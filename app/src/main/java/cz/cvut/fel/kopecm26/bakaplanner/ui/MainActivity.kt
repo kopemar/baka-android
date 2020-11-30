@@ -1,7 +1,8 @@
-package cz.cvut.fel.kopecm26.bakaplanner
+package cz.cvut.fel.kopecm26.bakaplanner.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import cz.cvut.fel.kopecm26.bakaplanner.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
