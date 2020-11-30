@@ -1,12 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import cz.cvut.fel.kopecm26.bakaplanner.R
+import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
+
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
