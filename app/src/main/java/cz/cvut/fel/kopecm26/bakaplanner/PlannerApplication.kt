@@ -5,11 +5,9 @@ import android.content.ContextWrapper
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
-import com.squareup.moshi.Moshi
 import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiService
 import cz.cvut.fel.kopecm26.bakaplanner.networking.BaseUrlChangingInterceptor
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
-import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
