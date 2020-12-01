@@ -9,8 +9,4 @@ abstract class ViewModelActivity<V: BaseViewModel, B : ViewDataBinding>(layoutRe
 
     open val viewModel by lazy { clazz.let { ViewModelProvider(this).get(it.java) } }
 
-    override fun init() {
-
-    }
-
 }

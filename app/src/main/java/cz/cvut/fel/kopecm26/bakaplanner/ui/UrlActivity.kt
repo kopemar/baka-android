@@ -10,19 +10,16 @@ class UrlActivity : BindingActivity<ActivityUrlBinding>(R.layout.activity_url) {
 
     override fun initUi() {
         form {
-            input(R.id.et_url) {
+            input(binding.etUrl.id) {
                 assert(getString(R.string.must_be_url)) {
                     it.editableText.isUrl()
                 }
             }
 
-            submitWith(R.id.btn_set_up) {
+            submitWith(binding.btnSetUp.id) {
                 Logger.d("submit")
             }
         }
     }
 
-//    fun setUp(button: View) {
-//
-//    }
 }
