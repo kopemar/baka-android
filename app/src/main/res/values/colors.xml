@@ -2,5 +2,12 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#B0CFFF</color>
+    <color name="very_light_blue">#EDF5FF</color>
+    <color name="very_light_blue_ripple">#D1D9E4</color>
+    <color name="white">#ffffff</color>
+    <color name="light_blue">#B0CFFF</color>
+    <color name="sunny_evenings">#FEB3B3</color>
+    <color name="sunny_evenings_ripple">#FBCDCD</color>
+    <color name="text">#204560</color>
 </resources>
