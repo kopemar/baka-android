@@ -9,6 +9,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.layout.activity_login, LoginViewModel::class) {
+
+    override val statusBarTransparent = true
+
     override fun initUi() {
         form {
             submitWith(binding.btnLogIn.id) {

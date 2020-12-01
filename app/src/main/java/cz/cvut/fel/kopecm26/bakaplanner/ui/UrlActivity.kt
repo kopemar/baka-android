@@ -11,6 +11,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
 
 class UrlActivity : BindingActivity<ActivityUrlBinding>(R.layout.activity_url) {
 
+    override val statusBarTransparent = true
+
     override fun initUi() {
         form {
             input(binding.etUrl.id) {
