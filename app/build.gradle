@@ -1,7 +1,7 @@
-apply plugin: 'kotlinx-serialization'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -20,12 +20,22 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     buildFeatures {
         dataBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -42,10 +52,15 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-core:$koin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
     implementation 'com.pixplicity.easyprefs:library:1.9.0'
+    implementation("com.squareup.moshi:moshi:1.11.0")
 
-    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.0'
+
+    implementation "com.squareup.retrofit2:converter-moshi:2.4.0"
+
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
