@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="vm"
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.LoginViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:focusable="true">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/background"/>
+        <include layout="@layout/background" />
 
         <ImageView
             android:id="@+id/baka_planner_logo"
@@ -24,11 +30,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="72dp"
             android:background="@drawable/rectangle_30"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
-            android:paddingTop="72dp"
+            android:paddingTop="90dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/baka_planner_logo">
@@ -36,20 +42,33 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/setup_instance" />
+                android:text="@string/login_with_credentials" />
 
             <EditText
-                android:id="@+id/et_url"
+                android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_link"
                 android:drawablePadding="10dp"
-                android:hint="http://example.com"
-                android:paddingHorizontal="6dp" />
+                android:hint="@string/username"
+                android:paddingHorizontal="6dp"
+                android:text="@={vm.username}" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:drawableStart="@drawable/ic_link"
+                android:drawablePadding="10dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="6dp"
+                android:text="@={vm.password}" />
 
             <Button
-                android:id="@+id/btn_set_up"
+                android:id="@+id/btn_log_in"
                 style="@style/Button.Primary"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="16dp"
@@ -70,11 +89,11 @@
 
         <Button
             android:id="@+id/btn_help"
-            android:layout_margin="36dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             style="@style/Button.Secondary"
+            android:layout_width="match_parent"
+            android:layout_margin="36dp"
             android:text="@string/help"
-            android:layout_width="match_parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

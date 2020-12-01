@@ -11,9 +11,8 @@ abstract class BindingActivity<B : ViewDataBinding>(private val layoutRes: Int) 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init()
-
         initBinding()
+        init()
         initUi()
     }
 
@@ -23,5 +22,7 @@ abstract class BindingActivity<B : ViewDataBinding>(private val layoutRes: Int) 
 
     private fun initBinding() {
         binding = DataBindingUtil.setContentView(this, layoutRes)
+
+        binding.lifecycleOwner = this
     }
 }

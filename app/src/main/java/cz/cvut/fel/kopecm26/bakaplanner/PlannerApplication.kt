@@ -7,6 +7,7 @@ import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
 import com.squareup.moshi.Moshi
 import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiService
+import cz.cvut.fel.kopecm26.bakaplanner.networking.BaseUrlChangingInterceptor
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import okhttp3.OkHttpClient
@@ -43,10 +44,7 @@ class PlannerApplication : Application() {
     }
 
     private fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor {
-            it.request().url().encodedPath().replace(BASE_URL_PLACEHOLDER, Prefs.getString(Constants.Prefs.BASE_URL, BASE_URL_PLACEHOLDER))
-            return@addInterceptor it.proceed(it.request())
-        }.build()
+        return OkHttpClient().newBuilder().addInterceptor(BaseUrlChangingInterceptor()).build()
     }
 
     private fun provideApi(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
@@ -70,7 +68,7 @@ class PlannerApplication : Application() {
     }
 
     companion object {
-        private const val BASE_URL_PLACEHOLDER = "http://10.0.0.7:3000/"
+        const val BASE_URL_PLACEHOLDER = "http://10.0.0.7:3000/"
     }
 
 }

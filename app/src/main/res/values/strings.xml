@@ -4,4 +4,7 @@
     <string name="set_up">Set Up</string>
     <string name="help">Help</string>
     <string name="must_be_url">Only valid URL is permitted.</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="login_with_credentials">Log in with your bakaplanner credentials</string>
 </resources>
