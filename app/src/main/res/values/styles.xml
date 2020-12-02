@@ -34,4 +34,9 @@
         <item name="android:drawablePadding">10dp</item>
     </style>
 
+    <style name="BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconTint">@color/sunny_evenings</item>
+    </style>
+
+
 </resources>

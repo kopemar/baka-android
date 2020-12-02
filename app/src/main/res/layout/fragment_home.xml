@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/subtoolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/very_light_blue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_subtoolbar_height" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_constraintTop_toBottomOf="@id/subtoolbar"
+            android:background="@color/light_blue" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/circle"
+            android:src="@drawable/ic_mdi_home"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtoolbar"
+            app:layout_constraintBottom_toBottomOf="@id/subtoolbar"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

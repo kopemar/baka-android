@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EDF5FF</color>
+    <color name="colorPrimary">@color/sunny_evenings</color>
     <color name="colorPrimaryDark">#EDF5FF</color>
     <color name="colorAccent">#B0CFFF</color>
     <color name="very_light_blue">#EDF5FF</color>
@@ -10,4 +10,5 @@
     <color name="sunny_evenings">#FEB3B3</color>
     <color name="sunny_evenings_ripple">#FBCDCD</color>
     <color name="text">#204560</color>
+    <color name="very_light_gray">#F9F9F9</color>
 </resources>
