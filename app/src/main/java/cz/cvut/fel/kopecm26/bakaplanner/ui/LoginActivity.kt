@@ -5,6 +5,7 @@ import com.afollestad.vvalidator.form
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityLoginBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.UnauthorizedException
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.LoginViewModel
@@ -33,6 +34,7 @@ class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.l
                 viewModel.viewModelScope.launch {
                     try {
                         viewModel.signIn()?.run {
+                            PrefsUtils.saveUser(this)
                             finishAffinity()
                             startActivity<MainActivity>()
                         }
