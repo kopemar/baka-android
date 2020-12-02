@@ -54,7 +54,7 @@
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_link"
                 android:text="@{defaultUrl}"
-                android:hint="http://example.com"
+                android:hint="@string/http_example_com"
                 />
 
             <Button

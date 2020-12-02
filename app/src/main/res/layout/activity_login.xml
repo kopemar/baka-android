@@ -46,7 +46,7 @@
                 android:textSize="@dimen/medium_font"
                 app:fromHtml="@{@string/login_with_credentials}" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_username"
                 style="@style/FormTextField"
                 android:layout_width="match_parent"
@@ -54,6 +54,7 @@
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="10dp"
+                android:textColor="@color/text"
                 android:hint="@string/username"
                 android:paddingHorizontal="6dp"
                 android:text="@={vm.username}" />

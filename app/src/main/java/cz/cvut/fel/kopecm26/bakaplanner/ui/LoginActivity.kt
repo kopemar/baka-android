@@ -1,11 +1,13 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui
 
+import androidx.lifecycle.viewModelScope
 import com.afollestad.vvalidator.form
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityLoginBinding
+import cz.cvut.fel.kopecm26.bakaplanner.networking.UnauthorizedException
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.LoginViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.layout.activity_login, LoginViewModel::class) {
@@ -27,8 +29,16 @@ class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.l
             }
 
             submitWith(binding.btnLogIn.id) {
-                GlobalScope.launch(Dispatchers.Default) {
-                    viewModel.signIn()
+                hideKeyboard()
+                viewModel.viewModelScope.launch {
+                    try {
+                        viewModel.signIn()?.run {
+                            startActivity<MainActivity>()
+                        }
+                    } catch (e: Exception) {
+                        if (e is UnauthorizedException) showSnackBar(R.string.wrong_password)
+                        else showSnackBar(R.string.unknown_error)
+                    }
                 }
             }
         }

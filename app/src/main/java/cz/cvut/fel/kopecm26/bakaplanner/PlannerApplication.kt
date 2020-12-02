@@ -5,8 +5,10 @@ import android.content.ContextWrapper
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
-import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiService
+import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiDescription
 import cz.cvut.fel.kopecm26.bakaplanner.networking.BaseUrlChangingInterceptor
+import cz.cvut.fel.kopecm26.bakaplanner.networking.RemoteDataSource
+import cz.cvut.fel.kopecm26.bakaplanner.networking.RetrofitRemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,7 +26,7 @@ class PlannerApplication : Application() {
         factory { provideOkHttpClient() }
         factory { provideApi(get()) }
         single { provideRetrofit(get()) }
-
+        single { initDataSource(get()) }
         single { UserRepository(get()) }
     }
 
@@ -43,12 +45,15 @@ class PlannerApplication : Application() {
     }
 
     private fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor(BaseUrlChangingInterceptor()).addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }).build()
+        return OkHttpClient()
+            .newBuilder()
+            .addInterceptor(BaseUrlChangingInterceptor())
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }).build()
     }
 
-    private fun provideApi(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+    private fun provideApi(retrofit: Retrofit) = retrofit.create(ApiDescription::class.java)
 
     private fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder().baseUrl(BASE_URL_PLACEHOLDER)
@@ -56,6 +61,8 @@ class PlannerApplication : Application() {
             .addConverterFactory(MoshiConverterFactory.create().asLenient().withNullSerialization())
             .build()
     }
+
+    private fun initDataSource(apiDescription: ApiDescription): RemoteDataSource = RetrofitRemoteDataSource(apiDescription)
 
     private fun initLogger() {
         Logger.addLogAdapter(AndroidLogAdapter())

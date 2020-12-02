@@ -5,6 +5,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BindingActivity<B : ViewDataBinding>(private val layoutRes: Int) : AppCompatActivity() {
 
@@ -39,4 +40,7 @@ abstract class BindingActivity<B : ViewDataBinding>(private val layoutRes: Int) 
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         }
     }
+
+    protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) = Snackbar.make(binding.root, text, length).show()
+    protected fun showSnackBar(text: Int, length: Int = Snackbar.LENGTH_SHORT) = showSnackBar(getString(text), length)
 }

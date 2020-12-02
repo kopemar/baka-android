@@ -10,4 +10,7 @@
     <string name="log_in">Log in</string>
     <string name="username_must_be_filled">This field has to be filled</string>
     <string name="password_must_be_filled">This field has to be filled</string>
+    <string name="wrong_password">Wrong username or password</string>
+    <string name="http_example_com">http://example.com</string>
+    <string name="unknown_error">Unknown error occurred</string>
 </resources>
