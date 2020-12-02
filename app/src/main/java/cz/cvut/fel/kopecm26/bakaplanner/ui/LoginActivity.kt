@@ -33,6 +33,7 @@ class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.l
                 viewModel.viewModelScope.launch {
                     try {
                         viewModel.signIn()?.run {
+                            finishAffinity()
                             startActivity<MainActivity>()
                         }
                     } catch (e: Exception) {
