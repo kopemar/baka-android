@@ -6,6 +6,7 @@ import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityUrlBinding
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isUrl
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
 
@@ -14,6 +15,8 @@ class UrlActivity : BindingActivity<ActivityUrlBinding>(R.layout.activity_url) {
     override val statusBarTransparent = true
 
     override fun initUi() {
+        binding.defaultUrl = PrefsUtils.getPrefsStringOrNull(Constants.Prefs.BASE_URL)
+
         form {
             input(binding.etUrl.id) {
                 assert(getString(R.string.must_be_url)) {
