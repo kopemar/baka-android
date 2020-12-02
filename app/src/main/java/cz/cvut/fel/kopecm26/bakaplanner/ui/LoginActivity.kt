@@ -2,12 +2,14 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui
 
 import androidx.lifecycle.viewModelScope
 import com.afollestad.vvalidator.form
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityLoginBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.UnauthorizedException
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.toJson
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
 
@@ -35,6 +37,7 @@ class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.l
                     try {
                         viewModel.signIn()?.run {
                             PrefsUtils.saveUser(this)
+                            Logger.d(toJson())
                             finishAffinity()
                             startActivity<MainActivity>()
                         }
