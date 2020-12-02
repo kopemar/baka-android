@@ -8,6 +8,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
+        <include android:id="@+id/toolbar" layout="@layout/toolbar"/>
+
+        <View
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:background="@color/very_light_blue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_subtoolbar_height"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

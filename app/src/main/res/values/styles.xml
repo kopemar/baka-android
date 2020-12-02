@@ -23,7 +23,7 @@
     </style>
 
     <style name="Button.Secondary">
-        <item name="backgroundTint">@color/very_light_blue</item>
+        <item name="backgroundTint">@color/sunny_evenings</item>
         <item name="android:background">@drawable/btn_secondary</item>
         <item name="android:textColor">@color/text</item>
     </style>
