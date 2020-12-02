@@ -14,6 +14,18 @@ class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.l
 
     override fun initUi() {
         form {
+            input(binding.etUsername.id) {
+                assert(getString(R.string.username_must_be_filled)) {
+                    it.text.isNotBlank()
+                }
+            }
+
+            input(binding.etPassword.id) {
+                assert(getString(R.string.password_must_be_filled)) {
+                    it.text.isNotBlank()
+                }
+            }
+
             submitWith(binding.btnLogIn.id) {
                 GlobalScope.launch(Dispatchers.Default) {
                     viewModel.signIn()

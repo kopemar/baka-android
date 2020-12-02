@@ -8,4 +8,6 @@
     <string name="username">Username</string>
     <string name="login_with_credentials"><![CDATA[Log in with your <b>bakaplanner</b> credentials]]></string>
     <string name="log_in">Log in</string>
+    <string name="username_must_be_filled">This field has to be filled</string>
+    <string name="password_must_be_filled">This field has to be filled</string>
 </resources>

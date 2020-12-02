@@ -9,6 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiService
 import cz.cvut.fel.kopecm26.bakaplanner.networking.BaseUrlChangingInterceptor
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -42,7 +43,9 @@ class PlannerApplication : Application() {
     }
 
     private fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor(BaseUrlChangingInterceptor()).build()
+        return OkHttpClient().newBuilder().addInterceptor(BaseUrlChangingInterceptor()).addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }).build()
     }
 
     private fun provideApi(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
