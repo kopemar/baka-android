@@ -42,7 +42,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_with_credentials" />
+                android:layout_marginBottom="8dp"
+                android:textSize="@dimen/medium_font"
+                app:fromHtml="@{@string/login_with_credentials}" />
 
             <EditText
                 android:id="@+id/et_username"

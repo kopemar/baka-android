@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">BakaPlanner</string>
-    <string name="setup_instance">Set up your bakaplanner instance</string>
+    <string name="setup_instance"><![CDATA[Set up your <b>bakaplanner</b> instance]]></string>
     <string name="set_up">Set Up</string>
     <string name="help">Help</string>
     <string name="must_be_url">Only valid URL is permitted.</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
-    <string name="login_with_credentials">Log in with your bakaplanner credentials</string>
+    <string name="login_with_credentials"><![CDATA[Log in with your <b>bakaplanner</b> credentials]]></string>
     <string name="log_in">Log in</string>
 </resources>

@@ -40,9 +40,11 @@
             app:layout_constraintTop_toBottomOf="@id/baka_planner_logo">
 
             <TextView
+                android:layout_marginBottom="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/setup_instance" />
+                android:textSize="@dimen/medium_font"
+                app:fromHtml="@{@string/setup_instance}" />
 
             <EditText
                 android:id="@+id/et_url"
