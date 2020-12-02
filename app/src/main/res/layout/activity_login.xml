@@ -48,6 +48,7 @@
 
             <EditText
                 android:id="@+id/et_username"
+                style="@style/FormTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -59,14 +60,13 @@
 
             <EditText
                 android:id="@+id/et_password"
+                style="@style/FormTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_lock"
-                android:drawablePadding="10dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:paddingHorizontal="6dp"
                 android:text="@={vm.password}" />
 
             <Button

@@ -26,5 +26,10 @@
         <item name="android:textColor">@color/text</item>
     </style>
 
-    <dimen name="medium_font">18sp</dimen>
+    <style name="FormTextField">
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingHorizontal">4dp</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
 </resources>
