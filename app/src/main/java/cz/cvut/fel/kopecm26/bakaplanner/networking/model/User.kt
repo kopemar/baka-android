@@ -18,4 +18,4 @@ data class User(
 data class UserResponseModel(@Json(name = "data") val user: User)
 
 @JsonClass(generateAdapter = true)
-data class SuccessModel(val success: Boolean)
+data class SignOutModel(val success: Boolean, val errors: List<String>? = null)
