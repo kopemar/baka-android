@@ -8,6 +8,13 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 
+/**
+ * A fun to make safeApiCall
+ * @return [ResponseModel] ([ResponseModel.SUCCESS] or [ResponseModel.ERROR])
+ * @param [T] is the class of API response
+ * @param [F] is desired class
+ * @param [converter] should be a converter from [T] to [F] (if [T] is [F], use <b>it</b>
+ */
 suspend fun <T, F> safeApiCall(call: suspend () -> Response<T>, converter: (T?) -> F?): ResponseModel<F> {
     return try {
         val response = call.invoke()
