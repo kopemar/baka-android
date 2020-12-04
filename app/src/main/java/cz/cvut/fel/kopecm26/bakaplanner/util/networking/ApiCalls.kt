@@ -28,6 +28,9 @@ suspend fun <T, F> safeApiCall(call: suspend () -> Response<T>, converter: (T?) 
     }
 }
 
+/**
+ * @return [Exception] mapped to [ErrorType]
+ */
 fun mapToDomainError(
     remoteException: Exception
 ): ErrorType {
