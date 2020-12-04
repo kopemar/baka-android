@@ -36,18 +36,20 @@ class LoginActivity : ViewModelActivity<LoginViewModel, ActivityLoginBinding>(
 
             submitWith(binding.btnLogIn.id) {
                 hideKeyboard()
-                viewModel.viewModelScope.launch {
-                    viewModel.signIn()?.run {
-                        if (this is ResponseModel.SUCCESS) {
-                            PrefsUtils.saveUser(this.data)
-                            Logger.d(data.toJson())
-                            finishAffinity()
-                            startActivity<MainActivity>()
-                        } else if (this is ResponseModel.ERROR) {
-                            this.errorType?.messageRes?.let { error -> showSnackBar(error) }
-                        }
-                    }
-                }
+                viewModel.viewModelScope.launch { signIn() }
+            }
+        }
+    }
+
+    private suspend fun signIn() {
+        viewModel.signIn()?.run {
+            if (this is ResponseModel.SUCCESS) {
+                PrefsUtils.saveUser(this.data)
+                Logger.d(data.toJson())
+                finishAffinity()
+                startActivity<MainActivity>()
+            } else if (this is ResponseModel.ERROR) {
+                this.errorType?.messageRes?.let { error -> showSnackBar(error) }
             }
         }
     }
