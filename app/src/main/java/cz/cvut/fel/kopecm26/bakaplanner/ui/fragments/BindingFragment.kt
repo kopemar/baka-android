@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import cz.cvut.fel.kopecm26.bakaplanner.BR
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 
 abstract class BindingFragment<B: ViewDataBinding>(private val layoutRes: Int): Fragment() {
 
@@ -33,6 +35,8 @@ abstract class BindingFragment<B: ViewDataBinding>(private val layoutRes: Int): 
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
 
         binding.lifecycleOwner = this
+
+        binding.setVariable(BR.USER, PrefsUtils.getUser())
     }
 
     protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) = Snackbar.make(binding.root, text, length).show()

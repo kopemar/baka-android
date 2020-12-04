@@ -8,4 +8,6 @@ object PrefsUtils {
     fun getPrefsStringOrNull(key: String): String? = Prefs.getString(key, null)
 
     fun saveUser(user: User?) = Prefs.putString(Constants.Prefs.USER, user.toJson())
+
+    fun getUser(): User? = getPrefsStringOrNull(Constants.Prefs.USER)?.fromJson()
 }
