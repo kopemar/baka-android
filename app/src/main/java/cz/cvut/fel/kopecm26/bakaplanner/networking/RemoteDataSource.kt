@@ -7,4 +7,5 @@ interface RemoteDataSource {
 
     suspend fun signIn(auth: Auth) : User?
 
+    suspend fun signOut(): Boolean
 }

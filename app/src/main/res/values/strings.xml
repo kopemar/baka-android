@@ -16,4 +16,6 @@
     <string name="home">Home</string>
     <string name="schedule">Schedule</string>
     <string name="profile">Profile</string>
+    <string name="log_out">Log out</string>
+    <string name="url">Set up URL</string>
 </resources>

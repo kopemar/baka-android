@@ -10,6 +10,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.BaseUrlChangingInterceptor
 import cz.cvut.fel.kopecm26.bakaplanner.networking.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.RetrofitRemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
+import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -48,6 +50,15 @@ class PlannerApplication : Application() {
         return OkHttpClient()
             .newBuilder()
             .addInterceptor(BaseUrlChangingInterceptor())
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                Constants.UserHeaders.values().forEach {
+                    PrefsUtils.getPrefsStringOrNull(it.key)?.run {
+                        request.addHeader(it.key, this).build()
+                    }
+                }
+                chain.proceed(request.build())
+            }
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             }).build()

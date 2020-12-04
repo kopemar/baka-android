@@ -16,3 +16,6 @@ data class User(
 
 @JsonClass(generateAdapter = true)
 data class UserResponseModel(@Json(name = "data") val user: User)
+
+@JsonClass(generateAdapter = true)
+data class SuccessModel(val success: Boolean)

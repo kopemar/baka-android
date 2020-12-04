@@ -4,11 +4,6 @@ import com.orhanobut.logger.Logger
 
 class MainViewModel : BaseViewModel() {
 
-    suspend fun signIn(username: String, password: String, onError: (String) -> Unit) = userRepository.signIn(
-        username,
-        password
-    )
-
     fun init() {
         Logger.d("hello world")
     }

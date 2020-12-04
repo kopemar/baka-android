@@ -33,7 +33,9 @@ class UrlActivity : BindingActivity<ActivityUrlBinding>(R.layout.activity_url) {
                 hideKeyboard()
                 Logger.d("Saving url to Prefs ${binding.etUrl.text}")
                 Prefs.putString(Constants.Prefs.BASE_URL, binding.etUrl.text.toString())
-                startActivity<LoginActivity>()
+                PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER)?.let {
+                    startActivity<MainActivity>()
+                } ?: startActivity<LoginActivity>()
             }
         }
     }

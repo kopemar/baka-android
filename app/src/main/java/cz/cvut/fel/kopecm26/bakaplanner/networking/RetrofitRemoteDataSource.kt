@@ -27,6 +27,13 @@ class RetrofitRemoteDataSource(val api: ApiDescription) : RemoteDataSource {
         }
     }
 
+    override suspend fun signOut(): Boolean = try {
+        api.signOut().body()?.success ?: false
+    } catch (e: Exception) {
+        false
+    }
+
+
     private fun mapToDomainException(
         remoteException: Exception,
         httpExceptionsMapper: (HttpException) -> Exception? = { null }
