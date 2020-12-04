@@ -18,4 +18,6 @@
     <string name="profile">Profile</string>
     <string name="log_out">Log out</string>
     <string name="url">Set up URL</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="remote_exception">Remote exception</string>
 </resources>

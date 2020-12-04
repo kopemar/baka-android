@@ -5,7 +5,7 @@ import com.afollestad.vvalidator.form
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityLoginBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.UnauthorizedException
+import cz.cvut.fel.kopecm26.bakaplanner.networking.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
@@ -13,7 +13,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.toJson
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
 
-class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.layout.activity_login, LoginViewModel::class) {
+class LoginActivity : ViewModelActivity<LoginViewModel, ActivityLoginBinding>(
+    R.layout.activity_login,
+    LoginViewModel::class
+) {
 
     override val statusBarTransparent = true
 
@@ -34,16 +37,15 @@ class LoginActivity: ViewModelActivity<LoginViewModel, ActivityLoginBinding>(R.l
             submitWith(binding.btnLogIn.id) {
                 hideKeyboard()
                 viewModel.viewModelScope.launch {
-                    try {
-                        viewModel.signIn()?.run {
-                            PrefsUtils.saveUser(this)
-                            Logger.d(toJson())
+                    viewModel.signIn()?.run {
+                        if (this is ResponseModel.SUCCESS) {
+                            PrefsUtils.saveUser(this.data)
+                            Logger.d(data.toJson())
                             finishAffinity()
                             startActivity<MainActivity>()
+                        } else if (this is ResponseModel.ERROR) {
+                            this.errorType?.messageRes?.let { error -> showSnackBar(error) }
                         }
-                    } catch (e: Exception) {
-                        if (e is UnauthorizedException) showSnackBar(R.string.wrong_password)
-                        else showSnackBar(R.string.unknown_error)
                     }
                 }
             }
