@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main
 
 import androidx.lifecycle.viewModelScope
 import com.jakewharton.processphoenix.ProcessPhoenix
@@ -6,9 +6,10 @@ import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentProfileBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
-import cz.cvut.fel.kopecm26.bakaplanner.ui.UrlActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.UrlActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity

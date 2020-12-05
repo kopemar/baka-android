@@ -6,12 +6,12 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiDescription
-import cz.cvut.fel.kopecm26.bakaplanner.networking.BaseUrlChangingInterceptor
-import cz.cvut.fel.kopecm26.bakaplanner.networking.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.networking.RetrofitRemoteDataSource
+import cz.cvut.fel.kopecm26.bakaplanner.networking.datasource.RemoteDataSource
+import cz.cvut.fel.kopecm26.bakaplanner.networking.datasource.RetrofitRemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
+import cz.cvut.fel.kopecm26.bakaplanner.util.networking.BaseUrlChangingInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext

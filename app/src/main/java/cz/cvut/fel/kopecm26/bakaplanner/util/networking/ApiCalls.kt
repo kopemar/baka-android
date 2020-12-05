@@ -1,9 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util.networking
 
-import cz.cvut.fel.kopecm26.bakaplanner.networking.ErrorType
-import cz.cvut.fel.kopecm26.bakaplanner.networking.NoInternetError
-import cz.cvut.fel.kopecm26.bakaplanner.networking.ResponseModel
-import cz.cvut.fel.kopecm26.bakaplanner.networking.UnauthorizedError
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NoInternetError
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UnauthorizedError
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException

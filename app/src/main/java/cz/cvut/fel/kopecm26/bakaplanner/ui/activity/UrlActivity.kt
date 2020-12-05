@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui
+package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import android.view.View
 import com.afollestad.vvalidator.form
@@ -6,6 +6,7 @@ import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityUrlBinding
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.BindingActivity
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard

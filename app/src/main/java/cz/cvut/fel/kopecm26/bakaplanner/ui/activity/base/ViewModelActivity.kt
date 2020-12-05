@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui
+package cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base
 
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider

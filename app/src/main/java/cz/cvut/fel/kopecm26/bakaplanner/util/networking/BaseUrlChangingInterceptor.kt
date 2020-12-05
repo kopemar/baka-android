@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.networking
+package cz.cvut.fel.kopecm26.bakaplanner.util.networking
 
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.PlannerApplication

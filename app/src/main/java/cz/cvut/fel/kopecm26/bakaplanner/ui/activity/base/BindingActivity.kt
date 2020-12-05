@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui
+package cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base
 
 import android.os.Bundle
 import android.view.WindowManager

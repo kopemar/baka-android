@@ -1,8 +1,8 @@
 package cz.cvut.fel.kopecm26.bakaplanner.repository
 
-import cz.cvut.fel.kopecm26.bakaplanner.networking.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.networking.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 

@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.base
 
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider

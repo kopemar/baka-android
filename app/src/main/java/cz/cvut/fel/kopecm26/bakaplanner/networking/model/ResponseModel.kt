@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.networking
+package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 
 import okhttp3.Headers
 

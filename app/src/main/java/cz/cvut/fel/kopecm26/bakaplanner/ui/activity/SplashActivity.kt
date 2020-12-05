@@ -1,7 +1,8 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui
+package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivitySplashBinding
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.BindingActivity
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity

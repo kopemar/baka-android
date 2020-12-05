@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import cz.cvut.fel.kopecm26.bakaplanner.ui.BindingActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.BindingActivity
 
 /**
  * Utils function to simplify creation of new Activities...

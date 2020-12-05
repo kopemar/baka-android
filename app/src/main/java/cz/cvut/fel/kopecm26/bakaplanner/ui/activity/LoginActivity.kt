@@ -1,11 +1,12 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui
+package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import androidx.lifecycle.viewModelScope
 import com.afollestad.vvalidator.form
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityLoginBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity

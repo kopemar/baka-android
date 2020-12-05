@@ -1,10 +1,11 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui
+package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityMainBinding
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.HomeFragment
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.ProfileFragment
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.ScheduleFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.HomeFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.ProfileFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.ScheduleFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.setFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.MainViewModel
 
