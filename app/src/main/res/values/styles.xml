@@ -41,7 +41,7 @@
     <style name="Text"/>
 
     <style name="Text.Strong">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/magra_bold</item>
     </style>
 

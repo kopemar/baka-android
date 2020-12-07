@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="shift"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:elevation="6dp"
+        android:background="@drawable/bg_rectangle_round">
+
+        <ImageView
+            android:id="@+id/iv_shift_state_icon"
+            android:layout_width="48dp"
+            android:layout_height="51dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_shift_future" />
+
+        <TextView
+            android:id="@+id/tv_date_headline"
+            style="@style/Text.Strong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/iv_shift_state_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_shift_state_icon"
+            android:text="@{shift.dateF}"
+            tools:text="Mon, November 9, 2020" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tv_date_headline"
+            app:layout_constraintTop_toBottomOf="@id/tv_date_headline"
+            tools:text="9:00 AM - 5:30 PM" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
