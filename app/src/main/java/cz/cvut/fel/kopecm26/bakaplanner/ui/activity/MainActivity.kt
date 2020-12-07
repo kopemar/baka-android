@@ -17,9 +17,6 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(R.lay
     private val profileFragment by lazy { ProfileFragment() }
 
     override fun initUi() {
-        super.initUi()
-        viewModel.init()
-
         setFragment(binding.frameLayout.id, HomeFragment())
 
         binding.bnvMain.setOnNavigationItemSelectedListener {

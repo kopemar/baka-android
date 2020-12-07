@@ -11,5 +11,5 @@ fun String.hoursAndMinutes(): String = ZonedDateTime.parse(this).format(DateTime
 
 object DateTimeFormats {
     const val FULL_DATE_SHORT_DAY = "E, MMMM d, yyyy"
-    const val HOURS_MINUTES = "HH:MM a"
+    const val HOURS_MINUTES = "HH:mm a"
 }

@@ -23,4 +23,9 @@
     <string name="full_name">%1$s %2$s</string>
     <string name="email"><![CDATA[%1$s <font color="#7D8E9E"> | %2$s</font>]]></string>
     <string name="time_from_to">%1$s — %2$s</string>
+    <string name="working_until_">Working until %s</string>
+    <string name="happening_right_now">Happening right now</string>
+    <string name="next_planned_shift">Next planned shift</string>
+    <string name="day_hours_start_end">%1$s %2$s — %3$s</string>
+    <string name="later_this_week">Later this week</string>
 </resources>
