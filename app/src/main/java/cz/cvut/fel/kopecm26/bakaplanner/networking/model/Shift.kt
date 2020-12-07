@@ -5,11 +5,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.fullDateShortDayOfWeek
 
 @JsonClass(generateAdapter = true)
 data class Shift(
-    val start_day: String,
     val start_time: String,
     val end_time: String
 ) {
-    val dateF get() = start_day.fullDateShortDayOfWeek()
+    val dateF get() = start_time.fullDateShortDayOfWeek()
 }
 
 @JsonClass(generateAdapter = true)
