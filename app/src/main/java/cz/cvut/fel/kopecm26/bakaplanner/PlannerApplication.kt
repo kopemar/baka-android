@@ -8,6 +8,7 @@ import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiDescription
 import cz.cvut.fel.kopecm26.bakaplanner.networking.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.datasource.RetrofitRemoteDataSource
+import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
@@ -30,6 +31,7 @@ class PlannerApplication : Application() {
         single { provideRetrofit(get()) }
         single { initDataSource(get()) }
         single { UserRepository(get()) }
+        single { ShiftRepository(get()) }
     }
 
     override fun onCreate() {

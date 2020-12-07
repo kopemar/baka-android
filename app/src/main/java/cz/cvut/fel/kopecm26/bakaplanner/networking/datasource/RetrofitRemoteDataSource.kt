@@ -4,6 +4,7 @@ import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiDescription
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
@@ -18,6 +19,9 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     }
 
     override suspend fun signOut() = safeApiCall({ api.signOut() }, { it })
+
+    override suspend fun getShifts(): ResponseModel<List<Shift>> =
+        safeApiCall({ api.getSchedule() }, { it?.shifts })
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

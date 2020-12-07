@@ -24,6 +24,7 @@ suspend fun <T, F> safeApiCall(call: suspend () -> Response<T>, converter: (T?) 
             else -> ErrorType()
         }, data = converter.invoke(response.body()))
     } catch (e: Exception) {
+        e.printStackTrace()
         ResponseModel.ERROR(mapToDomainError(e))
     }
 }
