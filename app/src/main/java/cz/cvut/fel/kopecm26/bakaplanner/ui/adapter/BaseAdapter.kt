@@ -7,7 +7,7 @@ import androidx.viewbinding.ViewBinding
 
 class BaseListAdapter<T>(
     private val inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewBinding,
-    private val bind: (item: T, binding: ViewBinding) -> Unit,
+    private val bind: (item: T, binding: ViewBinding, index: Int) -> Unit,
     private val onClick: ((item: T) -> Unit)? = null,
     compareItems: (old: T, new: T) -> Boolean,
     compareContents: (old: T, new: T) -> Boolean
@@ -18,7 +18,7 @@ class BaseListAdapter<T>(
         ItemViewHolder(inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        bind(getItem(position), (holder as BaseListAdapter<T>.ItemViewHolder).binding)
+        bind(getItem(position), (holder as BaseListAdapter<T>.ItemViewHolder).binding, position)
     }
 
     internal fun setItems(items: List<T>) {

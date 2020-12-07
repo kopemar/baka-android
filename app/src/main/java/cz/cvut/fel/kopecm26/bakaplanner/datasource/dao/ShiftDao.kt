@@ -16,7 +16,7 @@ interface ShiftDao: BaseDao<Shift> {
     @Query("SELECT * FROM Shift WHERE end_time > :time")
     suspend fun getUpcoming(time: String = LocalDateTime.now().toString()): List<Shift>
 
-    @Query("SELECT * FROM Shift WHERE end_time > :start AND start_time < :end ORDER BY start_time")
+    @Query("SELECT * FROM Shift WHERE start_time > :start AND start_time < :end ORDER BY start_time")
     suspend fun inTimePeriod(start: String = LocalDateTime.now().toString(), end: String = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SUNDAY)).toString()): List<Shift>
 
     @Query("SELECT * FROM Shift WHERE start_time < :time AND end_time > :time LIMIT 1")

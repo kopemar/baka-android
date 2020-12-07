@@ -8,10 +8,18 @@ import kotlinx.coroutines.launch
 class HomeViewModel : BaseViewModel() {
     val currentShift = MutableLiveData<Shift>()
     val nextShift = MutableLiveData<Shift>()
+    val nextWeekDays = MutableLiveData<List<Shift>>()
 
     init {
         getCurrentShift()
         getNextShift()
+        getNextWeekShifts()
+    }
+
+    fun getNextWeekShifts() {
+        viewModelScope.launch {
+            nextWeekDays.value = shiftRepository.getNextWeekShifts()
+        }
     }
 
     fun getCurrentShift() {

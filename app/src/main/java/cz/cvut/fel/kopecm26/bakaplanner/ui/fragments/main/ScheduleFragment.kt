@@ -17,7 +17,7 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
         binding.rvShifts.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvShifts.adapter = BaseListAdapter<Shift>(
             { layoutInflater, viewGroup, attachToRoot -> ListShiftBinding.inflate(layoutInflater, viewGroup, attachToRoot)},
-            { shift, binding -> (binding as ListShiftBinding).shift = shift },
+            { shift, binding, _ -> (binding as ListShiftBinding).shift = shift },
             null,
             { old, new -> old.id == new.id },
             { old, new -> old == new }

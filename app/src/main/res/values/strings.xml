@@ -27,5 +27,6 @@
     <string name="happening_right_now">Happening right now</string>
     <string name="next_planned_shift">Next planned shift</string>
     <string name="day_hours_start_end">%1$s %2$s — %3$s</string>
+    <string name="hours_start_end">%1$s — %2$s</string>
     <string name="later_this_week">Later this week</string>
 </resources>
