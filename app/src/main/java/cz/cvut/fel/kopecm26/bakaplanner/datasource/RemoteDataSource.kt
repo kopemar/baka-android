@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.networking.datasource
+package cz.cvut.fel.kopecm26.bakaplanner.datasource
 
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 

@@ -1,7 +1,7 @@
-package cz.cvut.fel.kopecm26.bakaplanner.networking.datasource
+package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import com.pixplicity.easyprefs.library.Prefs
-import cz.cvut.fel.kopecm26.bakaplanner.networking.ApiDescription
+import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
