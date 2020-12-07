@@ -2,7 +2,9 @@ package cz.cvut.fel.kopecm26.bakaplanner.util.binding
 
 import android.text.Html
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 
 /**
@@ -19,4 +21,9 @@ fun TextView.fromHtml(html: String) {
 @BindingAdapter("visible")
 fun View.visible(value: Boolean) {
     visibility = if (value) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("android:src")
+fun ImageView.src(@DrawableRes res: Int) {
+    this.setImageResource(res)
 }

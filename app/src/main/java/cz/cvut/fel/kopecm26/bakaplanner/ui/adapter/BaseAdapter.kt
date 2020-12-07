@@ -26,6 +26,8 @@ class BaseListAdapter<T>(
         this.submitList(items)
     }
 
+    override fun getItemCount(): Int = items.size
+
     inner class ItemViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder((binding).root) {
         init {
             binding.root.setOnClickListener { onClick?.invoke(getItem(adapterPosition)) }

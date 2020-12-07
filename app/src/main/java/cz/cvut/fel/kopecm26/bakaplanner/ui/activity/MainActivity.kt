@@ -12,6 +12,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.MainViewModel
 
 class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main, MainViewModel::class) {
 
+    private val homeFragment by lazy { HomeFragment() }
+    private val scheduleFragment by lazy { ScheduleFragment() }
+    private val profileFragment by lazy { ProfileFragment() }
+
     override fun initUi() {
         super.initUi()
         viewModel.init()
@@ -20,9 +24,9 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(R.lay
 
         binding.bnvMain.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_home -> setFragment(binding.frameLayout.id, HomeFragment())
-                R.id.menu_profile -> setFragment(binding.frameLayout.id, ProfileFragment())
-                R.id.menu_schedule -> setFragment(binding.frameLayout.id, ScheduleFragment())
+                R.id.menu_home -> setFragment(binding.frameLayout.id, homeFragment)
+                R.id.menu_profile -> setFragment(binding.frameLayout.id, profileFragment)
+                R.id.menu_schedule -> setFragment(binding.frameLayout.id, scheduleFragment)
             }
             true
         }

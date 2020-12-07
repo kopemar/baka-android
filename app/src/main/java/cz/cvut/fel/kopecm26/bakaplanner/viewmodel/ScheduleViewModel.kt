@@ -11,11 +11,11 @@ class ScheduleViewModel : BaseViewModel() {
     val shifts = MutableLiveData<List<Shift>>()
     val showError = MutableLiveData<Int>()
 
-    fun getShifts() {
+    fun getShifts(forceUpdate: Boolean = false) {
         viewModelScope.launch {
-            shiftRepository.getShifts().run {
+            shiftRepository.getUpcomingShifts(forceUpdate).run {
                 if (this is ResponseModel.SUCCESS) {
-                    shifts.postValue(data)
+                    shifts.value = data
                 } else if (this is ResponseModel.ERROR) {
                     showError.postValue(errorType?.messageRes)
                 }
