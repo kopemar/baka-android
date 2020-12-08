@@ -11,26 +11,33 @@ class HomeViewModel : BaseViewModel() {
     val nextWeekDays = MutableLiveData<List<Shift>>()
 
     init {
+        getShifts()
         getCurrentShift()
         getNextShift()
         getNextWeekShifts()
     }
 
-    fun getNextWeekShifts() {
+    private fun getNextWeekShifts() {
         viewModelScope.launch {
             nextWeekDays.value = shiftRepository.getNextWeekShifts()
         }
     }
 
-    fun getCurrentShift() {
+    private fun getCurrentShift() {
         viewModelScope.launch {
             currentShift.value = shiftRepository.getCurrentShift()
         }
     }
 
-    fun getNextShift() {
+    private fun getNextShift() {
         viewModelScope.launch {
             nextShift.value = shiftRepository.getNextShift()
+        }
+    }
+
+    private fun getShifts() {
+        viewModelScope.launch {
+            shiftRepository.getAllShifts()
         }
     }
 }

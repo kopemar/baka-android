@@ -12,7 +12,7 @@ class ScheduleViewModel : BaseViewModel() {
 
     fun getShifts(forceUpdate: Boolean = false) {
         viewModelScope.launch {
-            shiftRepository.getUpcomingShifts(forceUpdate).run {
+            shiftRepository.getAllShifts(forceUpdate).run {
                 if (this is ResponseModel.SUCCESS) {
                     shifts.value = data
                 } else if (this is ResponseModel.ERROR) {

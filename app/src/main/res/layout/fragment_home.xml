@@ -128,7 +128,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                visible="@{vm.nextShift != null}"
+                visible="@{!vm.nextWeekDays.empty}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -173,5 +173,16 @@
 
         </LinearLayout>
 
+        <include
+            android:id="@+id/empty_message"
+            layout="@layout/empty_plans"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_icon"
+            app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

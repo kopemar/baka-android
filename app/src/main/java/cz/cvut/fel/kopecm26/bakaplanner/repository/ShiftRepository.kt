@@ -16,13 +16,13 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun deleteAll() = shiftDao.deleteAll()
 
-    suspend fun getUpcomingShifts(forceUpdate: Boolean = false): ResponseModel<List<Shift>> {
+    suspend fun getAllShifts(forceUpdate: Boolean = false, filterUpcoming: Boolean = true): ResponseModel<List<Shift>> {
         return if (forceUpdate || shiftDao.getAll().isNullOrEmpty()) {
             return service.getShifts().apply {
                 if (this is ResponseModel.SUCCESS) {
                     data?.let { shiftDao.insert(it) }
 
-                    data = data?.filter { !it.end_time.isBefore() }
+                    if (filterUpcoming) data = data?.filter { !it.end_time.isBefore() }
                 }
             }
         } else {

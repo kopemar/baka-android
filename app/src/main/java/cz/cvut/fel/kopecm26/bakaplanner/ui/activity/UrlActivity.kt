@@ -36,7 +36,8 @@ class UrlActivity : BindingActivity<ActivityUrlBinding>(R.layout.activity_url) {
                 Prefs.putString(Constants.Prefs.BASE_URL, binding.etUrl.text.toString())
 
                 PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER)?.let {
-                    finish()
+                    finishAffinity()
+                    startActivity<SplashActivity>()
                 } ?: run {
                     startActivity<LoginActivity>()
                 }
