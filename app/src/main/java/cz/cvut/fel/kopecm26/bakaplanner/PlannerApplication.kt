@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner
 
 import android.app.Application
 import android.content.ContextWrapper
+import com.github.pedrovgs.lynx.LynxShakeDetector
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
@@ -19,6 +20,7 @@ class PlannerApplication : Application() {
 
         initLogger()
         initKoin()
+        initLynxLog()
 
         Prefs.Builder()
             .setContext(this)
@@ -28,6 +30,10 @@ class PlannerApplication : Application() {
             .build()
     }
 
+    private fun initLynxLog() {
+        LynxShakeDetector(this).init()
+    }
+
     private fun initLogger() {
         Logger.addLogAdapter(AndroidLogAdapter())
     }
@@ -35,7 +41,7 @@ class PlannerApplication : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@PlannerApplication)
-            modules(databaseModule, networkModule, repositoryModule, )
+            modules(databaseModule, networkModule, repositoryModule)
         }
     }
 
