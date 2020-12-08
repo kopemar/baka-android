@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 /**
  * Sets content of [TextView] to HTML.
@@ -26,4 +27,9 @@ fun View.visible(value: Boolean) {
 @BindingAdapter("android:src")
 fun ImageView.src(@DrawableRes res: Int) {
     this.setImageResource(res)
+}
+
+@BindingAdapter("isRefreshing")
+fun SwipeRefreshLayout.isRefreshing(boolean: Boolean) {
+    isRefreshing = boolean
 }

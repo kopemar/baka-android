@@ -12,4 +12,5 @@ abstract class BaseViewModel : ViewModel() {
     protected val shiftRepository by inject(ShiftRepository::class.java)
 
     val errorMessage = MutableLiveData<Int>()
+    val working = MutableLiveData(false)
 }

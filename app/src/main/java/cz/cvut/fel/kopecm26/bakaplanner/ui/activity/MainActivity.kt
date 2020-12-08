@@ -1,7 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import androidx.annotation.IdRes
-import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityMainBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
@@ -26,10 +25,9 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
     }
 
     private fun setFragment(@IdRes id: Int) {
-        Logger.d(id)
         if (selectedFragment == id) return
         supportFragmentManager.beginTransaction()
-            .run { supportFragmentManager.findFragmentByTag(selectedFragment.toString())?.let { hide(it) } ?: this }
+            .run { supportFragmentManager.findFragmentByTag(selectedFragment.toString())?.let(::hide) ?: this }
             .run {
                 supportFragmentManager.findFragmentByTag(id.toString())?.let(::show)
                     ?: this.add(binding.frameLayout.id, createFragment(id), id.toString())

@@ -11,6 +11,12 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HomeViewModel
 
 class HomeFragment: ViewModelFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home, HomeViewModel::class) {
+
+    override fun initUi() {
+        viewModel.nextWeekDays.observe(this, observer)
+        binding.swipeRefresh.setOnRefreshListener { viewModel.getAll(true) }
+    }
+
     private val observer by lazy { Observer<List<Shift>> {
         binding.rvDateTime.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvDateTime.adapter = BaseListAdapter<Shift>(
@@ -24,8 +30,4 @@ class HomeFragment: ViewModelFragment<HomeViewModel, FragmentHomeBinding>(R.layo
             { old, new -> old == new }
         ).apply { setItems(it) }
     } }
-
-    override fun initUi() {
-        viewModel.nextWeekDays.observe(this, observer)
-    }
 }

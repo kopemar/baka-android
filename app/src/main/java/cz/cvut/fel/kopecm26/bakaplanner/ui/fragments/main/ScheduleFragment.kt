@@ -32,7 +32,6 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
     override fun initUi() {
         binding.swipeRefresh.isRefreshing = true
         viewModel.shifts.observe(this, observer)
-        viewModel.getShifts()
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.getShifts(true)
         }
