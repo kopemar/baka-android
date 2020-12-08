@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 class ScheduleViewModel : BaseViewModel() {
 
     val shifts = MutableLiveData<List<Shift>>()
-    val showError = MutableLiveData<Int>()
 
     fun getShifts(forceUpdate: Boolean = false) {
         viewModelScope.launch {
@@ -17,7 +16,7 @@ class ScheduleViewModel : BaseViewModel() {
                 if (this is ResponseModel.SUCCESS) {
                     shifts.value = data
                 } else if (this is ResponseModel.ERROR) {
-                    showError.postValue(errorType?.messageRes)
+                    errorMessage.value = errorType?.messageRes
                 }
             }
 

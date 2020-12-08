@@ -10,10 +10,10 @@ import java.time.temporal.TemporalAdjusters
 @Dao
 interface ShiftDao: BaseDao<Shift> {
 
-    @Query("SELECT * FROM Shift")
+    @Query("SELECT * FROM Shift ORDER BY start_time")
     suspend fun getAll(): List<Shift>
 
-    @Query("SELECT * FROM Shift WHERE end_time > :time")
+    @Query("SELECT * FROM Shift WHERE end_time > :time ORDER BY start_time")
     suspend fun getUpcoming(time: String = LocalDateTime.now().toString()): List<Shift>
 
     @Query("SELECT * FROM Shift WHERE start_time > :start AND start_time < :end ORDER BY start_time")
@@ -24,4 +24,7 @@ interface ShiftDao: BaseDao<Shift> {
 
     @Query("SELECT * FROM Shift WHERE start_time > :time ORDER BY start_time LIMIT 1")
     suspend fun getNext(time: String = LocalDateTime.now().toString()): Shift?
+
+    @Query("DELETE FROM Shift")
+    suspend fun deleteAll()
 }

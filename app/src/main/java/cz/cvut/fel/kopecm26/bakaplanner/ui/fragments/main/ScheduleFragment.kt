@@ -12,6 +12,11 @@ import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ScheduleViewModel
 
 class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBinding>(R.layout.fragment_schedule,ScheduleViewModel::class) {
 
+    override fun errorObserver() = Observer<Int> {
+        binding.swipeRefresh.isRefreshing = false
+        super.errorObserver().onChanged(it)
+    }
+
     private val observer by lazy { Observer<List<Shift>> {
         binding.swipeRefresh.isRefreshing = false
         binding.rvShifts.layoutManager = LinearLayoutManager(binding.root.context)

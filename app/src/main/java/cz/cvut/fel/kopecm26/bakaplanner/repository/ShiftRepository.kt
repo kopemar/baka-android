@@ -14,6 +14,8 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun getNextShift(): Shift? = shiftDao.getNext()
 
+    suspend fun deleteAll() = shiftDao.deleteAll()
+
     suspend fun getUpcomingShifts(forceUpdate: Boolean = false): ResponseModel<List<Shift>> {
         return if (forceUpdate || shiftDao.getAll().isNullOrEmpty()) {
             return service.getShifts().apply {
@@ -24,7 +26,7 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
                 }
             }
         } else {
-            ResponseModel.SUCCESS(shiftDao.getAll())
+            ResponseModel.SUCCESS(shiftDao.getUpcoming())
         }
     }
 }
