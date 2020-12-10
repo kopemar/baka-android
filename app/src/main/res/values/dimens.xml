@@ -3,4 +3,6 @@
     <dimen name="medium_font">18sp</dimen>
     <dimen name="base_subtoolbar_height">48dp</dimen>
     <dimen name="card_elevation">6dp</dimen>
+    <dimen name="subheader_icon_size">64dp</dimen>
+    <dimen name="empty_screen_icon_size">64dp</dimen>
 </resources>

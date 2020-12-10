@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="@dimen/empty_screen_icon_size"
+        android:layout_height="@dimen/empty_screen_icon_size"
         android:src="@drawable/ic_hourglass_empty_upcoming"
         app:layout_constraintBottom_toTopOf="@id/empty_text"
         app:layout_constraintEnd_toEndOf="parent"

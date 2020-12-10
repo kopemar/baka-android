@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="@dimen/empty_screen_icon_size"
+        android:layout_height="@dimen/empty_screen_icon_size"
         android:src="@drawable/ic_cal_empty_plans"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
