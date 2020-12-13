@@ -48,6 +48,6 @@ class KeepStateNavigator(
         transaction.setReorderingAllowed(true)
         transaction.commitNow()
 
-        return if (initialNavigate) destination else null
+        return super.navigate(destination, args, navOptions, navigatorExtras)
     }
 }
