@@ -19,9 +19,7 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
         val navController = navHostFragment.navController
 
         val navigator = KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
-
         navController.navigatorProvider.addNavigator(navigator)
-
         navController.setGraph(R.navigation.main_navigation)
 
         binding.bnvMain.setupWithNavController(navController)

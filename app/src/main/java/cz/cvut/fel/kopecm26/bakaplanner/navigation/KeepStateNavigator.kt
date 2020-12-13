@@ -8,7 +8,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
 
-
+// initial src: https://github.com/STAR-ZERO/navigation-keep-fragment-sample
 @Navigator.Name("keep_state_fragment")
 class KeepStateNavigator(
     private val context: Context,
@@ -26,31 +26,28 @@ class KeepStateNavigator(
         val transaction = manager.beginTransaction()
 
         var initialNavigate = false
-        val currentFragment = manager.primaryNavigationFragment
 
-        if (currentFragment != null) {
-            transaction.hide(currentFragment)
-        } else {
+        manager.primaryNavigationFragment?.let {
+            transaction.hide(it)
+        } ?: run {
             initialNavigate = true
         }
 
         var fragment = manager.findFragmentByTag(tag)
-        if (fragment == null) {
+
+        fragment?.let {
+            transaction.show(it)
+        } ?: run {
             val className = destination.className
-            fragment = manager.fragmentFactory.instantiate(context.classLoader, className)
-            transaction.add(containerId, fragment, tag)
-        } else {
-            transaction.show(fragment)
+            fragment = manager.fragmentFactory.instantiate(context.classLoader, className).apply {
+                transaction.add(containerId, this, tag)
+            }
         }
 
         transaction.setPrimaryNavigationFragment(fragment)
         transaction.setReorderingAllowed(true)
         transaction.commitNow()
 
-        return if (initialNavigate) {
-            destination
-        } else {
-            null
-        }
+        return if (initialNavigate) destination else null
     }
 }
