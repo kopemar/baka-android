@@ -1,11 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main
 
 import androidx.lifecycle.Observer
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentProfileBinding
-import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.ContractsActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.SplashActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
@@ -33,10 +31,13 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
         viewModel.signedOut.observe(this, signedOutObserver)
 
         binding.btnUrl.setOnClickListener {
-            val directions: NavDirections = ProfileFragmentDirections.navigateToUrl()
-            findNavController().navigate(directions)
+            findNavController().navigate(ProfileFragmentDirections.navigateToUrl())
         }
-        binding.btnContracts.setOnClickListener { requireActivity().startActivity<ContractsActivity>() }
+
+        binding.btnContracts.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.navigateToContracts())
+        }
+
         binding.btnLogOut.setOnClickListener { viewModel.signOut() }
     }
 

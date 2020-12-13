@@ -26,6 +26,10 @@
             android:id="@+id/navigate_to_url"
             app:destination="@id/url_activity" />
 
+        <action
+            android:id="@+id/navigate_to_contracts"
+            app:destination="@id/contracts_activity" />
+
     </keep_state_fragment>
 
     <activity
@@ -33,5 +37,11 @@
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.activity.UrlActivity"
         android:label="UrlActivity"
         tools:layout="@layout/activity_url" />
+
+    <activity
+        android:id="@+id/contracts_activity"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.activity.ContractsActivity"
+        android:label="ContractsActivity"
+        tools:layout="@layout/activity_contracts" />
 
 </navigation>
