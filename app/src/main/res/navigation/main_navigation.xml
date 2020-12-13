@@ -6,17 +6,17 @@
     app:startDestination="@id/menu_home">
 
 
-    <keep_state_fragment
+    <fragment
         android:id="@+id/menu_home"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
-    <keep_state_fragment
+    <fragment
         android:id="@+id/menu_schedule"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.ScheduleFragment"
         android:label="ScheduleFragment"
         tools:layout="@layout/fragment_schedule" />
-    <keep_state_fragment
+    <fragment
         android:id="@+id/menu_profile"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.ProfileFragment"
         android:label="ScheduleFragment"
@@ -28,9 +28,9 @@
 
         <action
             android:id="@+id/navigate_to_contracts"
-            app:destination="@id/contracts_activity" />
+            app:destination="@id/contracts_fragment" />
 
-    </keep_state_fragment>
+    </fragment>
 
     <activity
         android:id="@+id/url_activity"
@@ -38,10 +38,12 @@
         android:label="UrlActivity"
         tools:layout="@layout/activity_url" />
 
-    <activity
-        android:id="@+id/contracts_activity"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.activity.ContractsActivity"
-        android:label="ContractsActivity"
-        tools:layout="@layout/activity_contracts" />
+    <fragment
+        android:id="@+id/contracts_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.profile.ContractsFragment"
+        android:label="ContractsFragment"
+        app:popUpTo="@id/menu_profile"
+        tools:layout="@layout/activity_contracts">
+    </fragment>
 
 </navigation>

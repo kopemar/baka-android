@@ -4,7 +4,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityMainBinding
-import cz.cvut.fel.kopecm26.bakaplanner.navigation.KeepStateNavigator
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.MainViewModel
 
@@ -18,9 +17,9 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        val navigator = KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
-        navController.navigatorProvider.addNavigator(navigator)
-        navController.setGraph(R.navigation.main_navigation)
+//        val navigator = KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
+//        navController.navigatorProvider.addNavigator(navigator)
+//        navController.setGraph(R.navigation.main_navigation)
 
         binding.bnvMain.setupWithNavController(navController)
     }
