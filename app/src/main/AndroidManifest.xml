@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.UrlActivity" />
+        <activity android:name=".ui.activity.ContractsActivity" />
 
     </application>
 

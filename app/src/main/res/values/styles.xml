@@ -49,4 +49,8 @@
         <item name="android:textColor">@color/text_light</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:fontFamily">@font/magra_bold</item>
+    </style>
+
 </resources>

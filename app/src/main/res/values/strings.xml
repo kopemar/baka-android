@@ -32,4 +32,5 @@
     <string name="no_more_shifts_coming_up_this_week">No more shifts coming up this week</string>
     <string name="no_more_plans_for_you">No more plans for you</string>
     <string name="not_found">Not found</string>
+    <string name="contracts">Contracts</string>
 </resources>

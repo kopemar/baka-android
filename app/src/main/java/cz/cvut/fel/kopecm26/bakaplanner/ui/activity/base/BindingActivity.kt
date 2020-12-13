@@ -2,12 +2,14 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base
 
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.snackbar.Snackbar
 
-abstract class BindingActivity<B : ViewDataBinding>(private val layoutRes: Int) : AppCompatActivity() {
+abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layoutRes: Int) : AppCompatActivity() {
 
     protected lateinit var binding: B
 
@@ -39,6 +41,11 @@ abstract class BindingActivity<B : ViewDataBinding>(private val layoutRes: Int) 
         if (statusBarTransparent) {
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         }
+    }
+
+    protected fun setUpToolbar(toolbar: Toolbar) {
+        this.setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) = Snackbar.make(binding.root, text, length).show()
