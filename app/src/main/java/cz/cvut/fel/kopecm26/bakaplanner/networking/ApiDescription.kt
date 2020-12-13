@@ -5,10 +5,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
+import java.time.LocalDate
 
 interface ApiDescription {
     @POST("/auth/sign_in")
@@ -17,6 +15,9 @@ interface ApiDescription {
     @DELETE("/auth/sign_out")
     suspend fun signOut(): Response<SignOutModel>
 
-    @GET("/schedule")
-    suspend fun getSchedule(): Response<ShiftResponse>
+    @GET("/shifts")
+    suspend fun getShifts(): Response<ShiftResponse>
+
+    @GET("/shifts")
+    suspend fun getShifts(@Query("start_date") startDate: LocalDate, @Query("end_date") endDate: LocalDate): Response<ShiftResponse>
 }
