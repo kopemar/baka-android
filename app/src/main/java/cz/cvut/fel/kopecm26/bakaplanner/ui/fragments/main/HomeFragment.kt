@@ -3,6 +3,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main
 import BaseListAdapter
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentHomeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListDayTimeBinding
@@ -11,6 +12,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HomeViewModel
 
 class HomeFragment: ViewModelFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home, HomeViewModel::class) {
+    init {
+        Logger.d("New instance of HomeFragment")
+    }
 
     override fun initUi() {
         viewModel.nextWeekDays.observe(this, observer)
