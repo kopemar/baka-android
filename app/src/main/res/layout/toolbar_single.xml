@@ -29,7 +29,7 @@
             android:background="@{color == null ? @color/light_blue : ContextCompat.getColor(context, color)}"
             android:elevation="4dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:toolbarTitle="@{title}"
+            app:title="@{title}"
             app:titleTextColor="@color/text"
             tools:background="@color/light_blue"
             tools:title="@string/contracts" />
