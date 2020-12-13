@@ -21,7 +21,7 @@ class KeepStateNavigator(
         args: Bundle?,
         navOptions: NavOptions?,
         navigatorExtras: Navigator.Extras?
-    ): NavDestination? {
+    ): NavDestination {
         val tag = destination.id.toString()
         val transaction = manager.beginTransaction()
 
@@ -48,6 +48,6 @@ class KeepStateNavigator(
         transaction.setReorderingAllowed(true)
         transaction.commitNow()
 
-        return super.navigate(destination, args, navOptions, navigatorExtras)
+        return destination
     }
 }
