@@ -35,4 +35,6 @@
     <string name="contracts">Contracts</string>
     <string name="employment_contract">Employment contract</string>
     <string name="valid_until">Valid until %s</string>
+    <string name="active_contracts">Active contracts</string>
+    <string name="inactive_contracts">Inactive contracts</string>
 </resources>

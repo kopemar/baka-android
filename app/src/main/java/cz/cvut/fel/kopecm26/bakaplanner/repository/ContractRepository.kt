@@ -10,6 +10,10 @@ class ContractRepository(
     private val contractDao: ContractDao
 ) {
 
+    suspend fun deleteAll() {
+        contractDao.deleteAll()
+    }
+
     suspend fun refreshAll() = service.getContracts().apply {
         if (this is ResponseModel.SUCCESS) {
             data?.let { contractDao.insert(it) }

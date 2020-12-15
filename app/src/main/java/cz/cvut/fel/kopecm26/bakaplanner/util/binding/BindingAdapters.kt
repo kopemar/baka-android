@@ -4,6 +4,7 @@ import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -32,4 +33,9 @@ fun ImageView.src(@DrawableRes res: Int) {
 @BindingAdapter("isRefreshing")
 fun SwipeRefreshLayout.isRefreshing(boolean: Boolean) {
     isRefreshing = boolean
+}
+
+@BindingAdapter("drawableTint")
+fun ImageView.setDrawableTint(@ColorRes color: Int) {
+    setColorFilter(color)
 }

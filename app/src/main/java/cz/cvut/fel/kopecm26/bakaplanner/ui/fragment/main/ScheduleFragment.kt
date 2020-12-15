@@ -1,12 +1,12 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
-import BaseListAdapter
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentScheduleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListShiftBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ScheduleViewModel
 
