@@ -25,7 +25,7 @@ class ExpandableHeaderAdapter<S, T>(
         isExpanded = !isExpanded
     }
 
-    var isExpanded: Boolean = true
+    var isExpanded: Boolean = false
         set(value) {
             if (value) {
                 notifyItemRangeInserted(1, items.size)
@@ -57,13 +57,22 @@ class ExpandableHeaderAdapter<S, T>(
                 bindHeader(it, (holder as BaseListAdapter<*>.ItemViewHolder).binding, position)
             }
         } else {
-            bind(getItem(position - 1), (holder as BaseListAdapter<*>.ItemViewHolder).binding, position)
+            bind(
+                getItem(position - 1),
+                (holder as BaseListAdapter<*>.ItemViewHolder).binding,
+                position
+            )
         }
     }
 
-    inner class HeaderViewHolder(binding: ViewBinding) : BaseListAdapter<T>.ItemViewHolder(binding) {
+    inner class HeaderViewHolder(binding: ViewBinding) :
+        BaseListAdapter<T>.ItemViewHolder(binding) {
         init {
-            if (binding is HeaderExpandableBinding) binding.expanded = isExpanded
+            if (binding is HeaderExpandableBinding) {
+                binding.expanded = isExpanded
+                binding.ivChevron.rotation =
+                    if (isExpanded) IC_EXPANDED_ROTATION_DEG else IC_COLLAPSED_ROTATION_DEG
+            }
             binding.root.setOnClickListener(onHeaderClickListener)
         }
     }
@@ -72,7 +81,7 @@ class ExpandableHeaderAdapter<S, T>(
         private const val VIEW_TYPE_ITEM = 1
         private const val VIEW_TYPE_HEADER = 2
 
-        private const val IC_EXPANDED_ROTATION_DEG = 0F
-        private const val IC_COLLAPSED_ROTATION_DEG = 180F
+        private const val IC_EXPANDED_ROTATION_DEG = 180F
+        private const val IC_COLLAPSED_ROTATION_DEG = 0F
     }
 }
