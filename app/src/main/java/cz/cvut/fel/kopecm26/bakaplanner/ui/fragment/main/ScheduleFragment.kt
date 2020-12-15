@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentScheduleBinding
@@ -33,7 +34,7 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
                     )
                 },
                 { shift, binding, _ -> (binding as ListShiftBinding).shift = shift },
-                null,
+                { findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(it.id)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
@@ -42,7 +43,7 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
 
     override fun initUi() {
         binding.swipeRefresh.isRefreshing = true
-        viewModel.shifts.observe(this, observer)
+        viewModel.shifts.observe(viewLifecycleOwner, observer)
         binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
     }
 }

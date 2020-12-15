@@ -9,6 +9,10 @@ fun String.isBefore(date: ZonedDateTime = ZonedDateTime.now()): Boolean =
 
 fun String.isBefore(date: String) = isBefore(ZonedDateTime.parse(date))
 
+fun String.daysUntilNow() = ZonedDateTime.now().until(ZonedDateTime.parse(this), ChronoUnit.DAYS)
+fun String.hoursUntilNow() = ZonedDateTime.now().until(ZonedDateTime.parse(this), ChronoUnit.HOURS)
+fun String.minutesUntilNow() = ZonedDateTime.now().until(ZonedDateTime.parse(this), ChronoUnit.MINUTES)
+
 fun String.isMorning() = ZonedDateTime.parse(this).hour in (4..8)
 fun String.isDay() = ZonedDateTime.parse(this).hour in (8..12)
 fun String.isEvening() = ZonedDateTime.parse(this).hour in (12..16)

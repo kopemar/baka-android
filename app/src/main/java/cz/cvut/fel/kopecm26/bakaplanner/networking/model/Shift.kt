@@ -1,12 +1,17 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 
+import android.text.format.DateUtils
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.*
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayOfWeek
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.fullDateShortDayOfWeek
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
+import java.time.ZonedDateTime
+import java.util.*
 
 @Entity
 @JsonClass(generateAdapter = true)
@@ -22,12 +27,12 @@ data class Shift(
 
     val dayOfWeek get() = start_time.dayOfWeek()
 
-    val shiftTime: ShiftTime get() = when {
-        start_time.isMorning() -> ShiftTime.MORNING
-        start_time.isDay() -> ShiftTime.DAY
-        start_time.isEvening() -> ShiftTime.EVENING
-        else -> ShiftTime.NIGHT
-    }
+    val relativeTimestamp
+        get() = DateUtils.getRelativeTimeSpanString(
+            ZonedDateTime.parse(start_time).toEpochSecond() * 1000,
+            ZonedDateTime.now().toEpochSecond() * 1000,
+            DateUtils.MINUTE_IN_MILLIS
+        ).toString().toLowerCase(Locale.ROOT)
 }
 
 @JsonClass(generateAdapter = true)

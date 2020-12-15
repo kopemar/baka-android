@@ -10,6 +10,9 @@ import java.time.temporal.TemporalAdjusters
 @Dao
 interface ShiftDao: BaseDao<Shift> {
 
+    @Query("SELECT * FROM Shift WHERE id = :id")
+    suspend fun getById(id: Int): Shift?
+
     @Query("SELECT * FROM Shift ORDER BY start_time")
     suspend fun getAll(): List<Shift>
 

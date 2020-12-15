@@ -17,7 +17,7 @@ class HomeFragment: ViewModelFragment<HomeViewModel, FragmentHomeBinding>(R.layo
     }
 
     override fun initUi() {
-        viewModel.nextWeekDays.observe(this, observer)
+        viewModel.nextWeekDays.observe(viewLifecycleOwner, observer)
         binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
     }
 

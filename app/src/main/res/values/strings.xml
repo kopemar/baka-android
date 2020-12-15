@@ -33,8 +33,10 @@
     <string name="no_more_plans_for_you">No more plans for you</string>
     <string name="not_found">Not found</string>
     <string name="contracts">Contracts</string>
+    <string name="shift">Shift</string>
     <string name="employment_contract">Employment contract</string>
     <string name="valid_until">Valid until %s</string>
     <string name="active_contracts">Active contracts</string>
     <string name="inactive_contracts">Inactive contracts</string>
+    <string name="not_implemented_yet">Not implemented yet</string>
 </resources>

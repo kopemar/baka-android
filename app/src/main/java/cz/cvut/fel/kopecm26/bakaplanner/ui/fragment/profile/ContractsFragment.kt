@@ -1,7 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile
 
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -18,6 +18,11 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
     R.layout.fragment_contracts,
     ContractsViewModel::class
 ) {
+
+    override val toolbar: Toolbar
+        get() = binding.toolbar.toolbar
+
+    override var navigateUp = true
 
     private val contractsAdapter
         get() = ExpandableHeaderAdapter<Headers, Contract>(
@@ -71,10 +76,7 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
         }
 
         binding.toolbar.toolbar.run {
-            setNavigationIcon(R.drawable.ic_mdi_back)
-            setNavigationOnClickListener {
-                findNavController().navigateUp()
-            }
+
         }
 
     }
