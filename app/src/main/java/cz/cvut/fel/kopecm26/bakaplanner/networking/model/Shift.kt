@@ -7,9 +7,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayOfWeek
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.fullDateShortDayOfWeek
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.*
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -27,12 +25,25 @@ data class Shift(
 
     val dayOfWeek get() = start_time.dayOfWeek()
 
-    val relativeTimestamp
-        get() = DateUtils.getRelativeTimeSpanString(
-            ZonedDateTime.parse(start_time).toEpochSecond() * 1000,
-            ZonedDateTime.now().toEpochSecond() * 1000,
-            DateUtils.MINUTE_IN_MILLIS
-        ).toString().toLowerCase(Locale.ROOT)
+    val shiftTime: ShiftTime
+        get() = when {
+            start_time.isMorning() -> ShiftTime.MORNING
+            start_time.isDay() -> ShiftTime.DAY
+            start_time.isEvening() -> ShiftTime.EVENING
+            else -> ShiftTime.NIGHT
+        }
+
+
+    val relativeTimestamp: String
+        get() {
+            val time = if (start_time.isBefore()) end_time else start_time
+
+            return DateUtils.getRelativeTimeSpanString(
+                ZonedDateTime.parse(time).toEpochSecond() * 1000,
+                ZonedDateTime.now().toEpochSecond() * 1000,
+                DateUtils.MINUTE_IN_MILLIS
+            ).toString().toLowerCase(Locale.ROOT)
+        }
 }
 
 @JsonClass(generateAdapter = true)
