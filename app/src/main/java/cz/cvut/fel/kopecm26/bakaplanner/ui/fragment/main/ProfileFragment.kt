@@ -1,11 +1,11 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentProfileBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.SplashActivity
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ProfileViewModel
 

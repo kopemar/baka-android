@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.di
 
 import android.content.Context
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.PlannerDatabase
+import cz.cvut.fel.kopecm26.bakaplanner.repository.ContractRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import org.koin.android.ext.koin.androidApplication
@@ -12,12 +13,15 @@ val databaseModule: Module = module {
     fun buildDatabase(context: Context): PlannerDatabase = PlannerDatabase.buildDatabase(context)
 
     fun getShiftDao(database: PlannerDatabase) = database.getShiftDao()
+    fun getContractDao(database: PlannerDatabase) = database.getContractDao()
 
     single { buildDatabase(androidApplication()) }
     single { getShiftDao(get()) }
+    single { getContractDao(get()) }
 }
 
 val repositoryModule = module {
     single { UserRepository(get()) }
     single { ShiftRepository(get(), get()) }
+    single { ContractRepository(get(), get()) }
 }

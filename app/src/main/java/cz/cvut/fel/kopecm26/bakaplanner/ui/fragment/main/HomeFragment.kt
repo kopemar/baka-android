@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import BaseListAdapter
 import androidx.lifecycle.Observer
@@ -8,7 +8,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentHomeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListDayTimeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HomeViewModel
 
 class HomeFragment: ViewModelFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home, HomeViewModel::class) {
@@ -18,7 +18,7 @@ class HomeFragment: ViewModelFragment<HomeViewModel, FragmentHomeBinding>(R.layo
 
     override fun initUi() {
         viewModel.nextWeekDays.observe(this, observer)
-        binding.swipeRefresh.setOnRefreshListener { viewModel.getAll(true) }
+        binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
     }
 
     private val observer by lazy { Observer<List<Shift>> {

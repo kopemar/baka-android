@@ -2,10 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.weeksAfter
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
@@ -23,7 +20,12 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun signOut() = safeApiCall({ api.signOut() }, { it })
 
     override suspend fun getShifts(): ResponseModel<List<Shift>> =
-        safeApiCall({ api.getShifts(LocalDate.now(), LocalDate.now().weeksAfter(1)) }, { it?.shifts })
+        safeApiCall(
+            { api.getShifts(LocalDate.now(), LocalDate.now().weeksAfter(1)) },
+            { it?.shifts })
+
+    override suspend fun getContracts(): ResponseModel<List<Contract>> =
+        safeApiCall({ api.getContracts() }, { it?.contracts })
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

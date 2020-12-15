@@ -33,4 +33,6 @@
     <string name="no_more_plans_for_you">No more plans for you</string>
     <string name="not_found">Not found</string>
     <string name="contracts">Contracts</string>
+    <string name="employment_contract">Employment contract</string>
+    <string name="valid_until">Valid until %s</string>
 </resources>

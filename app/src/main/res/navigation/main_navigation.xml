@@ -8,17 +8,17 @@
 
     <fragment
         android:id="@+id/menu_home"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.HomeFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/menu_schedule"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.ScheduleFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.ScheduleFragment"
         android:label="ScheduleFragment"
         tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/menu_profile"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.main.ProfileFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.ProfileFragment"
         android:label="ScheduleFragment"
         tools:layout="@layout/fragment_profile">
 
@@ -40,10 +40,10 @@
 
     <fragment
         android:id="@+id/contracts_fragment"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragments.profile.ContractsFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.ContractsFragment"
         android:label="ContractsFragment"
         app:popUpTo="@id/menu_profile"
-        tools:layout="@layout/activity_contracts">
+        tools:layout="@layout/fragment_contracts">
     </fragment>
 
 </navigation>

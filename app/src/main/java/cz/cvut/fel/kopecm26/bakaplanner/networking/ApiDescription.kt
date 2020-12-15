@@ -1,9 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking
 
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftResponse
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 import retrofit2.Response
 import retrofit2.http.*
 import java.time.LocalDate
@@ -20,4 +17,7 @@ interface ApiDescription {
 
     @GET("/shifts")
     suspend fun getShifts(@Query("start_date") startDate: LocalDate, @Query("end_date") endDate: LocalDate): Response<ShiftResponse>
+
+    @GET("/contracts")
+    suspend fun getContracts(): Response<ContractResponse>
 }

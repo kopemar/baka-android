@@ -14,11 +14,17 @@ class HomeViewModel : BaseViewModel() {
         getAll()
     }
 
+    fun refreshShifts() {
+        viewModelScope.launch {
+            shiftRepository.refreshAllShifts()
+            getAll()
+        }
+    }
 
-    fun getAll(force: Boolean = false) {
+    fun getAll() {
         viewModelScope.launch {
             working.value = true
-            getShifts(force)
+            getShifts()
             getCurrentShift()
             getNextShift()
             getNextWeekShifts()
@@ -38,7 +44,7 @@ class HomeViewModel : BaseViewModel() {
         nextShift.value = shiftRepository.getNextShift()
     }
 
-    private suspend fun getShifts(force: Boolean = false) {
-        shiftRepository.getAllShifts(force)
+    private suspend fun getShifts() {
+        shiftRepository.getCachedShifts()
     }
 }

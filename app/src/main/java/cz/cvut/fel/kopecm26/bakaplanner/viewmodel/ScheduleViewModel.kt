@@ -15,18 +15,28 @@ class ScheduleViewModel : BaseViewModel() {
         getShifts()
     }
 
-    fun getShifts(forceUpdate: Boolean = false) {
-
+    fun refreshShifts() {
         viewModelScope.launch {
-            shiftRepository.getAllShifts(forceUpdate).run {
-                if (this is ResponseModel.SUCCESS) {
-                    Logger.d(data?.size)
-                    shifts.value = data
-                } else if (this is ResponseModel.ERROR) {
-                    errorMessage.value = errorType?.messageRes
-                }
-            }
+            working.value = true
+            shiftRepository.refreshAllShifts().let(::saveShifts)
+            working.value = false
+        }
+    }
 
+    fun getShifts() {
+        viewModelScope.launch {
+            working.value = true
+            shiftRepository.getCachedShifts().let(::saveShifts)
+            working.value = false
+        }
+    }
+
+    private fun saveShifts(response: ResponseModel<List<Shift>>) {
+        if (response is ResponseModel.SUCCESS) {
+            Logger.d(response.data?.size)
+            shifts.value = response.data
+        } else if (response is ResponseModel.ERROR) {
+            errorMessage.value = response.errorType?.messageRes
         }
     }
 
