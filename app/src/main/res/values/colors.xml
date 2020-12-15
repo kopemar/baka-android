@@ -14,4 +14,6 @@
     <color name="very_light_gray">#F9F9F9</color>
     <color name="orange_10000">#FEA575</color>
     <color name="gray_blue_light">#C6D0E0</color>
+    <color name="green_poison">#5FF96F</color>
+    <color name="greeno">#7CB882</color>
 </resources>
