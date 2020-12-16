@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:layout_marginEnd="16dp"
+            android:rotation="@{expanded ? 180F : 0F}"
             android:src="@drawable/ic_chevron_down"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

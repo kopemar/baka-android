@@ -70,8 +70,6 @@ class ExpandableHeaderAdapter<S, T>(
         init {
             if (binding is HeaderExpandableBinding) {
                 binding.expanded = isExpanded
-                binding.ivChevron.rotation =
-                    if (isExpanded) IC_EXPANDED_ROTATION_DEG else IC_COLLAPSED_ROTATION_DEG
             }
             binding.root.setOnClickListener(onHeaderClickListener)
         }
@@ -80,8 +78,5 @@ class ExpandableHeaderAdapter<S, T>(
     companion object {
         private const val VIEW_TYPE_ITEM = 1
         private const val VIEW_TYPE_HEADER = 2
-
-        private const val IC_EXPANDED_ROTATION_DEG = 180F
-        private const val IC_COLLAPSED_ROTATION_DEG = 0F
     }
 }

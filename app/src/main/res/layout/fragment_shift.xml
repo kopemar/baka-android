@@ -8,6 +8,16 @@
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftViewModel" />
+
+        <variable
+            name="infoExpanded"
+            type="Boolean" />
+
+        <variable
+            name="actionsExpanded"
+            type="Boolean" />
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.Headers" />
     </data>
 
     <LinearLayout
@@ -71,6 +81,82 @@
                 tools:text="Starts in 5 hours" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/infoHeader"
+                layout="@layout/header_expandable"
+                app:expanded="@{infoExpanded}"
+                app:header="@{Headers.INFO}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="16dp"
+                app:visible="@{infoExpanded}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:fromHtml="@{@string/shift_id(vm.shift.id)}"
+                    tools:text="aaaaaa" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    app:fromHtml="@{@string/schedule_id(vm.shift.schedule_id)}"
+                    tools:text="aaaaaa" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    app:fromHtml="@{@string/duration(vm.shift.duration)}"
+                    tools:text="aaaaaa" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_blue_light"
+                app:visible="@{infoExpanded}" />
+
+            <include
+                android:id="@+id/actionsHeader"
+                layout="@layout/header_expandable"
+                app:expanded="@{actionsExpanded}"
+                app:header="@{Headers.ACTIONS}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                app:visible="@{actionsExpanded}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:fromHtml="@{@string/schedule_id(vm.shift.schedule_id)}"
+                    tools:text="aaaaaa" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_blue_light"
+                app:visible="@{actionsExpanded}" />
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

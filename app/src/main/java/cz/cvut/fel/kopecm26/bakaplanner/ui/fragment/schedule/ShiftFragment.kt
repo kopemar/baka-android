@@ -11,7 +11,7 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     R.layout.fragment_shift,
     ShiftViewModel::class
 ) {
-    
+
     val args by navArgs<ShiftFragmentArgs>()
 
     override val toolbar: Toolbar
@@ -21,5 +21,22 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
 
     override fun initUi() {
         viewModel.getShift(args.shiftId)
+
+        initExpandable()
+    }
+
+    private fun initExpandable() {
+        binding.infoHeader.run {
+            binding.infoExpanded = true
+            root.setOnClickListener {
+                binding.infoExpanded = binding.infoExpanded?.not() ?: false
+            }
+        }
+
+        binding.actionsHeader.run {
+            root.setOnClickListener {
+                binding.actionsExpanded = binding.actionsExpanded?.not() ?: false
+            }
+        }
     }
 }

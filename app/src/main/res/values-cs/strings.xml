@@ -37,4 +37,9 @@
     <string name="set_up">Nastavit</string>
     <string name="setup_instance"><![CDATA[Zadejte URL svého <b>bakaplanneru</b>]]></string>
     <string name="no_server_connection">Připojení k serveru se nezdařilo</string>
+    <string name="information">Informace</string>
+    <string name="schedule_id"><![CDATA[ID rozvrhu: <b>%s</b>]]></string>
+    <string name="actions">Akce</string>
+    <string name="duration"><![CDATA[Počet hodin: <b>%s</b>]]></string>
+    <string name="shift_id"><![CDATA[ID směny: <b>%s</b>]]></string>
 </resources>

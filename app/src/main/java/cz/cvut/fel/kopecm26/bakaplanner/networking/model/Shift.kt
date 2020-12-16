@@ -18,7 +18,9 @@ import java.util.*
 data class Shift(
     @PrimaryKey val id: Int,
     val start_time: String,
-    val end_time: String
+    val end_time: String,
+    val schedule_id: String,
+    val duration: Int,
 ) {
     val dateF get() = start_time.fullDateShortDayOfWeek()
 

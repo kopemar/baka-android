@@ -43,4 +43,9 @@
     <string name="ends">Ends %s</string>
     <string name="ended">Ended %s</string>
     <string name="no_server_connection">Unable to connect to server</string>
+    <string name="information">Information</string>
+    <string name="shift_id"><![CDATA[Shift ID: <b>%s</b>]]></string>
+    <string name="schedule_id"><![CDATA[Schedule ID: <b>%s</b>]]></string>
+    <string name="duration"><![CDATA[Number of hours: <b>%s</b>]]></string>
+    <string name="actions">Actions</string>
 </resources>
