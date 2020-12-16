@@ -11,9 +11,10 @@
     </style>
 
     <style name="Button">
-        <item name="android:fontFamily">@font/magra_bold</item>
+        <item name="android:fontFamily">@font/magra_regular</item>
         <item name="android:textSize">@dimen/medium_font</item>
-        <item name="android:layout_height">52dp</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:layout_height">40dp</item>
     </style>
 
     <style name="Button.Primary">

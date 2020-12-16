@@ -3,7 +3,7 @@
     android:color="@color/sunny_evenings_ripple">
     <item>
         <shape>
-            <corners android:radius="30dp" />
+            <corners android:radius="5dp" />
             <gradient android:endColor="@color/orange_10000" android:startColor="@color/sunny_evenings"/>
         </shape>
     </item>
