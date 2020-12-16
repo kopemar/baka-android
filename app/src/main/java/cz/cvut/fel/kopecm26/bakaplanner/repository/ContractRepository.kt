@@ -1,7 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.repository
 
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.datasource.dao.ContractDao
+import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ContractDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 

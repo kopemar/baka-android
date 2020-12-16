@@ -18,7 +18,8 @@ class ScheduleViewModel : BaseViewModel() {
     fun refreshShifts() {
         viewModelScope.launch {
             working.value = true
-            shiftRepository.refreshAllShifts().let(::saveShifts)
+            shiftRepository.refreshAllShifts()
+            shiftRepository.getUpcomingShifts().let(::saveShifts)
             working.value = false
         }
     }
@@ -26,7 +27,7 @@ class ScheduleViewModel : BaseViewModel() {
     fun getShifts() {
         viewModelScope.launch {
             working.value = true
-            shiftRepository.getCachedShifts().let(::saveShifts)
+            shiftRepository.getUpcomingShifts().let(::saveShifts)
             working.value = false
         }
     }

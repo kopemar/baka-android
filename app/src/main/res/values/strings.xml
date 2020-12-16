@@ -34,7 +34,7 @@
     <string name="not_found">Not found</string>
     <string name="contracts">Contracts</string>
     <string name="shift">Shift</string>
-    <string name="employment_contract">Employment contract</string>
+    <string name="employment_contract">Employment contract #%d</string>
     <string name="valid_until">Valid until %s</string>
     <string name="active_contracts">Active contracts</string>
     <string name="inactive_contracts">Inactive contracts</string>
@@ -42,4 +42,5 @@
     <string name="starts">Starts %s</string>
     <string name="ends">Ends %s</string>
     <string name="ended">Ended %s</string>
+    <string name="no_server_connection">Unable to connect to server</string>
 </resources>

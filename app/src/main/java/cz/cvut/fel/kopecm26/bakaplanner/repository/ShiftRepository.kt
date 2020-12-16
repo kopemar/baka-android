@@ -2,7 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.repository
 
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.datasource.dao.ShiftDao
+import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ShiftDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift

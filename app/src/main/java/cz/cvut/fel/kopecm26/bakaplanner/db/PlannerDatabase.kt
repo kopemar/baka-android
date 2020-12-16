@@ -1,11 +1,11 @@
-package cz.cvut.fel.kopecm26.bakaplanner.datasource
+package cz.cvut.fel.kopecm26.bakaplanner.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import cz.cvut.fel.kopecm26.bakaplanner.datasource.dao.ContractDao
-import cz.cvut.fel.kopecm26.bakaplanner.datasource.dao.ShiftDao
+import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ContractDao
+import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ShiftDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 

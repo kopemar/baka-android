@@ -6,8 +6,8 @@
     <string name="not_implemented_yet">Ještě nebylo implementováno</string>
     <string name="inactive_contracts">Neaktuální smlouvy</string>
     <string name="active_contracts">Aktuální smlouvy</string>
-    <string name="valid_until">Platí do %s</string>
-    <string name="employment_contract">Pracovní smlouva</string>
+    <string name="valid_until">Platná do %s</string>
+    <string name="employment_contract">Pracovní smlouva č. %d</string>
     <string name="shift">Směna</string>
     <string name="contracts">Smlouvy</string>
     <string name="not_found">Nenalezeno</string>
@@ -36,4 +36,5 @@
     <string name="help">Nápověda</string>
     <string name="set_up">Nastavit</string>
     <string name="setup_instance"><![CDATA[Zadejte URL svého <b>bakaplanneru</b>]]></string>
+    <string name="no_server_connection">Připojení k serveru se nezdařilo</string>
 </resources>

@@ -1,7 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.di
 
 import android.content.Context
-import cz.cvut.fel.kopecm26.bakaplanner.datasource.PlannerDatabase
+import cz.cvut.fel.kopecm26.bakaplanner.db.PlannerDatabase
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ContractRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository

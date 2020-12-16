@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.datasource.dao
+package cz.cvut.fel.kopecm26.bakaplanner.db.dao
 
 import androidx.room.Delete
 import androidx.room.Insert

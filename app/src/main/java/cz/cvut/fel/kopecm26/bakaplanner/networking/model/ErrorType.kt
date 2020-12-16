@@ -10,3 +10,5 @@ class UnauthorizedError: ErrorType(R.string.wrong_password)
 class NoInternetError: ErrorType(R.string.no_internet_connection)
 
 class NotFoundError: ErrorType(R.string.not_found)
+
+class NoServerConnectionError: ErrorType(R.string.no_server_connection)

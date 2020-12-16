@@ -4,6 +4,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import java.net.SocketTimeoutException
 
 /**
  * A fun to make safeApiCall
@@ -34,6 +35,7 @@ fun mapToDomainError(
     remoteException: Exception
 ): ErrorType {
     return when (remoteException) {
+        is SocketTimeoutException -> NoServerConnectionError()
         is IOException -> NoInternetError()
         is HttpException -> ErrorType()
         else -> ErrorType()
