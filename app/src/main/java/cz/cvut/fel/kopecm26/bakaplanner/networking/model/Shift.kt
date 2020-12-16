@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.*
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -33,17 +35,22 @@ data class Shift(
             else -> ShiftTime.NIGHT
         }
 
-
     val relativeTimestamp: String
         get() {
             val time = if (start_time.isBefore()) end_time else start_time
 
             return DateUtils.getRelativeTimeSpanString(
                 ZonedDateTime.parse(time).toEpochSecond() * 1000,
-                ZonedDateTime.now().toEpochSecond() * 1000,
+                LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(0)) * 1000,
                 DateUtils.MINUTE_IN_MILLIS
-            ).toString().toLowerCase(Locale.ROOT)
+            ).toString().toLowerCase(Locale.getDefault())
         }
+
+    val ended: Boolean
+        get() = end_time.isBefore()
+
+    val started: Boolean
+        get() = start_time.isBefore()
 }
 
 @JsonClass(generateAdapter = true)

@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{vm.shift.relativeTimestamp}"
+                android:text="@{vm.shift.ended ? @string/ended(vm.shift.relativeTimestamp) : (vm.shift.started ? @string/ends(vm.shift.relativeTimestamp) : @string/starts(vm.shift.relativeTimestamp))}"
                 app:layout_constraintStart_toStartOf="@id/tv_starting_hours"
                 app:layout_constraintTop_toBottomOf="@id/tv_starting_hours"
                 tools:text="Starts in 5 hours" />
