@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="starts">Začne %s</string>
+    <string name="ends">Skončí %s</string>
+    <string name="ended">Skončilo %s</string>
+    <string name="not_implemented_yet">Ještě nebylo implementováno</string>
+    <string name="inactive_contracts">Neaktuální smlouvy</string>
+    <string name="active_contracts">Aktuální smlouvy</string>
+    <string name="valid_until">Platí do %s</string>
+    <string name="employment_contract">Pracovní smlouva</string>
+    <string name="shift">Směna</string>
+    <string name="contracts">Smlouvy</string>
+    <string name="not_found">Nenalezeno</string>
+    <string name="no_more_plans_for_you">Už nemáte nic naplánováno</string>
+    <string name="no_more_shifts_coming_up_this_week">Tento týden nemáte nic naplánováno</string>
+    <string name="later_this_week">Později tento týden</string>
+    <string name="next_planned_shift">Další naplánovaná směna</string>
+    <string name="happening_right_now">Právě teď</string>
+    <string name="working_until_">V práci do %s</string>
+    <string name="remote_exception">Chyba na serveru</string>
+    <string name="no_internet_connection">Nejste připojeni k internetu</string>
+    <string name="url">Nastavit URL</string>
+    <string name="log_out">Odhlásit se</string>
+    <string name="profile">Profil</string>
+    <string name="schedule">Rozvrh</string>
+    <string name="home">Domů</string>
+    <string name="unknown_error">Nastala neznámá chyba</string>
+    <string name="wrong_password">Špatné uživatelské jméno nebo heslo</string>
+    <string name="password_must_be_filled">Vyplňte prosím heslo</string>
+    <string name="username_must_be_filled">Vyplňte prosím uživatelské jméno</string>
+    <string name="log_in">Přihlásit se</string>
+    <string name="login_with_credentials"><![CDATA[Přihlašte se svými údaji do <b>bakaplanneru</b>]]></string>
+    <string name="username">Uživatelské jméno</string>
+    <string name="password">Heslo</string>
+    <string name="must_be_url">Vyplňte platné URL</string>
+    <string name="help">Nápověda</string>
+    <string name="set_up">Nastavit</string>
+    <string name="setup_instance"><![CDATA[Zadejte URL svého <b>bakaplanneru</b>]]></string>
+</resources>

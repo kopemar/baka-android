@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BakaPlanner</string>
+    <string name="app_name" translatable="false">BakaPlanner</string>
     <string name="setup_instance"><![CDATA[Set up your <b>bakaplanner</b> instance]]></string>
     <string name="set_up">Set Up</string>
     <string name="help">Help</string>
@@ -11,7 +11,7 @@
     <string name="username_must_be_filled">This field has to be filled</string>
     <string name="password_must_be_filled">This field has to be filled</string>
     <string name="wrong_password">Wrong username or password</string>
-    <string name="http_example_com">http://example.com</string>
+    <string name="http_example_com" translatable="false">http://example.com</string>
     <string name="unknown_error">Unknown error occurred</string>
     <string name="home">Home</string>
     <string name="schedule">Schedule</string>
@@ -20,14 +20,14 @@
     <string name="url">Set up URL</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="remote_exception">Remote exception</string>
-    <string name="full_name">%1$s %2$s</string>
-    <string name="email"><![CDATA[%1$s <font color="#7D8E9E"> | %2$s</font>]]></string>
-    <string name="time_from_to">%1$s — %2$s</string>
+    <string name="full_name" translatable="false">%1$s %2$s</string>
+    <string name="email" translatable="false"><![CDATA[%1$s <font color="#7D8E9E"> | %2$s</font>]]></string>
+    <string name="time_from_to" translatable="false">%1$s — %2$s</string>
     <string name="working_until_">Working until %s</string>
     <string name="happening_right_now">Happening right now</string>
     <string name="next_planned_shift">Next planned shift</string>
-    <string name="day_hours_start_end">%1$s %2$s — %3$s</string>
-    <string name="hours_start_end">%1$s — %2$s</string>
+    <string name="day_hours_start_end" translatable="false">%1$s %2$s — %3$s</string>
+    <string name="hours_start_end" translatable="false">%1$s — %2$s</string>
     <string name="later_this_week">Later this week</string>
     <string name="no_more_shifts_coming_up_this_week">No more shifts coming up this week</string>
     <string name="no_more_plans_for_you">No more plans for you</string>
@@ -39,4 +39,7 @@
     <string name="active_contracts">Active contracts</string>
     <string name="inactive_contracts">Inactive contracts</string>
     <string name="not_implemented_yet">Not implemented yet</string>
+    <string name="starts">Starts %s</string>
+    <string name="ends">Ends %s</string>
+    <string name="ended">Ended %s</string>
 </resources>
