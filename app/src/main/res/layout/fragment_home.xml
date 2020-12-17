@@ -51,6 +51,7 @@
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/current_shift"
                     visible="@{vm.currentShift != null}"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
@@ -93,6 +94,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/next_shift"
                     visible="@{vm.nextShift != null}"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"

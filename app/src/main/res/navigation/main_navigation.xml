@@ -10,7 +10,11 @@
         android:id="@+id/menu_home"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/navigate_to_shift_detail"
+            app:destination="@id/shift_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/menu_schedule"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.ScheduleFragment"
@@ -18,7 +22,7 @@
         tools:layout="@layout/fragment_schedule">
         <action
             android:id="@+id/navigate_to_shift_detail"
-            app:destination="@id/shift_fragment"></action>
+            app:destination="@id/shift_fragment" />
     </fragment>
     <fragment
         android:id="@+id/menu_profile"
@@ -52,7 +56,8 @@
     <fragment
         android:id="@+id/shift_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.schedule.ShiftFragment"
-        android:label="ShiftFragment">
+        android:label="ShiftFragment"
+        tools:layout="@layout/fragment_shift">
         <argument
             android:name="shift_id"
             app:argType="integer"
