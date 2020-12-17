@@ -14,30 +14,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/white_ripple"
         android:clickable="true"
-        android:elevation="@dimen/card_elevation"
         android:focusable="true">
-
-        <FrameLayout
-            android:id="@+id/fl_background"
-            android:layout_width="64dp"
-            android:layout_height="match_parent"
-            android:background="@{ContextCompat.getColor(context, shift.shiftTime.colorRes)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_shift_state_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:alpha="0.64"
+            android:layout_marginStart="16dp"
             android:src="@{shift.shiftTime.shiftIcon}"
-            app:layout_constraintEnd_toEndOf="@id/fl_background"
-            app:layout_constraintStart_toStartOf="@id/fl_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_weather_sunset_up" />
 
@@ -47,29 +36,26 @@
             style="@style/Text.Strong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="@{shift.dateF}"
-            app:layout_constraintStart_toEndOf="@id/fl_background"
+            app:layout_constraintStart_toEndOf="@id/iv_shift_state_icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Mon, November 9, 2020" />
 
         <TextView
             android:id="@+id/tv_time"
+            style="@style/Text.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
             android:text="@{@string/time_from_to(shift.startTimeHours, shift.endTimeHours)}"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_date_headline"
             app:layout_constraintTop_toBottomOf="@id/tv_date_headline"
             tools:text="9:00 AM - 5:30 PM" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_blue_light"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

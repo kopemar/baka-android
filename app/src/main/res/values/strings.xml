@@ -48,4 +48,5 @@
     <string name="schedule_id"><![CDATA[Schedule ID: <b>%s</b>]]></string>
     <string name="duration"><![CDATA[Number of hours: <b>%s</b>]]></string>
     <string name="actions">Actions</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

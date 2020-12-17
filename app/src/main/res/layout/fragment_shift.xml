@@ -140,23 +140,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="16dp"
+                android:layout_marginVertical="16dp"
                 app:visible="@{actionsExpanded}">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    app:fromHtml="@{@string/schedule_id(vm.shift.schedule_id)}"
-                    tools:text="aaaaaa" />
+                <Button
+                    style="@style/Button.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/sign_up"
+                    app:icon="@drawable/ic_calendar_add"
+                    app:iconGravity="textStart"
+                    app:iconPadding="16dp" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_blue_light"
-                app:visible="@{actionsExpanded}" />
         </LinearLayout>
-
     </LinearLayout>
 </layout>

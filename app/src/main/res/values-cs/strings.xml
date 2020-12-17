@@ -42,4 +42,5 @@
     <string name="actions">Akce</string>
     <string name="duration"><![CDATA[Počet hodin: <b>%s</b>]]></string>
     <string name="shift_id"><![CDATA[ID směny: <b>%s</b>]]></string>
+    <string name="sign_up">Zapsat se</string>
 </resources>
