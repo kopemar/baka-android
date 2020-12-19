@@ -5,27 +5,30 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorControlNormal">@color/text</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:fontFamily">@font/magra</item>
     </style>
 
-    <style name="Button">
+    <style name="Button" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
         <item name="android:fontFamily">@font/magra_regular</item>
         <item name="android:textSize">@dimen/medium_font</item>
-        <item name="android:letterSpacing">0.1</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_height">52dp</item>
     </style>
 
     <style name="Button.Primary">
         <item name="android:background">@drawable/btn_primary</item>
-        <item name="backgroundTint">@color/sunny_evenings</item>
         <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/sunny_evenings</item>
+        <item name="iconTint">@color/white</item>
     </style>
 
     <style name="Button.Secondary">
-        <item name="backgroundTint">@color/light_blue</item>
-        <item name="android:background">@drawable/btn_secondary</item>
+        <item name="strokeColor">@color/text</item>
+        <item name="strokeWidth">1dp</item>
         <item name="android:textColor">@color/text</item>
     </style>
 
@@ -39,7 +42,9 @@
         <item name="itemIconTint">@color/sunny_evenings</item>
     </style>
 
-    <style name="Text" />
+    <style name="Text">
+        <item name="android:letterSpacing">0.05</item>
+    </style>
 
     <style name="Text.Strong">
         <item name="android:textSize">18sp</item>
@@ -50,8 +55,31 @@
         <item name="android:textColor">@color/text_light</item>
     </style>
 
+    <style name="Text.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:fontFamily">@font/magra_bold</item>
+        <item name="titleTextAppearance">@style/TitleStyle</item>
+        <item name="android:contentInsetStartWithNavigation">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay.Large">
+        <item name="titleTextAppearance">@style/TitleStyle</item>
+        <item name="android:fontFamily">@font/magra_bold</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="TitleStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="TitleStyle.Large">
+        <item name="android:textSize">24sp</item>
     </style>
 
 </resources>

@@ -2,9 +2,6 @@
 <layout>
     <data>
         <variable
-            name="closeId"
-            type="int" />
-        <variable
             name="closeButton"
             type="Boolean" />
 
@@ -16,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@color/very_light_blue"
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp">
 
