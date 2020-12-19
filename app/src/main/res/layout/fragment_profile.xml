@@ -90,7 +90,7 @@
 
         <TextView
             android:id="@+id/btn_history"
-            style="@style/Text.Medium"
+            style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/white_ripple"
@@ -101,14 +101,10 @@
             android:text="@string/history"
             app:drawableStartCompat="@drawable/ic_history" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_blue_light" />
 
         <TextView
             android:id="@+id/btn_contracts"
-            style="@style/Text.Medium"
+            style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/white_ripple"
@@ -119,14 +115,10 @@
             android:text="@string/contracts"
             app:drawableStartCompat="@drawable/ic_contracts" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_blue_light" />
 
         <TextView
             android:id="@+id/btn_settings"
-            style="@style/Text.Medium"
+            style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/white_ripple"
@@ -137,14 +129,9 @@
             android:text="@string/settings"
             app:drawableStartCompat="@drawable/ic_settings" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_blue_light" />
-
         <TextView
             android:id="@+id/btn_help"
-            style="@style/Text.Medium"
+            style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/white_ripple"
