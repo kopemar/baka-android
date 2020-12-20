@@ -18,6 +18,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            style="@style/Text.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
