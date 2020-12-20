@@ -1,48 +1,47 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.url
 
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.afollestad.vvalidator.form
 import com.orhanobut.logger.Logger
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.R
-import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityUrlBinding
-import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.BindingActivity
+import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentUrlBinding
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.BindingFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isUrl
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
 
-class UrlActivity : BindingActivity<ActivityUrlBinding>(R.layout.activity_url) {
+class UrlFragment : BindingFragment<FragmentUrlBinding>(R.layout.fragment_url) {
 
-    override val statusBarTransparent = true
+
 
     override fun initUi() {
         binding.root.onFocusChangeListener = View.OnFocusChangeListener { _, b ->
-            if (!b) hideKeyboard()
+            if (!b) activity?.hideKeyboard()
         }
         binding.defaultUrl = PrefsUtils.getPrefsStringOrNull(Constants.Prefs.BASE_URL)
 
         form {
-            input(binding.etUrl.id) {
+            input(binding.urlEt.id) {
                 assert(getString(R.string.must_be_url)) {
                     it.text.isUrl()
                 }
             }
 
             submitWith(binding.btnSetUp.id) {
-                hideKeyboard()
-                Logger.d("Saving url to Prefs ${binding.etUrl.text}")
-                Prefs.putString(Constants.Prefs.BASE_URL, binding.etUrl.text.toString())
+                activity?.hideKeyboard()
+                Logger.d("Saving url to Prefs ${binding.urlEt.text}")
+                Prefs.putString(Constants.Prefs.BASE_URL, binding.urlEt.text.toString())
+                Logger.d("URL set up")
 
                 PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER)?.let {
-                    finishAffinity()
-                    startActivity<SplashActivity>()
+                    findNavController().navigate(UrlFragmentDirections.openMainActivity())
                 } ?: run {
-                    startActivity<LoginActivity>()
+                    findNavController().navigate(UrlFragmentDirections.navigateToLogin())
                 }
             }
         }
     }
-
 }

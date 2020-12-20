@@ -29,9 +29,13 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
     ): View? {
         initBinding(inflater, container)
         init()
-        initUi()
         initToolbar()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUi()
     }
 
     private fun initToolbar() {

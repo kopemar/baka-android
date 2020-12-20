@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivitySplashBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.BindingActivity
@@ -18,8 +19,9 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
         GlobalScope.launch {
             delay(1500)
             finish()
+            Logger.d(PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER))
             PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER)
-                ?.let { startActivity<MainActivity>() } ?: startActivity<UrlActivity>()
+                ?.let { startActivity<MainActivity>() } ?: startActivity<SetupActivity>()
         }
     }
 }
