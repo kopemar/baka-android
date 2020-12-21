@@ -6,6 +6,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ShiftDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.weeksAfter
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class ShiftRepository(private val service: RemoteDataSource, private val shiftDao: ShiftDao) {
 
@@ -17,10 +20,16 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun deleteAll() = shiftDao.deleteAll()
 
-    suspend fun refreshAllShifts() = service.getShifts().apply {
+    suspend fun refreshAllShifts(from: LocalDate = LocalDate.now(), to: LocalDate = LocalDate.now().weeksAfter(1)) = service.getShifts(from, to).apply {
         if (this is ResponseModel.SUCCESS) {
             data?.let { shiftDao.insert(it) }
         }
+    }
+
+    suspend fun getCachedShifts(from: LocalDateTime, to: LocalDateTime) = if (shiftDao.inTimePeriod(from.toString(), to.toString()).isNullOrEmpty()) {
+        refreshAllShifts(from.toLocalDate(), to.toLocalDate())
+    } else {
+        ResponseModel.SUCCESS(shiftDao.inTimePeriod(from.toString(), to.toString()))
     }
 
     suspend fun getCachedShifts() = if (shiftDao.getAll().isNullOrEmpty()) {

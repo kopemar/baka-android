@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.datasource
 
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
+import java.time.LocalDate
 
 interface RemoteDataSource {
 
@@ -8,7 +9,7 @@ interface RemoteDataSource {
 
     suspend fun signOut(): ResponseModel<SignOutModel>
 
-    suspend fun getShifts(): ResponseModel<List<Shift>>
+    suspend fun getShifts(from: LocalDate, to: LocalDate): ResponseModel<List<Shift>>
 
     suspend fun getContracts(): ResponseModel<List<Contract>>
 }

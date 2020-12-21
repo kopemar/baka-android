@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,7 +9,7 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/very_light_gray">
@@ -45,8 +46,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
                         android:src="@drawable/ic_shift_now_inverted"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,8 +89,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
                         android:src="@drawable/ic_shift_future"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/next_planned_shift"
                         app:layout_constraintStart_toEndOf="@id/iv_next_planned"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -119,8 +120,8 @@
                         style="@style/Text.Light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="16dp"
                         android:text="@{@string/hours_start_end(vm.nextShift.startTimeHours, vm.nextShift.endTimeHours)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@id/tv_next_title"
@@ -129,10 +130,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_chevron_right"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="8dp"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -154,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:src="@drawable/ic_week"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -165,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/later_this_week"
                         app:layout_constraintStart_toEndOf="@id/iv_later_this_week"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -180,19 +181,17 @@
                         app:layout_constraintStart_toStartOf="@id/tv_later_this_week"
                         app:layout_constraintTop_toBottomOf="@id/tv_later_this_week" />
 
+                    <include
+                        android:id="@+id/empty_message"
+                        layout="@layout/empty_plans"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null}" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <include
-            android:id="@+id/empty_message"
-            layout="@layout/empty_plans"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

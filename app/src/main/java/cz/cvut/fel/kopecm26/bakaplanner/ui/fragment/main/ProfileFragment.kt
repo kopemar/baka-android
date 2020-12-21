@@ -34,6 +34,10 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
             findNavController().navigate(ProfileFragmentDirections.navigateToUrl())
         }
 
+        binding.btnHistory.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.navigateToHistory())
+        }
+
         binding.btnContracts.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.navigateToContracts())
         }

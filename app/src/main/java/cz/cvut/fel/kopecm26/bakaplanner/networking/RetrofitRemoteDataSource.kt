@@ -4,7 +4,6 @@ import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.weeksAfter
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
 import okhttp3.Headers
 import java.time.LocalDate
@@ -19,9 +18,9 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
 
     override suspend fun signOut() = safeApiCall({ api.signOut() }, { it })
 
-    override suspend fun getShifts(): ResponseModel<List<Shift>> =
+    override suspend fun getShifts(from: LocalDate, to: LocalDate): ResponseModel<List<Shift>> =
         safeApiCall(
-            { api.getShifts(LocalDate.now(), LocalDate.now().weeksAfter(1)) },
+            { api.getShifts(from, to) },
             { it?.shifts })
 
     override suspend fun getContracts(): ResponseModel<List<Contract>> =
