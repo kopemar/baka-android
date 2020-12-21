@@ -20,7 +20,6 @@ class PlannerApplication : Application() {
 
         initLogger()
         initKoin()
-        initLynxLog()
 
         Prefs.Builder()
             .setContext(this)
@@ -28,6 +27,10 @@ class PlannerApplication : Application() {
             .setPrefsName(packageName)
             .setUseDefaultSharedPreference(true)
             .build()
+
+        if (BuildConfig.DEBUG) {
+            initLynxLog()
+        }
     }
 
     private fun initLynxLog() {

@@ -7,6 +7,19 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
+    signingConfigs {
+        release {
+            def properties = new Properties()
+            properties.load(new FileInputStream(rootProject.file("local.properties")))
+
+            if (properties["storeFile"] != null) {
+                storeFile file(properties["storeFile"])
+                storePassword properties["storePassword"]
+                keyAlias properties["keyAlias"]
+                keyPassword properties["keyPassword"]
+            }
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -22,6 +35,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
