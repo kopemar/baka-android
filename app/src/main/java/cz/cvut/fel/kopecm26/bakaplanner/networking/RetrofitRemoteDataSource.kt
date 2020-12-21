@@ -2,11 +2,13 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
 import okhttp3.Headers
-import java.time.LocalDate
+import java.time.ZonedDateTime
 
 class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSource {
     override suspend fun signIn(auth: Auth): ResponseModel<User> {
@@ -18,13 +20,15 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
 
     override suspend fun signOut() = safeApiCall({ api.signOut() }, { it })
 
-    override suspend fun getShifts(from: LocalDate, to: LocalDate): ResponseModel<List<Shift>> =
-        safeApiCall(
-            { api.getShifts(from, to) },
-            { it?.shifts })
+    override suspend fun getShifts(from: ZonedDateTime, to: ZonedDateTime) = safeApiCall(
+        { api.getShifts(from.toString(), to.toString()) },
+        { it?.shifts })
 
-    override suspend fun getContracts(): ResponseModel<List<Contract>> =
-        safeApiCall({ api.getContracts() }, { it?.contracts })
+    override suspend fun getShiftsBefore(to: ZonedDateTime) = safeApiCall(
+        { api.getShiftsBefore(to.toString()) },
+        { it?.shifts })
+
+    override suspend fun getContracts() = safeApiCall({ api.getContracts() }, { it?.contracts })
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

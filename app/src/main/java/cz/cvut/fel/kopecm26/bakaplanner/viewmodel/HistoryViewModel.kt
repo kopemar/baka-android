@@ -1,27 +1,30 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
-import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.temporal.TemporalAdjusters
 
-class HistoryViewModel: BaseViewModel() {
+class HistoryViewModel : BaseViewModel() {
 
     init {
         Logger.d(LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)))
-        getShifts(LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)), LocalDateTime.now())
+        getShifts(ZonedDateTime.now())
     }
 
     val shifts = MutableLiveData<List<Shift>>()
 
-    fun getShifts(from: LocalDateTime, to: LocalDateTime) {
-        viewModelScope.launch {
-            shiftRepository.getCachedShifts(from, to).let(::saveShifts)
+    fun getShifts(to: ZonedDateTime) = working.work {
+        shiftRepository.getShiftsBefore(to).let(::saveShifts)
+    }
+
+    fun refreshShifts() {
+        working.work {
+            shiftRepository.refreshShiftsBefore(ZonedDateTime.now()).let(::saveShifts)
         }
     }
 

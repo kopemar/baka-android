@@ -14,12 +14,8 @@ class ContractsViewModel : BaseViewModel() {
         getContracts()
     }
 
-    fun refreshContracts() {
-        viewModelScope.launch {
-            working.value = true
-            contractRepository.refreshAll().let(::saveContracts)
-            working.value = false
-        }
+    fun refreshContracts() = working.work {
+        contractRepository.refreshAll().let(::saveContracts)
     }
 
     private fun getContracts() {

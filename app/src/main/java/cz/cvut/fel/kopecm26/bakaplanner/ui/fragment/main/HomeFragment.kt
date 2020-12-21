@@ -3,7 +3,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentHomeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListDayTimeBinding
@@ -16,22 +15,6 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
     R.layout.fragment_home,
     HomeViewModel::class
 ) {
-    init {
-        Logger.d("New instance of HomeFragment")
-    }
-
-    override fun initUi() {
-        viewModel.nextWeekDays.observe(viewLifecycleOwner, observer)
-        binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
-
-        binding.currentShift.setOnClickListener {
-            viewModel.currentShift.value?.id?.let(::openShiftDetail)
-        }
-
-        binding.nextShift.setOnClickListener {
-            viewModel.nextShift.value?.id?.let(::openShiftDetail)
-        }
-    }
 
     private val observer by lazy {
         Observer<List<Shift>> {
@@ -54,6 +37,19 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
+        }
+    }
+
+    override fun initUi() {
+        viewModel.nextWeekDays.observe(viewLifecycleOwner, observer)
+        binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
+
+        binding.currentShift.setOnClickListener {
+            viewModel.currentShift.value?.id?.let(::openShiftDetail)
+        }
+
+        binding.nextShift.setOnClickListener {
+            viewModel.nextShift.value?.id?.let(::openShiftDetail)
         }
     }
 

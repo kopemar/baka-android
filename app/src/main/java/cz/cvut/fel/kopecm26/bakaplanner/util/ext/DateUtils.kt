@@ -19,3 +19,5 @@ fun String.isEvening() = ZonedDateTime.parse(this).hour in (12..16)
 fun String.isNight() = ZonedDateTime.parse(this).hour.let { it in (16..24) || it in (0..4) }
 
 fun LocalDate.weeksAfter(count: Long = 1) = plus(count, ChronoUnit.WEEKS)
+
+fun ZonedDateTime.weeksAfter(count: Long = 1) = plus(count, ChronoUnit.WEEKS)

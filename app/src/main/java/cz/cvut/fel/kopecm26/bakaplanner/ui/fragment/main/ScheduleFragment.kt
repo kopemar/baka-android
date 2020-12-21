@@ -25,7 +25,6 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
 
     private val observer by lazy {
         Observer<List<Shift>> {
-            binding.swipeRefresh.isRefreshing = false
             binding.rvShifts.layoutManager = LinearLayoutManager(binding.root.context)
             binding.rvShifts.adapter = BaseListAdapter<Shift>(
                 { layoutInflater, viewGroup, attachToRoot ->

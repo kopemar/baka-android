@@ -7,8 +7,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.weeksAfter
-import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 class ShiftRepository(private val service: RemoteDataSource, private val shiftDao: ShiftDao) {
 
@@ -20,16 +19,28 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun deleteAll() = shiftDao.deleteAll()
 
-    suspend fun refreshAllShifts(from: LocalDate = LocalDate.now(), to: LocalDate = LocalDate.now().weeksAfter(1)) = service.getShifts(from, to).apply {
+    suspend fun refreshAllShifts(from: ZonedDateTime = ZonedDateTime.now(), to: ZonedDateTime = ZonedDateTime.now().weeksAfter(1)) = service.getShifts(from, to).apply {
         if (this is ResponseModel.SUCCESS) {
             data?.let { shiftDao.insert(it) }
         }
     }
 
-    suspend fun getCachedShifts(from: LocalDateTime, to: LocalDateTime) = if (shiftDao.inTimePeriod(from.toString(), to.toString()).isNullOrEmpty()) {
-        refreshAllShifts(from.toLocalDate(), to.toLocalDate())
+    suspend fun refreshShiftsBefore(to: ZonedDateTime = ZonedDateTime.now()) = service.getShiftsBefore(to).apply {
+        if (this is ResponseModel.SUCCESS) {
+            data?.let { shiftDao.insert(it) }
+        }
+    }
+
+    suspend fun getCachedShifts(from: ZonedDateTime, to: ZonedDateTime) = if (shiftDao.inTimePeriod(from.toString(), to.toString()).isNullOrEmpty()) {
+        refreshAllShifts(from, to)
     } else {
         ResponseModel.SUCCESS(shiftDao.inTimePeriod(from.toString(), to.toString()))
+    }
+
+    suspend fun getShiftsBefore(to: ZonedDateTime): ResponseModel<List<Shift>> = if (shiftDao.getBefore(to.toString()).isNullOrEmpty()) {
+        service.getShiftsBefore(to)
+    } else {
+        ResponseModel.SUCCESS(shiftDao.getBefore(to.toString()))
     }
 
     suspend fun getCachedShifts() = if (shiftDao.getAll().isNullOrEmpty()) {
