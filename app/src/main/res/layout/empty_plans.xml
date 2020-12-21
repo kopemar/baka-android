@@ -6,15 +6,14 @@
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="@dimen/empty_screen_icon_size"
-        android:layout_height="@dimen/empty_screen_icon_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_cal_empty_plans"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/empty_text"
-        app:tint="@color/gray_blue_light" />
+        app:layout_constraintBottom_toTopOf="@id/empty_text" />
 
     <TextView
         android:id="@+id/empty_text"

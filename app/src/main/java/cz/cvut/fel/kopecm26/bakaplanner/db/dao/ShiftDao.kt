@@ -16,7 +16,7 @@ interface ShiftDao: BaseDao<Shift> {
     @Query("SELECT * FROM Shift ORDER BY start_time")
     suspend fun getAll(): List<Shift>
 
-    @Query("SELECT * FROM Shift WHERE end_time < :time ORDER BY start_time DESC")
+    @Query("SELECT * FROM Shift WHERE end_time <= :time ORDER BY start_time DESC")
     suspend fun getBefore(time: String = LocalDateTime.now().toString()): List<Shift>
 
     @Query("SELECT * FROM Shift WHERE end_time > :time ORDER BY start_time")

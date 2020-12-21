@@ -30,7 +30,6 @@ class HistoryViewModel : BaseViewModel() {
 
     private fun saveShifts(response: ResponseModel<List<Shift>>) {
         if (response is ResponseModel.SUCCESS) {
-            Logger.d(response.data?.size)
             shifts.value = response.data
         } else if (response is ResponseModel.ERROR) {
             errorMessage.value = response.errorType?.messageRes

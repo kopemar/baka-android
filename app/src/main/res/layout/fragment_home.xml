@@ -9,26 +9,31 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/very_light_gray">
+        android:background="@color/very_light_gray"
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             app:isRefreshing="@{vm.working}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/happening_right_now"
                         app:layout_constraintStart_toEndOf="@id/iv_happening_now"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -71,6 +76,15 @@
                         app:layout_constraintStart_toStartOf="@id/tv_now_title"
                         app:layout_constraintTop_toBottomOf="@id/tv_now_title" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -180,20 +194,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/tv_later_this_week"
                         app:layout_constraintTop_toBottomOf="@id/tv_later_this_week" />
-
-                    <include
-                        android:id="@+id/empty_message"
-                        layout="@layout/empty_plans"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null}" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <include
+                    android:id="@+id/empty_message"
+                    layout="@layout/empty_plans"
+                    app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null}" />
+
 
             </LinearLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </layout>
