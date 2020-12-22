@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.url
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.setup
 
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -37,6 +37,7 @@ class UrlFragment : BindingFragment<FragmentUrlBinding>(R.layout.fragment_url) {
                 Logger.d("URL set up")
 
                 PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER)?.let {
+                    activity?.finishAffinity()
                     findNavController().navigate(UrlFragmentDirections.openMainActivity())
                 } ?: run {
                     findNavController().navigate(UrlFragmentDirections.navigateToLogin())

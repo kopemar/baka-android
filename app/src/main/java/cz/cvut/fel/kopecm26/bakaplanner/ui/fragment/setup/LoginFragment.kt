@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.url
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.setup
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController

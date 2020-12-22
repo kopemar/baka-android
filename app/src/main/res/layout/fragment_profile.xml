@@ -13,7 +13,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/very_light_gray"
         android:orientation="vertical">
 
         <include
@@ -72,17 +71,6 @@
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/btn_url"
-            style="@style/Text.Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_ripple"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="16dp"
-            android:text="@string/url" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -93,12 +81,13 @@
             style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/white_ripple"
+            android:background="@drawable/color_2_ripple"
             android:drawablePadding="@dimen/profile_icon_padding"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="12dp"
             android:text="@string/history"
+            app:drawableTint="@color/text"
             app:drawableStartCompat="@drawable/ic_history" />
 
 
@@ -107,12 +96,13 @@
             style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/white_ripple"
+            android:background="@drawable/color_2_ripple"
             android:drawablePadding="@dimen/profile_icon_padding"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="12dp"
             android:text="@string/contracts"
+            app:drawableTint="@color/text"
             app:drawableStartCompat="@drawable/ic_contracts" />
 
 
@@ -121,12 +111,13 @@
             style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/white_ripple"
+            android:background="@drawable/color_2_ripple"
             android:drawablePadding="@dimen/profile_icon_padding"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="12dp"
             android:text="@string/settings"
+            app:drawableTint="@color/text"
             app:drawableStartCompat="@drawable/ic_settings" />
 
         <TextView
@@ -134,12 +125,13 @@
             style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/white_ripple"
+            android:background="@drawable/color_2_ripple"
             android:drawablePadding="@dimen/profile_icon_padding"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="12dp"
             android:text="@string/help"
+            app:drawableTint="@color/text"
             app:drawableStartCompat="@drawable/ic_help" />
 
         <View

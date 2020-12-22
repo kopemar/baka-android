@@ -10,7 +10,6 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListShiftBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.ScheduleFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HistoryViewModel
 
 class HistoryFragment : ViewModelFragment<HistoryViewModel, FragmentHistoryBinding>(
@@ -35,7 +34,7 @@ class HistoryFragment : ViewModelFragment<HistoryViewModel, FragmentHistoryBindi
                     )
                 },
                 { shift, binding, _ -> (binding as ListShiftBinding).shift = shift },
-                { findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(it.id)) },
+                { findNavController().navigate(HistoryFragmentDirections.navigateToShiftDetail(it.id)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

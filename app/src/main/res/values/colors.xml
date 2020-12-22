@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/sunny_evenings</color>
-    <color name="colorPrimaryDark">@color/very_light_gray</color>
+    <color name="colorPrimaryDark">@color/bg_surface</color>
     <color name="colorAccent">#B0CFFF</color>
     <color name="very_light_blue">#EDF5FF</color>
     <color name="very_light_blue_ripple">#D1D9E4</color>
@@ -16,4 +16,6 @@
     <color name="gray_blue_light">#C6D0E0</color>
     <color name="green_poison">#5FF96F</color>
     <color name="greeno">#7CB882</color>
+    <color name="bg_surface">@color/very_light_gray</color>
+    <color name="bg_surface_2">@color/white</color>
 </resources>

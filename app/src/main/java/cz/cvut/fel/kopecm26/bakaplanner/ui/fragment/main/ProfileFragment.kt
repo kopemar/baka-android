@@ -30,16 +30,16 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
     override fun initUi() {
         viewModel.signedOut.observe(this, signedOutObserver)
 
-        binding.btnUrl.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections.navigateToUrl())
-        }
-
         binding.btnHistory.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.navigateToHistory())
         }
 
         binding.btnContracts.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.navigateToContracts())
+        }
+
+        binding.btnSettings.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.navigateToSettings())
         }
 
         binding.btnLogOut.setOnClickListener { viewModel.signOut() }
