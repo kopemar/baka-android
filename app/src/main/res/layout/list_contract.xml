@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_contract_type"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/gray_blue_light"
+            app:tint="@color/gray_blue"
             tools:src="@drawable/ic_contract_active" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginTop="12dp"
-            android:text="@{@string/employment_contract(contract.id)}"
+            android:text="@{String.format(context.getString(contract.type.nameRes), contract.id)}"
             app:layout_constraintStart_toEndOf="@id/iv_contract_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +52,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_blue_light"
+            android:background="@color/gray_blue"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

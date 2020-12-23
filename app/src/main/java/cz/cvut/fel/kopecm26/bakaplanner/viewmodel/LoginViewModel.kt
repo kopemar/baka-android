@@ -1,12 +1,10 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import cz.cvut.fel.kopecm26.bakaplanner.util.SingleLiveEvent
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
-import kotlinx.coroutines.launch
 
 class LoginViewModel : BaseViewModel() {
     val signedIn = SingleLiveEvent<Boolean>()
@@ -14,7 +12,7 @@ class LoginViewModel : BaseViewModel() {
     val password = MutableLiveData<String>()
 
     fun signIn() {
-        viewModelScope.launch {
+        working.work {
             username.value?.let {
                 userRepository.signIn(
                     it,

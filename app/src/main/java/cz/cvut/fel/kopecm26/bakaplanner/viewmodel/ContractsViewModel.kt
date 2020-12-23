@@ -1,11 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
-import kotlinx.coroutines.launch
 
 class ContractsViewModel : BaseViewModel() {
     val contracts = MutableLiveData<List<Contract>>()
@@ -19,10 +17,8 @@ class ContractsViewModel : BaseViewModel() {
     }
 
     private fun getContracts() {
-        viewModelScope.launch {
-            working.value = true
+        working.work {
             contractRepository.getAllCached().let(::saveContracts)
-            working.value = false
         }
     }
 

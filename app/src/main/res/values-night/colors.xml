@@ -4,5 +4,7 @@
     <color name="bg_surface_2">#313131</color>
     <color name="text">#DFDFDF</color>
     <color name="text_light">#BABABA</color>
-    <color name="sunny_evenings">#D87824</color>
+    <color name="sunny_evenings">#9E4E19</color>
+    <color name="orange_10000">#B66F30</color>
+    <color name="gray_blue">#616F85</color>
 </resources>

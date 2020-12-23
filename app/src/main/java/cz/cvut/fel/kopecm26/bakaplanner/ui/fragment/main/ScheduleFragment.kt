@@ -18,11 +18,6 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
     ScheduleViewModel::class
 ) {
 
-    override fun errorObserver() = Observer<Int> {
-        binding.swipeRefresh.isRefreshing = false
-        super.errorObserver().onChanged(it)
-    }
-
     private val observer by lazy {
         Observer<List<Shift>> {
             binding.rvShifts.layoutManager = LinearLayoutManager(binding.root.context)

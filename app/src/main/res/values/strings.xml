@@ -51,5 +51,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="history">History</string>
     <string name="settings">Settings</string>
-    <string name="app_name_debug">BP debug</string>
+    <string name="agreement_complete">Agreement to complete a job #%d</string>
 </resources>

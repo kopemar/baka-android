@@ -45,7 +45,7 @@
             visible="@{!last}"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_blue_light"
+            android:background="@color/gray_blue"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

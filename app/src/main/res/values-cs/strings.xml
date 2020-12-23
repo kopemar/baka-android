@@ -43,4 +43,7 @@
     <string name="duration"><![CDATA[Počet hodin: <b>%s</b>]]></string>
     <string name="shift_id"><![CDATA[ID směny: <b>%s</b>]]></string>
     <string name="sign_up">Zapsat se</string>
+    <string name="history">Historie</string>
+    <string name="settings">Nastavení</string>
+    <string name="agreement_complete">"Dohoda o provedení práce #%d "</string>
 </resources>

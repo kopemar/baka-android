@@ -1,11 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
-import kotlinx.coroutines.launch
 
 class ScheduleViewModel : BaseViewModel() {
 
@@ -16,19 +14,14 @@ class ScheduleViewModel : BaseViewModel() {
     }
 
     fun refreshShifts() {
-        viewModelScope.launch {
-            working.value = true
-            shiftRepository.refreshAllShifts()
-            shiftRepository.getUpcomingShifts().let(::saveShifts)
-            working.value = false
+        working.work {
+            shiftRepository.refreshAllShifts().let(::saveShifts)
         }
     }
 
     fun getShifts() {
-        viewModelScope.launch {
-            working.value = true
+        working.work {
             shiftRepository.getUpcomingShifts().let(::saveShifts)
-            working.value = false
         }
     }
 

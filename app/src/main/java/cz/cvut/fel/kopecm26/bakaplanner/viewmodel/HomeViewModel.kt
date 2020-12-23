@@ -1,10 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
-import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
     val currentShift = MutableLiveData<Shift>()
@@ -16,20 +15,26 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun refreshShifts() {
-        viewModelScope.launch {
-            shiftRepository.refreshAllShifts()
+        working.work {
+            shiftRepository.refreshAllShifts().let(::handleRefreshResponse)
             getAll()
         }
     }
 
-    fun getAll() {
-        viewModelScope.launch {
-            working.value = true
+    private fun getAll() {
+        working.work {
             getShifts()
             getCurrentShift()
             getNextShift()
             getNextWeekShifts()
-            working.value = false
+        }
+    }
+
+    private fun handleRefreshResponse(response: ResponseModel<List<Shift>>) {
+        if (response is ResponseModel.ERROR<*>) {
+            errorMessage.value = response.errorType?.messageRes
+        } else {
+            getAll()
         }
     }
 
