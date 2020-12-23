@@ -54,6 +54,7 @@
                 android:drawablePadding="8dp"
                 android:text="@{vm.shift.startTimeHours}"
                 app:drawableStartCompat="@drawable/ic_hourglass_start"
+                app:drawableTint="@color/text"
                 app:layout_constraintStart_toStartOf="@id/tv_shift_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_shift_title"
                 tools:text="10:00 AM" />
@@ -66,6 +67,7 @@
                 android:drawablePadding="8dp"
                 android:text="@{vm.shift.endTimeHours}"
                 app:drawableStartCompat="@drawable/ic_hourglass_end"
+                app:drawableTint="@color/text"
                 app:layout_constraintStart_toEndOf="@id/tv_starting_hours"
                 app:layout_constraintTop_toTopOf="@id/tv_starting_hours"
                 tools:text="10:00 AM" />
@@ -76,9 +78,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:text="@{vm.shift.ended ? @string/ended(vm.shift.relativeTimestamp) : (vm.shift.started ? @string/ends(vm.shift.relativeTimestamp) : @string/starts(vm.shift.relativeTimestamp))}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_starting_hours"
                 app:layout_constraintTop_toBottomOf="@id/tv_starting_hours"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="Starts in 5 hours" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
