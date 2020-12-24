@@ -8,7 +8,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.BR
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
 import kotlin.reflect.KClass
 
-abstract class ViewModelFragment<V: BaseViewModel, B: ViewDataBinding>(layoutRes: Int, private val clazz: KClass<V>, private val viewModelOwner: ViewModelStoreOwner? = null): BindingFragment<B>(layoutRes) {
+abstract class ViewModelFragment<V: BaseViewModel, B: ViewDataBinding>(layoutRes: Int, private val clazz: KClass<V>): BindingFragment<B>(layoutRes) {
+
+    protected open val viewModelOwner: ViewModelStoreOwner? = null
 
     open val viewModel by lazy { clazz.let { ViewModelProvider(viewModelOwner ?: this).get(it.java) } }
 

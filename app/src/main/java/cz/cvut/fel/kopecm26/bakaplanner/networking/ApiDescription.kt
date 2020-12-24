@@ -20,6 +20,9 @@ interface ApiDescription {
     @GET("/shifts")
     suspend fun getShiftsBefore(@Query("end_date") endDate: String): Response<ShiftResponse>
 
+    @GET("/unassigned")
+    suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String): Response<ShiftResponse>
+
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>
 }

@@ -46,4 +46,5 @@
     <string name="history">Historie</string>
     <string name="settings">Nastavení</string>
     <string name="agreement_complete">"Dohoda o provedení práce #%d "</string>
+    <string name="agreement_perform">"Dohoda o pracovní činnosti #%d "</string>
 </resources>

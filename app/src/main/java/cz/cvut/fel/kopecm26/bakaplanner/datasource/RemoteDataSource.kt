@@ -13,5 +13,8 @@ interface RemoteDataSource {
 
     suspend fun getShiftsBefore(to: ZonedDateTime): ResponseModel<List<Shift>>
 
+    suspend fun getUnassignedShifts(from: ZonedDateTime = ZonedDateTime.now()): ResponseModel<List<Shift>>
+
     suspend fun getContracts(): ResponseModel<List<Contract>>
+
 }

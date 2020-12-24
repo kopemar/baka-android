@@ -4,18 +4,25 @@
         android:id="@+id/menu_home"
         android:enabled="true"
         android:icon="@drawable/ic_mdi_home"
-        android:title="@string/home"/>
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/menu_shifts"
+        android:enabled="true"
+        android:icon="@drawable/ic_briefcase"
+        android:title="@string/shifts"
+        android:visible="false" />
 
     <item
         android:id="@+id/menu_schedule"
         android:enabled="true"
         android:icon="@drawable/ic_calendar"
-        android:title="@string/schedule"/>
+        android:title="@string/schedule" />
 
     <item
         android:id="@+id/menu_profile"
         android:enabled="true"
         android:icon="@drawable/ic_profile"
-        android:title="@string/profile"/>
+        android:title="@string/profile" />
 
 </menu>

@@ -45,15 +45,15 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
         binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
 
         binding.currentShift.setOnClickListener {
-            viewModel.currentShift.value?.id?.let(::openShiftDetail)
+            viewModel.currentShift.value?.let(::openShiftDetail)
         }
 
         binding.nextShift.setOnClickListener {
-            viewModel.nextShift.value?.id?.let(::openShiftDetail)
+            viewModel.nextShift.value?.let(::openShiftDetail)
         }
     }
 
-    private fun openShiftDetail(shiftId: Int) {
-        findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(shiftId))
+    private fun openShiftDetail(shift: Shift) {
+        findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(shift))
     }
 }

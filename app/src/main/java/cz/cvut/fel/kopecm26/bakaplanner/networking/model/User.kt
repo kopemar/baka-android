@@ -10,8 +10,9 @@ data class Auth(val username: String, val password: String)
 data class User(
     val username: String,
     val email: String? = null,
+    val agreement: Boolean,
     val first_name: String? = null,
-    val last_name: String? = null
+    val last_name: String? = null,
 )
 
 @JsonClass(generateAdapter = true)

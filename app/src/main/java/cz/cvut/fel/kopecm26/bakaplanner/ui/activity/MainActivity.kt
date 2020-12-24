@@ -5,6 +5,7 @@ import androidx.navigation.ui.setupWithNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityMainBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.MainViewModel
 
 
@@ -16,6 +17,7 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
     override fun initUi() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+        binding.bnvMain.menu.findItem(R.id.menu_shifts).isVisible = PrefsUtils.getUser()?.agreement == true
 
         binding.bnvMain.setupWithNavController(navController)
     }

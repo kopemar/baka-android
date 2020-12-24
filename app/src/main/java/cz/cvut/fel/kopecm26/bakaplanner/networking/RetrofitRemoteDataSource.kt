@@ -28,6 +28,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         { api.getShiftsBefore(to.toString()) },
         { it?.shifts })
 
+    override suspend fun getUnassignedShifts(from: ZonedDateTime) = safeApiCall(
+        { api.getUnassignedShiftsFrom(from.toString()) },
+        { it?.shifts })
+
+
     override suspend fun getContracts() = safeApiCall({ api.getContracts() }, { it?.contracts })
 
     private fun Headers.saveUserHeaders() =

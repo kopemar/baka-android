@@ -22,7 +22,8 @@ data class Contract(
 
 enum class ContractTypes(val id: Int, @StringRes val nameRes: Int) {
     EMPLOYMENT_CONTRACT(1, R.string.employment_contract),
-    AGREEMENT_COMPLETE(2, R.string.agreement_complete);
+    AGREEMENT_COMPLETE(2, R.string.agreement_complete),
+    AGREEMENT_PERFORM(3, R.string.agreement_perform),
 }
 
 fun Int.mapToContractType() = ContractTypes.values().firstOrNull { it.id == this }

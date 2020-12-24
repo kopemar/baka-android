@@ -9,7 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ShiftDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 
-@Database(entities = [Shift::class, Contract::class], version = 5, exportSchema = false)
+@Database(entities = [Shift::class, Contract::class], version = 7, exportSchema = false)
 abstract class PlannerDatabase : RoomDatabase() {
     abstract fun getShiftDao(): ShiftDao
     abstract fun getContractDao(): ContractDao

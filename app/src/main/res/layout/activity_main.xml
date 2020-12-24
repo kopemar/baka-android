@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="USER"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
+        <import type="android.R"/>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,6 +41,7 @@
             android:layout_height="wrap_content"
             android:elevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            tools:menu="@menu/main"
             app:menu="@menu/main"
             tools:layout_editor_absoluteX="0dp" />
 

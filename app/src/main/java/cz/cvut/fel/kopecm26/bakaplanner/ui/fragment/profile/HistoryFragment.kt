@@ -34,7 +34,7 @@ class HistoryFragment : ViewModelFragment<HistoryViewModel, FragmentHistoryBindi
                     )
                 },
                 { shift, binding, _ -> (binding as ListShiftBinding).shift = shift },
-                { findNavController().navigate(HistoryFragmentDirections.navigateToShiftDetail(it.id)) },
+                { findNavController().navigate(HistoryFragmentDirections.navigateToShiftDetail(it)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

@@ -20,7 +20,7 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     override var navigateUp = true
 
     override fun initUi() {
-        viewModel.getShift(args.shiftId)
+        viewModel.shift.value = args.shift
 
         initExpandable()
     }

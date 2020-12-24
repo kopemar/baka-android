@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.*
+import java.io.Serializable
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
@@ -19,9 +20,9 @@ data class Shift(
     @PrimaryKey val id: Int,
     val start_time: String,
     val end_time: String,
-    val schedule_id: String,
+    val schedule_id: String?,
     val duration: Int,
-) {
+): Serializable {
     val dateF get() = start_time.fullDateShortDayOfWeek()
 
     val startTimeHours get() = start_time.hoursAndMinutes()
