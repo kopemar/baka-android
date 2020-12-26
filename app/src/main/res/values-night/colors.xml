@@ -5,6 +5,8 @@
     <color name="text">#DFDFDF</color>
     <color name="text_light">#BABABA</color>
     <color name="sunny_evenings">#9E4E19</color>
+    <color name="color_primary">@color/sunny_evenings</color>
+    <color name="color_low_contrast">#292323</color>
     <color name="orange_10000">#B66F30</color>
     <color name="gray_blue">#616F85</color>
 </resources>

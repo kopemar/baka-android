@@ -6,7 +6,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NotFoundError
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 
-class ProfileViewModel: BaseViewModel() {
+class ProfileViewModel : BaseViewModel() {
     val signedOut = MutableLiveData(false)
 
     /**
@@ -18,8 +18,7 @@ class ProfileViewModel: BaseViewModel() {
                 if (this is ResponseModel.SUCCESS) {
                     removeSession()
                 } else if (this is ResponseModel.ERROR) {
-                    if (this.errorType is NotFoundError) removeSession()
-                    else errorMessage.value = errorType?.messageRes
+                    errorType?.let(::parseError)
                 }
             }
         }

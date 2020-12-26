@@ -32,7 +32,7 @@ class HomeViewModel : BaseViewModel() {
 
     private fun handleRefreshResponse(response: ResponseModel<List<Shift>>) {
         if (response is ResponseModel.ERROR<*>) {
-            errorMessage.value = response.errorType?.messageRes
+            response.errorType?.let(::parseError)
         } else {
             getAll()
         }

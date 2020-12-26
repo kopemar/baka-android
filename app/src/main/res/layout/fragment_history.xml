@@ -33,6 +33,15 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+
+        <include
+            android:id="@+id/no_connection"
+            layout="@layout/no_connection"
+            app:visible="@{vm.noNetworkConnection == true &amp;&amp; vm.shifts == null}" />
+
+        <include
+            layout="@layout/empty_history"
+            visible="@{vm.shifts.empty &amp;&amp; vm.noNetworkConnection != true}" />
     </LinearLayout>
 
 

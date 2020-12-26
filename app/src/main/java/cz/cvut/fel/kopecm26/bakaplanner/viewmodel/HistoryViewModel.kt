@@ -13,18 +13,18 @@ class HistoryViewModel : BaseViewModel() {
 
     init {
         Logger.d(LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)))
-        getShifts(ZonedDateTime.now())
+        fetchShifts(ZonedDateTime.now())
     }
 
     val shifts = MutableLiveData<List<Shift>>()
 
-    fun getShifts(to: ZonedDateTime) = working.work {
-        shiftRepository.getShiftsBefore(to).let(::saveShifts)
+    fun fetchShifts(to: ZonedDateTime) = working.work {
+        shiftRepository.refreshShiftsBefore(ZonedDateTime.now()).run { parseResponse(shifts) }
     }
 
     fun refreshShifts() {
         working.work {
-            shiftRepository.refreshShiftsBefore(ZonedDateTime.now()).let(::saveShifts)
+            shiftRepository.refreshShiftsBefore(ZonedDateTime.now()).run { parseResponse(shifts) }
         }
     }
 
@@ -32,7 +32,7 @@ class HistoryViewModel : BaseViewModel() {
         if (response is ResponseModel.SUCCESS) {
             shifts.value = response.data
         } else if (response is ResponseModel.ERROR) {
-            errorMessage.value = response.errorType?.messageRes
+            response.errorType?.let(::parseError)
         }
     }
 }

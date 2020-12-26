@@ -54,4 +54,5 @@
     <string name="agreement_complete">Agreement to complete a job #%d</string>
     <string name="agreement_perform">Agreement to perform a job #%d</string>
     <string name="shifts">Shifts</string>
+    <string name="no_history_for_you">Your shift history is empty</string>
 </resources>

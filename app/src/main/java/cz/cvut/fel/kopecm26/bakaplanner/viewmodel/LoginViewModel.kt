@@ -27,7 +27,7 @@ class LoginViewModel : BaseViewModel() {
             signedIn.value = true
             PrefsUtils.saveUser(response.data)
         } else if (response is ResponseModel.ERROR) {
-            errorMessage.value = response.errorType?.messageRes
+            response.errorType?.let(::parseError)
         }
     }
 }
