@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import cz.cvut.fel.kopecm26.bakaplanner.BR
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -66,4 +68,22 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
 
     protected fun showSnackBar(@StringRes text: Int, length: Int = Snackbar.LENGTH_SHORT) =
         showSnackBar(getString(text), length)
+
+    protected fun showMaterialDialog(
+        @StringRes message: Int,
+        @StringRes title: Int? = null,
+        @StringRes positive: Int? = R.string.ok,
+        onPositive: ((DialogInterface) -> Unit?)? = null,
+        @StringRes negative: Int? = R.string.cancel,
+        onNegative: ((DialogInterface) -> Unit?)? = null,
+    ) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(message)
+            .apply {
+                title?.let(::setTitle)
+                positive?.let { this.setPositiveButton(getString(it)) { dialog, _ -> onPositive?.invoke(dialog) } }
+                negative?.let { this.setNegativeButton(getString(it)) { dialog, _ -> onNegative?.invoke(dialog) } }
+            }
+            .show()
+    }
 }

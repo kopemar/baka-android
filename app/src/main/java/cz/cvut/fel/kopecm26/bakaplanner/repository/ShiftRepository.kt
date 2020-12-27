@@ -21,11 +21,13 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun refreshAllShifts(
         from: ZonedDateTime = ZonedDateTime.now(),
-        to: ZonedDateTime = ZonedDateTime.now().weeksAfter(1)
-    ) = service.getShifts(from, to).apply {
+        to: ZonedDateTime = ZonedDateTime.now().weeksAfter(2)
+    ): ResponseModel<List<Shift>> = service.getShifts(from, to).run {
         if (this is ResponseModel.SUCCESS) {
             data?.let { shiftDao.insert(it) }
-        }
+            ResponseModel.SUCCESS(shiftDao.getUpcoming(from.toString()))
+        } else this
+
     }
 
     suspend fun refreshShiftsBefore(to: ZonedDateTime = ZonedDateTime.now()) =
@@ -77,7 +79,8 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
             if (this is ResponseModel.SUCCESS) data?.let { shiftDao.insert(it) }
         }
 
-    suspend fun removeShiftFromSchedule(shiftId: Int) = service.removeShiftFromSchedule(shiftId).apply {
-        if (this is ResponseModel.SUCCESS) data?.id?.let { shiftDao.deleteById(it) }
-    }
+    suspend fun removeShiftFromSchedule(shiftId: Int) =
+        service.removeShiftFromSchedule(shiftId).apply {
+            if (this is ResponseModel.SUCCESS) data?.id?.let { shiftDao.deleteById(it) }
+        }
 }

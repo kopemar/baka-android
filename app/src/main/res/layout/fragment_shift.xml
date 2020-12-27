@@ -52,7 +52,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="@string/remove_from_schedule"
-            app:icon="@drawable/ic_calendar_add"
+            app:icon="@drawable/ic_calendar_minus"
             app:iconGravity="textStart"
             app:iconPadding="16dp" />
 

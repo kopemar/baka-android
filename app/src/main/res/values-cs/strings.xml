@@ -53,4 +53,8 @@
     <string name="schedule_ids">Rozvrh #%d</string>
     <string name="successfully_signed_up">Směna byla zapsána!</string>
     <string name="ok">OK</string>
+    <string name="remove_from_schedule">Odebrat z rozvrhu</string>
+    <string name="successfully_removed">Odebráno z rozvrhu!</string>
+    <string name="cancel">Zrušit</string>
+    <string name="are_you_sure">Jste si jisti?</string>
 </resources>

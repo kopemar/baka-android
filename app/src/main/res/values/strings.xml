@@ -61,4 +61,6 @@
     <string name="ok">OK</string>
     <string name="remove_from_schedule">Remove from schedule</string>
     <string name="successfully_removed">Successfully removed from schedule!</string>
+    <string name="cancel">Cancel</string>
+    <string name="are_you_sure">Are you sure?</string>
 </resources>

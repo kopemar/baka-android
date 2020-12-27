@@ -38,7 +38,7 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
         viewModel.removed.observe(this, removedObserver)
         initExpandable()
         setupMenu()
-        binding.btnRemove.setOnClickListener { viewModel.removeFromSchedule() }
+        binding.btnRemove.setOnClickListener { runRemoval() }
         binding.btnSignUp.setOnClickListener { navigateToSignUpFragment() }
     }
 
@@ -64,5 +64,9 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
                 binding.infoExpanded = binding.infoExpanded?.not() ?: false
             }
         }
+    }
+
+    private fun runRemoval() {
+        showMaterialDialog(R.string.are_you_sure, title = R.string.remove_from_schedule,  onPositive = { viewModel.removeFromSchedule() }, onNegative = { it.cancel() })
     }
 }
