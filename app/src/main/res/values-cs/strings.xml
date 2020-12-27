@@ -47,4 +47,10 @@
     <string name="settings">Nastavení</string>
     <string name="agreement_complete">"Dohoda o provedení práce #%d "</string>
     <string name="agreement_perform">"Dohoda o pracovní činnosti #%d "</string>
+    <string name="shifts">Volné směny</string>
+    <string name="no_history_for_you">Historie směn je prázdná</string>
+    <string name="pick_schedule">Vyberte rozvrh</string>
+    <string name="schedule_ids">Rozvrh #%d</string>
+    <string name="successfully_signed_up">Směna byla zapsána!</string>
+    <string name="ok">OK</string>
 </resources>
