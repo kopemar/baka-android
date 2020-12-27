@@ -62,11 +62,10 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:fontFamily">@font/magra_bold</item>
+        <item name="android:fontFamily">@font/magra_regular</item>
         <item name="titleTextAppearance">@style/TitleStyle</item>
         <item name="android:contentInsetStartWithNavigation">0dp</item>
         <item name="android:insetLeft">0dp</item>
-        <item name="android:textColorSecondary">@color/text</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay.Large">
