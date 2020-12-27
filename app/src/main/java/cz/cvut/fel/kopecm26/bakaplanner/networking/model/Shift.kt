@@ -22,6 +22,7 @@ data class Shift(
     val end_time: String,
     val schedule_id: String?,
     val duration: Int,
+    val user_scheduled: Boolean,
 ): Serializable {
     val dateF get() = start_time.fullDateShortDayOfWeek()
 
@@ -54,6 +55,8 @@ data class Shift(
 
     val started: Boolean
         get() = start_time.isBefore()
+
+    val canBeRemoved get() = this.schedule_id != null && start_time.hoursUntilNow() > 96L && user_scheduled
 }
 
 @JsonClass(generateAdapter = true)

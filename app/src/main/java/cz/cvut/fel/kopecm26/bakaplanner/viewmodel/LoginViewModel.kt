@@ -1,7 +1,10 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import cz.cvut.fel.kopecm26.bakaplanner.R
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UnauthorizedError
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import cz.cvut.fel.kopecm26.bakaplanner.util.SingleLiveEvent
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
@@ -29,5 +32,10 @@ class LoginViewModel : BaseViewModel() {
         } else if (response is ResponseModel.ERROR) {
             response.errorType?.let(::parseError)
         }
+    }
+
+    override fun parseError(error: ErrorType) {
+        if (error is UnauthorizedError) errorMessage.value = R.string.wrong_password
+        else super.parseError(error)
     }
 }

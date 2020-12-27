@@ -46,7 +46,7 @@
         <Button
             android:id="@+id/btn_remove"
             style="@style/Button.Primary"
-            visible="@{vm.shift.schedule_id != null}"
+            visible="@{vm.shift.canBeRemoved}"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="12dp"
             android:layout_marginTop="8dp"

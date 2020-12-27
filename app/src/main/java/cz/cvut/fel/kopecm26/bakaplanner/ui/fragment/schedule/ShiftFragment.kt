@@ -2,7 +2,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.schedule
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -16,7 +15,6 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     R.layout.fragment_shift,
     ShiftViewModel::class
 ) {
-    override val viewModelOwner: ViewModelStoreOwner? get() = activity
     override val toolbar: Toolbar get() = binding.sToolbar.toolbar
     override var navigateUp = true
 

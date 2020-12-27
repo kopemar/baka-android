@@ -36,7 +36,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    protected fun parseError(error: ErrorType) {
+    protected open fun parseError(error: ErrorType) {
         if (error is NoInternetError || error is NoServerConnectionError) {
             Logger.d("No Internet Error")
             noNetworkConnection.value = true
