@@ -9,6 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NoInternetError
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NoServerConnectionError
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ContractRepository
+import cz.cvut.fel.kopecm26.bakaplanner.repository.ScheduleRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -20,6 +21,8 @@ abstract class BaseViewModel : ViewModel() {
     protected val shiftRepository by inject(ShiftRepository::class.java)
 
     protected val contractRepository by inject(ContractRepository::class.java)
+
+    protected val scheduleRepository by inject(ScheduleRepository::class.java)
 
     val errorMessage = MutableLiveData<Int>()
     val noNetworkConnection = MutableLiveData(false)

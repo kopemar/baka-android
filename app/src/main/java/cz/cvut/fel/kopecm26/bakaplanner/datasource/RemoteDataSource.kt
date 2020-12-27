@@ -17,4 +17,8 @@ interface RemoteDataSource {
 
     suspend fun getContracts(): ResponseModel<List<Contract>>
 
+    suspend fun getSchedulesForShift(shiftId: Int): ResponseModel<List<Schedule>>
+
+    suspend fun addShiftToSchedule(scheduleId: Int, shiftId: Int): ResponseModel<Shift>
+
 }

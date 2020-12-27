@@ -62,7 +62,7 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
     }
 
     protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) =
-        Snackbar.make(binding.root, text, length).show()
+        Snackbar.make(binding.root, text, length).apply { show() }
 
     protected fun showSnackBar(@StringRes text: Int, length: Int = Snackbar.LENGTH_SHORT) =
         showSnackBar(getString(text), length)

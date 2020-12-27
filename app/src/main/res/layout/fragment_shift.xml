@@ -13,10 +13,6 @@
             name="infoExpanded"
             type="Boolean" />
 
-        <variable
-            name="actionsExpanded"
-            type="Boolean" />
-
         <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.Headers" />
     </data>
 
@@ -26,64 +22,26 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/s_toolbar"
             layout="@layout/toolbar_single"
             app:title="@{@string/shift}" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include
+            layout="@layout/header_shift"
+            app:shift="@{vm.shift}" />
+
+        <Button
+            android:id="@+id/btn_sign_up"
+            style="@style/Button.Primary"
+            visible="@{vm.shift.schedule_id == null}"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_shift_title"
-                style="@style/Text.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@{vm.shift.dateF}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_starting_hours"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawablePadding="8dp"
-                android:text="@{vm.shift.startTimeHours}"
-                app:drawableStartCompat="@drawable/ic_hourglass_start"
-                app:drawableTint="@color/text"
-                app:layout_constraintStart_toStartOf="@id/tv_shift_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_shift_title"
-                tools:text="10:00 AM" />
-
-            <TextView
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
-                android:drawablePadding="8dp"
-                android:text="@{vm.shift.endTimeHours}"
-                app:drawableStartCompat="@drawable/ic_hourglass_end"
-                app:drawableTint="@color/text"
-                app:layout_constraintStart_toEndOf="@id/tv_starting_hours"
-                app:layout_constraintTop_toTopOf="@id/tv_starting_hours"
-                tools:text="10:00 AM" />
-
-            <TextView
-                style="@style/Text.Light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:text="@{vm.shift.ended ? @string/ended(vm.shift.relativeTimestamp) : (vm.shift.started ? @string/ends(vm.shift.relativeTimestamp) : @string/starts(vm.shift.relativeTimestamp))}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_starting_hours"
-                app:layout_constraintTop_toBottomOf="@id/tv_starting_hours"
-                tools:text="Starts in 5 hours" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/sign_up"
+            app:icon="@drawable/ic_calendar_add"
+            app:iconGravity="textStart"
+            app:iconPadding="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,34 +89,6 @@
                     tools:text="aaaaaa" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_blue"
-                app:visible="@{infoExpanded}" />
-
-            <include
-                android:id="@+id/actionsHeader"
-                layout="@layout/header_expandable"
-                app:expanded="@{actionsExpanded}"
-                app:header="@{Headers.ACTIONS}" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="16dp"
-                app:visible="@{actionsExpanded}">
-
-                <Button
-                    style="@style/Button.Primary"
-                    android:layout_width="match_parent"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/sign_up"
-                    app:icon="@drawable/ic_calendar_add"
-                    app:iconGravity="textStart"
-                    app:iconPadding="16dp" />
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

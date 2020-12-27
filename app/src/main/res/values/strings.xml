@@ -55,4 +55,8 @@
     <string name="agreement_perform">Agreement to perform a job #%d</string>
     <string name="shifts">Shifts</string>
     <string name="no_history_for_you">Your shift history is empty</string>
+    <string name="pick_schedule">Pick schedule</string>
+    <string name="schedule_ids">Schedule #%d</string>
+    <string name="successfully_signed_up">Successfully signed up!</string>
+    <string name="ok">OK</string>
 </resources>

@@ -9,7 +9,7 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HistoryViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -24,7 +24,9 @@
             isRefreshing="@{vm.working}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/t_toolbar">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_shifts"
@@ -37,12 +39,17 @@
         <include
             android:id="@+id/no_connection"
             layout="@layout/no_connection"
-            app:visible="@{vm.noNetworkConnection == true &amp;&amp; vm.shifts == null}" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/t_toolbar"
+            visible="@{vm.noNetworkConnection == true &amp;&amp; vm.shifts == null}" />
 
         <include
+            android:id="@+id/empty_history"
             layout="@layout/empty_history"
-            visible="@{vm.shifts.empty &amp;&amp; vm.noNetworkConnection != true}" />
-    </LinearLayout>
+            visible="@{vm.shifts.empty &amp;&amp; vm.noNetworkConnection != true}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

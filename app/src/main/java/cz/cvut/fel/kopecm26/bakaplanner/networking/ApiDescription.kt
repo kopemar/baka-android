@@ -25,4 +25,10 @@ interface ApiDescription {
 
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>
+
+    @GET("/schedules")
+    suspend fun getSchedulesForShift(@Query("shift_id") shiftId: Int): Response<ScheduleResponse>
+
+    @POST("/schedule/{id}")
+    suspend fun addShiftToSchedule(@Path("id") scheduleId: Int, @Query("shift_id") shiftId: Int): Response<Shift>
 }

@@ -9,6 +9,7 @@ import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.di.databaseModule
 import cz.cvut.fel.kopecm26.bakaplanner.di.networkModule
 import cz.cvut.fel.kopecm26.bakaplanner.di.repositoryModule
+import cz.cvut.fel.kopecm26.bakaplanner.di.sharedViewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -44,7 +45,7 @@ class PlannerApplication : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@PlannerApplication)
-            modules(databaseModule, networkModule, repositoryModule)
+            modules(databaseModule, networkModule, repositoryModule, sharedViewModelModule)
         }
     }
 

@@ -2,9 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
 import okhttp3.Headers
@@ -34,6 +32,14 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
 
 
     override suspend fun getContracts() = safeApiCall({ api.getContracts() }, { it?.contracts })
+
+    override suspend fun getSchedulesForShift(shiftId: Int): ResponseModel<List<Schedule>> =
+        safeApiCall({ api.getSchedulesForShift(shiftId) }) { it?.schedules }
+
+    override suspend fun addShiftToSchedule(scheduleId: Int, shiftId: Int): ResponseModel<Shift> =
+        safeApiCall({
+            api.addShiftToSchedule(scheduleId, shiftId)
+        }, { it })
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

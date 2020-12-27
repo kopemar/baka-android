@@ -11,6 +11,8 @@ class UnassignedViewModel : BaseViewModel() {
 
     val shifts = MutableLiveData<List<Shift>>()
 
+    val bottomSheetVisible = MutableLiveData(false)
+
     fun fetchShifts() {
         working.work {
             shiftRepository.getUnassigned().parseResponse(shifts)

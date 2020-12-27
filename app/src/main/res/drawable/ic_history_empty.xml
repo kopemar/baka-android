@@ -13,7 +13,7 @@
   <path
       android:pathData="M10.996,193.918C35.236,198.194 53.503,200.333 65.795,200.333C78.087,200.333 95.391,197.876 117.706,192.963C118.765,190.265 116.964,187.913 112.302,185.907C120.569,130.559 96.074,102.411 70.553,102.411C95.682,102.411 79.423,102.411 61.335,102.411C43.247,102.411 28.962,102.411 54.007,102.411C51.071,102.411 48.163,102.114 45.472,102.678C21.598,107.686 7.777,135.44 9.912,184.012C4.357,188.31 4.718,191.612 10.996,193.918Z"
       android:strokeWidth="1"
-      android:fillColor="#B0CFFF"
+      android:fillColor="@color/color_primary"
       android:fillType="evenOdd"
       android:strokeColor="#00000000"/>
   <path
@@ -34,34 +34,34 @@
   <path
       android:pathData="M41.627,37.901a2.557,2.569 0,1 0,5.114 0a2.557,2.569 0,1 0,-5.114 0z"
       android:strokeWidth="1"
-      android:fillColor="#979797"
+      android:fillColor="@color/color_low_contrast"
       android:fillType="evenOdd"
       android:strokeColor="#00000000"/>
   <path
       android:pathData="M85.561,37.901a2.557,2.569 0,1 0,5.114 0a2.557,2.569 0,1 0,-5.114 0z"
       android:strokeWidth="1"
-      android:fillColor="#979797"
+      android:fillColor="@color/color_low_contrast"
       android:fillType="evenOdd"
       android:strokeColor="#00000000"/>
   <path
       android:pathData="M40,60.822C45.889,74.387 54.567,81.17 66.035,81.17C77.503,81.17 86.491,74.387 93,60.822"
       android:strokeWidth="7"
       android:fillColor="#00000000"
-      android:strokeColor="#979797"
+      android:strokeColor="@color/color_low_contrast"
       android:fillType="evenOdd"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M10,184.333C29.456,188.718 46.802,191.042 62.036,191.306C77.27,191.57 94.258,189.84 113,186.117"
       android:strokeWidth="5"
       android:fillColor="#00000000"
-      android:strokeColor="#979797"
+      android:strokeColor="@color/color_low_contrast"
       android:fillType="evenOdd"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M14,23.333C33.456,18.947 50.802,16.623 66.036,16.359C81.27,16.095 98.258,17.825 117,21.549"
       android:strokeWidth="5"
       android:fillColor="#00000000"
-      android:strokeColor="#979797"
+      android:strokeColor="@color/color_low_contrast"
       android:fillType="evenOdd"
       android:strokeLineCap="round"/>
   <path
@@ -69,6 +69,6 @@
       android:strokeLineJoin="round"
       android:strokeWidth="6"
       android:fillColor="#00000000"
-      android:strokeColor="#979797"
+      android:strokeColor="@color/color_low_contrast"
       android:fillType="evenOdd"/>
 </vector>
