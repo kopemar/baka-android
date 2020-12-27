@@ -4,6 +4,7 @@
     <color name="color_primary">#B0CFFF</color>
     <color name="colorPrimaryDark">@color/bg_surface</color>
     <color name="colorAccent">#B0CFFF</color>
+    <color name="controls">@color/text</color>
     <color name="very_light_blue">#EDF5FF</color>
     <color name="very_light_blue_ripple">#D1D9E4</color>
     <color name="white">#ffffff</color>

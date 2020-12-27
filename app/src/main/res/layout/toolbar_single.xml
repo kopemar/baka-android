@@ -31,6 +31,7 @@
             app:titleTextAppearance="@style/TitleStyle"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@{title}"
+            android:paddingEnd="8dp"
             app:titleTextColor="@color/text"
             tools:background="@color/bg_surface"
             tools:title="@string/contracts" />
