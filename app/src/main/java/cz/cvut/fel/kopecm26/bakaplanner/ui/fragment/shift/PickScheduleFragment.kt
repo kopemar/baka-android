@@ -12,7 +12,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Schedule
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PickScheduleViewModel
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.SignUpToShiftViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SignUpToShiftViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PickScheduleFragment : ViewModelFragment<PickScheduleViewModel, FragmentPickScheduleBinding>(

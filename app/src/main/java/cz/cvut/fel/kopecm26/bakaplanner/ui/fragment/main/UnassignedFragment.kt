@@ -13,8 +13,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListShiftBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.SignUpToShiftViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.UnassignedViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SignUpToShiftViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassignedBinding>(

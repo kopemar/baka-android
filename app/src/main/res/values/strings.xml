@@ -59,4 +59,6 @@
     <string name="schedule_ids">Schedule #%d</string>
     <string name="successfully_signed_up">Successfully signed up!</string>
     <string name="ok">OK</string>
+    <string name="remove_from_schedule">Remove from schedule</string>
+    <string name="successfully_removed">Successfully removed from schedule!</string>
 </resources>

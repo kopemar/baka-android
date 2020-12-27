@@ -36,10 +36,14 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun getSchedulesForShift(shiftId: Int): ResponseModel<List<Schedule>> =
         safeApiCall({ api.getSchedulesForShift(shiftId) }) { it?.schedules }
 
-    override suspend fun addShiftToSchedule(scheduleId: Int, shiftId: Int): ResponseModel<Shift> =
+    override suspend fun addShiftToSchedule(shiftId: Int, scheduleId: Int): ResponseModel<Shift> =
         safeApiCall({
-            api.addShiftToSchedule(scheduleId, shiftId)
+            api.addShiftToSchedule(shiftId, scheduleId)
         }, { it })
+
+    override suspend fun removeShiftFromSchedule(shiftId: Int): ResponseModel<Shift> = safeApiCall({
+        api.removeShiftFromSchedule(shiftId)
+    }) {it}
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

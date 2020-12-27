@@ -33,4 +33,7 @@ interface ShiftDao: BaseDao<Shift> {
 
     @Query("DELETE FROM Shift")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM Shift WHERE id=:id")
+    suspend fun deleteById(id: Int)
 }

@@ -9,16 +9,16 @@ class ScheduleViewModel : BaseViewModel() {
     val shifts = MutableLiveData<List<Shift>>()
 
     init {
-        fetchShifts()
+        refreshShifts()
     }
 
-    fun refreshShifts() {
+    fun fetchShiftsRemote() {
         working.work {
             shiftRepository.refreshAllShifts().let(::saveShifts)
         }
     }
 
-    fun fetchShifts() {
+    fun refreshShifts() {
         working.work {
             shiftRepository.getUpcomingShifts().let(::saveShifts)
         }

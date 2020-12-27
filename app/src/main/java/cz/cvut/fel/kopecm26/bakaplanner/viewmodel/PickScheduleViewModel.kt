@@ -18,7 +18,7 @@ class PickScheduleViewModel : BaseViewModel() {
 
     fun addToSchedule(schedule: Schedule) {
         working.work {
-            shift.value?.id?.let { scheduleRepository.addShiftToSchedule(schedule.id, it) }
+            shift.value?.id?.let { shiftRepository.addShiftToSchedule(it, schedule.id) }
                 ?.let(::parseResponse)
         }
     }

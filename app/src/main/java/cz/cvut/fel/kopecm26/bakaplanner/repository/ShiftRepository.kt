@@ -72,5 +72,12 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
             ResponseModel.SUCCESS(it)
         } ?: run { ResponseModel.ERROR(ErrorType(R.string.not_implemented_yet)) }
 
+    suspend fun addShiftToSchedule(shiftId: Int, scheduleId: Int) =
+        service.addShiftToSchedule(shiftId, scheduleId).apply {
+            if (this is ResponseModel.SUCCESS) data?.let { shiftDao.insert(it) }
+        }
 
+    suspend fun removeShiftFromSchedule(shiftId: Int) = service.removeShiftFromSchedule(shiftId).apply {
+        if (this is ResponseModel.SUCCESS) data?.id?.let { shiftDao.deleteById(it) }
+    }
 }

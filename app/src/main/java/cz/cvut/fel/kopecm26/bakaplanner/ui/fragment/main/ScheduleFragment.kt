@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.vvalidator.util.hide
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentScheduleBinding
@@ -12,11 +13,28 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ScheduleViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.RemoveShiftViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBinding>(
     R.layout.fragment_schedule,
     ScheduleViewModel::class
 ) {
+
+    private val removeVM: RemoveShiftViewModel by sharedViewModel()
+
+    private val removeObserver by lazy {
+        Observer<Boolean?> {
+            if (it == true) {
+                removeVM.success.value = null
+                viewModel.refreshShifts()
+
+                showSnackBar(R.string.successfully_removed).apply {
+                    this.setAction(R.string.ok) { snack -> snack.hide() }
+                }
+            }
+        }
+    }
 
     private val observer by lazy {
         Observer<List<Shift>> {
@@ -38,16 +56,22 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
     }
 
     override fun initUi() {
-        binding.swipeRefresh.isRefreshing = true
+        initObservers()
+    }
+
+    private fun initObservers() {
         viewModel.shifts.observe(viewLifecycleOwner, observer)
-        binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
+        binding.swipeRefresh.setOnRefreshListener { viewModel.fetchShiftsRemote() }
 
         binding.rvShifts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 Logger.d("Scroll listener ${recyclerView.computeVerticalScrollOffset()}")
 
-                binding.mainToolbar.appBarLayout.elevation = if (recyclerView.computeVerticalScrollOffset() > 0) 6F else 0F
+                binding.mainToolbar.appBarLayout.elevation =
+                    if (recyclerView.computeVerticalScrollOffset() > 0) 6F else 0F
             }
         })
+
+        removeVM.success.observe(this, removeObserver)
     }
 }
