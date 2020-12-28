@@ -1,9 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking
 
-import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
 import okhttp3.Headers
 import java.time.ZonedDateTime
@@ -48,5 +48,5 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }
 
-    private fun Headers.getAndSave(key: String) = get(key)?.let { Prefs.putString(key, it) }
+    private fun Headers.getAndSave(key: String) = get(key)?.let { PrefsUtils.putString(key, it) }
 }

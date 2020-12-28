@@ -1,8 +1,8 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util.networking
 
-import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.PlannerApplication
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Interceptor
@@ -11,7 +11,7 @@ import okhttp3.Response
 class BaseUrlChangingInterceptor : Interceptor {
 
     private val host: HttpUrl
-        get() = Prefs.getString(Constants.Prefs.BASE_URL, PlannerApplication.BASE_URL_PLACEHOLDER).toHttpUrl()
+        get() = PrefsUtils.run { getPrefsStringOrNull(Constants.Prefs.BASE_URL) ?: PlannerApplication.BASE_URL_PLACEHOLDER}.toHttpUrl()
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val newRequest = host.let {

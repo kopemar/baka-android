@@ -4,7 +4,6 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.afollestad.vvalidator.form
 import com.orhanobut.logger.Logger
-import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentUrlBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.BindingFragment
@@ -33,7 +32,7 @@ class UrlFragment : BindingFragment<FragmentUrlBinding>(R.layout.fragment_url) {
             submitWith(binding.btnSetUp.id) {
                 activity?.hideKeyboard()
                 Logger.d("Saving url to Prefs ${binding.urlEt.text}")
-                Prefs.putString(Constants.Prefs.BASE_URL, binding.urlEt.text.toString())
+                PrefsUtils.putString(Constants.Prefs.BASE_URL, binding.urlEt.text.toString())
                 Logger.d("URL set up")
 
                 PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER)?.let {

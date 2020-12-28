@@ -1,10 +1,10 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NotFoundError
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 
 class ProfileViewModel : BaseViewModel() {
     val signedOut = MutableLiveData(false)
@@ -25,7 +25,7 @@ class ProfileViewModel : BaseViewModel() {
     }
 
     private suspend fun removeSession() {
-        Prefs.remove(Constants.Prefs.USER)
+        PrefsUtils.remove(Constants.Prefs.USER)
         shiftRepository.deleteAll()
         contractRepository.deleteAll()
         signedOut.value = true

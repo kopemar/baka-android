@@ -1,11 +1,12 @@
 package cz.cvut.fel.kopecm26.bakaplanner
 
 import android.app.Application
-import android.content.ContextWrapper
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.github.pedrovgs.lynx.LynxShakeDetector
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.pixplicity.easyprefs.library.Prefs
 import cz.cvut.fel.kopecm26.bakaplanner.di.databaseModule
 import cz.cvut.fel.kopecm26.bakaplanner.di.networkModule
 import cz.cvut.fel.kopecm26.bakaplanner.di.repositoryModule
@@ -21,13 +22,7 @@ class PlannerApplication : Application() {
 
         initLogger()
         initKoin()
-
-        Prefs.Builder()
-            .setContext(this)
-            .setMode(ContextWrapper.MODE_PRIVATE)
-            .setPrefsName(packageName)
-            .setUseDefaultSharedPreference(true)
-            .build()
+        initPrefs()
 
         if (BuildConfig.DEBUG) {
             initLynxLog()
@@ -49,8 +44,22 @@ class PlannerApplication : Application() {
         }
     }
 
+    private fun initPrefs() {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
+        preferences = EncryptedSharedPreferences.create(
+            "encrypted_preferences", // fileName
+            masterKeyAlias, // masterKeyAlias
+            this, // context
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, // prefKeyEncryptionScheme
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM // prefvalueEncryptionScheme
+        )
+    }
+
     companion object {
         const val BASE_URL_PLACEHOLDER = "http://10.0.0.7:3000/"
+
+        lateinit var preferences: SharedPreferences private set
     }
 
 }
