@@ -63,5 +63,6 @@
     <string name="successfully_removed">Successfully removed from schedule!</string>
     <string name="cancel">Cancel</string>
     <string name="are_you_sure">Are you sure?</string>
-    <string name="unauthorized">Unauthorized to perform this</string>
+    <string name="unauthorized">You are not authorized to perform this</string>
+    <string name="user_scheduled"><![CDATA[User scheduled: <b>%s</b>]]></string>
 </resources>

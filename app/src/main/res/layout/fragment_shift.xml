@@ -100,6 +100,16 @@
                     android:layout_marginTop="8dp"
                     app:fromHtml="@{@string/duration(vm.shift.duration)}"
                     tools:text="aaaaaa" />
+
+                <TextView
+                    style="@style/Text"
+                    visible="@{vm.shift.schedule_id != null}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    app:fromHtml="@{@string/user_scheduled(vm.shift.user_scheduled)}"
+                    tools:text="aaaaaa" />
             </LinearLayout>
 
         </LinearLayout>

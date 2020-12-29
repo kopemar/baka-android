@@ -57,4 +57,6 @@
     <string name="successfully_removed">Odebráno z rozvrhu!</string>
     <string name="cancel">Zrušit</string>
     <string name="are_you_sure">Jste si jisti?</string>
+    <string name="unauthorized">"Nemáte oprávnění "</string>
+    <string name="user_scheduled"><![CDATA[Naplánováno uživatelem: <b>%s</b>]]></string>
 </resources>
