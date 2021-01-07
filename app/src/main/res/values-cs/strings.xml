@@ -59,4 +59,5 @@
     <string name="are_you_sure">Jste si jisti?</string>
     <string name="unauthorized">"Nemáte oprávnění "</string>
     <string name="user_scheduled"><![CDATA[Naplánováno uživatelem: <b>%s</b>]]></string>
+    <string name="planning">Plánování</string>
 </resources>

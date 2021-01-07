@@ -38,7 +38,7 @@
             app:destination="@id/history_fragment" />
         <action
             android:id="@+id/navigate_to_settings"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settings_fragment" />
 
     </fragment>
 
@@ -90,7 +90,7 @@
             app:destination="@id/shift_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/settings_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">

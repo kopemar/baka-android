@@ -23,10 +23,6 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
         }
     }
 
-    private val errorMessageObserver = Observer<Int> {
-        showSnackBar(it)
-    }
-
     override fun initUi() {
         viewModel.signedOut.observe(this, signedOutObserver)
 
@@ -42,7 +38,6 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
             findNavController().navigate(ProfileFragmentDirections.navigateToSettings())
         }
 
-        binding.btnLogOut.setOnClickListener { viewModel.signOut() }
     }
 
 }

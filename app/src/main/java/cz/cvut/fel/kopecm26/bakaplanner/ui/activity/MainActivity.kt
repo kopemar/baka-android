@@ -17,7 +17,12 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
     override fun initUi() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        binding.bnvMain.menu.findItem(R.id.menu_shifts).isVisible = PrefsUtils.getUser()?.agreement == true
+
+        with (PrefsUtils.getUser()) {
+            binding.bnvMain.menu.findItem(R.id.menu_shifts).isVisible = this?.manager != true && this?.agreement == true
+            binding.bnvMain.menu.findItem(R.id.menu_planning).isVisible = this?.manager == true
+            binding.bnvMain.menu.findItem(R.id.menu_schedule).isVisible = this?.manager != true
+        }
 
         binding.bnvMain.setupWithNavController(navController)
     }

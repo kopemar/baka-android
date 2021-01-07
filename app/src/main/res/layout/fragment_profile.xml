@@ -8,6 +8,10 @@
         <variable
             name="USER"
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
+
+        <variable
+            name="vm"
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ProfileViewModel" />
     </data>
 
     <LinearLayout
@@ -61,6 +65,17 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_name"
                 tools:text="John Doe" />
 
+            <TextView
+                android:id="@+id/tv_organization"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{USER.organization_name}"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_mail"
+                tools:text="John Doe" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_log_out"
                 style="@style/Button.Secondary"
@@ -68,6 +83,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/log_out"
+                android:onClick="@{() -> vm.signOut()}"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

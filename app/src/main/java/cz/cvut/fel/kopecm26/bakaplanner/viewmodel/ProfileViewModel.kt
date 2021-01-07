@@ -15,7 +15,7 @@ class ProfileViewModel : BaseViewModel() {
     fun signOut() {
         working.work {
             userRepository.signOut().run {
-                if (this is ResponseModel.SUCCESS) {
+                if (this is ResponseModel.SUCCESS || (this is ResponseModel.ERROR && errorType is NotFoundError)) {
                     removeSession()
                 } else if (this is ResponseModel.ERROR) {
                     errorType?.let(::parseError)

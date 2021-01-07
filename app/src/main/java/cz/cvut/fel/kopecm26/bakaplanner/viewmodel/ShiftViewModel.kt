@@ -9,14 +9,6 @@ class ShiftViewModel : BaseViewModel() {
     val shift = MutableLiveData<Shift>()
     val removed = SingleLiveEvent<Boolean>()
 
-    fun fetchShift(id: Int) {
-        working.work {
-            shiftRepository.getShift(id).run {
-                parseResponse(shift)
-            }
-        }
-    }
-
     fun removeFromSchedule() {
         working.work {
             shift.value?.id?.let { shiftRepository.removeShiftFromSchedule(it) }?.let(::handleResponse)
