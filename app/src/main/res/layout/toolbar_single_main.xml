@@ -21,22 +21,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp"
+        tools:background="@color/bg_surface"
+        android:background="@{color == null ? @color/bg_surface : ContextCompat.getColor(context, color)}"
         android:theme="@style/AppTheme.AppBarOverlay.Large">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="12dp"
             android:background="@{color == null ? @color/bg_surface : ContextCompat.getColor(context, color)}"
             android:elevation="0dp"
+            android:paddingTop="16dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@{title}"
+            app:titleMarginBottom="90dp"
             app:titleTextAppearance="@style/TitleStyle.Large"
             app:titleTextColor="@color/text"
             tools:background="@color/bg_surface"
-            tools:title="@string/contracts" />
+            tools:title="@string/planning" />
 
     </com.google.android.material.appbar.AppBarLayout>
 </layout>
