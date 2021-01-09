@@ -44,4 +44,7 @@ interface ApiDescription {
 
     @GET("/units/{id}")
     suspend fun getSchedulingUnits(@Path("id") periodId: Int): Response<SchedulingUnitsResponse>
+
+    @POST("/templates")
+    suspend fun createTemplate(@Body template: ShiftTemplate): Response<ShiftTemplateResponse>
 }

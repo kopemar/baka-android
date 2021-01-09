@@ -1,11 +1,13 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -49,6 +51,15 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
                 }
             }
         }
+    }
+
+    inline fun <reified T: AppCompatActivity> startActivityForResult(requestCode: Int) = Intent(requireContext(), T::class.java).apply {
+        startActivityForResult(this, requestCode)
+    }
+
+    inline fun <reified T: AppCompatActivity> startActivityForResult(requestCode: Int, extras: Bundle.() -> Bundle) = Intent(requireContext(), T::class.java).apply {
+        this.putExtras(extras.invoke(Bundle()))
+        startActivityForResult(this, requestCode)
     }
 
     protected open fun init() {}

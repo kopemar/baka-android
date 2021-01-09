@@ -56,7 +56,8 @@ data class Shift(
     val started: Boolean
         get() = start_time.isBefore()
 
-    val canBeRemoved get() = this.schedule_id != null && start_time.hoursUntilNow() > 96L && user_scheduled
+    val canBeRemoved: Boolean
+        get() = this.schedule_id != null && start_time.hoursUntilNow() > 96L && user_scheduled
 }
 
 @JsonClass(generateAdapter = true)

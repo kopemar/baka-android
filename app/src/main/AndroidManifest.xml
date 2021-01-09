@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.SetupActivity" />
+        <activity android:name=".ui.activity.AddShiftTemplateActivity" />
 
     </application>
 

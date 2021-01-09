@@ -1,10 +1,10 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import cz.cvut.fel.kopecm26.bakaplanner.R
-import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityUrlBinding
+import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivitySetupBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.BindingActivity
 
-class SetupActivity : BindingActivity<ActivityUrlBinding>(R.layout.activity_url) {
+class SetupActivity : BindingActivity<ActivitySetupBinding>(R.layout.activity_setup) {
 
     override val statusBarTransparent = true
 

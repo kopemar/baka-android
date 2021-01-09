@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.planning
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -30,7 +31,7 @@ class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
                     )
                 },
                 { unit, binding, _ -> (binding as ListSchedulingUnitBinding).unit = unit },
-                { },
+                { unit -> findNavController().navigate(PeriodFragmentDirections.navigateToTemplatesFragment(unit)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
@@ -42,4 +43,5 @@ class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
         viewModel.period.value = args.period
         viewModel.fetchSchedulingUnits()
     }
+
 }

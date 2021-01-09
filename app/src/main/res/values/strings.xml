@@ -67,4 +67,12 @@
     <string name="user_scheduled"><![CDATA[User scheduled: <b>%s</b>]]></string>
     <string name="planning">Planning</string>
     <string name="plan_week">Plan week</string>
+    <string name="plan_day">Plan day</string>
+    <string name="add">Add</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="add_shift_template">Add shift template</string>
+    <string name="are_you_sure_you_want_to_cancel">Are you sure you want to cancel this?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>
