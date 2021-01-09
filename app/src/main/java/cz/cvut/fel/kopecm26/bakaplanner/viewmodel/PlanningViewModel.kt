@@ -12,7 +12,7 @@ class PlanningViewModel: BaseViewModel() {
 
     fun fetchSchedulingPeriods() {
         working.work {
-            schedulingPeriodRepository.getSchedulingPeriods().parseResponse(periods)
+            planningRepository.getSchedulingPeriods().parseResponse(periods)
         }
     }
 }

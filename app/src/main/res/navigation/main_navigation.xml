@@ -112,6 +112,20 @@
         android:id="@+id/menu_planning"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.PlanningFragment"
         android:label="PlanningFragment"
-        tools:layout="@layout/fragment_planning" />
+        tools:layout="@layout/fragment_planning">
+        <action
+            android:id="@+id/navigate_to_period_fragment"
+            app:destination="@id/period_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/period_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.planning.PeriodFragment"
+        android:label="PeriodFragment"
+        tools:layout="@layout/fragment_period">
+        <argument
+            android:name="period"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod"
+            app:nullable="false" />
+    </fragment>
 
 </navigation>

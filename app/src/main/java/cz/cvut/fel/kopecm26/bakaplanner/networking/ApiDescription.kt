@@ -41,4 +41,7 @@ interface ApiDescription {
      */
     @GET("/periods")
     suspend fun getSchedulingPeriods(): Response<SchedulingPeriodsResponse>
+
+    @GET("/units/{id}")
+    suspend fun getSchedulingUnits(@Path("id") periodId: Int): Response<SchedulingUnitsResponse>
 }

@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPlanningBinding
@@ -23,7 +24,7 @@ class PlanningFragment: ViewModelFragment<PlanningViewModel, FragmentPlanningBin
                     )
                 },
                 { period, binding, _ -> (binding as ListPeriodBinding).period = period },
-                {  },
+                { period -> findNavController().navigate(PlanningFragmentDirections.navigateToPeriodFragment(period)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

@@ -25,4 +25,6 @@ interface RemoteDataSource {
 
     suspend fun getSchedulingPeriods(): ResponseModel<List<SchedulingPeriod>>
 
+    suspend fun getSchedulingUnits(periodId: Int): ResponseModel<List<SchedulingUnit>>
+
 }

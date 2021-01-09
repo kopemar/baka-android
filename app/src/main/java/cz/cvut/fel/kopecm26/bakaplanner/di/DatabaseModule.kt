@@ -23,5 +23,5 @@ val repositoryModule = module {
     single { ScheduleRepository(get(), get()) }
     single { ShiftRepository(get(), get()) }
     single { ContractRepository(get(), get()) }
-    single { SchedulingPeriodRepository(get()) }
+    single { PlanningRepository(get()) }
 }

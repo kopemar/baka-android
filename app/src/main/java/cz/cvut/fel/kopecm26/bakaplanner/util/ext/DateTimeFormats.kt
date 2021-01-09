@@ -20,12 +20,15 @@ fun String.hoursAndMinutes(): String =
             Locale.getDefault()
         )
 
+fun String.dayMonth(): String = ZonedDateTime.parse(this).format(DateTimeFormatter.ofPattern(DateTimeFormats.FULL_MONTH_DAY))
+
 fun String.dayOfWeek(): String =
     ZonedDateTime.parse(this).format(DateTimeFormatter.ofPattern(DateTimeFormats.WEEK_DAY))
 
 object DateTimeFormats {
     const val WEEK_DAY = "EEEE"
     const val SHORT_DAY = "E "
-    const val FULL_DATE_SHORT_DAY = "E, MMMM d, yyyy"
+    const val FULL_DATE_SHORT_DAY = "EE, MMMM d"
+    const val FULL_MONTH_DAY = "MMMM d"
     const val HOURS_MINUTES = "hh:mm a"
 }

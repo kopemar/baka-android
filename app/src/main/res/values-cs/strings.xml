@@ -60,4 +60,5 @@
     <string name="unauthorized">"Nemáte oprávnění "</string>
     <string name="user_scheduled"><![CDATA[Naplánováno uživatelem: <b>%s</b>]]></string>
     <string name="planning">Plánování</string>
+    <string name="plan_week">Naplánovat týden</string>
 </resources>

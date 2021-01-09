@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="period"
-            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod" />
+            name="unit"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:src="@{period.state.iconRes}"
+            android:src="@{unit.state.iconRes}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,10 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{@string/time_from_to(period.start_date, period.end_date)}"
+            android:text="@{unit.weekDay}"
             app:layout_constraintStart_toEndOf="@id/iv_shift_state_icon"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="January 11 – January 18" />
+            tools:text="Monday" />
 
         <TextView
             android:id="@+id/tv_time"
@@ -46,12 +46,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="12dp"
-            android:text=""
+            android:text="@{unit.dateF}"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_date_headline"
             app:layout_constraintTop_toBottomOf="@id/tv_date_headline"
-            tools:text="2021, week 2" />
+            tools:text="January 11" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

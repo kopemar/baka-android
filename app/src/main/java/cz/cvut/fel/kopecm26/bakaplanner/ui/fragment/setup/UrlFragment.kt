@@ -14,8 +14,6 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isUrl
 
 class UrlFragment : BindingFragment<FragmentUrlBinding>(R.layout.fragment_url) {
 
-
-
     override fun initUi() {
         binding.root.onFocusChangeListener = View.OnFocusChangeListener { _, b ->
             if (!b) activity?.hideKeyboard()

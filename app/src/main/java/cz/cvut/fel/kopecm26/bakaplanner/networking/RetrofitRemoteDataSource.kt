@@ -50,6 +50,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.getSchedulingPeriods()
         }) { it?.periods }
 
+    override suspend fun getSchedulingUnits(periodId: Int): ResponseModel<List<SchedulingUnit>> =
+        safeApiCall(
+            { api.getSchedulingUnits(periodId) }
+        ) { it?.data }
+
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }
 

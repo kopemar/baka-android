@@ -21,7 +21,7 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val scheduleRepository by inject(ScheduleRepository::class.java)
 
-    protected val schedulingPeriodRepository by inject(SchedulingPeriodRepository::class.java)
+    protected val planningRepository by inject(PlanningRepository::class.java)
 
     val errorMessage = MutableLiveData<Int>()
     val noNetworkConnection = MutableLiveData(false)

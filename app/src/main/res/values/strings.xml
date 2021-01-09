@@ -66,4 +66,5 @@
     <string name="unauthorized">You are not authorized to perform this</string>
     <string name="user_scheduled"><![CDATA[User scheduled: <b>%s</b>]]></string>
     <string name="planning">Planning</string>
+    <string name="plan_week">Plan week</string>
 </resources>
