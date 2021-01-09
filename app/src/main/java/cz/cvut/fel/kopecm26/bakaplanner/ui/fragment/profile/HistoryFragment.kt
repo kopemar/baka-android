@@ -44,10 +44,6 @@ class HistoryFragment : ViewModelFragment<HistoryViewModel, FragmentHistoryBindi
     override fun initUi() {
         super.initUi()
 
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModel.refreshShifts()
-        }
-
         viewModel.shifts.observe(viewLifecycleOwner, observer)
     }
 }

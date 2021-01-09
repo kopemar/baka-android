@@ -42,7 +42,6 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
 
     override fun initUi() {
         viewModel.nextWeekDays.observe(viewLifecycleOwner, observer)
-        binding.swipeRefresh.setOnRefreshListener { viewModel.refreshShifts() }
 
         binding.currentShift.setOnClickListener {
             viewModel.currentShift.value?.let(::openShiftDetail)

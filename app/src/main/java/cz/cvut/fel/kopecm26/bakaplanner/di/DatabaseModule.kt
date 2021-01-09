@@ -2,10 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.di
 
 import android.content.Context
 import cz.cvut.fel.kopecm26.bakaplanner.db.PlannerDatabase
-import cz.cvut.fel.kopecm26.bakaplanner.repository.ContractRepository
-import cz.cvut.fel.kopecm26.bakaplanner.repository.ScheduleRepository
-import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
-import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
+import cz.cvut.fel.kopecm26.bakaplanner.repository.*
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -26,4 +23,5 @@ val repositoryModule = module {
     single { ScheduleRepository(get(), get()) }
     single { ShiftRepository(get(), get()) }
     single { ContractRepository(get(), get()) }
+    single { SchedulingPeriodRepository(get()) }
 }

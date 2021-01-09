@@ -21,6 +21,7 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             isRefreshing="@{vm.working}"
+            onRefresh="@{() -> vm.fetchShifts()}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

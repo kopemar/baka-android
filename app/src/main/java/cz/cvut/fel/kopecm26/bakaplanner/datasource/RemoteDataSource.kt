@@ -23,4 +23,6 @@ interface RemoteDataSource {
 
     suspend fun removeShiftFromSchedule(shiftId: Int): ResponseModel<Shift>
 
+    suspend fun getSchedulingPeriods(): ResponseModel<List<SchedulingPeriod>>
+
 }

@@ -61,7 +61,6 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
 
     private fun initObservers() {
         viewModel.shifts.observe(viewLifecycleOwner, observer)
-        binding.swipeRefresh.setOnRefreshListener { viewModel.fetchShiftsRemote() }
 
         binding.rvShifts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

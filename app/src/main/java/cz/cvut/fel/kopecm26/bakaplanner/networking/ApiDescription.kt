@@ -5,6 +5,7 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiDescription {
+    // AUTH
     @POST("/auth/sign_in")
     suspend fun signIn(@Body auth: Auth): Response<UserResponseModel>
 
@@ -34,4 +35,10 @@ interface ApiDescription {
 
     @DELETE("/shift/{id}/schedule")
     suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<Shift>
+
+    /**
+     * Scheduling periods, usually weeks
+     */
+    @GET("/periods")
+    suspend fun getSchedulingPeriods(): Response<SchedulingPeriodsResponse>
 }

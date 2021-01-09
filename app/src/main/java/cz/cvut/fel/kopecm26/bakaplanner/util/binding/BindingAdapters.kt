@@ -35,6 +35,11 @@ fun SwipeRefreshLayout.isRefreshing(boolean: Boolean) {
     isRefreshing = boolean
 }
 
+@BindingAdapter("onRefresh")
+fun SwipeRefreshLayout.onRefresh(action: () -> Unit) {
+    this.setOnRefreshListener { action.invoke() }
+}
+
 @BindingAdapter("drawableTint")
 fun ImageView.setDrawableTint(@ColorRes color: Int) {
     setColorFilter(color)

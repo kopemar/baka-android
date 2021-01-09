@@ -71,10 +71,6 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
     override fun initUi() {
         viewModel.contracts.observe(this, observer)
 
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModel.refreshContracts()
-        }
-
         binding.toolbar.toolbar.run {
 
         }

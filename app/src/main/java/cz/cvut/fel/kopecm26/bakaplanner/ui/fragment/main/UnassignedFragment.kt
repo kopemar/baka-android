@@ -58,10 +58,6 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
     }
 
     override fun initUi() {
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModel.fetchShifts()
-        }
-
         sharedVM.success.observe(this, successObserver)
 
         viewModel.shifts.observe(viewLifecycleOwner, observer)
