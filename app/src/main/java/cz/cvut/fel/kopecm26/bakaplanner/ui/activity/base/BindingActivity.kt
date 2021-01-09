@@ -22,6 +22,9 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
      */
     protected open val statusBarTransparent = false
 
+    open protected val toolbar: Toolbar? = null
+    open protected val navigateUp: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
@@ -29,6 +32,7 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
         initUi()
 
         initStatusBar()
+        initToolbar()
     }
 
     protected open fun init() {}
@@ -47,9 +51,11 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
         }
     }
 
-    protected fun setUpToolbar(toolbar: Toolbar) {
-        this.setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    private fun initToolbar() {
+        toolbar?.let {
+            this.setSupportActionBar(it)
+            supportActionBar?.setDisplayHomeAsUpEnabled(navigateUp)
+        }
     }
 
     protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) = Snackbar.make(binding.root, text, length).show()

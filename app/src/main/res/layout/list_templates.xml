@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="template"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate" />
+
+        <import type="androidx.core.content.ContextCompat" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_2_ripple"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/iv_shift_state_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@{template.shiftTime.shiftIcon}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_weather_sunset_up" />
+
+
+        <TextView
+            android:id="@+id/tv_date_headline"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{@string/time_from_to(template.startTimeHours, template.endTimeHours)}"
+            app:layout_constraintStart_toEndOf="@id/iv_shift_state_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Mon, November 9, 2020" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/Text.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_date_headline"
+            app:layout_constraintTop_toBottomOf="@id/tv_date_headline"
+            tools:text="9:00 AM - 5:30 PM" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

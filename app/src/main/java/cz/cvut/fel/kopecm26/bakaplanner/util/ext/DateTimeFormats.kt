@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util.ext
 
+import java.time.LocalTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -16,6 +17,12 @@ fun String.fullDate(): String? =
 
 fun String.hoursAndMinutes(): String =
     ZonedDateTime.parse(this).format(DateTimeFormatter.ofPattern(DateTimeFormats.HOURS_MINUTES))
+        .toUpperCase(
+            Locale.getDefault()
+        )
+
+fun LocalTime.hoursAndMinutes(): String =
+    this.format(DateTimeFormatter.ofPattern(DateTimeFormats.HOURS_MINUTES))
         .toUpperCase(
             Locale.getDefault()
         )

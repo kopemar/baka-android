@@ -9,4 +9,6 @@ class PlanningRepository(private val service: RemoteDataSource) {
     suspend fun getSchedulingUnits(periodId: Int) = service.getSchedulingUnits(periodId)
 
     suspend fun addShiftTemplate(template: ShiftTemplate) = service.addShiftTemplate(template)
+
+    suspend fun getShiftTemplates(unitId: Int) = service.getShiftTemplates(unitId)
 }

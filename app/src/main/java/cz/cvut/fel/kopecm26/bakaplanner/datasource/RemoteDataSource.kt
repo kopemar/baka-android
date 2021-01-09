@@ -29,4 +29,6 @@ interface RemoteDataSource {
 
     suspend fun addShiftTemplate(template: ShiftTemplate): ResponseModel<ShiftTemplate>
 
+    suspend fun getShiftTemplates(unitId: Int): ResponseModel<List<ShiftTemplate>>
+
 }

@@ -47,4 +47,7 @@ interface ApiDescription {
 
     @POST("/templates")
     suspend fun createTemplate(@Body template: ShiftTemplate): Response<ShiftTemplateResponse>
+
+    @GET("/templates")
+    suspend fun getShiftTemplates(@Query("unit_id") unitId: Int): Response<ShiftTemplatesResponse>
 }

@@ -51,6 +51,10 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun addShiftTemplate(template: ShiftTemplate) =
         safeApiCall({ api.createTemplate(template) }) { it?.data }
 
+    override suspend fun getShiftTemplates(unitId: Int): ResponseModel<List<ShiftTemplate>> = safeApiCall({
+        api.getShiftTemplates(unitId)
+    }) { it?.data }
+
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }
 
