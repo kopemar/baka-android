@@ -15,6 +15,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getHour
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getMinute
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isCzech
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.TemplateFormViewModel
 import java.time.LocalTime
 
@@ -51,21 +52,31 @@ class TemplateFormFragment : ViewModelFragment<TemplateFormViewModel, FragmentTe
                 it.text.isNotEmpty()
             }
         }
+        input(binding.etBreakMinutes.id) {
+            assert(getString(R.string.field_must_be_filled)) {
+                it.text.toString().toIntOrNull()?.run{ this >= 0} ?: false
+            }
+        }
+
     }
 
-    private fun EditText.setUpTimePicker(observable: MutableLiveData<String>) {
+    private fun EditText.setUpTimePicker(
+        observable: MutableLiveData<String>
+    ) {
         setOnClickListener {
-            Logger.d(this.text.toString().getHour())
             TimePickerDialog(
                 requireContext(),
+                R.style.AlertDialogTheme,
                 { _, hourOfDay, minute ->
+                    Logger.d(hourOfDay)
                     val dateTime = LocalTime.of(hourOfDay, minute)
+                    Logger.d(dateTime.toString())
                     observable.value = dateTime.toString()
                     this.setText(dateTime.hoursAndMinutes())
                 },
-                this.text.toString().getHour() ?: 9,
-                this.text.toString().getMinute() ?: 0,
-                false // todo 24h fmt
+                observable.value.toString().getHour() ?: 9,
+                observable.value.toString().getMinute() ?: 0,
+                isCzech()
             ).show()
         }
     }

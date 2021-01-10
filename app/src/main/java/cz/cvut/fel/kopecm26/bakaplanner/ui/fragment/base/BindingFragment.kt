@@ -87,14 +87,11 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
         onPositive: ((DialogInterface) -> Unit?)? = null,
         @StringRes negative: Int? = R.string.cancel,
         onNegative: ((DialogInterface) -> Unit?)? = null,
-    ) {
-        MaterialAlertDialogBuilder(requireContext())
+    ) = MaterialAlertDialogBuilder(requireContext())
             .setMessage(message)
             .apply {
                 title?.let(::setTitle)
                 positive?.let { this.setPositiveButton(getString(it)) { dialog, _ -> onPositive?.invoke(dialog) } }
                 negative?.let { this.setNegativeButton(getString(it)) { dialog, _ -> onNegative?.invoke(dialog) } }
-            }
-            .show()
-    }
+            }.show()
 }

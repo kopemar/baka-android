@@ -6,6 +6,10 @@ object Constants {
         const val USER = "USER"
     }
 
+    object Time {
+        const val MINUTES_IN_HOUR = 60
+    }
+
     enum class UserHeaders(val key: String) {
         ACCESS_TOKEN(Headers.ACCESS_TOKEN),
         TOKEN_TYPE(Headers.TOKEN_TYPE),

@@ -61,4 +61,16 @@
     <string name="user_scheduled"><![CDATA[Naplánováno uživatelem: <b>%s</b>]]></string>
     <string name="planning">Plánování</string>
     <string name="plan_week">Naplánovat týden</string>
+    <string name="break_label">Pauza</string>
+    <string name="break_minutes">Pauza (minut)</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="are_you_sure_you_want_to_cancel">Jste si jisti, že nechcete pokračovat?</string>
+    <string name="add_shift_template">Nová šablona směny</string>
+    <string name="start_time">Začátek</string>
+    <string name="end_time">Konec</string>
+    <string name="add">Přídat</string>
+    <string name="plan_day">Naplánovat den</string>
+    <string name="duration_less_12_hours">Směna by měla trvat nejvýše 12 hodin</string>
+    <string name="field_must_be_filled">Vyplňte prosím toto pole</string>
 </resources>

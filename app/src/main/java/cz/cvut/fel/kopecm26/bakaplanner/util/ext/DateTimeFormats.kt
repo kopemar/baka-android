@@ -4,16 +4,13 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
 
-fun String.fullDateShortDayOfWeek(): String =
-    StringBuilder(
-        ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.SHORT_DAY))
-    ).append(fullDate()).toString()
+@Deprecated("Replaced with full date", ReplaceWith("fullDate()"))
+fun String.fullDateShortDayOfWeek(): String = this.fullDate().toString()
 
 fun String.fullDate(): String? =
-    ZonedDateTime.parse(this).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
+    ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.DAY_MONTH_DAY_YEAR))
 
 fun String.hoursAndMinutes(): String =
     ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
@@ -27,19 +24,30 @@ fun LocalTime.hoursAndMinutes(): String =
             Locale.getDefault()
         )
 
-fun String.dayMonth(): String = ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
+fun String.dayMonth(): String =
+    ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
 
 fun String.dayOfWeek(): String =
     ZonedDateTime.parse(this).toOffsetDateTime().format(formatWithZone(DateTimeFormats.WEEK_DAY))
 
-fun formatWithZone(pattern: String) = DateTimeFormatter.ofPattern(pattern).withZone(ZoneId.systemDefault())
+fun formatWithZone(pattern: String) =
+    formatter(pattern).withZone(ZoneId.systemDefault())
+
+fun formatWithZone(format: DateTimeFormats) =
+    formatWithZone(if (isCzech()) format.czech else format.english)
+
+fun formatter(format: DateTimeFormats) =
+    formatter(if (isCzech()) format.czech else format.english)
 
 fun formatter(pattern: String) = DateTimeFormatter.ofPattern(pattern)
 
-object DateTimeFormats {
-    const val WEEK_DAY = "EEEE"
-    const val SHORT_DAY = "E "
-    const val FULL_DATE_SHORT_DAY = "EE, MMMM d"
-    const val FULL_MONTH_DAY = "MMMM d"
-    const val HOURS_MINUTES = "hh:mm a"
+fun isCzech() = Locale.getDefault().country == "CZ"
+
+enum class DateTimeFormats(val english: String, val czech: String = english) {
+    WEEK_DAY("EEEE"),
+    SHORT_DAY("E "),
+    DAY_MONTH_DAY("EE, MMMM d", "EE d. MMMM"),
+    DAY_MONTH_DAY_YEAR("EE, MMMM d YYYY", "EE d. MMMM YYYY"),
+    FULL_MONTH_DAY("MMMM d", "d. MMMM"),
+    HOURS_MINUTES("hh:mm a", "HH:mm"),
 }

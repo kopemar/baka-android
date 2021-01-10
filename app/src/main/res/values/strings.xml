@@ -77,4 +77,13 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="template_fragment_tag" translatable="false">TemplateFragment</string>
+    <string name="time_picker" translatable="false">TimePicker</string>
+    <string name="break_minutes">Break (min)</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="break_label">Break:</string>
+    <string name="min" translatable="false">min</string>
+    <string name="hours_">Hours: %.2f</string>
+    <string name="_no_value" translatable="false">-</string>
+    <string name="duration_less_12_hours">Shift should not last more than 12 hours</string>
+    <string name="break_too_long">Break is longer than shift!</string>
 </resources>
