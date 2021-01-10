@@ -9,6 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityTemplateBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit.TemplateFormFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.TemplateFormViewModel
 
 class AddShiftTemplateActivity:
@@ -42,19 +43,19 @@ class AddShiftTemplateActivity:
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.check, menu)
-        setupMenu()
+        setupMenu(menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun setupMenu() {
-        Logger.d("setupMenu")
-
-        toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.menu_check) {
+    private fun setupMenu(menu: Menu?) {
+        menu?.let {
+            val templates =
+                supportFragmentManager.findFragmentByTag(getString(R.string.template_fragment_tag)) as TemplateFormFragment
+            templates.setupFormValidation(menu, R.id.menu_check) {
                 viewModel.submitTemplate()
             }
-            true
         }
+        Logger.d("setupMenu")
     }
 
     private fun showCancelDialog() {

@@ -10,6 +10,7 @@
     <string name="log_in">Log in</string>
     <string name="username_must_be_filled">This field has to be filled</string>
     <string name="password_must_be_filled">This field has to be filled</string>
+    <string name="field_must_be_filled">This field has to be filled</string>
     <string name="wrong_password">Wrong username or password</string>
     <string name="http_example_com" translatable="false">http://example.com</string>
     <string name="unknown_error">Unknown error occurred</string>
@@ -75,4 +76,5 @@
     <string name="are_you_sure_you_want_to_cancel">Are you sure you want to cancel this?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="template_fragment_tag" translatable="false">TemplateFragment</string>
 </resources>

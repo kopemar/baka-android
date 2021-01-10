@@ -22,14 +22,16 @@ fun String.isEvening() = ZonedDateTime.parse(this).hour in (12..16)
 fun String.isNight() = ZonedDateTime.parse(this).hour.let { it in (16..24) || it in (0..4) }
 
 fun String.getHour() = try {
-    LocalTime.parse(this).hour
+    LocalTime.parse(this, formatter(DateTimeFormats.HOURS_MINUTES)).hour
 } catch (e: Exception) {
+    e.printStackTrace()
     null
 }
 
 fun String.getMinute() = try {
-    LocalTime.parse(this).minute
+    LocalTime.parse(this, formatter(DateTimeFormats.HOURS_MINUTES)).minute
 } catch (e: Exception) {
+    e.printStackTrace()
     null
 }
 
