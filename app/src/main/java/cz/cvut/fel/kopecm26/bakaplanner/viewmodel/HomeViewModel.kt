@@ -1,14 +1,20 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 
 class HomeViewModel : BaseViewModel() {
-    val currentShift = MutableLiveData<Shift>()
-    val nextShift = MutableLiveData<Shift?>()
-    val nextWeekDays = MutableLiveData<List<Shift>>()
+    private val _currentShift = MutableLiveData<Shift>()
+    val currentShift: LiveData<Shift> = _currentShift
+
+    private val _nextShift = MutableLiveData<Shift>()
+    val nextShift: LiveData<Shift?> = _nextShift
+
+    private val _nextWeekDays = MutableLiveData<List<Shift>>()
+    val nextWeekDays: LiveData<List<Shift>> = _nextWeekDays
 
     init {
         getAll()
@@ -40,17 +46,17 @@ class HomeViewModel : BaseViewModel() {
 
     private suspend fun getNextWeekShifts() {
         Logger.d(shiftRepository.getNextWeekShifts())
-        nextWeekDays.value = shiftRepository.getNextWeekShifts()
+        _nextWeekDays.value = shiftRepository.getNextWeekShifts()
     }
 
     private suspend fun getCurrentShift() {
         Logger.d(shiftRepository.getCurrentShift())
-        currentShift.value = shiftRepository.getCurrentShift()
+        _currentShift.value = shiftRepository.getCurrentShift()
     }
 
     private suspend fun getNextShift() {
         Logger.d(shiftRepository.getNextShift())
-        nextShift.value = shiftRepository.getNextShift()
+        _nextShift.value = shiftRepository.getNextShift()
     }
 
     private suspend fun getShifts() {

@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
@@ -10,7 +11,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.SingleLiveEvent
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 
 class LoginViewModel : BaseViewModel() {
-    val signedIn = SingleLiveEvent<Boolean>()
+    private val _signedIn = SingleLiveEvent<Boolean>()
+    val signedIn: LiveData<Boolean> = _signedIn
+
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
@@ -27,7 +30,7 @@ class LoginViewModel : BaseViewModel() {
 
     private fun handleLoginResult(response: ResponseModel<User>) {
         if (response is ResponseModel.SUCCESS) {
-            signedIn.value = true
+            _signedIn.value = true
             PrefsUtils.saveUser(response.data)
         } else if (response is ResponseModel.ERROR) {
             response.errorType?.let(::parseError)
@@ -35,7 +38,7 @@ class LoginViewModel : BaseViewModel() {
     }
 
     override fun parseError(error: ErrorType) {
-        if (error is UnauthorizedError) errorMessage.value = R.string.wrong_password
+        if (error is UnauthorizedError) this._errorMessage.value = R.string.wrong_password
         else super.parseError(error)
     }
 }

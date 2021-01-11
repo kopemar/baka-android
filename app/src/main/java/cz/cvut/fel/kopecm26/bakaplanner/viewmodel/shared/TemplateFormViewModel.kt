@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -30,7 +31,7 @@ class TemplateFormViewModel : BaseViewModel() {
         }
     }
 
-    val duration = MediatorLiveData<Float>().apply {
+    private val _duration = MediatorLiveData<Float>().apply {
         this.addSource(startTime) {
             this.value = countDuration()
         }
@@ -43,10 +44,13 @@ class TemplateFormViewModel : BaseViewModel() {
             this.value = countDuration()
         }
     }
+    val duration: LiveData<Float> = _duration
 
-    val durationError = MutableLiveData(true)
+    private val _durationError = MutableLiveData(true)
+    val durationError: LiveData<Boolean> = _durationError
 
-    val success = MutableLiveData<Boolean>()
+    private val _success = MutableLiveData<Boolean>()
+    val success: LiveData<Boolean> = _success
 
     val start: String
         get() = unit.value?.start_time?.mergeWithHours(startTime.value.toString()).toString()
@@ -58,7 +62,7 @@ class TemplateFormViewModel : BaseViewModel() {
 
     fun submitTemplate() {
         if (durationError.value != false) {
-            errorMessage.value = if (duration.value?.let { it > 0 } == true) R.string.duration_less_12_hours
+            _errorMessage.value = if (duration.value?.let { it > 0 } == true) R.string.duration_less_12_hours
             else R.string.break_too_long
             return
         }
@@ -77,7 +81,7 @@ class TemplateFormViewModel : BaseViewModel() {
 
     fun parseResponse(response: ResponseModel<ShiftTemplate>) {
         if (response is ResponseModel.SUCCESS) {
-            success.value = true
+            _success.value = true
         } else if (response is ResponseModel.ERROR) {
             response.errorType?.let { parseError(it) }
         }
@@ -88,11 +92,11 @@ class TemplateFormViewModel : BaseViewModel() {
             ZonedDateTime.parse(start),
             ZonedDateTime.parse(end)
         ).toFloat().minus(breakMinutes.value?.toFloatOrNull() ?: 0F).run {
-            durationError.value = this.div(Constants.Time.MINUTES_IN_HOUR) !in (0.0..12.0)
+            _durationError.value = this.div(Constants.Time.MINUTES_IN_HOUR) !in (0.0..12.0)
             this.div(Constants.Time.MINUTES_IN_HOUR)
         }
     } catch (e: DateTimeParseException) {
-        durationError.value = true
+        _durationError.value = true
         null
     }
 

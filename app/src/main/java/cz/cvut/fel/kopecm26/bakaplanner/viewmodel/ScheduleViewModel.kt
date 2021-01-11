@@ -1,12 +1,14 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 
 class ScheduleViewModel : BaseViewModel() {
 
-    val shifts = MutableLiveData<List<Shift>>()
+    private val _shifts = MutableLiveData<List<Shift>>()
+    val shifts: LiveData<List<Shift>> = _shifts
 
     init {
         refreshShifts()
@@ -25,7 +27,7 @@ class ScheduleViewModel : BaseViewModel() {
     }
 
     private fun saveShifts(response: ResponseModel<List<Shift>>) {
-        response.parseResponse(shifts)
+        response.parseResponse(_shifts)
     }
 
 }

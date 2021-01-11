@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,7 +24,9 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val planningRepository by inject(PlanningRepository::class.java)
 
-    val errorMessage = MutableLiveData<Int>()
+    protected val _errorMessage = MutableLiveData<Int>()
+    val errorMessage: LiveData<Int> = _errorMessage
+
     val noNetworkConnection = MutableLiveData(false)
     val working = MutableLiveData(false)
 
@@ -40,7 +43,7 @@ abstract class BaseViewModel : ViewModel() {
             Logger.d("No Internet Error")
             noNetworkConnection.value = true
         }
-        errorMessage.value = error.messageRes
+        this._errorMessage.value = error.messageRes
     }
 
     protected fun <T> ResponseModel<T>.parseResponse(liveData: MutableLiveData<T>) {
