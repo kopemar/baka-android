@@ -42,7 +42,7 @@ class ShiftTemplateFragment :
 
     private fun navigateToSignUpFragment() = viewModel.template.value?.let {
         findNavController().navigate(
-            ShiftTemplateFragmentDirections.navigateToPickScheduleFragment(it)
+            ShiftTemplateFragmentDirections.showDialog(it)
         )
     }
 }

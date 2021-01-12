@@ -8,5 +8,6 @@
     <color name="color_primary">@color/sunny_evenings</color>
     <color name="color_low_contrast">#292323</color>
     <color name="orange_10000">#B66F30</color>
-    <color name="gray_blue">#616F85</color>
+    <color name="gray_blue">#465161</color>
+    <color name="bg_surface_ripple">@color/bg_surface_2</color>
 </resources>

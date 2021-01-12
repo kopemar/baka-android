@@ -22,4 +22,5 @@
     <color name="greeno">#7CB882</color>
     <color name="bg_surface">@color/very_light_gray</color>
     <color name="bg_surface_2">@color/white</color>
+    <color name="bg_surface_ripple">#E1DBDB</color>
 </resources>

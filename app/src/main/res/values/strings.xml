@@ -93,4 +93,5 @@
     <string name="you_can_add_this_shift_to_your_schedule">You can add this shift to your schedule!</string>
     <string name="add_to_your_schedule">Add to your schedule</string>
     <string name="add_to_schedule">Add to schedule</string>
+    <string name="shift_will_be_added">Shift will be added to that schedule.</string>
 </resources>

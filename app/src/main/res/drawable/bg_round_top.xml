@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/bg_surface_ripple">
+    android:color="@color/bg_surface">
     <item>
         <shape>
+            <corners
+                android:topLeftRadius="12dp"
+                android:topRightRadius="12dp" />
             <solid android:color="@color/bg_surface" />
         </shape>
     </item>

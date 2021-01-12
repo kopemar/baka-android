@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.vvalidator.util.hide
@@ -13,20 +14,19 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ScheduleViewModel
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.RemoveShiftViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.nav.ScheduleNavViewModel
 
 class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBinding>(
     R.layout.fragment_schedule,
     ScheduleViewModel::class
 ) {
 
-    private val removeVM: RemoveShiftViewModel by sharedViewModel()
+    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.main_navigation)
 
     private val removeObserver by lazy {
         Observer<Boolean?> {
             if (it == true) {
-                removeVM.success.value = null
+                navVM.success.value = null
                 viewModel.refreshShifts()
 
                 showSnackBar(R.string.successfully_removed).apply {
@@ -71,6 +71,6 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
             }
         })
 
-        removeVM.success.observe(this, removeObserver)
+        navVM.success.observe(this, removeObserver)
     }
 }

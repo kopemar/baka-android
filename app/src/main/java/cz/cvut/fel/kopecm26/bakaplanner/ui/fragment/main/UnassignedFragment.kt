@@ -3,6 +3,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.vvalidator.util.hide
@@ -14,6 +15,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.UnassignedViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.nav.ScheduleNavViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SignUpToShiftViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -25,6 +27,7 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
     private val sharedVM: SignUpToShiftViewModel by sharedViewModel()
+    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.main_navigation)
 
     private val successObserver by lazy {
         Observer<Boolean?> {
@@ -35,6 +38,11 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
                     this.setAction(R.string.ok) { snack -> snack.hide() }
                 }
             }
+        }
+    }
+
+    private val removeObserver by lazy { Observer<Boolean?> {
+            if (it == true) viewModel.fetchShifts()
         }
     }
 
@@ -49,8 +57,16 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
                         attachToRoot
                     )
                 },
-                { template, binding, _ -> (binding as ListTemplatesBinding).template = template },
-                { findNavController().navigate(UnassignedFragmentDirections.navigateToShiftTemplateFragment(it)) },
+                { template, binding, _ ->
+                    (binding as ListTemplatesBinding).template = template
+                },
+                {
+                    findNavController().navigate(
+                        UnassignedFragmentDirections.navigateToShiftTemplateFragment(
+                            it
+                        )
+                    )
+                },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
@@ -59,6 +75,7 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
 
     override fun initUi() {
         sharedVM.success.observe(this, successObserver)
+        navVM.success.observe(this, removeObserver)
 
         viewModel.shifts.observe(viewLifecycleOwner, observer)
 
@@ -66,7 +83,8 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 Logger.d("Scroll listener ${recyclerView.computeVerticalScrollOffset()}")
 
-                binding.unassignedToolbar.appBarLayout.elevation = if (recyclerView.computeVerticalScrollOffset() > 0) 6F else 0F
+                binding.unassignedToolbar.appBarLayout.elevation =
+                    if (recyclerView.computeVerticalScrollOffset() > 0) 6F else 0F
             }
         })
     }

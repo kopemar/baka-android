@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="last"
+            type="boolean" />
+
+        <variable
             name="schedule"
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Schedule" />
     </data>
@@ -15,12 +19,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/color_2_ripple"
         android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_blue"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/tv_schedule_id"
