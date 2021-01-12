@@ -38,10 +38,10 @@
     <string name="setup_instance"><![CDATA[Zadejte URL svého <b>bakaplanneru</b>]]></string>
     <string name="no_server_connection">Připojení k serveru se nezdařilo</string>
     <string name="information">Informace</string>
-    <string name="schedule_id"><![CDATA[ID rozvrhu: <b>%s</b>]]></string>
+    <string name="schedule_id">ID rozvrhu</string>
     <string name="actions">Akce</string>
-    <string name="duration"><![CDATA[Počet hodin: <b>%s</b>]]></string>
-    <string name="shift_id"><![CDATA[ID směny: <b>%s</b>]]></string>
+    <string name="duration">Počet hodin</string>
+    <string name="shift_id">ID směny</string>
     <string name="sign_up">Zapsat se</string>
     <string name="history">Historie</string>
     <string name="settings">Nastavení</string>
@@ -57,8 +57,8 @@
     <string name="successfully_removed">Odebráno z rozvrhu!</string>
     <string name="cancel">Zrušit</string>
     <string name="are_you_sure">Jste si jisti?</string>
-    <string name="unauthorized">"Nemáte oprávnění "</string>
-    <string name="user_scheduled"><![CDATA[Naplánováno uživatelem: <b>%s</b>]]></string>
+    <string name="unauthorized">Nemáte oprávnění</string>
+    <string name="user_scheduled">Naplánováno uživatelem</string>
     <string name="planning">Plánování</string>
     <string name="plan_week">Naplánovat týden</string>
     <string name="break_label">Pauza</string>
@@ -73,4 +73,12 @@
     <string name="plan_day">Naplánovat den</string>
     <string name="duration_less_12_hours">Směna by měla trvat nejvýše 12 hodin</string>
     <string name="field_must_be_filled">Vyplňte prosím toto pole</string>
+    <string name="you_can_remove_this_shift_from_your_schedule_if_you_intent_to_do_it_do_it_asap">Zápis na tuto směmu můžete stále zrušit.\nPokud to máte v plánu, udělejte to co nejdříve.</string>
+    <string name="this_shift_can_still_be_removed">Zápis na tuto směnu lze zrušit</string>
+    <string name="break_too_long">Přestávka je delší než směna</string>
+    <string name="hours_">Hodin: %.2f</string>
+    <string name="add_to_your_schedule">Zapsat se na směnu</string>
+    <string name="you_can_add_this_shift_to_your_schedule">Tuto směnu si můžete zapsat do svého rozvrhu.</string>
+    <string name="add_to_schedule">Zapsat se na směnu</string>
+    <string name="_h">%.2f h</string>
 </resources>

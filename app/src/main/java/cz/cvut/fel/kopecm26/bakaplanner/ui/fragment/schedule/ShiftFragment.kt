@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentShiftBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.RemoveShiftViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -36,32 +37,29 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
         viewModel.removed.observe(this, removedObserver)
         initExpandable()
         setupMenu()
-        binding.btnRemove.setOnClickListener { runRemoval() }
-        binding.btnSignUp.setOnClickListener { navigateToSignUpFragment() }
+//        binding.btnRemove.setOnClickListener { runRemoval() }
     }
 
     private fun setupMenu() {
-        if (viewModel.shift.value?.schedule_id == null) {
-            toolbar.inflateMenu(R.menu.sign_up)
+        if (PrefsUtils.getUser()?.agreement == true && viewModel.shift.value?.canBeRemoved == true) {
+            toolbar.inflateMenu(R.menu.remove)
         }
 
         toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.menu_sign_up) { navigateToSignUpFragment() }
+            if (it.itemId == R.id.menu_remove) {
+                runRemoval()
+            }
             true
         }
     }
 
-    private fun navigateToSignUpFragment() = viewModel.shift.value?.let {
-        findNavController().navigate(ShiftFragmentDirections.navigateToPickSchedule(it))
-    }
-
     private fun initExpandable() {
-        binding.infoHeader.run {
-            binding.infoExpanded = false
-            root.setOnClickListener {
-                binding.infoExpanded = binding.infoExpanded?.not() ?: false
-            }
-        }
+//        binding.infoHeader.run {
+//            binding.infoExpanded = false
+//            root.setOnClickListener {
+//                binding.infoExpanded = binding.infoExpanded?.not() ?: false
+//            }
+//        }
     }
 
     private fun runRemoval() {

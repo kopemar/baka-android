@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -13,12 +15,14 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AddShiftTemplateActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.TemplateViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.TemplatesViewModel
 
-class TemplatesFragment : ViewModelFragment<TemplateViewModel, FragmentTemplatesBinding>(
+class TemplatesFragment : ViewModelFragment<TemplatesViewModel, FragmentTemplatesBinding>(
     R.layout.fragment_templates,
-    TemplateViewModel::class
+    TemplatesViewModel::class
 ) {
+    override val viewModelOwner: ViewModelStoreOwner? get() = activity
+
     override val toolbar: Toolbar
         get() = binding.templatesToolbar.toolbar
     override var navigateUp = true
@@ -35,7 +39,7 @@ class TemplatesFragment : ViewModelFragment<TemplateViewModel, FragmentTemplates
                     )
                 },
                 { template, binding, _ -> (binding as ListTemplatesBinding).template = template },
-                {  },
+                { findNavController().navigate(TemplatesFragmentDirections.navigateToTemplateFragment(it)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
@@ -46,8 +50,7 @@ class TemplatesFragment : ViewModelFragment<TemplateViewModel, FragmentTemplates
 
     override fun initUi() {
         viewModel.templates.observe(viewLifecycleOwner, observer)
-        viewModel.unit.value = args.unit
-        viewModel.fetchTemplates()
+        viewModel.setUnit(args.unit)
         setupMenu()
     }
 

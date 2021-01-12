@@ -73,7 +73,8 @@ class TemplateFormViewModel : BaseViewModel() {
                     start,
                     end,
                     breakMinutes.value?.toIntOrNull() ?: 0,
-                    1
+                    1,
+                    duration.value
                 )
             ).let(::parseResponse)
         }

@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftViewModel" />
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftTemplateViewModel" />
 
         <variable
             name="infoExpanded"
@@ -31,12 +31,11 @@
             app:title="@{null}" />
 
         <include
-            layout="@layout/header_shift"
-            app:shift="@{vm.shift}" />
-
+            layout="@layout/header_shift_template"
+            app:template="@{vm.template}" />
 
         <LinearLayout
-            visible="@{vm.shift.canBeRemoved &amp;&amp; USER.agreement == true}"
+            visible="@{USER.agreement == true}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -44,31 +43,42 @@
             android:elevation="@dimen/card_elevation"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp">
+            android:paddingTop="12dp"
+            android:paddingBottom="0dp"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/tv_removed_title"
+                android:id="@+id/tv_added_title"
                 style="@style/Text.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:drawablePadding="8dp"
                 android:gravity="center"
-                android:text="@string/this_shift_can_still_be_removed"
-                app:drawableStartCompat="@drawable/ic_calendar_minus"
+                android:text="@string/add_to_your_schedule"
+                app:drawableStartCompat="@drawable/ic_calendar_add"
                 app:drawableTint="@color/text" />
 
             <TextView
-                android:id="@+id/tv_can_be_removed"
+                android:id="@+id/tv_can_be_added"
                 style="@style/Text.Light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="30dp"
-                android:text="@string/you_can_remove_this_shift_from_your_schedule_if_you_intent_to_do_it_do_it_asap" />
+                android:text="@string/you_can_add_this_shift_to_your_schedule" />
+
+            <Button
+                android:id="@+id/btn_add"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="@string/add_to_schedule"
+                android:textAllCaps="false" />
         </LinearLayout>
 
         <View
-            visible="@{vm.shift.canBeRemoved != true || USER.agreement != true}"
+            visible="@{USER.agreement != true}"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="16dp"
@@ -76,7 +86,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
 
             <TextView
                 android:id="@+id/tv_shift_id_label"
@@ -84,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 app:fromHtml="@{@string/shift_id}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -95,32 +107,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="@{vm.shift.idString}"
+                visible="@{tvShiftIdLabel.getVisibility() == View.VISIBLE}"
+                android:text="@{vm.template.id.toString()}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_shift_id_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_shift_id_label"
                 tools:text="16" />
 
-            <TextView
-                android:id="@+id/tv_schedule_id_label"
-                style="@style/Text.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:fromHtml="@{@string/schedule_id}"
-                app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_shift_id_label"
-                tools:text="aaaaaa" />
-
-            <TextView
-                style="@style/Text.Light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{vm.shift.schedule_id.toString()}"
-                app:layout_constraintBottom_toBottomOf="@id/tv_schedule_id_label"
-                app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
-                app:layout_constraintTop_toTopOf="@id/tv_schedule_id_label"
-                tools:text="16" />
 
             <TextView
                 android:id="@+id/tv_duration_label"
@@ -130,14 +123,14 @@
                 android:layout_marginTop="8dp"
                 app:fromHtml="@{@string/duration}"
                 app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_schedule_id_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_shift_id"
                 tools:text="aaaaaa" />
 
             <TextView
                 style="@style/Text.Light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{@string/_h(vm.shift.duration)}"
+                android:text="@{@string/_h(vm.template.duration)}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_duration_label"
                 app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
                 app:layout_constraintTop_toTopOf="@id/tv_duration_label"
@@ -149,16 +142,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:fromHtml="@{@string/user_scheduled}"
+                android:text="@string/break_minutes"
                 app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_duration_label"
-                tools:text="aaaaaa" />
+                app:layout_constraintTop_toBottomOf="@id/tv_duration_label" />
 
             <TextView
                 style="@style/Text.Light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{vm.shift.user_scheduled ? @string/yes : @string/no}"
+                android:text="@{@string/_min(vm.template.break_minutes)}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_user_scheduled_label"
                 app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
                 app:layout_constraintTop_toTopOf="@id/tv_user_scheduled_label"

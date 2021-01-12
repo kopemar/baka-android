@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.planning
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
 class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(R.layout.fragment_period, PeriodViewModel::class) {
     override val toolbar: Toolbar get() = binding.planningToolbar.toolbar
     override var navigateUp = true
+    override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
     private val args by navArgs<PeriodFragmentArgs>()
 
@@ -40,8 +42,7 @@ class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
 
     override fun initUi() {
         viewModel.units.observe(viewLifecycleOwner, observer)
-        viewModel.period.value = args.period
-        viewModel.fetchSchedulingUnits()
+        viewModel.setPeriod(args.period)
     }
 
 }

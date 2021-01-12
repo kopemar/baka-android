@@ -45,9 +45,10 @@
     <string name="ended">Ended %s</string>
     <string name="no_server_connection">Unable to connect to server</string>
     <string name="information">Information</string>
-    <string name="shift_id"><![CDATA[Shift ID: <b>%s</b>]]></string>
-    <string name="schedule_id"><![CDATA[Schedule ID: <b>%s</b>]]></string>
-    <string name="duration"><![CDATA[Number of hours: <b>%s</b>]]></string>
+    <string name="shift_id">Shift ID</string>
+    <string name="schedule_id">Schedule ID</string>
+    <string name="duration">Number of hours</string>
+    <string name="_h">%.2fh</string>
     <string name="actions">Actions</string>
     <string name="sign_up">Sign Up</string>
     <string name="history">History</string>
@@ -65,7 +66,7 @@
     <string name="cancel">Cancel</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="unauthorized">You are not authorized to perform this</string>
-    <string name="user_scheduled"><![CDATA[User scheduled: <b>%s</b>]]></string>
+    <string name="user_scheduled">User scheduled</string>
     <string name="planning">Planning</string>
     <string name="plan_week">Plan week</string>
     <string name="plan_day">Plan day</string>
@@ -78,12 +79,18 @@
     <string name="yes">Yes</string>
     <string name="template_fragment_tag" translatable="false">TemplateFragment</string>
     <string name="time_picker" translatable="false">TimePicker</string>
-    <string name="break_minutes">Break (min)</string>
+    <string name="break_minutes">Break</string>
     <string name="_0" translatable="false">0</string>
     <string name="break_label">Break:</string>
     <string name="min" translatable="false">min</string>
+    <string name="_min">%d min</string>
     <string name="hours_">Hours: %.2f</string>
     <string name="_no_value" translatable="false">-</string>
     <string name="duration_less_12_hours">Shift should not last more than 12 hours</string>
     <string name="break_too_long">Break is longer than shift!</string>
+    <string name="this_shift_can_still_be_removed">Remove shift from schedule</string>
+    <string name="you_can_remove_this_shift_from_your_schedule_if_you_intent_to_do_it_do_it_asap">You can still remove it from your schedule. \nIf you intent to do it, do it as soon as possible.</string>
+    <string name="you_can_add_this_shift_to_your_schedule">You can add this shift to your schedule!</string>
+    <string name="add_to_your_schedule">Add to your schedule</string>
+    <string name="add_to_schedule">Add to schedule</string>
 </resources>

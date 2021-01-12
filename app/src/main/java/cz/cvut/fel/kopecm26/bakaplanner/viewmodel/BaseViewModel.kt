@@ -24,8 +24,10 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val planningRepository by inject(PlanningRepository::class.java)
 
-    protected val _errorMessage = MutableLiveData<Int>()
-    val errorMessage: LiveData<Int> = _errorMessage
+    protected val _errorMessage = MutableLiveData<Int?>()
+    val errorMessage: LiveData<Int?> = _errorMessage
+
+
 
     val noNetworkConnection = MutableLiveData(false)
     val working = MutableLiveData(false)
@@ -36,6 +38,10 @@ abstract class BaseViewModel : ViewModel() {
             work.invoke()
             this@work.value = false
         }
+    }
+
+    fun removeError() {
+        _errorMessage.value = null
     }
 
     protected open fun parseError(error: ErrorType) {

@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -12,6 +13,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanningViewModel
 
 class PlanningFragment: ViewModelFragment<PlanningViewModel, FragmentPlanningBinding>(R.layout.fragment_planning, PlanningViewModel::class) {
+    override val viewModelOwner: ViewModelStoreOwner? get() = activity
+
     private val observer by lazy {
         Observer<List<SchedulingPeriod>> {
             binding.rvPeriods.layoutManager = LinearLayoutManager(binding.root.context)

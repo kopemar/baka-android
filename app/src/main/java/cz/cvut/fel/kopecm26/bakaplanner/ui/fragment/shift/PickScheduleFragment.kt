@@ -39,7 +39,7 @@ class PickScheduleFragment : ViewModelFragment<PickScheduleViewModel, FragmentPi
                         attachToRoot
                     )
                 },
-                { shift, binding, _ -> (binding as ListScheduleBinding).schedule = shift },
+                { schedule, binding, _ -> (binding as ListScheduleBinding).schedule = schedule },
                 { viewModel.addToSchedule(it) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
@@ -57,9 +57,9 @@ class PickScheduleFragment : ViewModelFragment<PickScheduleViewModel, FragmentPi
     }
 
     override fun initUi() {
-        viewModel.shift.value = args.shift
+        viewModel.template.value = args.template
         viewModel.schedules.observe(viewLifecycleOwner, observer)
         viewModel.success.observe(this, successObserver)
-        viewModel.shift.value?.let { viewModel.fetchSchedules(it.id) }
+        viewModel.template.value?.id?.let { viewModel.fetchSchedules(it) }
     }
 }

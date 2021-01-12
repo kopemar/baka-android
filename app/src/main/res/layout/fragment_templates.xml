@@ -4,7 +4,7 @@
     <data>
         <variable
             name="vm"
-            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.TemplateViewModel" />
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.TemplatesViewModel" />
     </data>
 
     <LinearLayout

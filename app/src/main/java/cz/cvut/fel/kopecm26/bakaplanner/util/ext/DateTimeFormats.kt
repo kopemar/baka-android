@@ -10,7 +10,9 @@ import java.util.*
 fun String.fullDateShortDayOfWeek(): String = this.fullDate().toString()
 
 fun String.fullDate(): String? =
-    ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.DAY_MONTH_DAY_YEAR))
+    ZonedDateTime.parse(this).run {
+        format(if (this.year == ZonedDateTime.now().year) formatWithZone(DateTimeFormats.DAY_MONTH_DAY) else formatWithZone(DateTimeFormats.DAY_MONTH_DAY_YEAR))
+    }
 
 fun String.hoursAndMinutes(): String =
     ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
@@ -47,7 +49,7 @@ enum class DateTimeFormats(val english: String, val czech: String = english) {
     WEEK_DAY("EEEE"),
     SHORT_DAY("E "),
     DAY_MONTH_DAY("EE, MMMM d", "EE d. MMMM"),
-    DAY_MONTH_DAY_YEAR("EE, MMMM d YYYY", "EE d. MMMM YYYY"),
+    DAY_MONTH_DAY_YEAR("EE, MMMM d, YYYY", "EE d. MMMM YYYY"),
     FULL_MONTH_DAY("MMMM d", "d. MMMM"),
     HOURS_MINUTES("hh:mm a", "HH:mm"),
 }

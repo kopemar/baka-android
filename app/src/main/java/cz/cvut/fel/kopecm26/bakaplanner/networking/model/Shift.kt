@@ -21,10 +21,12 @@ data class Shift(
     val start_time: String,
     val end_time: String,
     val schedule_id: String?,
-    val duration: Int,
+    val duration: Float,
     val user_scheduled: Boolean,
 ): Serializable {
-    val dateF get() = start_time.fullDateShortDayOfWeek()
+    val idString get() = id.toString()
+    val dateF get() = start_time.fullDate()
+    val isUserScheduled get() = user_scheduled.toString()
 
     val startTimeHours get() = start_time.hoursAndMinutes()
     val endTimeHours get() = end_time.hoursAndMinutes()

@@ -21,8 +21,8 @@ interface ApiDescription {
     @GET("/shifts")
     suspend fun getShiftsBefore(@Query("end_date") endDate: String): Response<ShiftResponse>
 
-    @GET("/shifts?unassigned=true")
-    suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String): Response<ShiftResponse>
+    @GET("/templates")
+    suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String): Response<ShiftTemplatesResponse>
 
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>
@@ -30,8 +30,8 @@ interface ApiDescription {
     @GET("/shift/{id}/schedules")
     suspend fun getSchedulesForShift(@Path("id") shiftId: Int): Response<ScheduleResponse>
 
-    @POST("/shift/{id}/schedule")
-    suspend fun addShiftToSchedule(@Path("id") shiftId: Int, @Query("schedule_id") scheduleId: Int): Response<Shift>
+    @POST("/shifts")
+    suspend fun addShiftToSchedule(@Query("template_id") shiftId: Int, @Query("schedule_id") scheduleId: Int): Response<Shift>
 
     @DELETE("/shift/{id}/schedule")
     suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<Shift>

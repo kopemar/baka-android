@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="shift"
-            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift" />
+            name="template"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="2dp"
-            android:text="@{shift.dateF}"
+            android:text="@{template.dateF}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="January 11" />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:drawablePadding="8dp"
-            android:text="@{shift.startTimeHours}"
+            android:text="@{template.startTimeHours}"
             app:drawableStartCompat="@drawable/ic_hourglass_start"
             app:drawableTint="@color/text"
             app:layout_constraintEnd_toStartOf="@id/tv_ending_hours"
@@ -50,7 +50,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginBottom="8dp"
             android:drawablePadding="8dp"
-            android:text="@{shift.endTimeHours}"
+            android:text="@{template.endTimeHours}"
             app:drawableStartCompat="@drawable/ic_hourglass_end"
             app:drawableTint="@color/text"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -60,12 +60,12 @@
             tools:text="10:00 AM" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_relative_hours"
             style="@style/Text.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
-            android:text="@{shift.ended ? @string/ended(shift.relativeTimestamp) : (shift.started ? @string/ends(shift.relativeTimestamp) : @string/starts(shift.relativeTimestamp))}"
             app:layout_constraintStart_toStartOf="@id/tv_shift_title"
             app:layout_constraintTop_toBottomOf="@id/tv_shift_title"
             tools:text="Starts in 5 hours" />

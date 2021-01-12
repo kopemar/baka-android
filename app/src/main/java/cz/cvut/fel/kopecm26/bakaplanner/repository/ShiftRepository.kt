@@ -6,6 +6,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ShiftDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.weeksAfter
 import java.time.ZonedDateTime
 
@@ -67,7 +68,7 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
         return ResponseModel.SUCCESS(shiftDao.getUpcoming())
     }
 
-    suspend fun getUnassigned(): ResponseModel<List<Shift>> = service.getUnassignedShifts()
+    suspend fun getUnassigned(): ResponseModel<List<ShiftTemplate>> = service.getUnassignedShifts()
 
     suspend fun getShift(id: Int): ResponseModel<Shift> =
         shiftDao.getById(id)?.let {

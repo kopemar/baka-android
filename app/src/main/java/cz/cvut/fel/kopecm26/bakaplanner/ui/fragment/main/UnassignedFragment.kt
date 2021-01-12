@@ -9,8 +9,8 @@ import com.afollestad.vvalidator.util.hide
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentUnassignedBinding
-import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListShiftBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.UnassignedViewModel
@@ -39,18 +39,18 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
     }
 
     private val observer by lazy {
-        Observer<List<Shift>> {
+        Observer<List<ShiftTemplate>> {
             binding.rvShifts.layoutManager = LinearLayoutManager(binding.root.context)
-            binding.rvShifts.adapter = BaseListAdapter<Shift>(
+            binding.rvShifts.adapter = BaseListAdapter<ShiftTemplate>(
                 { layoutInflater, viewGroup, attachToRoot ->
-                    ListShiftBinding.inflate(
+                    ListTemplatesBinding.inflate(
                         layoutInflater,
                         viewGroup,
                         attachToRoot
                     )
                 },
-                { shift, binding, _ -> (binding as ListShiftBinding).shift = shift },
-                { findNavController().navigate(UnassignedFragmentDirections.navigateToShiftDetail(it)) },
+                { template, binding, _ -> (binding as ListTemplatesBinding).template = template },
+                { findNavController().navigate(UnassignedFragmentDirections.navigateToShiftTemplateFragment(it)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

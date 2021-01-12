@@ -1,10 +1,8 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 
 import com.squareup.moshi.JsonClass
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isDay
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isEvening
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isMorning
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.*
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class ShiftTemplate(
@@ -12,10 +10,12 @@ data class ShiftTemplate(
     val start_time: String,
     val end_time: String,
     val break_minutes: Int,
-    val priority: Int
-) {
+    val priority: Int,
+    val duration: Float?
+): Serializable {
     val startTimeHours get() = start_time.hoursAndMinutes()
     val endTimeHours get() = end_time.hoursAndMinutes()
+    val dateF get() = start_time.fullDate()
 
     val shiftTime: ShiftTime
         get() = when {

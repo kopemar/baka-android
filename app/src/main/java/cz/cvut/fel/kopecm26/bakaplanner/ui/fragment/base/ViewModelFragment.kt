@@ -14,7 +14,12 @@ abstract class ViewModelFragment<V: BaseViewModel, B: ViewDataBinding>(layoutRes
 
     open val viewModel by lazy { clazz.let { ViewModelProvider(viewModelOwner ?: this).get(it.java) } }
 
-    protected open fun errorObserver() =  Observer<Int> { showSnackBar(it) }
+    protected open fun errorObserver() =  Observer<Int?> {
+        it?.let {
+            showSnackBar(it) 
+            viewModel.removeError()
+        }
+    }
 
     override fun init() {
         binding.setVariable(BR.vm, viewModel)
