@@ -2,7 +2,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.vvalidator.util.hide
@@ -13,25 +12,36 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListShiftBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ScheduleViewModel
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.nav.ScheduleNavViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBinding>(
     R.layout.fragment_schedule,
     ScheduleViewModel::class
 ) {
 
-    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.schedule)
+    private val sharedVM: SharedViewModel by sharedViewModel()
 
     private val removeObserver by lazy {
-        Observer<Boolean?> {
-            if (it == true) {
-                navVM.success.value = null
+        Observer<Consumable<Boolean>> {
+            it.addConsumer(CONSUMER_TAG)
+            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
                 viewModel.refreshShifts()
 
                 showSnackBar(R.string.successfully_removed).apply {
                     this.setAction(R.string.ok) { snack -> snack.hide() }
                 }
+            }
+        }
+    }
+
+    private val signUpObserver by lazy {
+        Observer<Consumable<Boolean>> {
+            it.addConsumer(CONSUMER_TAG)
+            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
+                viewModel.refreshShifts()
             }
         }
     }
@@ -73,6 +83,11 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
             }
         })
 
-//        navVM.success.observe(this, removeObserver)
+        sharedVM.signUpSuccess.observe(this, signUpObserver)
+        sharedVM.removeSuccess.observe(this, removeObserver)
+    }
+
+    companion object {
+        private const val CONSUMER_TAG = "ScheduleFragmentConsumer"
     }
 }

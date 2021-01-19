@@ -10,8 +10,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListScheduleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Schedule
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.BaseBottomSheetDialogFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PickScheduleViewModel
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SignUpToShiftViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PickScheduleFragment : BaseBottomSheetDialogFragment<PickScheduleViewModel, DialogPickScheduleBinding>(
@@ -19,7 +20,7 @@ class PickScheduleFragment : BaseBottomSheetDialogFragment<PickScheduleViewModel
     PickScheduleViewModel::class
 ) {
 
-    private val sharedVM: SignUpToShiftViewModel by sharedViewModel()
+    private val sharedVM: SharedViewModel by sharedViewModel()
 
     private val args by navArgs<PickScheduleFragmentArgs>()
 
@@ -48,7 +49,7 @@ class PickScheduleFragment : BaseBottomSheetDialogFragment<PickScheduleViewModel
     private val successObserver by lazy {
         Observer<Boolean> {
             if (it) {
-                sharedVM.success.value = true
+                sharedVM.signUpSuccess.value = Consumable(true)
                 findNavController().popBackStack(R.id.unassignedFragment, false)
             }
         }

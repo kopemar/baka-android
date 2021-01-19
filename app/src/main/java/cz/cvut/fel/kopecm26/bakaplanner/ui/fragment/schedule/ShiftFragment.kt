@@ -4,13 +4,14 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navGraphViewModels
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentShiftBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftViewModel
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.nav.ScheduleNavViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     R.layout.fragment_shift,
@@ -19,12 +20,12 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     override val toolbar: Toolbar get() = binding.sToolbar.toolbar
     override var navigateUp = true
 
-    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.schedule)
+    private val sharedVM: SharedViewModel by sharedViewModel()
 
     private val removedObserver by lazy {
         Observer<Boolean> {
             if (it) {
-                navVM.success.value = it
+                sharedVM.removeSuccess.value = Consumable(true)
                 findNavController().navigateUp()
             }
         }
@@ -37,7 +38,7 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
         viewModel.removed.observe(this, removedObserver)
         initExpandable()
         setupMenu()
-//        binding.btnRemove.setOnClickListener { runRemoval() }
+        binding.btnRemove.setOnClickListener { runRemoval() }
     }
 
     private fun setupMenu() {

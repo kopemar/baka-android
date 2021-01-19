@@ -3,7 +3,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.vvalidator.util.hide
@@ -14,9 +13,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.UnassignedViewModel
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.nav.ScheduleNavViewModel
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SignUpToShiftViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassignedBinding>(
@@ -26,13 +25,12 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
 
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
-    private val sharedVM: SignUpToShiftViewModel by sharedViewModel()
-    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.shifts)
+    private val sharedVM: SharedViewModel by sharedViewModel()
 
     private val successObserver by lazy {
-        Observer<Boolean?> {
-            if (it == true) {
-                sharedVM.success.value = null
+        Observer<Consumable<Boolean>> {
+            it.addConsumer(CONSUMER_TAG)
+            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
                 viewModel.fetchShifts()
                 showSnackBar(R.string.successfully_signed_up).apply {
                     this.setAction(R.string.ok) { snack -> snack.hide() }
@@ -42,8 +40,11 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
     }
 
     private val removeObserver by lazy {
-        Observer<Boolean?> {
-            if (it == true) viewModel.fetchShifts()
+        Observer<Consumable<Boolean>> {
+            it.addConsumer(CONSUMER_TAG)
+            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
+                viewModel.fetchShifts()
+            }
         }
     }
 
@@ -73,8 +74,8 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
     }
 
     override fun initUi() {
-        sharedVM.success.observe(this, successObserver)
-        navVM.success.observe(this, removeObserver)
+        sharedVM.signUpSuccess.observe(this, successObserver)
+        sharedVM.removeSuccess.observe(this, removeObserver)
 
         viewModel.shifts.observe(viewLifecycleOwner, observer)
 
@@ -86,5 +87,9 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
                     if (recyclerView.computeVerticalScrollOffset() > 0) 6F else 0F
             }
         })
+    }
+
+    companion object {
+        private const val CONSUMER_TAG = "UnassignedFragmentConsumer"
     }
 }
