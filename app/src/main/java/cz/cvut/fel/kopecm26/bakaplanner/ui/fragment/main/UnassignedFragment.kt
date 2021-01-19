@@ -27,7 +27,7 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
     private val sharedVM: SignUpToShiftViewModel by sharedViewModel()
-    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.main_navigation)
+    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.shifts)
 
     private val successObserver by lazy {
         Observer<Boolean?> {
@@ -41,7 +41,8 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
         }
     }
 
-    private val removeObserver by lazy { Observer<Boolean?> {
+    private val removeObserver by lazy {
+        Observer<Boolean?> {
             if (it == true) viewModel.fetchShifts()
         }
     }
@@ -62,9 +63,7 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
                 },
                 {
                     findNavController().navigate(
-                        UnassignedFragmentDirections.navigateToShiftTemplateFragment(
-                            it
-                        )
+                        UnassignedFragmentDirections.navigateToShiftTemplateFragment(it)
                     )
                 },
                 { old, new -> old.id == new.id },

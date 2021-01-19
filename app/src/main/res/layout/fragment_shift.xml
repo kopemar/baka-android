@@ -48,11 +48,10 @@
 
             <TextView
                 android:id="@+id/tv_removed_title"
-                style="@style/Text.Medium"
+                style="@style/Text.Medium.Img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:drawablePadding="8dp"
                 android:gravity="center"
                 android:text="@string/this_shift_can_still_be_removed"
                 app:drawableStartCompat="@drawable/ic_calendar_minus"
@@ -63,7 +62,7 @@
                 style="@style/Text.Light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="30dp"
+                android:paddingHorizontal="32dp"
                 android:text="@string/you_can_remove_this_shift_from_your_schedule_if_you_intent_to_do_it_do_it_asap" />
         </LinearLayout>
 

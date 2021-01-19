@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/schedule"
+    app:startDestination="@id/scheduleFragment">
+
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.ScheduleFragment"
+        android:label="ScheduleFragment"
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/navigate_to_shift_detail"
+            app:destination="@id/shift_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shift_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.schedule.ShiftFragment"
+        android:label="ShiftFragment"
+        tools:layout="@layout/fragment_shift">
+        <argument
+            android:name="shift"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift"
+            app:nullable="false" />
+    </fragment>
+</navigation>

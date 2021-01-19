@@ -7,7 +7,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.BR
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
 import kotlin.reflect.KClass
 
-abstract class ViewModelActivity<V: BaseViewModel, B : ViewDataBinding>(@LayoutRes layoutRes: Int, clazz: KClass<V>) : BindingActivity<B>(layoutRes) {
+abstract class ViewModelActivity<V : BaseViewModel, B : ViewDataBinding>(
+    @LayoutRes layoutRes: Int,
+    clazz: KClass<V>
+) : BindingActivity<B>(layoutRes) {
 
     open val viewModel by lazy { clazz.let { ViewModelProvider(this).get(it.java) } }
 

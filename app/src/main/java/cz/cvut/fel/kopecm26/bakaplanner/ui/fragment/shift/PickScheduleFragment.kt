@@ -49,7 +49,7 @@ class PickScheduleFragment : BaseBottomSheetDialogFragment<PickScheduleViewModel
         Observer<Boolean> {
             if (it) {
                 sharedVM.success.value = true
-                findNavController().popBackStack(R.id.menu_shifts, false)
+                findNavController().popBackStack(R.id.unassignedFragment, false)
             }
         }
     }

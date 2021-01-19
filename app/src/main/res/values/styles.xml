@@ -106,6 +106,10 @@
         <item name="android:letterSpacing">0.0</item>
     </style>
 
+    <style name="Text.Medium.Img">
+        <item name="android:drawablePadding">12dp</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:fontFamily">@font/magra_regular</item>
         <item name="titleTextAppearance">@style/TitleStyle</item>

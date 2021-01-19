@@ -21,7 +21,7 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
     ScheduleViewModel::class
 ) {
 
-    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.main_navigation)
+    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.schedule)
 
     private val removeObserver by lazy {
         Observer<Boolean?> {
@@ -48,7 +48,9 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
                     )
                 },
                 { shift, binding, _ -> (binding as ListShiftBinding).shift = shift },
-                { findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(it)) },
+                {
+                    findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(it))
+                },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
@@ -71,6 +73,6 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
             }
         })
 
-        navVM.success.observe(this, removeObserver)
+//        navVM.success.observe(this, removeObserver)
     }
 }

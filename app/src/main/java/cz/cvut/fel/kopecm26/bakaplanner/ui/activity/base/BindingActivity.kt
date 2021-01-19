@@ -22,18 +22,21 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
      */
     protected open val statusBarTransparent = false
 
-    open protected val toolbar: Toolbar? = null
-    open protected val navigateUp: Boolean = false
+    protected open val toolbar: Toolbar? = null
+    protected open val navigateUp: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
+        initNavigation()
         init()
         initUi()
 
         initStatusBar()
         initToolbar()
     }
+
+    protected open fun initNavigation() {}
 
     protected open fun init() {}
 
@@ -58,8 +61,11 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
         }
     }
 
-    protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) = Snackbar.make(binding.root, text, length).show()
-    protected fun showSnackBar(text: Int, length: Int = Snackbar.LENGTH_SHORT) = showSnackBar(getString(text), length)
+    protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) =
+        Snackbar.make(binding.root, text, length).show()
+
+    protected fun showSnackBar(text: Int, length: Int = Snackbar.LENGTH_SHORT) =
+        showSnackBar(getString(text), length)
 
     protected fun showMaterialDialog(
         @StringRes message: Int,
@@ -73,8 +79,20 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
             .setMessage(message)
             .apply {
                 title?.let(::setTitle)
-                positive?.let { this.setPositiveButton(getString(it)) { dialog, _ -> onPositive?.invoke(dialog) } }
-                negative?.let { this.setNegativeButton(getString(it)) { dialog, _ -> onNegative?.invoke(dialog) } }
+                positive?.let {
+                    this.setPositiveButton(getString(it)) { dialog, _ ->
+                        onPositive?.invoke(
+                            dialog
+                        )
+                    }
+                }
+                negative?.let {
+                    this.setNegativeButton(getString(it)) { dialog, _ ->
+                        onNegative?.invoke(
+                            dialog
+                        )
+                    }
+                }
             }
             .show()
     }

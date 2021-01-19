@@ -62,7 +62,7 @@
     <string name="planning">Plánování</string>
     <string name="plan_week">Naplánovat týden</string>
     <string name="break_label">Pauza</string>
-    <string name="break_minutes">Pauza (minut)</string>
+    <string name="break_minutes">Pauza</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="are_you_sure_you_want_to_cancel">Jste si jisti, že nechcete pokračovat?</string>
@@ -81,4 +81,5 @@
     <string name="you_can_add_this_shift_to_your_schedule">Tuto směnu si můžete zapsat do svého rozvrhu.</string>
     <string name="add_to_schedule">Zapsat se na směnu</string>
     <string name="_h">%.2f h</string>
+    <string name="_min">%d min</string>
 </resources>

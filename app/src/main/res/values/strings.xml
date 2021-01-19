@@ -83,15 +83,14 @@
     <string name="_0" translatable="false">0</string>
     <string name="break_label">Break:</string>
     <string name="min" translatable="false">min</string>
-    <string name="_min">%d min</string>
+    <string name="_min">%dmin</string>
     <string name="hours_">Hours: %.2f</string>
     <string name="_no_value" translatable="false">-</string>
     <string name="duration_less_12_hours">Shift should not last more than 12 hours</string>
     <string name="break_too_long">Break is longer than shift!</string>
     <string name="this_shift_can_still_be_removed">Remove shift from schedule</string>
-    <string name="you_can_remove_this_shift_from_your_schedule_if_you_intent_to_do_it_do_it_asap">You can still remove it from your schedule. \nIf you intent to do it, do it as soon as possible.</string>
+    <string name="you_can_remove_this_shift_from_your_schedule_if_you_intent_to_do_it_do_it_asap">You can remove this shift from your schedule. \nIf you intent to do it, do it as soon as possible.</string>
     <string name="you_can_add_this_shift_to_your_schedule">You can add this shift to your schedule!</string>
-    <string name="add_to_your_schedule">Add to your schedule</string>
+    <string name="add_to_your_schedule">Add to schedule</string>
     <string name="add_to_schedule">Add to schedule</string>
-    <string name="shift_will_be_added">Shift will be added to that schedule.</string>
 </resources>

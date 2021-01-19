@@ -19,7 +19,7 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     override val toolbar: Toolbar get() = binding.sToolbar.toolbar
     override var navigateUp = true
 
-    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.main_navigation)
+    private val navVM by navGraphViewModels<ScheduleNavViewModel>(R.id.schedule)
 
     private val removedObserver by lazy {
         Observer<Boolean> {

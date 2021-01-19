@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile"
+    app:startDestination="@id/profileFragment">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.ProfileFragment"
+        android:label="ScheduleFragment"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/navigate_to_contracts"
+            app:destination="@id/contracts_fragment" />
+        <action
+            android:id="@+id/navigate_to_history"
+            app:destination="@id/history_fragment" />
+        <action
+            android:id="@+id/navigate_to_settings"
+            app:destination="@id/settings_fragment" />
+
+    </fragment>
+
+    <activity
+        android:id="@+id/url_activity"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.activity.SetupActivity"
+        android:label="UrlActivity"
+        tools:layout="@layout/activity_template" />
+
+    <fragment
+        android:id="@+id/contracts_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.ContractsFragment"
+        android:label="ContractsFragment"
+        app:popUpTo="@id/profile"
+        tools:layout="@layout/fragment_contracts" />
+
+    <fragment
+        android:id="@+id/shift_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.schedule.ShiftFragment"
+        android:label="ShiftFragment"
+        tools:layout="@layout/fragment_shift">
+        <argument
+            android:name="shift"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/history_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.HistoryFragment"
+        android:label="ShiftFragment"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/navigate_to_shift_detail"
+            app:destination="@id/shift_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/navigate_to_url"
+            app:destination="@id/url_activity" />
+    </fragment>
+
+</navigation>

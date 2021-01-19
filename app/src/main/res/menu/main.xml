@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_home"
+        android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_mdi_home"
+        android:menuCategory="secondary"
         android:title="@string/home" />
 
     <item
-        android:id="@+id/menu_shifts"
+        android:id="@+id/shifts"
         android:enabled="true"
         android:icon="@drawable/ic_briefcase"
+        android:menuCategory="secondary"
         android:title="@string/shifts"
         android:visible="false" />
 
     <item
-        android:id="@+id/menu_schedule"
+        android:id="@+id/schedule"
         android:enabled="true"
         android:icon="@drawable/ic_calendar"
+        android:menuCategory="secondary"
         android:title="@string/schedule" />
 
     <item
-        android:id="@+id/menu_planning"
+        android:id="@+id/planning"
         android:enabled="true"
         android:icon="@drawable/ic_fas_planning"
+        android:menuCategory="secondary"
         android:title="@string/planning"
         android:visible="false" />
 
     <item
-        android:id="@+id/menu_profile"
+        android:id="@+id/profile"
         android:enabled="true"
         android:icon="@drawable/ic_profile"
+        android:menuCategory="secondary"
         android:title="@string/profile" />
 
 
