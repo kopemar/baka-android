@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.vvalidator.util.hide
-import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentUnassignedBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
@@ -81,8 +80,6 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
 
         binding.rvShifts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                Logger.d("Scroll listener ${recyclerView.computeVerticalScrollOffset()}")
-
                 binding.unassignedToolbar.appBarLayout.elevation =
                     if (recyclerView.computeVerticalScrollOffset() > 0) 6F else 0F
             }
