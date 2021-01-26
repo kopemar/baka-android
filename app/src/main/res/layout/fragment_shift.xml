@@ -154,7 +154,7 @@
                 tools:text="2.20h" />
 
             <TextView
-                android:id="@+id/tv_user_scheduled_label"
+                android:id="@+id/tv_break_label"
                 style="@style/Text.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,9 +169,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{vm.shift.user_scheduled ? @string/yes : @string/no}"
-                app:layout_constraintBottom_toBottomOf="@id/tv_user_scheduled_label"
+                app:layout_constraintBottom_toBottomOf="@id/tv_break_label"
                 app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
-                app:layout_constraintTop_toTopOf="@id/tv_user_scheduled_label"
+                app:layout_constraintTop_toTopOf="@id/tv_break_label"
                 tools:text="2.20h" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

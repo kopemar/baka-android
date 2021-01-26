@@ -26,7 +26,6 @@ data class Shift(
 ): Serializable {
     val idString get() = id.toString()
     val dateF get() = start_time.fullDate()
-    val isUserScheduled get() = user_scheduled.toString()
 
     val startTimeHours get() = start_time.hoursAndMinutes()
     val endTimeHours get() = end_time.hoursAndMinutes()
@@ -72,4 +71,12 @@ enum class ShiftTime(@DrawableRes val shiftIcon: Int, @ColorRes val colorRes: In
     DAY(R.drawable.ic_sunny_icon, R.color.greeno),
     EVENING(R.drawable.ic_sun_down_icon, R.color.sunny_evenings),
     NIGHT(R.drawable.ic_night_icon, R.color.text)
+}
+
+object Break {
+    val breakMinutes = ArrayList<Int>().apply {
+        for (i in 0..100 step 5) {
+            add(i)
+        }
+    }
 }

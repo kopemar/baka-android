@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.R
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Priority
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
@@ -20,14 +21,15 @@ class TemplateFormViewModel : BaseViewModel() {
 
     val startTime = MutableLiveData<String>()
     val endTime = MutableLiveData<String>()
+    val priority = MutableLiveData<Priority>()
 
-    val breakMinutes = MediatorLiveData<String>().apply {
+    val breakMinutes = MediatorLiveData<Int>().apply {
         this.addSource(startTime) {
-            if (this.value == null && endTime.value != null) this.value = "30"
+            if (this.value == null && endTime.value != null) this.value = 30
         }
 
         this.addSource(endTime) {
-            if (this.value == null && startTime.value != null) this.value = "30"
+            if (this.value == null && startTime.value != null) this.value = 30
         }
     }
 
@@ -72,8 +74,8 @@ class TemplateFormViewModel : BaseViewModel() {
                     null,
                     start,
                     end,
-                    breakMinutes.value?.toIntOrNull() ?: 0,
-                    1,
+                    breakMinutes.value ?: 0,
+                    priority.value?.integerValue ?: 0,
                     duration.value
                 )
             ).let(::parseResponse)
@@ -92,7 +94,7 @@ class TemplateFormViewModel : BaseViewModel() {
         ChronoUnit.MINUTES.between(
             ZonedDateTime.parse(start),
             ZonedDateTime.parse(end)
-        ).toFloat().minus(breakMinutes.value?.toFloatOrNull() ?: 0F).run {
+        ).toFloat().minus(breakMinutes.value?.toFloat() ?: 0F).run {
             _durationError.value = this.div(Constants.Time.MINUTES_IN_HOUR) !in (0.0..12.0)
             this.div(Constants.Time.MINUTES_IN_HOUR)
         }

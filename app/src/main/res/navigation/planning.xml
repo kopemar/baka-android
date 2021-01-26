@@ -33,7 +33,7 @@
         android:id="@+id/templates_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit.TemplatesFragment"
         android:label="TemplatesFragment"
-        tools:layout="@layout/fragment_templates">
+        tools:layout="@layout/fragment_plan_day">
         <argument
             android:name="unit"
             app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit"

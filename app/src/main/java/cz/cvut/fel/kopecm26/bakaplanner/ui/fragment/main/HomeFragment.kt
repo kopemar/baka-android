@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentHomeBinding
@@ -52,6 +53,6 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
     }
 
     private fun openShiftDetail(shift: Shift) {
-//        findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(shift))
+        findNavController().navigate(HomeFragmentDirections.navigateToShiftDetail(shift))
     }
 }

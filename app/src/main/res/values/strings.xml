@@ -95,4 +95,12 @@
     <string name="add_to_schedule">Add to schedule</string>
     <string name="plan_shift">Plan shift</string>
     <string name="nothing_planned_yet">Nothing planned yet!</string>
+    <string name="demand">Demand</string>
+    <string name="highest">Highest</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="lowest">Lowest</string>
+    <string name="high">High</string>
+    <string name="set_some_demand">Set some demand value</string>
+    <string name="priority">Priority</string>
 </resources>
