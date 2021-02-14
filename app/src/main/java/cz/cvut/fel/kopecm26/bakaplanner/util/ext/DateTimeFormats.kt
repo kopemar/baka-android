@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util.ext
 
+import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -29,6 +30,12 @@ fun LocalTime.hoursAndMinutes(): String =
 fun String.dayMonth(): String =
     ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
 
+fun String.dayFullMonth(): String =
+    LocalDate.parse(this.substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
+
+fun String.dayShortMonth(): String =
+    LocalDate.parse(this.substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY_SHORT))
+
 fun String.dayOfWeek(): String =
     ZonedDateTime.parse(this).toOffsetDateTime().format(formatWithZone(DateTimeFormats.WEEK_DAY))
 
@@ -51,5 +58,6 @@ enum class DateTimeFormats(val english: String, val czech: String = english) {
     DAY_MONTH_DAY("EE, MMMM d", "EE d. MMMM"),
     DAY_MONTH_DAY_YEAR("EE, MMMM d, YYYY", "EE d. MMMM YYYY"),
     FULL_MONTH_DAY("MMMM d", "d. MMMM"),
+    FULL_MONTH_DAY_SHORT("MMM d", "d. MMM"),
     HOURS_MINUTES("hh:mm a", "HH:mm"),
 }

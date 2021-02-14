@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel" />
@@ -21,14 +23,26 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             isRefreshing="@{vm.working}"
-            android:layout_width="match_parent"
             onRefresh="@{() -> vm.fetchSchedulingUnits()}"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_units"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_units"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/empty_week_message"
+                    layout="@layout/empty_plan_week"
+                    visible="@{vm.units.empty}"
+                    app:period="@{vm.period}" />
+            </LinearLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>

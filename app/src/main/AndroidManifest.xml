@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".ui.activity.SetupActivity" />
         <activity android:name=".ui.activity.AddShiftTemplateActivity" />
+        <activity android:name=".ui.activity.PlanWeekActivity" />
 
     </application>
 

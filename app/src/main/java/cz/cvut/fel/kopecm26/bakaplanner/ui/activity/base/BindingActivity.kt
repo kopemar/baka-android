@@ -3,6 +3,8 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +26,12 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
 
     protected open val toolbar: Toolbar? = null
     protected open val navigateUp: Boolean = false
+
+    @DrawableRes
+    protected open val navigateUpRes = R.drawable.ic_mdi_back
+
+    @ColorRes
+    protected open val navigateUpTint = R.color.text
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +66,8 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
         toolbar?.let {
             this.setSupportActionBar(it)
             supportActionBar?.setDisplayHomeAsUpEnabled(navigateUp)
+            toolbar?.setNavigationIcon(navigateUpRes)
+            toolbar?.navigationIcon?.setTint(getColor(navigateUpTint))
         }
     }
 

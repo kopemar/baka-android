@@ -10,6 +10,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPeriodBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListSchedulingUnitBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
@@ -43,6 +44,10 @@ class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
     override fun initUi() {
         viewModel.units.observe(viewLifecycleOwner, observer)
         viewModel.setPeriod(args.period)
+
+        binding.emptyWeekMessage.btnPlanShift.setOnClickListener {
+            startActivityForResult<PlanWeekActivity>(0)
+        }
     }
 
 }
