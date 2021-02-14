@@ -3,6 +3,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.HeaderExpandableBinding
@@ -10,11 +11,11 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.HeaderExpandableBinding
 // https://medium.com/swlh/expandable-list-in-android-with-mergeadapter-3a7f0cb56166
 // https://medium.com/codeshake/create-an-expandable-recyclerview-with-the-mergeadapter-254fd671fa5b
 class ExpandableHeaderAdapter<S, T>(
-    private val inflateHeader: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewBinding,
-    private val bindHeader: (item: S, binding: ViewBinding, index: Int) -> Unit,
-    inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewBinding,
+    private val inflateHeader: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding,
+    private val bindHeader: (item: S, binding: ViewDataBinding, index: Int) -> Unit,
+    inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding,
     bind: (item: T, binding: ViewBinding, index: Int) -> Unit,
-    onClick: ((item: T) -> Unit)? = null,
+    onClick: ((item: T, binding: ViewBinding) -> Unit)? = null,
     compareItems: (old: T, new: T) -> Boolean,
     compareContents: (old: T, new: T) -> Boolean
 ) : BaseListAdapter<T>(inflate, bind, onClick, compareItems, compareContents) {
@@ -65,7 +66,7 @@ class ExpandableHeaderAdapter<S, T>(
         }
     }
 
-    inner class HeaderViewHolder(binding: ViewBinding) :
+    inner class HeaderViewHolder(binding: ViewDataBinding) :
         BaseListAdapter<T>.ItemViewHolder(binding) {
         init {
             if (binding is HeaderExpandableBinding) {

@@ -61,9 +61,9 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
                 { template, binding, _ ->
                     (binding as ListTemplatesBinding).template = template
                 },
-                {
+                { template, _ ->
                     findNavController().navigate(
-                        UnassignedFragmentDirections.navigateToShiftTemplateFragment(it)
+                        UnassignedFragmentDirections.navigateToShiftTemplateFragment(template)
                     )
                 },
                 { old, new -> old.id == new.id },

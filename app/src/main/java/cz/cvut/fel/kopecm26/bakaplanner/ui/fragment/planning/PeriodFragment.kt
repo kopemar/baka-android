@@ -11,6 +11,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPeriodBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListSchedulingUnitBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity.Companion.SCHEDULING_PERIOD
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
@@ -34,7 +35,7 @@ class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
                     )
                 },
                 { unit, binding, _ -> (binding as ListSchedulingUnitBinding).unit = unit },
-                { unit -> findNavController().navigate(PeriodFragmentDirections.navigateToTemplatesFragment(unit)) },
+                { unit, _ -> findNavController().navigate(PeriodFragmentDirections.navigateToTemplatesFragment(unit)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
@@ -46,7 +47,10 @@ class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
         viewModel.setPeriod(args.period)
 
         binding.emptyWeekMessage.btnPlanShift.setOnClickListener {
-            startActivityForResult<PlanWeekActivity>(0)
+            startActivityForResult<PlanWeekActivity>(0) {
+                this.putSerializable(SCHEDULING_PERIOD, viewModel.period.value)
+                this
+            }
         }
     }
 

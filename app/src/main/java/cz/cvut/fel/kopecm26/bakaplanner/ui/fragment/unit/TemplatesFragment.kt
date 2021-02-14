@@ -39,10 +39,10 @@ class TemplatesFragment : ViewModelFragment<TemplatesViewModel, FragmentPlanDayB
                     )
                 },
                 { template, binding, _ -> (binding as ListTemplatesBinding).template = template },
-                {
+                { template, _ ->
                     findNavController().navigate(
                         TemplatesFragmentDirections.navigateToTemplateFragment(
-                            it
+                            template
                         )
                     )
                 },

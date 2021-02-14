@@ -1,10 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
@@ -51,9 +48,27 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun addShiftTemplate(template: ShiftTemplate) =
         safeApiCall({ api.createTemplate(template) }) { it?.data }
 
-    override suspend fun getShiftTemplates(unitId: Int): ResponseModel<List<ShiftTemplate>> = safeApiCall({
-        api.getShiftTemplates(unitId)
-    }) { it?.data }
+    override suspend fun getShiftTemplates(unitId: Int): ResponseModel<List<ShiftTemplate>> =
+        safeApiCall({
+            api.getShiftTemplates(unitId)
+        }) { it?.data }
+
+    override suspend fun getPeriodDays(periodId: Int): ResponseModel<List<PeriodDay>> =
+        safeApiCall({
+            api.getPeriodDays(periodId)
+        }) { it?.days }
+
+    override suspend fun getShiftTimeCalculations(
+        periodId: Int,
+        startTime: String,
+        endTime: String,
+        shiftHours: Int,
+        breakHours: Int,
+        perDay: Int
+    ): ResponseModel<List<ShiftTimeCalculation>> =
+        safeApiCall({
+            api.getShiftTimeCalculations(periodId, startTime, endTime, shiftHours, breakHours, perDay)
+        }) { it?.times }
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

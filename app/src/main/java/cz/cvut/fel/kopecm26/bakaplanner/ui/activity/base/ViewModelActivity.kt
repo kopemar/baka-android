@@ -12,6 +12,7 @@ abstract class ViewModelActivity<V : BaseViewModel, B : ViewDataBinding>(
     clazz: KClass<V>
 ) : BindingActivity<B>(layoutRes) {
 
+    // todo by viewModels
     open val viewModel by lazy { clazz.let { ViewModelProvider(this).get(it.java) } }
 
     override fun init() {

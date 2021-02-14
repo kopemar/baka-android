@@ -30,14 +30,15 @@ fun LocalTime.hoursAndMinutes(): String =
 fun String.dayMonth(): String =
     ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
 
+
 fun String.dayFullMonth(): String =
     LocalDate.parse(this.substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
 
 fun String.dayShortMonth(): String =
-    LocalDate.parse(this.substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY_SHORT))
+    LocalDate.parse(substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY_SHORT))
 
 fun String.dayOfWeek(): String =
-    ZonedDateTime.parse(this).toOffsetDateTime().format(formatWithZone(DateTimeFormats.WEEK_DAY))
+    LocalDate.parse(substring(0, 10)).format(formatWithZone(DateTimeFormats.WEEK_DAY))
 
 fun formatWithZone(pattern: String) =
     formatter(pattern).withZone(ZoneId.systemDefault())

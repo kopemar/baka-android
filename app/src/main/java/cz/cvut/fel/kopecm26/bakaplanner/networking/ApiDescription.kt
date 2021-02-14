@@ -16,7 +16,10 @@ interface ApiDescription {
     suspend fun getShifts(): Response<ShiftResponse>
 
     @GET("/shifts")
-    suspend fun getShifts(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<ShiftResponse>
+    suspend fun getShifts(
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String
+    ): Response<ShiftResponse>
 
     @GET("/shifts")
     suspend fun getShiftsBefore(@Query("end_date") endDate: String): Response<ShiftResponse>
@@ -50,4 +53,20 @@ interface ApiDescription {
 
     @GET("/templates")
     suspend fun getShiftTemplates(@Query("unit_id") unitId: Int): Response<ShiftTemplatesResponse>
+
+
+    /* Period planning */
+
+    @GET("/periods/{id}/calculations/period-days")
+    suspend fun getPeriodDays(@Path("id") periodId: Int): Response<PeriodDaysResponse>
+
+    @GET("/periods/{id}/calculations/shift-times")
+    suspend fun getShiftTimeCalculations(
+        @Path("id") periodId: Int,
+        @Query("start_time") startTime: String,
+        @Query("end_time") endTime: String,
+        @Query("shift_hours") shiftHours: Int,
+        @Query("break_hours") breakHours: Int,
+        @Query("per_day") perDay: Int,
+    ): Response<ShiftTimeCalculationResponse>
 }

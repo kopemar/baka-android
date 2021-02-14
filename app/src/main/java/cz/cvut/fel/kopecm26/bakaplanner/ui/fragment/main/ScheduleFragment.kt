@@ -58,8 +58,8 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
                     )
                 },
                 { shift, binding, _ -> (binding as ListShiftBinding).shift = shift },
-                {
-                    findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(it))
+                { shift, _ ->
+                    findNavController().navigate(ScheduleFragmentDirections.navigateToShiftDetail(shift))
                 },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }

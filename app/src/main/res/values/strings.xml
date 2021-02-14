@@ -104,4 +104,9 @@
     <string name="high">High</string>
     <string name="set_some_demand">Set some demand value</string>
     <string name="priority">Priority</string>
+    <string name="step_of_wizard"><![CDATA[<b>Step %d of %d</b>: %s]]></string>
+    <string name="select_working_days">Select Working Days</string>
+    <string name="plan_working_days">Plan Working Days</string>
+    <string name="review">Review</string>
+    <string name="adjust_shifts">Adjust Shifts</string>
 </resources>

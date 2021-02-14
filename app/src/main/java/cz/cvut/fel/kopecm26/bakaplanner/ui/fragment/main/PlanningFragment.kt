@@ -27,7 +27,7 @@ class PlanningFragment: ViewModelFragment<PlanningViewModel, FragmentPlanningBin
                     )
                 },
                 { period, binding, _ -> (binding as ListPeriodBinding).period = period },
-                { period -> findNavController().navigate(PlanningFragmentDirections.navigateToPeriodFragment(period)) },
+                { period, _ -> findNavController().navigate(PlanningFragmentDirections.navigateToPeriodFragment(period)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

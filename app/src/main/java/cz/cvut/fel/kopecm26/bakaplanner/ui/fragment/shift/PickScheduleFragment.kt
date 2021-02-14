@@ -39,7 +39,7 @@ class PickScheduleFragment : BaseBottomSheetDialogFragment<PickScheduleViewModel
                     (binding as ListScheduleBinding).schedule = schedule
                     binding.last = position == it.size - 1
                 },
-                { viewModel.addToSchedule(it) },
+                { schedule, _ -> viewModel.addToSchedule(schedule) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

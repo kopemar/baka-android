@@ -2,15 +2,15 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 
 open class BaseListAdapter<T>(
-    private val inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewBinding,
-    protected val bind: (item: T, binding: ViewBinding, index: Int) -> Unit,
-    private val onClick: ((item: T) -> Unit)? = null,
+    private val inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding,
+    protected val bind: (item: T, binding: ViewDataBinding, index: Int) -> Unit,
+    private val onClick: ((item: T, binding: ViewDataBinding) -> Unit)? = null,
     compareItems: (old: T, new: T) -> Boolean,
     compareContents: (old: T, new: T) -> Boolean
 ) : ListAdapter<T, RecyclerView.ViewHolder>(DiffCallback(compareItems, compareContents)) {
@@ -20,7 +20,8 @@ open class BaseListAdapter<T>(
         ItemViewHolder(inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        bind(getItem(position), (holder as BaseListAdapter<*>.ItemViewHolder).binding, position)
+        bind(getItem(position),
+            (holder as BaseListAdapter<*>.ItemViewHolder).binding, position)
     }
 
     internal fun setItems(items: List<T>) {
@@ -30,9 +31,9 @@ open class BaseListAdapter<T>(
 
     override fun getItemCount(): Int = items.size
 
-    open inner class ItemViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder((binding).root) {
+    open inner class ItemViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder((binding).root) {
         init {
-            binding.root.setOnClickListener { onClick?.invoke(getItem(bindingAdapterPosition)) }
+            binding.root.setOnClickListener { onClick?.invoke(getItem(bindingAdapterPosition), binding) }
         }
     }
 
