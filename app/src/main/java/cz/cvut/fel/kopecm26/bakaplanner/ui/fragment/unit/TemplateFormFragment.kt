@@ -1,11 +1,8 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit
 
-import android.app.TimePickerDialog
 import android.view.Menu
 import android.widget.AdapterView
-import android.widget.AutoCompleteTextView
 import android.widget.EditText
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelStoreOwner
 import com.afollestad.vvalidator.form
 import com.afollestad.vvalidator.form.Form
@@ -19,12 +16,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Break
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Priority
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.array.BaseArrayAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getHour
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getMinute
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isCzech
+import cz.cvut.fel.kopecm26.bakaplanner.ui.util.setupAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.TemplateFormViewModel
-import java.time.LocalTime
 
 class TemplateFormFragment : ViewModelFragment<TemplateFormViewModel, FragmentTemplateFormBinding>(
     R.layout.fragment_template_form,
@@ -46,8 +39,12 @@ class TemplateFormFragment : ViewModelFragment<TemplateFormViewModel, FragmentTe
         }
 
     override fun initUi() {
-        binding.etStart.setUpTimePicker(viewModel.startTime)
-        binding.etEnd.setUpTimePicker(viewModel.endTime)
+        binding.etStart.setOnClickListener {
+            (it as EditText).setUpTimePicker(viewModel.startTime)
+        }
+        binding.etEnd.setOnClickListener {
+            (it as EditText).setUpTimePicker(viewModel.endTime)
+        }
         setupPrioritySelect()
         setupBreakSelect()
     }
@@ -87,26 +84,7 @@ class TemplateFormFragment : ViewModelFragment<TemplateFormViewModel, FragmentTe
 
     }
 
-    private fun EditText.setUpTimePicker(
-        observable: MutableLiveData<String>
-    ) {
-        setOnClickListener {
-            TimePickerDialog(
-                requireContext(),
-                R.style.AlertDialogTheme,
-                { _, hourOfDay, minute ->
-                    Logger.d(hourOfDay)
-                    val dateTime = LocalTime.of(hourOfDay, minute)
-                    Logger.d(dateTime.toString())
-                    observable.value = dateTime.toString()
-                    this.setText(dateTime.hoursAndMinutes())
-                },
-                observable.value.toString().getHour() ?: 9,
-                observable.value.toString().getMinute() ?: 0,
-                isCzech()
-            ).show()
-        }
-    }
+
 
     private fun setupPrioritySelect() {
         val adapter = BaseArrayAdapter<Priority, ListPriorityBinding>(
@@ -128,13 +106,5 @@ class TemplateFormFragment : ViewModelFragment<TemplateFormViewModel, FragmentTe
         )
 
         binding.actvBreakSpinner.setupAdapter(adapter, breakSelectedListener)
-    }
-
-    private fun AutoCompleteTextView.setupAdapter(
-        adapter: BaseArrayAdapter<*, *>,
-        listener: AdapterView.OnItemClickListener
-    ) {
-        setAdapter(adapter)
-        onItemClickListener = listener
     }
 }

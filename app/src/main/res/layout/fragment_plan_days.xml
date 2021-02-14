@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_night"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:text="@string/night_shift"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_blue"
+            app:layout_constraintTop_toBottomOf="@id/switch_night" />
+
+        <TextView
+            android:id="@+id/tv_title_opening"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="14dp"
+            android:text="@string/regular_opening_hours"
+            app:layout_constraintTop_toBottomOf="@id/switch_night" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_start_time"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@id/input_end_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_opening">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_start_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/start_time"
+                android:inputType="none"
+                android:text="@{vm.startTime}"
+                android:padding="16dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_end_time"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/input_start_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/input_start_time">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/end_time"
+                android:text="@{vm.endTime}"
+                android:inputType="none"
+                android:padding="16dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_title_shifts_per_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="14dp"
+            android:text="@string/number_of_shifts_per_day"
+            app:layout_constraintTop_toBottomOf="@id/input_start_time" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/spinner_shifts_per_day"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/input_start_time"
+            app:layout_constraintStart_toStartOf="@id/input_start_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_shifts_per_day">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_shifts_per_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shifts"
+                android:inputType="none"
+                android:text="@{vm.shiftsPerDay.toString()}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_title_shift_break"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="14dp"
+            android:layout_marginBottom="52dp"
+            android:text="@string/shift_and_break_length"
+            app:layout_constraintTop_toBottomOf="@id/spinner_shifts_per_day" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_shift_hours"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/input_start_time"
+            app:layout_constraintStart_toStartOf="@id/input_start_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_shift_break">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_shift_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shift"
+                android:inputType="none"
+                android:padding="16dp"
+                android:text="@{vm.shiftHours != null ? @string/_hrs(vm.shiftHours) : null}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_break"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/input_end_time"
+            app:layout_constraintStart_toStartOf="@id/input_end_time"
+            app:layout_constraintTop_toTopOf="@id/input_shift_hours">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_break"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/break_"
+                android:inputType="none"
+                android:padding="16dp"
+                android:text="@{vm.breakMinutes != null ? @string/_min(vm.breakMinutes) : null}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

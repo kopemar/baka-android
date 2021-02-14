@@ -80,3 +80,19 @@ object Break {
         }
     }
 }
+
+object ShiftHours {
+    val all = ArrayList<Int>().apply {
+        for (i in 8..12) {
+            add(i)
+        }
+    }
+}
+
+object ShiftsPerDay {
+    val all = ArrayList<Int>().apply {
+        for (i in 1..5) {
+            add(i)
+        }
+    }
+}

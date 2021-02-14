@@ -6,8 +6,17 @@
     app:startDestination="@id/selectWorkingDaysFragment">
 
     <fragment
-        tools:layout="@layout/fragment_select_working_days"
         android:id="@+id/selectWorkingDaysFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragment"
-        android:label="SelectWorkingDaysFragment" />
+        android:label="SelectWorkingDaysFragment"
+        tools:layout="@layout/fragment_select_working_days" >
+        <action
+            android:id="@+id/navigate_to_plan_days"
+            app:destination="@id/planDaysFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planDaysFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragment"
+        android:label="PlanDaysFragment"
+        tools:layout="@layout/fragment_plan_days" />
 </navigation>

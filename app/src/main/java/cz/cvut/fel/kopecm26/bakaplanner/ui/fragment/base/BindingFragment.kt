@@ -94,4 +94,5 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
                 positive?.let { this.setPositiveButton(getString(it)) { dialog, _ -> onPositive?.invoke(dialog) } }
                 negative?.let { this.setNegativeButton(getString(it)) { dialog, _ -> onNegative?.invoke(dialog) } }
             }.show()
+
 }

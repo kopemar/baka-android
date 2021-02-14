@@ -49,6 +49,7 @@
     <string name="schedule_id">Schedule ID</string>
     <string name="duration">Number of hours</string>
     <string name="_h">%.2fh</string>
+    <string name="_hrs">%dh</string>
     <string name="actions">Actions</string>
     <string name="sign_up">Sign Up</string>
     <string name="history">History</string>
@@ -109,4 +110,11 @@
     <string name="plan_working_days">Plan Working Days</string>
     <string name="review">Review</string>
     <string name="adjust_shifts">Adjust Shifts</string>
+    <string name="night_shift">Night shift</string>
+    <string name="regular_opening_hours">Regular opening hours</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="number_of_shifts_per_day">Number of shifts per day</string>
+    <string name="shift_and_break_length">Shift and break length</string>
+    <string name="break_">Break</string>
 </resources>

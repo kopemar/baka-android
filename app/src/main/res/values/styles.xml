@@ -57,6 +57,11 @@
         <item name="iconTint">@color/white</item>
     </style>
 
+    <style name="Button.Primary.Color">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="iconTint">@color/white</item>
+    </style>
+
     <style name="Button.Secondary">
         <item name="rippleColor">@color/gray_blue</item>
         <item name="strokeColor">@color/text</item>
