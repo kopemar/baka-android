@@ -9,6 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityWeekBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragmentDirections
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.PlanWeekWizard
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
@@ -63,9 +64,16 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
                     viewModel.nextStep()
                     nav.navigate(SelectWorkingDaysFragmentDirections.navigateToPlanDays())
                 }
-                PlanWeekWizard.PLAN_DAYS -> {}
-                PlanWeekWizard.ADJUST_SHIFTS -> {}
-                PlanWeekWizard.REVIEW -> {}
+                PlanWeekWizard.PLAN_DAYS -> {
+                    viewModel.nextStep()
+                    fetchCalculations()
+                    nav.navigate(PlanDaysFragmentDirections.navigateToReview())
+                }
+                PlanWeekWizard.REVIEW -> {
+                    viewModel.nextStep()
+                    nav.navigate(ReviewFragmentDirections.navigateToAdjustShifts())
+                }
+                PlanWeekWizard.ADJUST_SHIFTS -> { }
                 else -> {}
             }
             setMenuVisibility()
@@ -88,10 +96,16 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
             viewModel.step.value == PlanWeekWizard.PLAN_DAYS
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_check_time) periodDaysViewModel.period.value?.id?.let {
-            findNavController(R.id.nav_host_fragment).navigate(PlanDaysFragmentDirections.showShiftTimesDialog())
+    private fun fetchCalculations() {
+        periodDaysViewModel.period.value?.id?.let {
             planDaysViewModel.fetchShiftTimeCalculations(it)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_check_time) {
+            fetchCalculations()
+            findNavController(R.id.nav_host_fragment).navigate(PlanDaysFragmentDirections.showShiftTimesDialog())
         }
         return super.onOptionsItemSelected(item)
     }

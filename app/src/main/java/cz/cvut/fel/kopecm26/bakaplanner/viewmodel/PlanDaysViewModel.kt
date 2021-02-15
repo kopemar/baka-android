@@ -34,6 +34,12 @@ class PlanDaysViewModel : BaseViewModel() {
     private val _shiftTimeCalculations = MutableLiveData<List<ShiftTimeCalculation>>()
     val shiftTimeCalculations: LiveData<List<ShiftTimeCalculation>> = _shiftTimeCalculations
 
+    val mappedShiftHours = MediatorLiveData<String>().apply {
+        this.addSource(shiftTimeCalculations) {
+            this.value = it.joinToString(", ") { "${it.startTime} – ${it.endTime}"  }
+        }
+    }
+
     fun fetchShiftTimeCalculations(periodId: Int) {
         ifNotNull(
             startTime.value,

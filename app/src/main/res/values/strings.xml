@@ -121,4 +121,8 @@
     <string name="check_time">Check time</string>
     <string name="shift_times">Shift times</string>
     <string name="from_to__">%s – %s</string>
+    <string name="week">Week</string>
+    <string name="working_days">Working days</string>
+    <string name="shift_length">Shift length</string>
+    <string name="break_length">Break length</string>
 </resources>

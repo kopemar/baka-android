@@ -1,7 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week
 
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.DialogShiftTimesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListShiftTimeBinding
@@ -18,7 +17,6 @@ class ShiftTimesDialogFragment :
     override val viewModelOwner get() = activity
 
     private val observer = Observer<List<ShiftTimeCalculation>> {
-        binding.rvShiftTimes.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvShiftTimes.adapter = BaseListAdapter<ShiftTimeCalculation>(
             { layoutInflater, viewGroup, attachToRoot ->
                 ListShiftTimeBinding.inflate(

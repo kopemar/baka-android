@@ -18,6 +18,8 @@ class PeriodDaysViewModel: BaseViewModel() {
         fetchDays()
     }
 
+    fun mapWorkingDays(): String? = periodDays.value?.filter{ it.checked }?.joinToString(", ") { it.dayOfWeek }
+
     fun fetchDays() {
         _period.value?.id?.let {
             working.work {

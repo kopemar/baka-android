@@ -9,7 +9,7 @@
         android:id="@+id/selectWorkingDaysFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragment"
         android:label="SelectWorkingDaysFragment"
-        tools:layout="@layout/fragment_select_working_days" >
+        tools:layout="@layout/fragment_select_working_days">
         <action
             android:id="@+id/navigate_to_plan_days"
             app:destination="@id/planDaysFragment" />
@@ -18,13 +18,30 @@
         android:id="@+id/planDaysFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragment"
         android:label="PlanDaysFragment"
-        tools:layout="@layout/fragment_plan_days" >
+        tools:layout="@layout/fragment_plan_days">
         <action
             android:id="@+id/show_shift_times_dialog"
             app:destination="@id/shiftTimesDialogFragment" />
+        <action
+            android:id="@+id/navigate_to_review"
+            app:destination="@id/reviewFragment" />
     </fragment>
     <dialog
         android:id="@+id/shiftTimesDialogFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ShiftTimesDialogFragment"
         android:label="ShiftTimesDialogFragment" />
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review">
+        <action
+            android:id="@+id/navigate_to_adjust_shifts"
+            app:destination="@id/adjustShiftsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adjustShiftsFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.AdjustShiftsFragment"
+        android:label="AdjustShiftsFragment"
+        tools:layout="@layout/fragment_adjust_shifts" />
 </navigation>
