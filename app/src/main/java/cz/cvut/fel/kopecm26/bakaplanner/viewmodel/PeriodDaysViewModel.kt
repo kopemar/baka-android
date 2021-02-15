@@ -8,6 +8,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 class PeriodDaysViewModel: BaseViewModel() {
     /* Period days setup */
     private val _period = MutableLiveData<SchedulingPeriod>()
+    val period: LiveData<SchedulingPeriod> = _period
 
     private val _periodDays = MutableLiveData<List<PeriodDay>>()
     val periodDays: LiveData<List<PeriodDay>> = _periodDays

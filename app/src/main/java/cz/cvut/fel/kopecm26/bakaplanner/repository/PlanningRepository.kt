@@ -17,14 +17,14 @@ class PlanningRepository(private val service: RemoteDataSource) {
         startTime: String,
         endTime: String,
         shiftHours: Int,
-        breakHours: Int,
+        breakMinutes: Int,
         perDay: Int,
     ) = service.getShiftTimeCalculations(
         periodId,
         startTime,
         endTime,
         shiftHours,
-        breakHours,
+        breakMinutes,
         perDay
     )
 

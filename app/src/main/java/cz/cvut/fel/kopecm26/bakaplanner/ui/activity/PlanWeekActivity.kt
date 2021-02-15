@@ -1,15 +1,18 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
-import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityWeekBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.PlanWeekWizard
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanWeekWizardViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,7 +23,11 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
     override val navigateUpRes: Int get() = R.drawable.ic_mdi_close
 
     private val periodDaysViewModel: PeriodDaysViewModel by viewModel()
+    private val planDaysViewModel: PlanDaysViewModel by viewModel()
+
     private val period get() = intent?.extras?.getSerializable(SCHEDULING_PERIOD) as? SchedulingPeriod
+
+    private var menu: Menu? = null
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
@@ -29,7 +36,7 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
 
     override fun initUi() {
         periodDaysViewModel.setPeriod(period)
-        Logger.d(period)
+        setMenuVisibility()
 
         toolbar.setTitle(R.string.plan_week)
 
@@ -44,6 +51,7 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
                 viewModel.prevStep()
                 nav.navigateUp()
             }
+            setMenuVisibility()
         }
     }
 
@@ -60,11 +68,33 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
                 PlanWeekWizard.REVIEW -> {}
                 else -> {}
             }
-
+            setMenuVisibility()
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        this.menu = menu
+        menuInflater.inflate(R.menu.check_time, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onBackPressed() {
+        viewModel.prevStep()
+        super.onBackPressed()
+    }
+
+    private fun setMenuVisibility() {
+        menu?.findItem(R.id.action_check_time)?.isVisible =
+            viewModel.step.value == PlanWeekWizard.PLAN_DAYS
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_check_time) periodDaysViewModel.period.value?.id?.let {
+            findNavController(R.id.nav_host_fragment).navigate(PlanDaysFragmentDirections.showShiftTimesDialog())
+            planDaysViewModel.fetchShiftTimeCalculations(it)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     companion object {
         const val SCHEDULING_PERIOD = "SCHEDULING_PERIOD"

@@ -50,6 +50,21 @@ fun String.mergeWithHours(time: String, nextDay: Boolean = false): String {
     ).run { if (nextDay) this.plusDays(1) else this }.toString()
 }
 
+fun ZonedDateTime.mergeWithHours(time: String, nextDay: Boolean = false): String {
+    val mergedDate = this
+    val mergedTime = LocalTime.parse(time)
+    return ZonedDateTime.of(
+        mergedDate.year,
+        mergedDate.monthValue,
+        mergedDate.dayOfMonth,
+        mergedTime.hour,
+        mergedTime.minute,
+        0,
+        0,
+        ZoneId.systemDefault()
+    ).run { if (nextDay) this.plusDays(1) else this }.toString()
+}
+
 fun LocalDate.weeksAfter(count: Long = 1) = plus(count, ChronoUnit.WEEKS)
 
 fun ZonedDateTime.weeksAfter(count: Long = 1) = plus(count, ChronoUnit.WEEKS)

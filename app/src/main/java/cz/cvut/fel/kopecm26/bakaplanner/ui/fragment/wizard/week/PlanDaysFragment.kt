@@ -12,6 +12,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftHours
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftsPerDay
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.array.BaseArrayAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.util.onClickOrFocus
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.setupAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel
 
@@ -49,20 +50,12 @@ class PlanDaysFragment: ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBin
     }
 
     private fun setupTimePickers() {
-        binding.actvStartTime.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) binding.actvStartTime.setUpTimePicker(viewModel.startTime)
+        binding.actvStartTime.onClickOrFocus {
+            setUpTimePicker(viewModel.startTime)
         }
 
-        binding.actvStartTime.setOnClickListener {
-            binding.actvStartTime.setUpTimePicker(viewModel.startTime)
-        }
-
-        binding.actvEndTime.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) binding.actvEndTime.setUpTimePicker(viewModel.endTime)
-        }
-
-        binding.actvEndTime.setOnClickListener {
-            binding.actvEndTime.setUpTimePicker(viewModel.endTime)
+        binding.actvEndTime.onClickOrFocus {
+            setUpTimePicker(viewModel.endTime)
         }
     }
 

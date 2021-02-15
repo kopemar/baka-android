@@ -66,7 +66,7 @@ interface ApiDescription {
         @Query("start_time") startTime: String,
         @Query("end_time") endTime: String,
         @Query("shift_hours") shiftHours: Int,
-        @Query("break_hours") breakHours: Int,
+        @Query("break_minutes") breakMinutes: Int,
         @Query("per_day") perDay: Int,
     ): Response<ShiftTimeCalculationResponse>
 }

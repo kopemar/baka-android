@@ -117,4 +117,8 @@
     <string name="number_of_shifts_per_day">Number of shifts per day</string>
     <string name="shift_and_break_length">Shift and break length</string>
     <string name="break_">Break</string>
+    <string name="_24_hours">24 hours</string>
+    <string name="check_time">Check time</string>
+    <string name="shift_times">Shift times</string>
+    <string name="from_to__">%s – %s</string>
 </resources>

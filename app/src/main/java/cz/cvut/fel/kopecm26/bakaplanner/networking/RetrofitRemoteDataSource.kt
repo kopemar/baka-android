@@ -63,11 +63,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         startTime: String,
         endTime: String,
         shiftHours: Int,
-        breakHours: Int,
+        breakMinutes: Int,
         perDay: Int
     ): ResponseModel<List<ShiftTimeCalculation>> =
         safeApiCall({
-            api.getShiftTimeCalculations(periodId, startTime, endTime, shiftHours, breakHours, perDay)
+            api.getShiftTimeCalculations(periodId, startTime, endTime, shiftHours, breakMinutes, perDay)
         }) { it?.times }
 
     private fun Headers.saveUserHeaders() =

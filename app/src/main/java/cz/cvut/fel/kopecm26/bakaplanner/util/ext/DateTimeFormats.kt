@@ -5,6 +5,7 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.*
 
 @Deprecated("Replaced with full date", ReplaceWith("fullDate()"))
@@ -12,20 +13,25 @@ fun String.fullDateShortDayOfWeek(): String = this.fullDate().toString()
 
 fun String.fullDate(): String? =
     ZonedDateTime.parse(this).run {
-        format(if (this.year == ZonedDateTime.now().year) formatWithZone(DateTimeFormats.DAY_MONTH_DAY) else formatWithZone(DateTimeFormats.DAY_MONTH_DAY_YEAR))
+        format(
+            if (this.year == ZonedDateTime.now().year) formatWithZone(DateTimeFormats.DAY_MONTH_DAY) else formatWithZone(
+                DateTimeFormats.DAY_MONTH_DAY_YEAR
+            )
+        )
     }
 
 fun String.hoursAndMinutes(): String =
-    ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
-        .toUpperCase(
-            Locale.getDefault()
-        )
+    try {
+        ZonedDateTime.parse(this).toLocalTime()
+    } catch (e: DateTimeParseException) {
+        LocalTime.parse(this)
+    }.format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
+        .toUpperCase(Locale.getDefault())
+
 
 fun LocalTime.hoursAndMinutes(): String =
     format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
-        .toUpperCase(
-            Locale.getDefault()
-        )
+        .toUpperCase(Locale.getDefault())
 
 fun String.dayMonth(): String =
     ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
@@ -60,5 +66,5 @@ enum class DateTimeFormats(val english: String, val czech: String = english) {
     DAY_MONTH_DAY_YEAR("EE, MMMM d, YYYY", "EE d. MMMM YYYY"),
     FULL_MONTH_DAY("MMMM d", "d. MMMM"),
     FULL_MONTH_DAY_SHORT("MMM d", "d. MMM"),
-    HOURS_MINUTES("hh:mm a", "HH:mm"),
+    HOURS_MINUTES("hh:mm a", "HH:mm a"),
 }
