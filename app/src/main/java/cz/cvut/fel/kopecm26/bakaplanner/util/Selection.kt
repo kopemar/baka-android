@@ -1,10 +1,10 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util
 
-class Selection<T>(val item: T, var selected: Boolean = false) {
+class Selection<T>(val item: T, var selected: Boolean = false, val tag: String? = null) {
 
     override fun equals(other: Any?): Boolean {
         if (other !is Selection<*>) return false
-        return other.item.hashCode() == item.hashCode()
+        return other.item.hashCode() == item.hashCode() && tag.equals(other.tag)
     }
 
     override fun hashCode(): Int {
@@ -39,6 +39,6 @@ class SingleSelectionList<W : Selection<*>> : ArrayList<W>() {
     }
 }
 
-fun <W> selectionListOf(list: List<W>, selected: Boolean = false): SelectionList<Selection<W>> = SelectionList<Selection<W>>().apply {
-    addAll(list.map { Selection(it, selected) })
+fun <W> selectionListOf(list: List<W>, selected: Boolean = false, tag: ((item: W) -> String)? = null): SelectionList<Selection<W>> = SelectionList<Selection<W>>().apply {
+    addAll(list.map { Selection(it, selected, tag?.invoke(it)) })
 }

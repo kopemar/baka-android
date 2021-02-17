@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week
 
 import androidx.lifecycle.Observer
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentAdjustShiftsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListAdjustTimeBinding
@@ -52,7 +53,7 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
                 },
                 { day, binding, _ -> (binding as ListDaysCircleBinding).day = day },
                 { day, _ -> selectDay(day) },
-                { old, new -> old.item.id == new.item.id },
+                { old, new -> old == new },
                 { old, new -> old == new }
             ).apply { setItems(it) }
         }
@@ -75,10 +76,12 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
 
     // TODO
     private fun selectCalc(day: Selection<ShiftTimeCalculation>) {
-        adjustViewModel.daysMap.value?.get(adjustViewModel.daySelection.value?.selected?.item)?.apply {
+        adjustViewModel.daysMap.value?.get(adjustViewModel.selectedDay?.item)?.apply {
             if (day.selected) unselect(day) {
+                Logger.d("Unselect")
                 binding.rvShifts.adapter?.notifyItemChanged(it)
             } else select(day) {
+                Logger.d("Select")
                 binding.rvShifts.adapter?.notifyItemChanged(it)
             }
         }
@@ -86,8 +89,10 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
 
     private fun showShiftCalculations() {
         binding.rvShifts.adapter = shiftsAdapter.apply {
-            adjustViewModel.daysMap.value?.get(adjustViewModel.daySelection.value?.selected?.item)
-                ?.let(::setItems)
+            val q = adjustViewModel.daysMap.value?.get(adjustViewModel.selectedDay?.item)
+            Logger.d(adjustViewModel.selectedDay?.item?.dateF)
+            q?.let(::setItems)
+            Logger.d(q?.map { it.tag })
         }
     }
 }

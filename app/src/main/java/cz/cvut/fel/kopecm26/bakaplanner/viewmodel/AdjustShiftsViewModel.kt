@@ -19,6 +19,8 @@ class AdjustShiftsViewModel : BaseViewModel() {
     private val _daySelection = MutableLiveData<SingleSelectionList<Selection<PeriodDay>>>()
     val daySelection: LiveData<SingleSelectionList<Selection<PeriodDay>>> = _daySelection
 
+    val selectedDay: Selection<PeriodDay>? get() = _daySelection.value?.selected
+
     fun mapDays(
         days: List<PeriodDay>,
         times: List<ShiftTimeCalculation>,
@@ -29,7 +31,7 @@ class AdjustShiftsViewModel : BaseViewModel() {
             val selections = SingleSelectionList<Selection<PeriodDay>>()
 
             days.forEach {
-                map[it] = selectionListOf(times.deepCopy(), true)
+                map[it] = selectionListOf(times.deepCopy(), true) { _ -> it.date }
                 selections.add(Selection(it))
             }
 
