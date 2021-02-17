@@ -12,7 +12,7 @@ data class PeriodDay(
 
     val dayOfWeek = date.dayOfWeek()
     val dateF = date.dayFullMonth()
-    var checked: Boolean = false
+    var checked: Boolean = true
 }
 
 @JsonClass(generateAdapter = true)

@@ -18,6 +18,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/list_days_circle" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_shifts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_days"
+            tools:listitem="@layout/list_adjust_time" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

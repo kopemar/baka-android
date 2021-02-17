@@ -12,6 +12,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.PlanWeekWizard
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AdjustShiftsViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanWeekWizardViewModel
@@ -25,6 +27,7 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
 
     private val periodDaysViewModel: PeriodDaysViewModel by viewModel()
     private val planDaysViewModel: PlanDaysViewModel by viewModel()
+    private val adjustViewModel: AdjustShiftsViewModel by viewModel()
 
     private val period get() = intent?.extras?.getSerializable(SCHEDULING_PERIOD) as? SchedulingPeriod
 
@@ -49,10 +52,9 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
         binding.btnBack.setOnClickListener {
             val nav = findNavController(R.id.nav_host_fragment)
             if (viewModel.step.value != PlanWeekWizard.SELECT_DAYS) {
-                viewModel.prevStep()
+                prevStep()
                 nav.navigateUp()
             }
-            setMenuVisibility()
         }
     }
 
@@ -70,8 +72,14 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
                     nav.navigate(PlanDaysFragmentDirections.navigateToReview())
                 }
                 PlanWeekWizard.REVIEW -> {
-                    viewModel.nextStep()
-                    nav.navigate(ReviewFragmentDirections.navigateToAdjustShifts())
+                    ifNotNull(periodDaysViewModel.periodDays.value, planDaysViewModel.shiftTimeCalculations.value) {
+                        viewModel.nextStep()
+                        adjustViewModel.mapDays(
+                            periodDaysViewModel.periodDays.value!!,
+                            planDaysViewModel.shiftTimeCalculations.value!!
+                        )
+                        nav.navigate(ReviewFragmentDirections.navigateToAdjustShifts())
+                    }
                 }
                 PlanWeekWizard.ADJUST_SHIFTS -> { }
                 else -> {}
@@ -87,7 +95,7 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
     }
 
     override fun onBackPressed() {
-        viewModel.prevStep()
+        prevStep()
         super.onBackPressed()
     }
 
@@ -100,6 +108,11 @@ class PlanWeekActivity: ViewModelActivity<PlanWeekWizardViewModel, ActivityWeekB
         periodDaysViewModel.period.value?.id?.let {
             planDaysViewModel.fetchShiftTimeCalculations(it)
         }
+    }
+
+    private fun prevStep() {
+        viewModel.prevStep()
+        setMenuVisibility()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

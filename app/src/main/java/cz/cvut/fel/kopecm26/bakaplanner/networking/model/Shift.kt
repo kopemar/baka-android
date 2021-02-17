@@ -33,12 +33,7 @@ data class Shift(
     val dayOfWeek get() = start_time.dayOfWeek()
 
     val shiftTime: ShiftTime
-        get() = when {
-            start_time.isMorning() -> ShiftTime.MORNING
-            start_time.isDay() -> ShiftTime.DAY
-            start_time.isEvening() -> ShiftTime.EVENING
-            else -> ShiftTime.NIGHT
-        }
+        get() = ShiftTime.getFromTime(start_time)
 
     val relativeTimestamp: String
         get() {
@@ -70,29 +65,15 @@ enum class ShiftTime(@DrawableRes val shiftIcon: Int, @ColorRes val colorRes: In
     MORNING(R.drawable.ic_sun_up_icon, R.color.color_primary),
     DAY(R.drawable.ic_sunny_icon, R.color.greeno),
     EVENING(R.drawable.ic_sun_down_icon, R.color.sunny_evenings),
-    NIGHT(R.drawable.ic_night_icon, R.color.text)
-}
+    NIGHT(R.drawable.ic_night_icon, R.color.text);
 
-object Break {
-    val breakMinutes = ArrayList<Int>().apply {
-        for (i in 0..100 step 5) {
-            add(i)
+    companion object {
+        fun getFromTime(time: String) = when {
+            time.isMorning() -> MORNING
+            time.isDay() -> DAY
+            time.isEvening() -> EVENING
+            else -> NIGHT
         }
     }
 }
 
-object ShiftHours {
-    val all = ArrayList<Int>().apply {
-        for (i in 8..12) {
-            add(i)
-        }
-    }
-}
-
-object ShiftsPerDay {
-    val all = ArrayList<Int>().apply {
-        for (i in 1..5) {
-            add(i)
-        }
-    }
-}

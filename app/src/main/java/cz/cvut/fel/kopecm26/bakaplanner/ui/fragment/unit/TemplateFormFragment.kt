@@ -12,9 +12,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentTemplateFormBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListBreakBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListPriorityBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Break
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Priority
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.array.BaseArrayAdapter
+import cz.cvut.fel.kopecm26.bakaplanner.ui.forms.values.Break
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.setupAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.TemplateFormViewModel

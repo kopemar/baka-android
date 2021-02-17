@@ -7,10 +7,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPlanDaysBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListBreakBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListHoursBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListIntBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Break
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftHours
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftsPerDay
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.array.BaseArrayAdapter
+import cz.cvut.fel.kopecm26.bakaplanner.ui.forms.values.Break
+import cz.cvut.fel.kopecm26.bakaplanner.ui.forms.values.ShiftHours
+import cz.cvut.fel.kopecm26.bakaplanner.ui.forms.values.ShiftsPerDay
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.onClickOrFocus
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.setupAdapter

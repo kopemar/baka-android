@@ -4,6 +4,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.format.DateTimeParseException
 import java.time.temporal.ChronoUnit
 
 fun String.isBefore(date: ZonedDateTime = ZonedDateTime.now()): Boolean =
@@ -16,9 +17,24 @@ fun String.hoursUntilNow() = ZonedDateTime.now().until(ZonedDateTime.parse(this)
 fun String.minutesUntilNow() =
     ZonedDateTime.now().until(ZonedDateTime.parse(this), ChronoUnit.MINUTES)
 
-fun String.isMorning() = ZonedDateTime.parse(this).hour in (4..8)
-fun String.isDay() = ZonedDateTime.parse(this).hour in (8..12)
-fun String.isEvening() = ZonedDateTime.parse(this).hour in (12..16)
+fun String.isMorning() = try {
+    ZonedDateTime.parse(this).toLocalTime()
+} catch (e: DateTimeParseException) {
+    LocalTime.parse(this)
+}.hour in (4..8)
+
+fun String.isDay() = try {
+    ZonedDateTime.parse(this).toLocalTime()
+} catch (e: DateTimeParseException) {
+    LocalTime.parse(this)
+}.hour in (8..12)
+
+fun String.isEvening() = try {
+    ZonedDateTime.parse(this).toLocalTime()
+} catch (e: DateTimeParseException) {
+    LocalTime.parse(this)
+}.hour in (12..16)
+
 fun String.isNight() = ZonedDateTime.parse(this).hour.let { it in (16..24) || it in (0..4) }
 
 fun String.getHour() = try {
