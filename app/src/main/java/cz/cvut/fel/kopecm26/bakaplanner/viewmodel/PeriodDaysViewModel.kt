@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 
-class PeriodDaysViewModel: BaseViewModel() {
+class PeriodDaysViewModel : BaseViewModel() {
     /* Period days setup */
     private val _period = MutableLiveData<SchedulingPeriod>()
     val period: LiveData<SchedulingPeriod> = _period
@@ -18,7 +18,10 @@ class PeriodDaysViewModel: BaseViewModel() {
         fetchDays()
     }
 
-    fun mapWorkingDays(): String? = periodDays.value?.filter{ it.checked }?.joinToString(", ") { it.dayOfWeek }
+    fun mapWorkingDays(): String? =
+        periodDays.value?.filter { it.checked }?.joinToString(", ") { it.dayOfWeek }
+
+    fun mapWorkingDayIdsToList() = periodDays.value?.filter { it.checked }?.map { it.id } ?: listOf()
 
     fun fetchDays() {
         _period.value?.id?.let {

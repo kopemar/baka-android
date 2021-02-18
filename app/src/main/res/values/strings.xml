@@ -46,6 +46,7 @@
     <string name="no_server_connection">Unable to connect to server</string>
     <string name="information">Information</string>
     <string name="shift_id">Shift ID</string>
+    <string name="shift_hash">shift #%d</string>
     <string name="schedule_id">Schedule ID</string>
     <string name="duration">Number of hours</string>
     <string name="_h">%.2fh</string>

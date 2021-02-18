@@ -1,5 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.planning
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
@@ -47,11 +49,21 @@ class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
         viewModel.setPeriod(args.period)
 
         binding.emptyWeekMessage.btnPlanShift.setOnClickListener {
-            startActivityForResult<PlanWeekActivity>(0) {
+            startActivityForResult<PlanWeekActivity>(PLAN_PERIOD_RC) {
                 this.putSerializable(SCHEDULING_PERIOD, viewModel.period.value)
                 this
             }
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == PLAN_PERIOD_RC && resultCode == Activity.RESULT_OK) {
+            viewModel.fetchSchedulingUnits()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    companion object {
+        private const val PLAN_PERIOD_RC = 1112
+    }
 }

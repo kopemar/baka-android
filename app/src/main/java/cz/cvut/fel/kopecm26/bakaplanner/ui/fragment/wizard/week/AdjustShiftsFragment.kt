@@ -11,6 +11,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.Selection
+import cz.cvut.fel.kopecm26.bakaplanner.util.SelectionList
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AdjustShiftsViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel
@@ -41,6 +42,12 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
         )
     }
 
+    private val shiftsObserver by lazy {
+        Observer<Map<PeriodDay, SelectionList<Selection<ShiftTimeCalculation>>>> {
+            it[adjustViewModel.selectedDay?.item]?.let { items -> shiftsAdapter.setItems(items) }
+        }
+    }
+
     private val periodDaysObserver by lazy {
         Observer<List<Selection<PeriodDay>>> {
             binding.rvDays.adapter = BaseListAdapter<Selection<PeriodDay>>(
@@ -61,6 +68,7 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
 
     override fun initUi() {
         adjustViewModel.daySelection.observe(this, periodDaysObserver)
+        adjustViewModel.daysMap.observe(this, shiftsObserver)
         showShiftCalculations()
     }
 
@@ -74,7 +82,7 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
         showShiftCalculations()
     }
 
-    // TODO
+    // TODO animator
     private fun selectCalc(day: Selection<ShiftTimeCalculation>) {
         adjustViewModel.daysMap.value?.get(adjustViewModel.selectedDay?.item)?.apply {
             if (day.selected) unselect(day) {
@@ -89,10 +97,7 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
 
     private fun showShiftCalculations() {
         binding.rvShifts.adapter = shiftsAdapter.apply {
-            val q = adjustViewModel.daysMap.value?.get(adjustViewModel.selectedDay?.item)
-            Logger.d(adjustViewModel.selectedDay?.item?.dateF)
-            q?.let(::setItems)
-            Logger.d(q?.map { it.tag })
+            adjustViewModel.daysMap.value?.get(adjustViewModel.selectedDay?.item)?.let(::setItems)
         }
     }
 }

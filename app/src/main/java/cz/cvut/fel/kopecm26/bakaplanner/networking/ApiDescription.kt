@@ -1,9 +1,11 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import retrofit2.Response
 import retrofit2.http.*
 
+@JvmSuppressWildcards
 interface ApiDescription {
     // AUTH
     @POST("/auth/sign_in")
@@ -34,7 +36,10 @@ interface ApiDescription {
     suspend fun getSchedulesForShift(@Path("id") shiftId: Int): Response<ScheduleResponse>
 
     @POST("/shifts")
-    suspend fun addShiftToSchedule(@Query("template_id") shiftId: Int, @Query("schedule_id") scheduleId: Int): Response<Shift>
+    suspend fun addShiftToSchedule(
+        @Query("template_id") shiftId: Int,
+        @Query("schedule_id") scheduleId: Int
+    ): Response<Shift>
 
     @DELETE("/shift/{id}/schedule")
     suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<Shift>
@@ -69,4 +74,12 @@ interface ApiDescription {
         @Query("break_minutes") breakMinutes: Int,
         @Query("per_day") perDay: Int,
     ): Response<ShiftTimeCalculationResponse>
+
+    // TODO how to post excluded and working days?
+    @POST("/periods/{id}/shift-templates")
+    suspend fun createShiftTemplates(
+        @Path("id") periodId: Int,
+        @Body body: CreateShiftTemplatesRequest,
+    ): Response<ShiftTemplatesResponse>
+
 }

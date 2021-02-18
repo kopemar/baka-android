@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
@@ -25,7 +26,7 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         safeApiCall({ api.getShiftsBefore(to.toString()) }) { it?.shifts }
 
     override suspend fun getUnassignedShifts(from: ZonedDateTime) =
-        safeApiCall({ api.getUnassignedShiftsFrom(from.toString()) }) { it?.data }
+        safeApiCall({ api.getUnassignedShiftsFrom(from.toString()) }) { it?.templates }
 
     override suspend fun getContracts() =
         safeApiCall({ api.getContracts() }) { it?.contracts }
@@ -51,7 +52,7 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun getShiftTemplates(unitId: Int): ResponseModel<List<ShiftTemplate>> =
         safeApiCall({
             api.getShiftTemplates(unitId)
-        }) { it?.data }
+        }) { it?.templates }
 
     override suspend fun getPeriodDays(periodId: Int): ResponseModel<List<PeriodDay>> =
         safeApiCall({
@@ -69,6 +70,19 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         safeApiCall({
             api.getShiftTimeCalculations(periodId, startTime, endTime, shiftHours, breakMinutes, perDay)
         }) { it?.times }
+
+    override suspend fun createShiftTemplates(
+        periodId: Int,
+        startTime: String,
+        endTime: String,
+        shiftHours: Int,
+        breakMinutes: Int,
+        perDay: Int,
+        excluded: Map<Int, ArrayList<Int>>,
+        workingDays: List<Int>
+    ): ResponseModel<List<ShiftTemplate>> = safeApiCall({
+        api.createShiftTemplates(periodId, CreateShiftTemplatesRequest(startTime, endTime, shiftHours, breakMinutes, perDay, excluded, workingDays))
+    }) { it?.templates }
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

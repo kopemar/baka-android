@@ -2,7 +2,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentSelectWorkingDaysBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListPeriodDayBinding
@@ -30,7 +29,6 @@ class SelectWorkingDaysFragment :
             },
             { periodDay, binding, _ -> (binding as ListPeriodDayBinding).day = periodDay },
             { periodDay, binding ->
-                Logger.d(periodDay.checked)
                 periodDay.checked = !periodDay.checked
                 binding.invalidateAll()
             },

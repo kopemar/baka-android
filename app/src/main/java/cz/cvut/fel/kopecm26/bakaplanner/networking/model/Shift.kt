@@ -62,10 +62,10 @@ data class ShiftResponse(
 )
 
 enum class ShiftTime(@DrawableRes val shiftIcon: Int, @ColorRes val colorRes: Int) {
-    MORNING(R.drawable.ic_sun_up_icon, R.color.color_primary),
-    DAY(R.drawable.ic_sunny_icon, R.color.greeno),
-    EVENING(R.drawable.ic_sun_down_icon, R.color.sunny_evenings),
-    NIGHT(R.drawable.ic_night_icon, R.color.text);
+    MORNING(R.drawable.ic_weather_sunset_up, R.color.color_primary),
+    DAY(R.drawable.ic_weather_sunny, R.color.greeno),
+    EVENING(R.drawable.ic_weather_sunset_down, R.color.sunny_evenings),
+    NIGHT(R.drawable.ic_weather_night, R.color.text);
 
     companion object {
         fun getFromTime(time: String) = when {

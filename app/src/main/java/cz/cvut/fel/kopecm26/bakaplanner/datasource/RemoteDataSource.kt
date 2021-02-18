@@ -42,4 +42,15 @@ interface RemoteDataSource {
         perDay: Int,
     ): ResponseModel<List<ShiftTimeCalculation>>
 
+    suspend fun createShiftTemplates(
+        periodId: Int,
+        startTime: String,
+        endTime: String,
+        shiftHours: Int,
+        breakMinutes: Int,
+        perDay: Int,
+        excluded: Map<Int, ArrayList<Int>>,
+        workingDays: List<Int>
+    ): ResponseModel<List<ShiftTemplate>>
+
 }

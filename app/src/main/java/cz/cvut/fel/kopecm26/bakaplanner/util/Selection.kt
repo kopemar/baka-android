@@ -14,6 +14,11 @@ class Selection<T>(val item: T, var selected: Boolean = false, val tag: String? 
 
 class SelectionList<W : Selection<*>> : ArrayList<W>() {
 
+    fun getAllSelected() = filter { it.selected }
+    fun getAllUnselected() = filter { !it.selected }
+
+    fun isAnySelected(): Boolean = find { it.selected } != null
+
     fun select(item: W, onSelect: ((index: Int) -> Unit)? = null) {
         find { it == item }?.selected = true
         onSelect?.invoke(indexOfFirst { it.item.hashCode() == item.hashCode() })

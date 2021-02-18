@@ -12,6 +12,8 @@ data class PeriodDay(
 
     val dayOfWeek = date.dayOfWeek()
     val dateF = date.dayFullMonth()
+
+    @Deprecated("use [Selection] instead")
     var checked: Boolean = true
 }
 
