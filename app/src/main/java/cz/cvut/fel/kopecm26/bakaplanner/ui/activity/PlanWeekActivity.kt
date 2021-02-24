@@ -1,6 +1,5 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
-import android.app.Activity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
@@ -11,10 +10,12 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityWeekBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.AdjustShiftsFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.PlanWeekWizard
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.finishWithOkResult
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AdjustShiftsViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
@@ -48,9 +49,10 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
 
     private val finishObserver by lazy {
         Observer<Boolean> {
-            if (it) {
-                setResult(Activity.RESULT_OK)
-                finish()
+            if (it && viewModel.step.value == PlanWeekWizard.ADJUST_SHIFTS) {
+                findNavController(binding.navHostFragment.id).navigate(
+                    AdjustShiftsFragmentDirections.navigateToPlanWeek()
+                )
             }
         }
     }
@@ -136,8 +138,12 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
     }
 
     override fun onBackPressed() {
-        prevStep()
-        super.onBackPressed()
+        if (viewModel.finished.value != true) {
+            prevStep()
+            super.onBackPressed()
+        } else {
+            finishWithOkResult()
+        }
     }
 
     private fun setMenuVisibility() {

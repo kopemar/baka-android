@@ -23,7 +23,7 @@
             app:title="@{@string/plan_week}" />
 
         <TextView
-            fromHtml="@{@string/step_of_wizard(vm.step.index, vm.stepsCount, context.getString(vm.step.stepName))}"
+            fromHtml="@{vm.finished ? @string/finished : @string/step_of_wizard(vm.step.index, vm.stepsCount, context.getString(vm.step.stepName))}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -44,6 +44,7 @@
             app:navGraph="@navigation/plan_week" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            visible="@{!vm.finished}"
             android:layout_width="match_parent"
             android:layout_height="64dp">
 
@@ -53,21 +54,22 @@
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/next"
+                android:text="@{vm.lastStep ? @string/submit : @string/next}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btn_back"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
+                visible="@{!vm.firstStep}"
                 android:layout_width="72dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/back"
                 android:textAllCaps="false"
-                app:layout_constraintEnd_toStartOf="@id/btn_next"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_next"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

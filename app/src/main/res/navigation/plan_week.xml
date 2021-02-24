@@ -43,5 +43,14 @@
         android:id="@+id/adjustShiftsFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.AdjustShiftsFragment"
         android:label="AdjustShiftsFragment"
-        tools:layout="@layout/fragment_adjust_shifts" />
+        tools:layout="@layout/fragment_adjust_shifts">
+        <action
+            android:id="@+id/navigate_to_plan_week"
+            app:destination="@id/plan_week_finished_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plan_week_finished_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanWeekFinishedFragment"
+        android:label="PlanWeekFinishedFragment"
+        tools:layout="@layout/fragment_week_finished" />
 </navigation>
