@@ -17,15 +17,15 @@ import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
 import java.time.LocalTime
 import kotlin.reflect.KClass
 
-abstract class ViewModelFragment<V: BaseViewModel, B: ViewDataBinding>(layoutRes: Int, private val clazz: KClass<V>): BindingFragment<B>(layoutRes) {
+abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutRes: Int, private val clazz: KClass<V>) : BindingFragment<B>(layoutRes) {
 
     protected open val viewModelOwner: ViewModelStoreOwner? = null
 
     open val viewModel by lazy { clazz.let { ViewModelProvider(viewModelOwner ?: this).get(it.java) } }
 
-    protected open fun errorObserver() =  Observer<Int?> {
+    protected open fun errorObserver() = Observer<Int?> {
         it?.let {
-            showSnackBar(it) 
+            showSnackBar(it)
             viewModel.removeError()
         }
     }
@@ -51,7 +51,5 @@ abstract class ViewModelFragment<V: BaseViewModel, B: ViewDataBinding>(layoutRes
             observable.value.toString().getMinute() ?: 0,
             isCzech()
         ).show()
-
     }
-
 }

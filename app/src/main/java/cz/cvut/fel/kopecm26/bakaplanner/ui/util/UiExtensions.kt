@@ -14,9 +14,9 @@ fun AutoCompleteTextView.setupAdapter(
 }
 
 /**
- * Sets both click and focus listener with the same function 
+ * Sets both click and focus listener with the same function
  */
-fun <T: View> T.onClickOrFocus(action: T.() -> Unit) {
+fun <T : View> T.onClickOrFocus(action: T.() -> Unit) {
     setOnClickListener { action.invoke(this) }
 
     setOnFocusChangeListener { _, hasFocus ->

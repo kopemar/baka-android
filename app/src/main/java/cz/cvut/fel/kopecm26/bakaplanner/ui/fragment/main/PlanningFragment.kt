@@ -12,7 +12,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanningViewModel
 
-class PlanningFragment: ViewModelFragment<PlanningViewModel, FragmentPlanningBinding>(R.layout.fragment_planning, PlanningViewModel::class) {
+class PlanningFragment : ViewModelFragment<PlanningViewModel, FragmentPlanningBinding>(R.layout.fragment_planning, PlanningViewModel::class) {
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
     private val observer by lazy {

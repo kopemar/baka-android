@@ -1,6 +1,17 @@
 package cz.cvut.fel.kopecm26.bakaplanner.datasource
 
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Schedule
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import java.time.ZonedDateTime
 
 interface RemoteDataSource {
@@ -52,5 +63,4 @@ interface RemoteDataSource {
         excluded: Map<Int, ArrayList<Int>>,
         workingDays: List<Int>
     ): ResponseModel<List<ShiftTemplate>>
-
 }

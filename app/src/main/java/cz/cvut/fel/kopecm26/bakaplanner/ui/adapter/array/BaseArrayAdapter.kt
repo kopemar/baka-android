@@ -14,7 +14,7 @@ class BaseArrayAdapter<T, V : ViewDataBinding>(
     @LayoutRes val layout: Int,
     val bind: (item: T, binding: V, index: Int) -> Unit,
     val items: List<T>,
-): ArrayAdapter<T>(context, layout) {
+) : ArrayAdapter<T>(context, layout) {
     override fun getCount() = items.size
 
     override fun getItem(position: Int) = items[position]

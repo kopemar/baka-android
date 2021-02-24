@@ -1,9 +1,27 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking
 
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ContractResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDaysResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ScheduleResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriodsResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnitsResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplateResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 @JvmSuppressWildcards
 interface ApiDescription {
@@ -59,7 +77,6 @@ interface ApiDescription {
     @GET("/templates")
     suspend fun getShiftTemplates(@Query("unit_id") unitId: Int): Response<ShiftTemplatesResponse>
 
-
     /* Period planning */
 
     @GET("/periods/{id}/calculations/period-days")
@@ -81,5 +98,4 @@ interface ApiDescription {
         @Path("id") periodId: Int,
         @Body body: CreateShiftTemplatesRequest,
     ): Response<ShiftTemplatesResponse>
-
 }

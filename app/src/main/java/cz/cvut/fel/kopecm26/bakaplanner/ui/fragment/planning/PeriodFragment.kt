@@ -18,7 +18,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
 
-class PeriodFragment: ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(R.layout.fragment_period, PeriodViewModel::class) {
+class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(R.layout.fragment_period, PeriodViewModel::class) {
     override val toolbar: Toolbar get() = binding.planningToolbar.toolbar
     override var navigateUp = true
     override val viewModelOwner: ViewModelStoreOwner? get() = activity

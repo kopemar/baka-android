@@ -7,7 +7,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.*
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayOfWeek
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.fullDate
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursUntilNow
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isBefore
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isDay
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isEvening
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isMorning
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -23,7 +30,7 @@ data class Shift(
     val schedule_id: String?,
     val duration: Float,
     val user_scheduled: Boolean,
-): Serializable {
+) : Serializable {
     val idString get() = id.toString()
     val dateF get() = start_time.fullDate()
 
@@ -76,4 +83,3 @@ enum class ShiftTime(@DrawableRes val shiftIcon: Int, @ColorRes val colorRes: In
         }
     }
 }
-

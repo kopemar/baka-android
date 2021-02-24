@@ -37,7 +37,5 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
         binding.btnSettings.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.navigateToSettings())
         }
-
     }
-
 }

@@ -15,7 +15,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
 import kotlin.reflect.KClass
 
-abstract class BaseBottomSheetDialogFragment<V: BaseViewModel, B: ViewDataBinding>(@LayoutRes val layoutRes: Int, clazz: KClass<V>): BottomSheetDialogFragment() {
+abstract class BaseBottomSheetDialogFragment<V : BaseViewModel, B : ViewDataBinding>(@LayoutRes val layoutRes: Int, clazz: KClass<V>) : BottomSheetDialogFragment() {
 
     protected lateinit var binding: B
     protected open val viewModelOwner: ViewModelStoreOwner? = null
@@ -48,6 +48,4 @@ abstract class BaseBottomSheetDialogFragment<V: BaseViewModel, B: ViewDataBindin
 
         binding.setVariable(BR.USER, PrefsUtils.getUser())
     }
-
-
 }

@@ -22,8 +22,5 @@ abstract class PlannerDatabase : RoomDatabase() {
         )
             .fallbackToDestructiveMigration()
             .build()
-
     }
 }
-
-

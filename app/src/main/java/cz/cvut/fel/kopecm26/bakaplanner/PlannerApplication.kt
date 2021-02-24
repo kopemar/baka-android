@@ -14,7 +14,6 @@ import cz.cvut.fel.kopecm26.bakaplanner.di.sharedViewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-
 class PlannerApplication : Application() {
 
     override fun onCreate() {
@@ -61,5 +60,4 @@ class PlannerApplication : Application() {
 
         lateinit var preferences: SharedPreferences private set
     }
-
 }

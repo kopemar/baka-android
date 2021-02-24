@@ -52,17 +52,21 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
             binding.rvContracts.layoutManager = LinearLayoutManager(binding.root.context)
             binding.rvContracts.adapter = ConcatAdapter().apply {
                 if (it.any { it.active }) {
-                    addAdapter(contractsAdapter.apply {
-                        header = Headers.ACTIVE_CONTRACTS
-                        setItems(it.filter { it.active })
-                    })
+                    addAdapter(
+                        contractsAdapter.apply {
+                            header = Headers.ACTIVE_CONTRACTS
+                            setItems(it.filter { it.active })
+                        }
+                    )
                 }
 
                 if (it.any { !it.active }) {
-                    addAdapter(contractsAdapter.apply {
-                        header = Headers.INACTIVE_CONTRACTS
-                        setItems(it.filter { !it.active })
-                    })
+                    addAdapter(
+                        contractsAdapter.apply {
+                            header = Headers.INACTIVE_CONTRACTS
+                            setItems(it.filter { !it.active })
+                        }
+                    )
                 }
             }
         }
@@ -72,8 +76,6 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
         viewModel.contracts.observe(this, observer)
 
         binding.toolbar.toolbar.run {
-
         }
-
     }
 }

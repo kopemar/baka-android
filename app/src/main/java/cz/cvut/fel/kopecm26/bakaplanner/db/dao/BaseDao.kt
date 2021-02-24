@@ -18,5 +18,4 @@ interface BaseDao<T> {
 
     @Delete
     suspend fun delete(vararg entity: T)
-
 }

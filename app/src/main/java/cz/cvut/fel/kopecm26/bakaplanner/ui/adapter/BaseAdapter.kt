@@ -20,8 +20,10 @@ open class BaseListAdapter<T>(
         ItemViewHolder(inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        bind(getItem(position),
-            (holder as BaseListAdapter<*>.ItemViewHolder).binding, position)
+        bind(
+            getItem(position),
+            (holder as BaseListAdapter<*>.ItemViewHolder).binding, position
+        )
     }
 
     internal fun setItems(items: List<T>) {

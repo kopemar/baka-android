@@ -53,11 +53,11 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
         }
     }
 
-    inline fun <reified T: AppCompatActivity> startActivityForResult(requestCode: Int) = Intent(requireContext(), T::class.java).apply {
+    inline fun <reified T : AppCompatActivity> startActivityForResult(requestCode: Int) = Intent(requireContext(), T::class.java).apply {
         startActivityForResult(this, requestCode)
     }
 
-    inline fun <reified T: AppCompatActivity> startActivityForResult(requestCode: Int, extras: Bundle.() -> Bundle) = Intent(requireContext(), T::class.java).apply {
+    inline fun <reified T : AppCompatActivity> startActivityForResult(requestCode: Int, extras: Bundle.() -> Bundle) = Intent(requireContext(), T::class.java).apply {
         this.putExtras(extras.invoke(Bundle()))
         startActivityForResult(this, requestCode)
     }
@@ -88,11 +88,10 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
         @StringRes negative: Int? = R.string.cancel,
         onNegative: ((DialogInterface) -> Unit?)? = null,
     ) = MaterialAlertDialogBuilder(requireContext())
-            .setMessage(message)
-            .apply {
-                title?.let(::setTitle)
-                positive?.let { this.setPositiveButton(getString(it)) { dialog, _ -> onPositive?.invoke(dialog) } }
-                negative?.let { this.setNegativeButton(getString(it)) { dialog, _ -> onNegative?.invoke(dialog) } }
-            }.show()
-
+        .setMessage(message)
+        .apply {
+            title?.let(::setTitle)
+            positive?.let { this.setPositiveButton(getString(it)) { dialog, _ -> onPositive?.invoke(dialog) } }
+            negative?.let { this.setNegativeButton(getString(it)) { dialog, _ -> onNegative?.invoke(dialog) } }
+        }.show()
 }

@@ -19,5 +19,4 @@ abstract class ViewModelActivity<V : BaseViewModel, B : ViewDataBinding>(
         val vm = viewModel
         binding.setVariable(BR.vm, vm)
     }
-
 }

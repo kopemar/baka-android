@@ -81,10 +81,7 @@ class TemplateFormFragment : ViewModelFragment<TemplateFormViewModel, FragmentTe
                 viewModel.priority.value != null
             }
         }
-
     }
-
-
 
     private fun setupPrioritySelect() {
         val adapter = BaseArrayAdapter<Priority, ListPriorityBinding>(

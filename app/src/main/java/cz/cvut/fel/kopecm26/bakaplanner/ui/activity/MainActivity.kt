@@ -11,7 +11,6 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.setupWithNavController
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.MainViewModel
 
-
 class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
     R.layout.activity_main,
     MainViewModel::class
@@ -29,7 +28,6 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
 
         setupBottomNavigationBar()
     }
-
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -59,5 +57,4 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
 
         currentNavController = controller
     }
-
 }

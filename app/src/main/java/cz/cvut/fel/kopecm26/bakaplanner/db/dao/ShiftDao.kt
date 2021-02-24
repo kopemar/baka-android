@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 import java.time.temporal.TemporalAdjusters
 
 @Dao
-interface ShiftDao: BaseDao<Shift> {
+interface ShiftDao : BaseDao<Shift> {
 
     @Query("SELECT * FROM Shift WHERE id = :id")
     suspend fun getById(id: Int): Shift?

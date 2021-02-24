@@ -11,7 +11,7 @@ import okhttp3.Response
 class BaseUrlChangingInterceptor : Interceptor {
 
     private val host: HttpUrl
-        get() = PrefsUtils.run { getPrefsStringOrNull(Constants.Prefs.BASE_URL) ?: PlannerApplication.BASE_URL_PLACEHOLDER}.toHttpUrl()
+        get() = PrefsUtils.run { getPrefsStringOrNull(Constants.Prefs.BASE_URL) ?: PlannerApplication.BASE_URL_PLACEHOLDER }.toHttpUrl()
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val newRequest = host.let {

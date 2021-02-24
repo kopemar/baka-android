@@ -37,7 +37,6 @@ class ExpandableHeaderAdapter<S, T>(
             field = value
         }
 
-
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) VIEW_TYPE_HEADER else VIEW_TYPE_ITEM
     }
@@ -50,7 +49,6 @@ class ExpandableHeaderAdapter<S, T>(
         } else {
             super.onCreateViewHolder(parent, viewType)
         }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position == 0) {

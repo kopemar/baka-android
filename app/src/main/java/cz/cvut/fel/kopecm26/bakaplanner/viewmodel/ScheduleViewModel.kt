@@ -29,5 +29,4 @@ class ScheduleViewModel : BaseViewModel() {
     private fun saveShifts(response: ResponseModel<List<Shift>>) {
         response.parseResponse(_shifts)
     }
-
 }

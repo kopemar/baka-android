@@ -1,6 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util
 
-class TwoWayListIterator<T>(val items: List<T>): ListIterator<T> {
+class TwoWayListIterator<T>(val items: List<T>) : ListIterator<T> {
     private var current = -1
 
     override fun hasNext() = items.size > nextIndex()

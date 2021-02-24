@@ -64,6 +64,6 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     }
 
     private fun runRemoval() {
-        showMaterialDialog(R.string.are_you_sure, title = R.string.remove_from_schedule,  onPositive = { viewModel.removeFromSchedule() }, onNegative = { it.cancel() })
+        showMaterialDialog(R.string.are_you_sure, title = R.string.remove_from_schedule, onPositive = { viewModel.removeFromSchedule() }, onNegative = { it.cancel() })
     }
 }

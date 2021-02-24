@@ -16,7 +16,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.util.onClickOrFocus
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.setupAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel
 
-class PlanDaysFragment: ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBinding>(
+class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBinding>(
     R.layout.fragment_plan_days,
     PlanDaysViewModel::class
 ) {
@@ -100,5 +100,4 @@ class PlanDaysFragment: ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBin
             shiftsCountSelected
         )
     }
-
 }

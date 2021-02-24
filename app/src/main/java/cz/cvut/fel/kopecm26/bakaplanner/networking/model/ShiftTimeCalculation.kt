@@ -9,7 +9,7 @@ data class ShiftTimeCalculation(
     val start_time: String,
     val end_time: String,
     val id: Int
-): DataClass<ShiftTimeCalculation> {
+) : DataClass<ShiftTimeCalculation> {
     val startTime = start_time.hoursAndMinutes()
     val endTime = end_time.hoursAndMinutes()
     var checked = true

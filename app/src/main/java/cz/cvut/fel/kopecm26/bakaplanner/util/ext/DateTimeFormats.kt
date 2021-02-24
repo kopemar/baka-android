@@ -28,14 +28,12 @@ fun String.hoursAndMinutes(): String =
     }.format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
         .toUpperCase(Locale.getDefault())
 
-
 fun LocalTime.hoursAndMinutes(): String =
     format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
         .toUpperCase(Locale.getDefault())
 
 fun String.dayMonth(): String =
     ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
-
 
 fun String.dayFullMonth(): String =
     LocalDate.parse(this.substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
@@ -46,22 +44,23 @@ fun String.dayShortMonth(): String =
 fun String.dayOfWeek(): String =
     LocalDate.parse(substring(0, 10)).format(formatWithZone(DateTimeFormats.WEEK_DAY))
 
-fun formatWithZone(pattern: String) =
+// TODO
+fun formatWithZone(pattern: String): DateTimeFormatter =
     formatter(pattern).withZone(ZoneId.systemDefault())
 
-fun formatWithZone(format: DateTimeFormats) =
+fun formatWithZone(format: DateTimeFormats): DateTimeFormatter =
     formatWithZone(if (isCzech()) format.czech else format.english)
 
-fun formatter(format: DateTimeFormats) =
+fun formatter(format: DateTimeFormats): DateTimeFormatter =
     formatter(if (isCzech()) format.czech else format.english)
 
-fun formatter(pattern: String) = DateTimeFormatter.ofPattern(pattern)
+fun formatter(pattern: String): DateTimeFormatter = DateTimeFormatter.ofPattern(pattern)
 
 fun isCzech() = Locale.getDefault().country == "CZ"
 
 enum class DateTimeFormats(val english: String, val czech: String = english) {
     WEEK_DAY("EEEE"),
-    SHORT_DAY("E "),
+    @Suppress("Unused") SHORT_DAY("E "),
     DAY_MONTH_DAY("EE, MMMM d", "EE d. MMMM"),
     DAY_MONTH_DAY_YEAR("EE, MMMM d, YYYY", "EE d. MMMM YYYY"),
     FULL_MONTH_DAY("MMMM d", "d. MMMM"),

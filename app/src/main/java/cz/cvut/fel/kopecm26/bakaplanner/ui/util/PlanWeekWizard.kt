@@ -11,6 +11,5 @@ enum class PlanWeekWizard(val index: Int, @StringRes val stepName: Int) {
 
     companion object {
         fun getSteps() = values().sortedBy { it.index }
-
     }
 }

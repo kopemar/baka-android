@@ -1,6 +1,11 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util.networking
 
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.*
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NoInternetError
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NoServerConnectionError
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NotFoundError
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UnauthorizedError
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -17,11 +22,14 @@ suspend fun <T, F> safeApiCall(call: suspend () -> Response<T>, converter: (T?) 
     return try {
         val response = call.invoke()
         if (response.isSuccessful) ResponseModel.SUCCESS(converter.invoke(response.body()), response.headers())
-        else ResponseModel.ERROR(errorType = when (response.code()) {
-            401 -> UnauthorizedError()
-            404 -> NotFoundError()
-            else -> ErrorType()
-        }, data = converter.invoke(response.body()))
+        else ResponseModel.ERROR(
+            errorType = when (response.code()) {
+                401 -> UnauthorizedError()
+                404 -> NotFoundError()
+                else -> ErrorType()
+            },
+            data = converter.invoke(response.body())
+        )
     } catch (e: Exception) {
         e.printStackTrace()
         ResponseModel.ERROR(mapToDomainError(e))

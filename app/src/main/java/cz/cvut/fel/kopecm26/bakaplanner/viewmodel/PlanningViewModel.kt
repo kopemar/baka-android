@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 
-class PlanningViewModel: BaseViewModel() {
+class PlanningViewModel : BaseViewModel() {
 
     init {
         fetchSchedulingPeriods()

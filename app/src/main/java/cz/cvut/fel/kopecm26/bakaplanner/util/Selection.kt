@@ -30,7 +30,6 @@ class SelectionList<W : Selection<*>> : ArrayList<W>() {
     }
 }
 
-
 class SingleSelectionList<W : Selection<*>> : ArrayList<W>() {
     private fun getSelectionIndex(): Int = indexOfFirst { it.selected }
 

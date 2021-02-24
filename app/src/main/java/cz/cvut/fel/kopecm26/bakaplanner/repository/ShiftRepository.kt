@@ -28,7 +28,6 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
             data?.let { shiftDao.insert(it) }
             ResponseModel.SUCCESS(shiftDao.getUpcoming(from.toString()))
         } else this
-
     }
 
     suspend fun refreshShiftsBefore(to: ZonedDateTime = ZonedDateTime.now()) =

@@ -58,7 +58,8 @@ class TemplateFormViewModel : BaseViewModel() {
         get() = unit.value?.start_time?.mergeWithHours(startTime.value.toString()).toString()
 
     val end: String
-        get() = unit.value?.start_time?.mergeWithHours(endTime.value.toString(),
+        get() = unit.value?.start_time?.mergeWithHours(
+            endTime.value.toString(),
             startTime.value?.let { endTime.value?.isTimeBefore(it) } == true
         ).toString()
 
@@ -102,5 +103,4 @@ class TemplateFormViewModel : BaseViewModel() {
         _durationError.value = true
         null
     }
-
 }

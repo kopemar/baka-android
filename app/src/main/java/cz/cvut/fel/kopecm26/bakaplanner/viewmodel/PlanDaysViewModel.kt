@@ -36,7 +36,7 @@ class PlanDaysViewModel : BaseViewModel() {
 
     val mappedShiftHours = MediatorLiveData<String>().apply {
         this.addSource(shiftTimeCalculations) {
-            this.value = it.joinToString(", ") { "${it.startTime} – ${it.endTime}"  }
+            this.value = it.joinToString(", ") { "${it.startTime} – ${it.endTime}" }
         }
     }
 

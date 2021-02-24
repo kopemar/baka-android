@@ -12,7 +12,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit.TemplateFormFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.TemplateFormViewModel
 
-class AddShiftTemplateActivity:
+class AddShiftTemplateActivity :
     ViewModelActivity<TemplateFormViewModel, ActivityTemplateBinding>(R.layout.activity_template, TemplateFormViewModel::class) {
 
     override val toolbar: Toolbar get() = binding.toolbar.toolbar

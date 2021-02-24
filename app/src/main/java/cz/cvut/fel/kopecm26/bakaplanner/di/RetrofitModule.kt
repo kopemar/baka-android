@@ -34,9 +34,11 @@ private fun provideOkHttpClient(): OkHttpClient {
             }
             chain.proceed(request.build())
         }
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }).build()
+        .addInterceptor(
+            HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+        ).build()
 }
 
 private fun provideApi(retrofit: Retrofit) = retrofit.create(ApiDescription::class.java)
