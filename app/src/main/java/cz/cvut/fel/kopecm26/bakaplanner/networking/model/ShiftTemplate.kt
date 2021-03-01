@@ -5,9 +5,6 @@ import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.fullDate
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isDay
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isEvening
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isMorning
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
@@ -17,20 +14,15 @@ data class ShiftTemplate(
     val end_time: String,
     val break_minutes: Int,
     val priority: Int,
-    val duration: Float?
+    val duration: Float?,
+    val shifts_count: Int? = null
 ) : Serializable {
     val startTimeHours get() = start_time.hoursAndMinutes()
     val endTimeHours get() = end_time.hoursAndMinutes()
     val dateF get() = start_time.fullDate()
     val priorityValue: Priority? = Priority.getPriorityByValue(priority)
 
-    val shiftTime: ShiftTime
-        get() = when {
-            start_time.isMorning() -> ShiftTime.MORNING
-            start_time.isDay() -> ShiftTime.DAY
-            start_time.isEvening() -> ShiftTime.EVENING
-            else -> ShiftTime.NIGHT
-        }
+    val shiftTime: ShiftTime get() = ShiftTime.getFromTime(start_time)
 }
 
 @JsonClass(generateAdapter = true)
@@ -41,6 +33,11 @@ data class ShiftTemplateResponse(
 @JsonClass(generateAdapter = true)
 data class ShiftTemplatesResponse(
     val templates: List<ShiftTemplate>
+)
+
+@JsonClass(generateAdapter = true)
+data class ShiftTemplateEmployeesResponse(
+    val employees: List<User>
 )
 
 enum class Priority(@StringRes val titleRes: Int, val integerValue: Int) {

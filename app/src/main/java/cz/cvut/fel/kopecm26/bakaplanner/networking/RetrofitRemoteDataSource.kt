@@ -59,6 +59,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.getShiftTemplates(unitId)
         }) { it?.templates }
 
+    override suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<User>> =
+        safeApiCall({
+            api.getTemplateEmployees(templateId)
+        }) { it?.employees }
+
     override suspend fun getPeriodDays(periodId: Int): ResponseModel<List<PeriodDay>> =
         safeApiCall({
             api.getPeriodDays(periodId)

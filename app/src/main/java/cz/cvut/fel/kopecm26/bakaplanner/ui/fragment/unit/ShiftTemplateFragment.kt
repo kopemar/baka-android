@@ -1,10 +1,13 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit
 
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.tabs.TabLayoutMediator
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentShiftTemplateBinding
+import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseViewPagerAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftTemplateViewModel
@@ -17,14 +20,17 @@ class ShiftTemplateFragment :
     override val toolbar: Toolbar get() = binding.sToolbar.toolbar
     override var navigateUp = true
 
+    override val viewModelOwner: ViewModelStoreOwner? get() = activity
+
     private val args by navArgs<ShiftTemplateFragmentArgs>()
 
     override fun initUi() {
-        viewModel.template.value = args.template
+        viewModel.template.postValue(args.template)
 
         binding.btnAdd.setOnClickListener { navigateToSignUpFragment() }
 
         setupMenu()
+        setupViewPager()
     }
 
     private fun setupMenu() {
@@ -38,6 +44,17 @@ class ShiftTemplateFragment :
             }
             true
         }
+    }
+
+    private fun setupViewPager() {
+        val fragments = listOf(ShiftInformationFragment(), ShiftEmployeesFragment())
+        val titles = listOf(R.string.information, R.string.employees)
+
+        binding.viewPager.adapter = BaseViewPagerAdapter(childFragmentManager, lifecycle, fragments)
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, int ->
+            tab.text = getString(titles[int])
+        }.attach()
     }
 
     private fun navigateToSignUpFragment() = viewModel.template.value?.let {

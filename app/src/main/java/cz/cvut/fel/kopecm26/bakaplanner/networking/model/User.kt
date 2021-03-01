@@ -8,6 +8,7 @@ data class Auth(val username: String, val password: String)
 
 @JsonClass(generateAdapter = true)
 data class User(
+    val id: Int,
     val username: String,
     val email: String? = null,
     val agreement: Boolean?,
@@ -15,7 +16,9 @@ data class User(
     val first_name: String? = null,
     val last_name: String? = null,
     val organization_name: String
-)
+) {
+    val fullName = "$last_name, $first_name"
+}
 
 @JsonClass(generateAdapter = true)
 data class UserResponseModel(@Json(name = "data") val user: User)

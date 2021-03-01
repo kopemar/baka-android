@@ -43,8 +43,8 @@
             android:elevation="@dimen/card_elevation"
             android:orientation="vertical"
             android:paddingStart="16dp"
-            android:paddingEnd="8dp"
             android:paddingTop="12dp"
+            android:paddingEnd="8dp"
             android:paddingBottom="0dp"
             tools:visibility="visible">
 
@@ -77,107 +77,21 @@
                 android:textAllCaps="false" />
         </LinearLayout>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:backgroundTint="@color/bg_surface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <View
-            visible="@{USER.agreement != true}"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginVertical="16dp"
             android:background="@color/gray_blue" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                android:id="@+id/tv_shift_id_label"
-                style="@style/Text.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                app:fromHtml="@{@string/shift_id}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Shift ID" />
-
-            <TextView
-                android:id="@+id/tv_shift_id"
-                style="@style/Text.Light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                visible="@{tvShiftIdLabel.getVisibility() == View.VISIBLE}"
-                android:text="@{vm.template.id.toString()}"
-                app:layout_constraintBottom_toBottomOf="@id/tv_shift_id_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_shift_id_label"
-                tools:text="16" />
-
-
-            <TextView
-                android:id="@+id/tv_duration_label"
-                style="@style/Text.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/duration"
-                app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_shift_id" />
-
-            <TextView
-                style="@style/Text.Light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/_h(vm.template.duration)}"
-                app:layout_constraintBottom_toBottomOf="@id/tv_duration_label"
-                app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
-                app:layout_constraintTop_toTopOf="@id/tv_duration_label"
-                tools:text="2.20h" />
-
-            <TextView
-                android:id="@+id/tv_break_label"
-                style="@style/Text.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/break_minutes"
-                app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_duration_label" />
-
-            <TextView
-                style="@style/Text.Light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/_min(vm.template.break_minutes)}"
-                app:layout_constraintBottom_toBottomOf="@id/tv_break_label"
-                app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
-                app:layout_constraintTop_toTopOf="@id/tv_break_label"
-                tools:text="2.20h" />
-
-            <TextView
-                android:id="@+id/tv_priority_label"
-                style="@style/Text.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/priority"
-                visible="@{USER.manager}"
-                app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_break_label" />
-
-            <TextView
-                android:id="@+id/tv_priority_value"
-                style="@style/Text.Light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                visible="@{tvPriorityLabel.getVisibility() == View.VISIBLE}"
-                android:text="@{vm.template.priorityValue == null ? null : context.getString(vm.template.priorityValue.titleRes)}"
-                app:layout_constraintBottom_toBottomOf="@id/tv_priority_label"
-                app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
-                app:layout_constraintTop_toTopOf="@id/tv_priority_label"
-                tools:text="2.20h" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 </layout>

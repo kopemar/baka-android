@@ -9,6 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnitsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplateEmployeesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplateResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
@@ -76,6 +77,9 @@ interface ApiDescription {
 
     @GET("/templates")
     suspend fun getShiftTemplates(@Query("unit_id") unitId: Int): Response<ShiftTemplatesResponse>
+
+    @GET("/templates/{id}/employees")
+    suspend fun getTemplateEmployees(@Path("id") id: Int): Response<ShiftTemplateEmployeesResponse>
 
     /* Period planning */
 

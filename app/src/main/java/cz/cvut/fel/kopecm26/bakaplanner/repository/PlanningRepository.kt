@@ -12,6 +12,8 @@ class PlanningRepository(private val service: RemoteDataSource) {
 
     suspend fun getShiftTemplates(unitId: Int) = service.getShiftTemplates(unitId)
 
+    suspend fun getShiftTemplateEmployees(templateId: Int) = service.getTemplateEmployees(templateId)
+
     suspend fun getShiftTimeCalculations(
         periodId: Int,
         startTime: String,
