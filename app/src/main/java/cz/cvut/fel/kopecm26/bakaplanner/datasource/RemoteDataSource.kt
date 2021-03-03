@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.datasource
 
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Schedule
@@ -42,7 +43,9 @@ interface RemoteDataSource {
 
     suspend fun getShiftTemplates(unitId: Int): ResponseModel<List<ShiftTemplate>>
 
-    suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<User>>
+    suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<Employee>>
+
+    suspend fun getOrganizationEmployees(id: Int): ResponseModel<List<Employee>>
 
     suspend fun getPeriodDays(periodId: Int): ResponseModel<List<PeriodDay>>
 

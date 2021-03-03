@@ -131,4 +131,6 @@
     <string name="submit">Submit</string>
     <string name="plan_shifts">Plan shifts</string>
     <string name="employees">Employees</string>
+    <string name="organization">Organization</string>
+    <string name="name"><![CDATA[%s <b>(%s)</b>]]></string>
 </resources>

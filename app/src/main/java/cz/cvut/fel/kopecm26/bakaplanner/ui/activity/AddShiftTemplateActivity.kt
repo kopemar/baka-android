@@ -51,7 +51,7 @@ class AddShiftTemplateActivity :
         menu?.let {
             val templates =
                 supportFragmentManager.findFragmentByTag(getString(R.string.template_fragment_tag)) as TemplateFormFragment
-            templates.setupFormValidation(menu, R.id.menu_check) {
+            templates.setupFormValidation(it, R.id.menu_check) {
                 viewModel.submitTemplate()
             }
         }

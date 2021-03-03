@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 
 class ShiftTemplateViewModel : BaseViewModel() {
     init {
@@ -13,14 +13,14 @@ class ShiftTemplateViewModel : BaseViewModel() {
     }
     val template = MutableLiveData<ShiftTemplate>()
 
-    private val _employees = MediatorLiveData<List<User>>().apply {
+    private val _employees = MediatorLiveData<List<Employee>>().apply {
         addSource(template) {
             Logger.d(template)
             fetchEmployees()
         }
     }
 
-    val employees: LiveData<List<User>> = _employees
+    val employees: LiveData<List<Employee>> = _employees
 
     fun fetchEmployees() {
         template.value?.id?.let {

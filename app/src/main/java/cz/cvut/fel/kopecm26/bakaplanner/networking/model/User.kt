@@ -15,7 +15,8 @@ data class User(
     val manager: Boolean?,
     val first_name: String? = null,
     val last_name: String? = null,
-    val organization_name: String
+    val organization_name: String,
+    val organization_id: Int,
 ) {
     val fullName = "$last_name, $first_name"
 }

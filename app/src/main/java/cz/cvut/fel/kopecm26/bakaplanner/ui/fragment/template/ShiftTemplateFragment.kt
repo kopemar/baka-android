@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelStoreOwner
@@ -24,6 +24,16 @@ class ShiftTemplateFragment :
 
     private val args by navArgs<ShiftTemplateFragmentArgs>()
 
+    private val employeesFragment by lazy {
+        ShiftEmployeesFragment().apply {
+            itemLongPressListener = {
+                findNavController().navigate(ShiftTemplateFragmentDirections.showEmployeeBottomSheet(it))
+            }
+        }
+    }
+
+    private val shiftInfoFragment by lazy { ShiftInformationFragment() }
+
     override fun initUi() {
         viewModel.template.postValue(args.template)
 
@@ -47,7 +57,8 @@ class ShiftTemplateFragment :
     }
 
     private fun setupViewPager() {
-        val fragments = listOf(ShiftInformationFragment(), ShiftEmployeesFragment())
+
+        val fragments = listOf(shiftInfoFragment, employeesFragment)
         val titles = listOf(R.string.information, R.string.employees)
 
         binding.viewPager.adapter = BaseViewPagerAdapter(childFragmentManager, lifecycle, fragments)

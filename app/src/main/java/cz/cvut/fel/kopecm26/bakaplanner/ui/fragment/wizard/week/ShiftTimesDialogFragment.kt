@@ -6,11 +6,11 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.DialogShiftTimesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListShiftTimeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.BaseBottomSheetDialogFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelBottomSheetFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel
 
 class ShiftTimesDialogFragment :
-    BaseBottomSheetDialogFragment<PlanDaysViewModel, DialogShiftTimesBinding>(
+    ViewModelBottomSheetFragment<PlanDaysViewModel, DialogShiftTimesBinding>(
         R.layout.dialog_shift_times,
         PlanDaysViewModel::class
     ) {

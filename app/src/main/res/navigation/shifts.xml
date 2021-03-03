@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/shift_template_fragment"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit.ShiftTemplateFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template.ShiftTemplateFragment"
         android:label="ShiftTemplateFragment"
         tools:layout="@layout/fragment_shift_template">
         <argument

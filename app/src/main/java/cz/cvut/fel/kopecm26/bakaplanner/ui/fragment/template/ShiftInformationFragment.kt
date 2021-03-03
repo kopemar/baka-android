@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template
 
 import androidx.lifecycle.ViewModelStoreOwner
 import cz.cvut.fel.kopecm26.bakaplanner.R

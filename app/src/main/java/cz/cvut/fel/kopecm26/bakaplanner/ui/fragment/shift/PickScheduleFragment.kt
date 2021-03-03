@@ -9,13 +9,13 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.DialogPickScheduleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListScheduleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Schedule
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.BaseBottomSheetDialogFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelBottomSheetFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PickScheduleViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class PickScheduleFragment : BaseBottomSheetDialogFragment<PickScheduleViewModel, DialogPickScheduleBinding>(
+class PickScheduleFragment : ViewModelBottomSheetFragment<PickScheduleViewModel, DialogPickScheduleBinding>(
     R.layout.dialog_pick_schedule,
     PickScheduleViewModel::class
 ) {

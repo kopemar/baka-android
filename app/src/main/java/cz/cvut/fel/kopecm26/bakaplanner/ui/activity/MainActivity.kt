@@ -3,11 +3,13 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityMainBinding
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.user.UserRole
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.SessionUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.setupWithNavController
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.MainViewModel
 
@@ -19,14 +21,12 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
     private var currentNavController: LiveData<NavController>? = null
 
     override fun initUi() {
-        with(PrefsUtils.getUser()) {
-            binding.bnvMain.menu.findItem(R.id.shifts).isVisible =
-                this?.manager != true && this?.agreement == true
-            binding.bnvMain.menu.findItem(R.id.planning).isVisible = this?.manager == true
-            binding.bnvMain.menu.findItem(R.id.schedule).isVisible = this?.manager != true
-        }
-
         setupBottomNavigationBar()
+
+        if (SessionUtils.getUserRole() == UserRole.AGREEMENT) {
+            Logger.d(SessionUtils.getUserRole())
+            binding.bnvMain.menu.findItem(R.id.shifts).isVisible = true
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -38,15 +38,32 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
     }
 
     private fun setupBottomNavigationBar() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bnv_main)
+        val bottomNavigationView = binding.bnvMain
 
-        val navGraphIds = listOf(
-            R.navigation.home,
-            R.navigation.schedule,
-            R.navigation.planning,
-            R.navigation.shifts,
-            R.navigation.profile
+        bottomNavigationView.inflateMenu(
+            if (PrefsUtils.getUser()?.manager == true) {
+                R.menu.main_manager
+            }
+            else {
+                R.menu.main_employee
+            }
         )
+
+        val navGraphIds = if (PrefsUtils.getUser()?.manager == true) {
+            listOf(
+                R.navigation.home,
+                R.navigation.planning,
+                R.navigation.organization,
+                R.navigation.profile,
+            )
+        } else {
+            listOf(
+                R.navigation.home,
+                R.navigation.schedule,
+                R.navigation.shifts,
+                R.navigation.profile,
+            )
+        }
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

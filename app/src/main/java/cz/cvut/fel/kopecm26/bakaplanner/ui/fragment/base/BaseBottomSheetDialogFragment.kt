@@ -1,4 +1,4 @@
-package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment
+package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,20 +7,13 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import cz.cvut.fel.kopecm26.bakaplanner.BR
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
-import kotlin.reflect.KClass
 
-abstract class BaseBottomSheetDialogFragment<V : BaseViewModel, B : ViewDataBinding>(@LayoutRes val layoutRes: Int, clazz: KClass<V>) : BottomSheetDialogFragment() {
+abstract class BaseBottomSheetDialogFragment<B : ViewDataBinding>(@LayoutRes val layoutRes: Int) : BottomSheetDialogFragment() {
 
     protected lateinit var binding: B
-    protected open val viewModelOwner: ViewModelStoreOwner? = null
-
-    open val viewModel by lazy { clazz.let { ViewModelProvider(viewModelOwner ?: this).get(it.java) } }
 
     override fun onCreateView(
         inflater: LayoutInflater,

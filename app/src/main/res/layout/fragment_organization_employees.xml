@@ -4,7 +4,11 @@
     <data>
         <variable
             name="vm"
-            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanningViewModel" />
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.OrganizationEmployeesViewModel" />
+
+        <variable
+            name="USER"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
     </data>
 
     <LinearLayout
@@ -14,19 +18,19 @@
 
         <include
             android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_single_main"
+            layout="@layout/toolbar_single"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/planning}" />
+            app:title="@{@string/employees}" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             isRefreshing="@{vm.working}"
             android:layout_width="match_parent"
-            onRefresh="@{() -> vm.fetchSchedulingPeriods()}"
+            onRefresh="@{() -> vm.fetchOrganizationEmployees(USER.organization_id)}"
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_periods"
+                android:id="@+id/rv_employees"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

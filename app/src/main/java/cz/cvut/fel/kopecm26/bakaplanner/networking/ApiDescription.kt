@@ -9,12 +9,12 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnitsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplateEmployeesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplateResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -79,7 +79,10 @@ interface ApiDescription {
     suspend fun getShiftTemplates(@Query("unit_id") unitId: Int): Response<ShiftTemplatesResponse>
 
     @GET("/templates/{id}/employees")
-    suspend fun getTemplateEmployees(@Path("id") id: Int): Response<ShiftTemplateEmployeesResponse>
+    suspend fun getTemplateEmployees(@Path("id") id: Int): Response<EmployeeListResponse>
+
+    @GET("/organization/{id}/employees")
+    suspend fun getOrganizationEmployees(@Path("id") periodId: Int): Response<EmployeeListResponse>
 
     /* Period planning */
 

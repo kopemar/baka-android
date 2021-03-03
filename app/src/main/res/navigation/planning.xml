@@ -8,12 +8,11 @@
     <fragment
         android:id="@+id/planningFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main.PlanningFragment"
-        android:label="PlanningFragment" >
+        android:label="PlanningFragment">
         <action
             android:id="@+id/navigate_to_period_fragment"
             app:destination="@id/period_fragment" />
     </fragment>
-
 
     <fragment
         android:id="@+id/period_fragment"
@@ -45,7 +44,7 @@
 
     <fragment
         android:id="@+id/shift_template_fragment"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit.ShiftTemplateFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template.ShiftTemplateFragment"
         android:label="ShiftTemplateFragment"
         tools:layout="@layout/fragment_shift_template">
         <argument
@@ -55,6 +54,9 @@
         <action
             android:id="@+id/show_dialog"
             app:destination="@id/pick_schedule_fragment" />
+        <action
+            android:id="@+id/show_employee_bottom_sheet"
+            app:destination="@id/employeeBottomSheetFragment" />
     </fragment>
 
     <dialog
@@ -67,4 +69,16 @@
             app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate"
             app:nullable="false" />
     </dialog>
+
+    <dialog
+        android:id="@+id/employeeBottomSheetFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template.EmployeeBottomSheetFragment"
+        android:label="EmployeeBottomSheetFragment"
+        tools:layout="@layout/dialog_employee_detail">
+        <argument
+            android:name="employee"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee"
+            app:nullable="false" />
+    </dialog>
+
 </navigation>

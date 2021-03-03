@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/ic_mdi_home"
+        android:menuCategory="secondary"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/planning"
+        android:enabled="true"
+        android:icon="@drawable/ic_fas_planning"
+        android:menuCategory="secondary"
+        android:title="@string/planning" />
+
+    <item
+        android:id="@+id/organization"
+        android:enabled="true"
+        android:icon="@drawable/ic_employee_count"
+        android:menuCategory="secondary"
+        android:title="@string/organization" />
+
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:menuCategory="secondary"
+        android:title="@string/profile" />
+
+</menu>

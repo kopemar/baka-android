@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
@@ -59,9 +60,14 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.getShiftTemplates(unitId)
         }) { it?.templates }
 
-    override suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<User>> =
+    override suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<Employee>> =
         safeApiCall({
             api.getTemplateEmployees(templateId)
+        }) { it?.employees }
+
+    override suspend fun getOrganizationEmployees(id: Int): ResponseModel<List<Employee>> =
+        safeApiCall({
+            api.getOrganizationEmployees(id)
         }) { it?.employees }
 
     override suspend fun getPeriodDays(periodId: Int): ResponseModel<List<PeriodDay>> =

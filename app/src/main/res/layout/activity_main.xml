@@ -39,8 +39,7 @@
             android:layout_height="wrap_content"
             android:elevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:menu="@menu/main"
-            app:menu="@menu/main"
+            tools:menu="@menu/main_employee"
             tools:layout_editor_absoluteX="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

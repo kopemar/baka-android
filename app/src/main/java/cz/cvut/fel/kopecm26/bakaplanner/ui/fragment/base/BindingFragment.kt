@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -87,7 +88,7 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
         onPositive: ((DialogInterface) -> Unit?)? = null,
         @StringRes negative: Int? = R.string.cancel,
         onNegative: ((DialogInterface) -> Unit?)? = null,
-    ) = MaterialAlertDialogBuilder(requireContext())
+    ): AlertDialog = MaterialAlertDialogBuilder(requireContext())
         .setMessage(message)
         .apply {
             title?.let(::setTitle)

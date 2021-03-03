@@ -47,7 +47,7 @@ class PlannerApplication : Application() {
         val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
         preferences = EncryptedSharedPreferences.create(
-            "encrypted_preferences", // fileName
+            "encrypted_prefs", // fileName
             masterKeyAlias, // masterKeyAlias
             this, // context
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, // prefKeyEncryptionScheme

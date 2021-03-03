@@ -35,11 +35,6 @@ data class ShiftTemplatesResponse(
     val templates: List<ShiftTemplate>
 )
 
-@JsonClass(generateAdapter = true)
-data class ShiftTemplateEmployeesResponse(
-    val employees: List<User>
-)
-
 enum class Priority(@StringRes val titleRes: Int, val integerValue: Int) {
     HIGHEST(R.string.highest, 5),
     HIGH(R.string.high, 4),

@@ -12,7 +12,8 @@ open class BaseListAdapter<T>(
     protected val bind: (item: T, binding: ViewDataBinding, index: Int) -> Unit,
     private val onClick: ((item: T, binding: ViewDataBinding) -> Unit)? = null,
     compareItems: (old: T, new: T) -> Boolean,
-    compareContents: (old: T, new: T) -> Boolean
+    compareContents: (old: T, new: T) -> Boolean,
+    private val onLongPress: ((item: T, binding: ViewDataBinding) -> Unit)? = null
 ) : ListAdapter<T, RecyclerView.ViewHolder>(DiffCallback(compareItems, compareContents)) {
     var items = emptyList<T>()
 
@@ -35,6 +36,10 @@ open class BaseListAdapter<T>(
 
     open inner class ItemViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder((binding).root) {
         init {
+            binding.root.setOnLongClickListener {
+                onLongPress?.invoke(getItem(bindingAdapterPosition), binding)
+                onLongPress != null
+            }
             binding.root.setOnClickListener { onClick?.invoke(getItem(bindingAdapterPosition), binding) }
         }
     }
