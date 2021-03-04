@@ -40,15 +40,6 @@ fun String.getLocalDateTime(): LocalDateTime =
         LocalDateTime.parse(this)
     }
 
-fun String.fullDate(): String? =
-    ZonedDateTime.parse(this).run {
-        format(
-            if (this.year == ZonedDateTime.now().year) formatWithZone(DateTimeFormats.DAY_MONTH_DAY) else formatWithZone(
-                DateTimeFormats.DAY_MONTH_DAY_YEAR
-            )
-        )
-    }
-
 fun LocalTime.formatTime(format: DateTimeFormats): String =
     format(formatWithZone(format))
 
@@ -81,5 +72,11 @@ enum class DateTimeFormats(val english: String, val czech: String = english) {
     DAY_MONTH_DAY_YEAR("EE, MMMM d, YYYY", "EE d. MMMM YYYY"),
     FULL_MONTH_DAY("MMMM d", "d. MMMM"),
     FULL_MONTH_DAY_SHORT("MMM d", "d. MMM"),
-    HOURS_MINUTES("hh:mm a", "HH:mm a"),
+    HOURS_MINUTES("hh:mm a", "HH:mm a");
+
+    companion object {
+        fun getFullDateFormat(date: String) = ZonedDateTime.parse(date).run {
+            if (this.year == ZonedDateTime.now().year) DAY_MONTH_DAY else DAY_MONTH_DAY_YEAR
+        }
+    }
 }

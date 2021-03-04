@@ -9,8 +9,8 @@ import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayOfWeek
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatTime
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.fullDate
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursUntilNow
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isBefore
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isDay
@@ -33,7 +33,7 @@ data class Shift(
     val user_scheduled: Boolean,
 ) : Serializable {
     val idString get() = id.toString()
-    val dateF get() = start_time.fullDate()
+    val dateF get() = start_time.formatDate(DateTimeFormats.getFullDateFormat(start_time))
 
     val startTimeHours get() = start_time.formatTime(DateTimeFormats.HOURS_MINUTES)
     val endTimeHours get() = end_time.formatTime(DateTimeFormats.HOURS_MINUTES)
