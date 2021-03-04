@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
 
 class PlanDaysViewModel : BaseViewModel() {
@@ -14,12 +14,12 @@ class PlanDaysViewModel : BaseViewModel() {
     val endTime = MutableLiveData<String>()
 
     private val _startTimeF = MediatorLiveData<String?>().apply {
-        addSource(startTime) { this.value = it.hoursAndMinutes() }
+        addSource(startTime) { this.value = it.format(DateTimeFormats.HOURS_MINUTES) }
     }
     val startTimeF: LiveData<String?> = _startTimeF
 
     private val _endTimeF = MediatorLiveData<String?>().apply {
-        addSource(endTime) { this.value = it.hoursAndMinutes() }
+        addSource(endTime) { this.value = it.format(DateTimeFormats.HOURS_MINUTES) }
     }
     val endTimeF: LiveData<String?> = _endTimeF
 

@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner
 
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatTime
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.mergeWithHours
 import org.junit.Assert
 import org.junit.Test
@@ -9,7 +10,7 @@ class DateFormatterTest {
 
     @Test
     fun hoursMinutes() {
-        Assert.assertEquals("11:00 AM", "2020-11-13T11:00:00.000Z".hoursAndMinutes())
+        Assert.assertEquals("11:00 AM", "2020-11-13T11:00:00.000Z".formatTime(DateTimeFormats.HOURS_MINUTES))
     }
 
     @Test

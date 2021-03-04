@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util.ext
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -8,8 +9,36 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.util.*
 
-@Deprecated("Replaced with full date", ReplaceWith("fullDate()"))
-fun String.fullDateShortDayOfWeek(): String = this.fullDate().toString()
+// todo
+fun String.formatDate(format: DateTimeFormats): String =
+    try {
+        getLocalDate().format(formatWithZone(format))
+    } catch (e: DateTimeParseException) {
+        this
+    }
+
+fun String.formatTime(format: DateTimeFormats): String =
+    try {
+        getLocalDateTime().format(formatWithZone(format))
+    } catch (e: DateTimeParseException) {
+        this
+    }.run {
+        if (format == DateTimeFormats.HOURS_MINUTES) toUpperCase(Locale.getDefault()) else this
+    }
+
+fun String.getLocalDate(): LocalDate =
+    try {
+        ZonedDateTime.parse(this).toLocalDate()
+    } catch (e: DateTimeParseException) {
+        LocalDate.parse(this.substring(0, 10))
+    }
+
+fun String.getLocalDateTime(): LocalDateTime =
+    try {
+        ZonedDateTime.parse(this).toLocalDateTime()
+    } catch (e: DateTimeParseException) {
+        LocalDateTime.parse(this)
+    }
 
 fun String.fullDate(): String? =
     ZonedDateTime.parse(this).run {
@@ -20,29 +49,14 @@ fun String.fullDate(): String? =
         )
     }
 
-fun String.hoursAndMinutes(): String =
-    try {
-        ZonedDateTime.parse(this).toLocalTime()
-    } catch (e: DateTimeParseException) {
-        LocalTime.parse(this)
-    }.format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
-        .toUpperCase(Locale.getDefault())
-
-fun LocalTime.hoursAndMinutes(): String =
-    format(formatWithZone(DateTimeFormats.HOURS_MINUTES))
-        .toUpperCase(Locale.getDefault())
-
-fun String.dayMonth(): String =
-    ZonedDateTime.parse(this).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
-
-fun String.dayFullMonth(): String =
-    LocalDate.parse(this.substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY))
+fun LocalTime.formatTime(format: DateTimeFormats): String =
+    format(formatWithZone(format))
 
 fun String.dayShortMonth(): String =
-    LocalDate.parse(substring(0, 10)).format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY_SHORT))
+    getLocalDate().format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY_SHORT))
 
 fun String.dayOfWeek(): String =
-    LocalDate.parse(substring(0, 10)).format(formatWithZone(DateTimeFormats.WEEK_DAY))
+    getLocalDate().format(formatWithZone(DateTimeFormats.WEEK_DAY))
 
 // TODO
 fun formatWithZone(pattern: String): DateTimeFormatter =
@@ -60,7 +74,9 @@ fun isCzech() = Locale.getDefault().country == "CZ"
 
 enum class DateTimeFormats(val english: String, val czech: String = english) {
     WEEK_DAY("EEEE"),
-    @Suppress("Unused") SHORT_DAY("E "),
+
+    @Suppress("Unused")
+    SHORT_DAY("E "),
     DAY_MONTH_DAY("EE, MMMM d", "EE d. MMMM"),
     DAY_MONTH_DAY_YEAR("EE, MMMM d, YYYY", "EE d. MMMM YYYY"),
     FULL_MONTH_DAY("MMMM d", "d. MMMM"),

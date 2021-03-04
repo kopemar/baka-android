@@ -3,8 +3,9 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 import androidx.annotation.StringRes
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.fullDate
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursAndMinutes
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatTime
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
@@ -17,9 +18,9 @@ data class ShiftTemplate(
     val duration: Float?,
     val shifts_count: Int? = null
 ) : Serializable {
-    val startTimeHours get() = start_time.hoursAndMinutes()
-    val endTimeHours get() = end_time.hoursAndMinutes()
-    val dateF get() = start_time.fullDate()
+    val startTimeHours get() = start_time.formatTime(DateTimeFormats.HOURS_MINUTES)
+    val endTimeHours get() = end_time.formatTime(DateTimeFormats.HOURS_MINUTES)
+    val dateF get() = start_time.formatDate(DateTimeFormats.FULL_MONTH_DAY)
     val priorityValue: Priority? = Priority.getPriorityByValue(priority)
 
     val shiftTime: ShiftTime get() = ShiftTime.getFromTime(start_time)

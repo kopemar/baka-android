@@ -1,8 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 
 import com.squareup.moshi.JsonClass
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayFullMonth
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayOfWeek
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
 
 @JsonClass(generateAdapter = true)
 data class PeriodDay(
@@ -11,7 +12,7 @@ data class PeriodDay(
 ) {
 
     val dayOfWeek = date.dayOfWeek()
-    val dateF = date.dayFullMonth()
+    val dateF = date.formatDate(DateTimeFormats.FULL_MONTH_DAY)
 
     @Deprecated("use [Selection] instead")
     var checked: Boolean = true
