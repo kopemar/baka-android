@@ -19,5 +19,4 @@ class EmployeeBottomSheetFragment :
         Logger.d(args.employee)
         viewModel.setEmployeeValue(args.employee)
     }
-
 }

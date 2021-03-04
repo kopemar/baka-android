@@ -12,5 +12,4 @@ class EmployeeDialogViewModel : BaseViewModel() {
     fun setEmployeeValue(employee: Employee) {
         _employee.value = employee
     }
-
 }

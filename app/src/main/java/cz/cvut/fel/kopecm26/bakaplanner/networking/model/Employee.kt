@@ -9,6 +9,6 @@ data class Employee(
     val first_name: String,
     val last_name: String,
     val username: String
-): Serializable {
+) : Serializable {
     val fullName: String get() = "$last_name, $first_name"
 }

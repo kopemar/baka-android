@@ -11,7 +11,6 @@ object PrefsUtils {
 
     fun getUser(): User? = getPrefsStringOrNull(Constants.Prefs.USER)?.fromJson()
 
-
     fun putString(key: String, value: String) = PlannerApplication.preferences.edit().putString(key, value).apply()
 
     fun remove(key: String) = PlannerApplication.preferences.edit().remove(key).apply()

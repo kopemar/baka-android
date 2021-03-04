@@ -43,8 +43,7 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
         bottomNavigationView.inflateMenu(
             if (PrefsUtils.getUser()?.manager == true) {
                 R.menu.main_manager
-            }
-            else {
+            } else {
                 R.menu.main_employee
             }
         )
