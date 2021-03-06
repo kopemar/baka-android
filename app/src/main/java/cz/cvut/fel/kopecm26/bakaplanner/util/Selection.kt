@@ -17,7 +17,7 @@ class SelectionList<W : Selection<*>> : ArrayList<W>() {
     fun getAllSelected() = filter { it.selected }
     fun getAllUnselected() = filter { !it.selected }
 
-    fun isAnySelected(): Boolean = find { it.selected } != null
+    fun isAnyNotSelected(): Boolean = find { !it.selected } != null
 
     fun select(item: W, onSelect: ((index: Int) -> Unit)? = null) {
         find { it == item }?.selected = true

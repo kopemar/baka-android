@@ -43,20 +43,13 @@ fun String.getLocalDateTime(): LocalDateTime =
 fun LocalTime.formatTime(format: DateTimeFormats): String =
     format(formatWithZone(format))
 
-fun String.dayShortMonth(): String =
-    getLocalDate().format(formatWithZone(DateTimeFormats.FULL_MONTH_DAY_SHORT))
-
-fun String.dayOfWeek(): String =
-    getLocalDate().format(formatWithZone(DateTimeFormats.WEEK_DAY))
-
-// TODO
-fun formatWithZone(pattern: String): DateTimeFormatter =
-    formatter(pattern).withZone(ZoneId.systemDefault())
-
-fun formatWithZone(format: DateTimeFormats): DateTimeFormatter =
+private fun formatWithZone(format: DateTimeFormats): DateTimeFormatter =
     formatWithZone(if (isCzech()) format.czech else format.english)
 
-fun formatter(format: DateTimeFormats): DateTimeFormatter =
+private fun formatWithZone(pattern: String): DateTimeFormatter =
+    formatter(pattern).withZone(ZoneId.systemDefault())
+
+private fun formatter(format: DateTimeFormats): DateTimeFormatter =
     formatter(if (isCzech()) format.czech else format.english)
 
 fun formatter(pattern: String): DateTimeFormatter = DateTimeFormatter.ofPattern(pattern)

@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityWeekBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
@@ -113,6 +114,7 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
                         planDaysViewModel.shiftHours.value,
                         planDaysViewModel.shiftsPerDay.value
                     ) {
+                        Logger.d(adjustViewModel.mapExcludedToMap())
                         viewModel.submitShiftTemplates(
                             periodDaysViewModel.period.value!!.id,
                             planDaysViewModel.startTime.value!!,

@@ -3,7 +3,8 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 import androidx.annotation.DrawableRes
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayShortMonth
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
@@ -14,8 +15,8 @@ data class SchedulingPeriod(
 ) : Serializable {
     val state: PeriodState get() = PeriodState.TO_BE_SUBMITTED
 
-    val dateStartShort get() = start_date.dayShortMonth()
-    val dateEndShort get() = end_date.dayShortMonth()
+    val dateStartShort get() = start_date.formatDate(DateTimeFormats.FULL_MONTH_DAY_SHORT)
+    val dateEndShort get() = end_date.formatDate(DateTimeFormats.FULL_MONTH_DAY_SHORT)
 }
 
 enum class PeriodState(@DrawableRes val iconRes: Int) {

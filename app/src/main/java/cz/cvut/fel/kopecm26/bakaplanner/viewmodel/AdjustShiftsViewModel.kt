@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.util.Selection
@@ -41,8 +42,10 @@ class AdjustShiftsViewModel : BaseViewModel() {
 
     fun mapExcludedToMap(): Map<Int, ArrayList<Int>> {
         val days = _daysMap.value?.filter {
-            !it.value.isAnySelected()
+            it.value.isAnyNotSelected()
         }
+
+        Logger.d(days)
 
         return HashMap<Int, ArrayList<Int>>().apply {
             days?.forEach {

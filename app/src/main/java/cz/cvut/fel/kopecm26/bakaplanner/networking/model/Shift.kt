@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayOfWeek
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatTime
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hoursUntilNow
@@ -38,7 +37,7 @@ data class Shift(
     val startTimeHours get() = start_time.formatTime(DateTimeFormats.HOURS_MINUTES)
     val endTimeHours get() = end_time.formatTime(DateTimeFormats.HOURS_MINUTES)
 
-    val dayOfWeek get() = start_time.dayOfWeek()
+    val dayOfWeek get() = start_time.formatDate(DateTimeFormats.WEEK_DAY)
 
     val shiftTime: ShiftTime
         get() = ShiftTime.getFromTime(start_time)

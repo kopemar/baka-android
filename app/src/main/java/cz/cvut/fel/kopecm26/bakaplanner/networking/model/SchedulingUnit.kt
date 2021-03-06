@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.dayOfWeek
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
 import java.io.Serializable
 
@@ -15,7 +14,7 @@ data class SchedulingUnit(
     val end_time: String,
     val is_day: Boolean
 ) : Serializable {
-    val weekDay: String get() = if (is_day) start_time.dayOfWeek() else TODO("Not implemented yet")
+    val weekDay: String get() = if (is_day) start_time.formatDate(DateTimeFormats.WEEK_DAY) else TODO("Not implemented yet")
     val state: UnitState get() = UnitState.DONE
     val dateF: String get() = if (is_day) start_time.formatDate(DateTimeFormats.FULL_MONTH_DAY) else TODO("Not implemented yet")
 
