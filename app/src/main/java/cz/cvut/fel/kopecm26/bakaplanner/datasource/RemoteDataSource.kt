@@ -68,4 +68,8 @@ interface RemoteDataSource {
         excluded: Map<Int, ArrayList<Int>>,
         workingDays: List<Int>
     ): ResponseModel<List<ShiftTemplate>>
+
+    suspend fun callAutoScheduler(
+        periodId: Int
+    ): ResponseModel<Boolean>
 }

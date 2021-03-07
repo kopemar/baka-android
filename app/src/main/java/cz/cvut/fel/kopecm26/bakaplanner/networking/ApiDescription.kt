@@ -14,6 +14,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import retrofit2.Response
@@ -99,10 +100,14 @@ interface ApiDescription {
         @Query("per_day") perDay: Int,
     ): Response<ShiftTimeCalculationResponse>
 
-    // TODO how to post excluded and working days?
     @POST("/periods/{id}/shift-templates")
     suspend fun createShiftTemplates(
         @Path("id") periodId: Int,
         @Body body: CreateShiftTemplatesRequest,
     ): Response<ShiftTemplatesResponse>
+
+    @POST("/periods/{id}/calculations/generate-schedule")
+    suspend fun callAutoSchedule(
+        @Path("id") periodId: Int
+    ): Response<AutoSchedulerResponse>
 }

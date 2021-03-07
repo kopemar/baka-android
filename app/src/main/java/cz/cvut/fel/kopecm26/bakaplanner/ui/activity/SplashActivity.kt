@@ -17,11 +17,12 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     override fun initUi() {
         GlobalScope.launch {
-            delay(1500)
-            finish()
+            delay(1000)
             Logger.d(PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER))
             PrefsUtils.getPrefsStringOrNull(Constants.Prefs.USER)
                 ?.let { startActivity<MainActivity>() } ?: startActivity<SetupActivity>()
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
         }
     }
 }

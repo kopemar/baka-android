@@ -42,4 +42,6 @@ class PlanningRepository(private val service: RemoteDataSource) {
     ) = service.createShiftTemplates(periodId, startTime, endTime, shiftHours, breakMinutes, perDay, excluded, workingDays)
 
     suspend fun getPeriodDays(periodId: Int) = service.getPeriodDays(periodId)
+
+    suspend fun callAutoScheduler(periodId: Int) = service.callAutoScheduler(periodId)
 }

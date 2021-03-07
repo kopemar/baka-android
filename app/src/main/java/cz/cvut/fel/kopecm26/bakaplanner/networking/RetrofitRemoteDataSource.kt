@@ -100,6 +100,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         api.createShiftTemplates(periodId, CreateShiftTemplatesRequest(startTime, endTime, shiftHours, breakMinutes, perDay, excluded, workingDays))
     }) { it?.templates }
 
+    // TODO better response model
+    override suspend fun callAutoScheduler(periodId: Int): ResponseModel<Boolean> = safeApiCall(
+        { api.callAutoSchedule(periodId) }
+    ) { it?.success }
+
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }
 

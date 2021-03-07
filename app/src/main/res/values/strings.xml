@@ -133,4 +133,8 @@
     <string name="employees">Employees</string>
     <string name="organization">Organization</string>
     <string name="name"><![CDATA[%s <b>(%s)</b>]]></string>
+    <string name="auto_schedule">Auto Schedule</string>
+    <string name="automatic_scheduling_assigns_shifts_to_employees">Automatic scheduling assigns shifts to employees</string>
+    <string name="params_set_up">Settings</string>
+    <string name="do_schedule">Schedule</string>
 </resources>

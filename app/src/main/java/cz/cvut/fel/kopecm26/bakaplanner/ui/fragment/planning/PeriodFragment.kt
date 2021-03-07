@@ -12,8 +12,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPeriodBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListSchedulingUnitBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AutoScheduleActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
-import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity.Companion.SCHEDULING_PERIOD
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
@@ -48,10 +48,11 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         viewModel.units.observe(viewLifecycleOwner, observer)
         viewModel.setPeriod(args.period)
 
+        setupMenu()
+
         binding.emptyWeekMessage.btnPlanShift.setOnClickListener {
             startActivityForResult<PlanWeekActivity>(PLAN_PERIOD_RC) {
-                this.putSerializable(SCHEDULING_PERIOD, viewModel.period.value)
-                this
+                this.apply { putSerializable(PlanWeekActivity.SCHEDULING_PERIOD, viewModel.period.value) }
             }
         }
     }
@@ -63,7 +64,23 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    private fun setupMenu() {
+        toolbar.inflateMenu(R.menu.period_schedule)
+
+        toolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.action_auto) {
+                startActivityForResult<AutoScheduleActivity>(AUTO_SCHEDULE_RC) {
+                    this.apply { putSerializable(AutoScheduleActivity.SCHEDULING_PERIOD, viewModel.period.value) }
+                }
+            }
+            true
+        }
+    }
+
+
+
     companion object {
         private const val PLAN_PERIOD_RC = 1112
+        private const val AUTO_SCHEDULE_RC = 1113
     }
 }

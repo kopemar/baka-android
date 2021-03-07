@@ -48,5 +48,5 @@ fun ImageView.setDrawableTint(@ColorRes color: Int) {
 @BindingAdapter("viewEnabled")
 fun View.setViewEnabled(value: Boolean) {
     this.isEnabled = value
-    if (!value) this.alpha = 0.36F
+    this.alpha = if (value) 1F else 0.36F
 }

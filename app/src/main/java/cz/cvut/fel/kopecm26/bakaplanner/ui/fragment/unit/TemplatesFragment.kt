@@ -86,8 +86,7 @@ class TemplatesFragment : ViewModelFragment<TemplatesViewModel, FragmentPlanDayB
 
     private fun startAddShiftActivity() {
         startActivityForResult<AddShiftTemplateActivity>(ADD_TEMPLATE_RC) {
-            putSerializable(AddShiftTemplateActivity.SCHEDULING_UNIT, viewModel.unit.value)
-            this
+            this.apply { putSerializable(AddShiftTemplateActivity.SCHEDULING_UNIT, viewModel.unit.value) }
         }
     }
 
