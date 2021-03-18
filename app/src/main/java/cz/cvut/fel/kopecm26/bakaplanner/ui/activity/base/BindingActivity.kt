@@ -35,6 +35,7 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
     protected open val navigateUpTint = R.color.text
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        beforeOnCreate()
         super.onCreate(savedInstanceState)
         initBinding()
         initNavigation()
@@ -43,6 +44,10 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
 
         initStatusBar()
         initToolbar()
+    }
+
+    private fun beforeOnCreate() {
+        setTheme(R.style.AppTheme)
     }
 
     protected open fun initNavigation() {}
