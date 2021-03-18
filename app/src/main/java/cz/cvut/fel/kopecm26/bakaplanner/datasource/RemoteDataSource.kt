@@ -72,4 +72,8 @@ interface RemoteDataSource {
     suspend fun callAutoScheduler(
         periodId: Int
     ): ResponseModel<Boolean>
+
+    suspend fun submitSchedule(
+        periodId: Int
+    ): ResponseModel<SchedulingPeriod>
 }

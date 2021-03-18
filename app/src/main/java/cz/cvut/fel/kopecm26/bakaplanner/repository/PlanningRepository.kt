@@ -44,4 +44,6 @@ class PlanningRepository(private val service: RemoteDataSource) {
     suspend fun getPeriodDays(periodId: Int) = service.getPeriodDays(periodId)
 
     suspend fun callAutoScheduler(periodId: Int) = service.callAutoScheduler(periodId)
+
+    suspend fun submitSchedule(periodId: Int) = service.submitSchedule(periodId)
 }

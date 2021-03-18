@@ -26,4 +26,12 @@ class PeriodViewModel : BaseViewModel() {
             }
         }
     }
+
+    fun submit() {
+        working.work {
+            _period.value?.id?.let {
+                planningRepository.submitSchedule(it).parseResponse(_period)
+            }
+        }
+    }
 }

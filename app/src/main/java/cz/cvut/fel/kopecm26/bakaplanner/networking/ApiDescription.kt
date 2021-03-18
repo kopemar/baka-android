@@ -16,6 +16,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitScheduleResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -110,4 +111,9 @@ interface ApiDescription {
     suspend fun callAutoSchedule(
         @Path("id") periodId: Int
     ): Response<AutoSchedulerResponse>
+
+    @POST("/periods/{id}/submit")
+    suspend fun submitSchedule(
+        @Path("id") periodId: Int
+    ): Response<SubmitScheduleResponse>
 }

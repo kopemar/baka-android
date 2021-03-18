@@ -5,6 +5,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
@@ -104,6 +105,10 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun callAutoScheduler(periodId: Int): ResponseModel<Boolean> = safeApiCall(
         { api.callAutoSchedule(periodId) }
     ) { it?.success }
+
+    override suspend fun submitSchedule(periodId: Int): ResponseModel<SchedulingPeriod> = safeApiCall({
+        api.submitSchedule(periodId)
+    }) { it?.data }
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

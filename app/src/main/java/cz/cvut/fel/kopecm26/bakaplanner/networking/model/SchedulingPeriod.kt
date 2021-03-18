@@ -11,7 +11,8 @@ import java.io.Serializable
 data class SchedulingPeriod(
     val id: Int,
     val start_date: String,
-    val end_date: String
+    val end_date: String,
+    val submitted: Boolean
 ) : Serializable {
     val state: PeriodState get() = PeriodState.TO_BE_SUBMITTED
 
