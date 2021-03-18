@@ -25,7 +25,7 @@ class AutoScheduleViewModel: BaseViewModel() {
 
     private fun callAutoScheduleWithId(periodId: Int) {
         working.work {
-            _scheduleState.value  = planningRepository.callAutoScheduler(periodId)
+            planningRepository.callAutoScheduler(periodId).parseResponse(_scheduleState)
         }
     }
 }

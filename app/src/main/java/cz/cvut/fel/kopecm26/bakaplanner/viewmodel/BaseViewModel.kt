@@ -14,6 +14,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.repository.PlanningRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ScheduleRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent.inject
 
@@ -57,5 +58,10 @@ abstract class BaseViewModel : ViewModel() {
     protected fun <T> ResponseModel<T>.parseResponse(liveData: MutableLiveData<T>) {
         if (this is ResponseModel.SUCCESS) liveData.value = data
         else if (this is ResponseModel.ERROR) errorType?.let(::parseError)
+    }
+
+    protected fun <T> ResponseModel<T>.parseResponse(flow: MutableStateFlow<ResponseModel<T>?>) {
+        flow.value = this
+        if (this is ResponseModel.ERROR) errorType?.let(::parseError)
     }
 }

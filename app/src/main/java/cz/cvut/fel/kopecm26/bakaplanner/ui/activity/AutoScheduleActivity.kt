@@ -33,7 +33,11 @@ class AutoScheduleActivity : ViewModelActivity<AutoScheduleViewModel, ActivityAu
     }
 
     private fun onScheduleState(state: ResponseModel<Boolean>?) {
-        if (state is ResponseModel.SUCCESS) showSnackBar("Hey success")
+        if (state is ResponseModel.SUCCESS) {
+            showSnackBar("Hey success")
+        } else if (state is ResponseModel.ERROR) {
+            showSnackBar(state.errorType?.messageRes ?: R.string.unknown_error)
+        }
     }
 
     companion object {
