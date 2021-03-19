@@ -35,6 +35,9 @@ interface ApiDescription {
     @DELETE("/auth/sign_out")
     suspend fun signOut(): Response<SignOutModel>
 
+    @POST("/users/fcm-token")
+    suspend fun postFirebaseToken(@Query("fcm_token") fcmToken: String): Response<Void>
+
     @GET("/shifts")
     suspend fun getShifts(): Response<ShiftResponse>
 

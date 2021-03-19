@@ -9,4 +9,6 @@ class UserRepository(private val service: RemoteDataSource) {
     suspend fun signOut() = service.signOut()
 
     suspend fun getOrganizationEmployees(id: Int) = service.getOrganizationEmployees(id)
+
+    suspend fun postFirebaseToken(token: String) = service.postFirebaseToken(token)
 }

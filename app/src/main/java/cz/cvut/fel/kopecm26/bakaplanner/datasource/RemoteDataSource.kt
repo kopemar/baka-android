@@ -21,6 +21,8 @@ interface RemoteDataSource {
 
     suspend fun signOut(): ResponseModel<SignOutModel>
 
+    suspend fun postFirebaseToken(token: String): ResponseModel<Boolean>
+
     suspend fun getShifts(from: ZonedDateTime, to: ZonedDateTime): ResponseModel<List<Shift>>
 
     suspend fun getShiftsBefore(to: ZonedDateTime): ResponseModel<List<Shift>>

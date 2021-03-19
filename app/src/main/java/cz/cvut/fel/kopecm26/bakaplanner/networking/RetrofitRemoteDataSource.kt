@@ -26,6 +26,10 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
 
     override suspend fun signOut() = safeApiCall({ api.signOut() }, { it })
 
+    override suspend fun postFirebaseToken(token: String): ResponseModel<Boolean> = safeApiCall({
+        api.postFirebaseToken(token)
+    }) { true }
+
     override suspend fun getShifts(from: ZonedDateTime, to: ZonedDateTime) =
         safeApiCall({ api.getShifts(from.toString(), to.toString()) }, { it?.shifts })
 
