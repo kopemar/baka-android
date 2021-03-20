@@ -137,4 +137,5 @@
     <string name="automatic_scheduling_assigns_shifts_to_employees">Automatic scheduling assigns shifts to employees</string>
     <string name="params_set_up">Settings</string>
     <string name="do_schedule">Schedule</string>
+    <string name="show_profile">Show profile</string>
 </resources>

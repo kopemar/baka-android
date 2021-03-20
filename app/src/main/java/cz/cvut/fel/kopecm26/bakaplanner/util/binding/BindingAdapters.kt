@@ -50,3 +50,8 @@ fun View.setViewEnabled(value: Boolean) {
     this.isEnabled = value
     this.alpha = if (value) 1F else 0.36F
 }
+
+@BindingAdapter("drawableStart")
+fun TextView.setDrawableStart(@DrawableRes value: Int) {
+    this.setCompoundDrawablesRelativeWithIntrinsicBounds(value, 0, 0, 0)
+}

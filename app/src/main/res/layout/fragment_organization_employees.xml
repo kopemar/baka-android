@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.OrganizationEmployeesViewModel" />
@@ -25,15 +28,36 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             isRefreshing="@{vm.working}"
-            android:layout_width="match_parent"
             onRefresh="@{() -> vm.fetchOrganizationEmployees(USER.organization_id)}"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/no_connection"
+                    layout="@layout/no_connection"
+                    visible="@{vm.noNetworkConnection == true &amp;&amp; vm.employees == null}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/t_toolbar"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/empty_history"
+                    layout="@layout/empty_history"
+                    visible="@{vm.employees.empty &amp;&amp; vm.noNetworkConnection != true}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_employees"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>

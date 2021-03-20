@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeViewModel" />
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_shift_id_label"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            app:fromHtml="@{@string/username}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Username" />
+
+        <TextView
+            android:id="@+id/tv_shift_id"
+            style="@style/Text.Light"
+            visible="@{tvShiftIdLabel.getVisibility() == View.VISIBLE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="@{vm.employee.username}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_shift_id_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_shift_id_label"
+            tools:text="16" />
+
+
+        <TextView
+            android:id="@+id/tv_duration_label"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/duration"
+            app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_shift_id" />
+
+        <TextView
+            style="@style/Text.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintBottom_toBottomOf="@id/tv_duration_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
+            app:layout_constraintTop_toTopOf="@id/tv_duration_label"
+            tools:text="2.20h" />
+
+        <TextView
+            android:id="@+id/tv_break_label"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/break_minutes"
+            app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_duration_label" />
+
+        <TextView
+            style="@style/Text.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_break_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
+            app:layout_constraintTop_toTopOf="@id/tv_break_label"
+            tools:text="2.20h" />
+
+        <TextView
+            android:id="@+id/tv_priority_label"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/priority"
+            app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_break_label" />
+
+        <TextView
+            android:id="@+id/tv_priority_value"
+            style="@style/Text.Light"
+            visible="@{tvPriorityLabel.getVisibility() == View.VISIBLE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_priority_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
+            app:layout_constraintTop_toTopOf="@id/tv_priority_label"
+            tools:text="2.20h" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

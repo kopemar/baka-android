@@ -49,6 +49,8 @@ interface RemoteDataSource {
 
     suspend fun getOrganizationEmployees(id: Int): ResponseModel<List<Employee>>
 
+    suspend fun getEmployeeShifts(id: Int): ResponseModel<List<Shift>>
+
     suspend fun getPeriodDays(periodId: Int): ResponseModel<List<PeriodDay>>
 
     suspend fun getShiftTimeCalculations(

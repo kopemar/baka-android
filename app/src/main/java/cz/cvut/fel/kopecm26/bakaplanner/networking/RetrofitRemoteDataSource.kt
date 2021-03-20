@@ -6,6 +6,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
@@ -75,6 +76,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.getOrganizationEmployees(id)
         }) { it?.employees }
 
+    override suspend fun getEmployeeShifts(id: Int): ResponseModel<List<Shift>> =
+        safeApiCall({
+            api.getEmployeeShifts(id)
+        }) { it?.data }
+
     override suspend fun getPeriodDays(periodId: Int): ResponseModel<List<PeriodDay>> =
         safeApiCall({
             api.getPeriodDays(periodId)
@@ -89,7 +95,14 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         perDay: Int
     ): ResponseModel<List<ShiftTimeCalculation>> =
         safeApiCall({
-            api.getShiftTimeCalculations(periodId, startTime, endTime, shiftHours, breakMinutes, perDay)
+            api.getShiftTimeCalculations(
+                periodId,
+                startTime,
+                endTime,
+                shiftHours,
+                breakMinutes,
+                perDay
+            )
         }) { it?.times }
 
     override suspend fun createShiftTemplates(
@@ -102,7 +115,18 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         excluded: Map<Int, ArrayList<Int>>,
         workingDays: List<Int>
     ): ResponseModel<List<ShiftTemplate>> = safeApiCall({
-        api.createShiftTemplates(periodId, CreateShiftTemplatesRequest(startTime, endTime, shiftHours, breakMinutes, perDay, excluded, workingDays))
+        api.createShiftTemplates(
+            periodId,
+            CreateShiftTemplatesRequest(
+                startTime,
+                endTime,
+                shiftHours,
+                breakMinutes,
+                perDay,
+                excluded,
+                workingDays
+            )
+        )
     }) { it?.templates }
 
     // TODO better response model
@@ -110,9 +134,10 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         { api.callAutoSchedule(periodId) }
     ) { it?.success }
 
-    override suspend fun submitSchedule(periodId: Int): ResponseModel<SchedulingPeriod> = safeApiCall({
-        api.submitSchedule(periodId)
-    }) { it?.data }
+    override suspend fun submitSchedule(periodId: Int): ResponseModel<SchedulingPeriod> =
+        safeApiCall({
+            api.submitSchedule(periodId)
+        }) { it?.data }
 
     private fun Headers.saveUserHeaders() =
         Constants.UserHeaders.values().forEach { getAndSave(it.key) }

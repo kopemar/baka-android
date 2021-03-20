@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template
 
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -18,5 +19,9 @@ class EmployeeBottomSheetFragment :
     override fun initUi() {
         Logger.d(args.employee)
         viewModel.setEmployeeValue(args.employee)
+
+        binding.showProfile.root.setOnClickListener {
+            findNavController().navigate(EmployeeBottomSheetFragmentDirections.navigateToEmployeeDetail(args.employee))
+        }
     }
 }

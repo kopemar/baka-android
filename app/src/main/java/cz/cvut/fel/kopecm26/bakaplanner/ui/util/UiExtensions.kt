@@ -3,6 +3,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.util
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.array.BaseArrayAdapter
 
@@ -33,3 +34,15 @@ fun View.elevationOnScroll(recycler: RecyclerView) {
         }
     })
 }
+
+fun View.elevationOnScroll(scrollView: NestedScrollView) {
+    scrollView.setOnDragListener { v, _ ->
+        this@elevationOnScroll.elevation =
+            if (v.scrollY > 0) 6F else 0F
+        true
+    }
+//    scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+//
+//    }
+}
+

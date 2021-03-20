@@ -8,6 +8,8 @@
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeDialogViewModel" />
 
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.NativeOptions" />
     </data>
 
     <LinearLayout
@@ -19,12 +21,12 @@
 
         <TextView
             style="@style/Text.Large"
+            fromHtml="@{@string/name(vm.employee.fullName, vm.employee.username)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            fromHtml="@{@string/name(vm.employee.fullName, vm.employee.username)}" />
+            android:layout_marginBottom="8dp" />
 
         <View
             android:layout_width="match_parent"
@@ -33,11 +35,13 @@
             android:background="@color/gray_blue"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_schedules"
+        <include
+            android:id="@+id/show_profile"
+            layout="@layout/list_native_options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
-
+            android:layout_marginBottom="24dp"
+            app:line="@{false}"
+            app:option="@{NativeOptions.SHOW_PROFILE}" />
     </LinearLayout>
 </layout>

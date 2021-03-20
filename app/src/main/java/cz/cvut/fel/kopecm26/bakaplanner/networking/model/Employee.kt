@@ -11,4 +11,5 @@ data class Employee(
     val username: String
 ) : Serializable {
     val fullName: String get() = "$last_name, $first_name"
+    val firstLetters: String get() = "${first_name[0]}${last_name[0]}"
 }

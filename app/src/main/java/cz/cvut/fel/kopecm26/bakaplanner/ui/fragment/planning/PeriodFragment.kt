@@ -77,8 +77,6 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         }
     }
 
-
-
     companion object {
         private const val PLAN_PERIOD_RC = 1112
         private const val AUTO_SCHEDULE_RC = 1113

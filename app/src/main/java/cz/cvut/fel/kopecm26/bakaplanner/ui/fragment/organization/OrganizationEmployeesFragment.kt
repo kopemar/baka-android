@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationEmployeesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListEmployeeBinding
@@ -34,7 +35,7 @@ class OrganizationEmployeesFragment :
                 { employee, binding, _ ->
                     (binding as ListEmployeeBinding).employee = employee
                 },
-                null,
+                { employee, _ -> findNavController().navigate(OrganizationEmployeesFragmentDirections.navigateToEmployeeDetail(employee)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

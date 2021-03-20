@@ -32,17 +32,16 @@ class ShiftEmployeesFragment :
                 { employee, binding, _ ->
                     (binding as ListEmployeeBinding).employee = employee
                 },
-                null,
-                { old, new -> old.id == new.id },
-                { old, new -> old == new },
                 { employee, _ ->
                     itemLongPressListener?.invoke(employee)
-                }
+                },
+                { old, new -> old.id == new.id },
+                { old, new -> old == new },
             ).apply { setItems(it) }
         }
     }
 
     override fun initUi() {
-        viewModel.employees.observe(this, observer)
+        viewModel.employees.observe(viewLifecycleOwner, observer)
     }
 }
