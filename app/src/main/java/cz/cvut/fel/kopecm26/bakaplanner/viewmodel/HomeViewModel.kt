@@ -60,6 +60,6 @@ class HomeViewModel : BaseViewModel() {
     }
 
     private suspend fun getShifts() {
-        shiftRepository.getCachedShifts()
+        shiftRepository.getAllShifts()
     }
 }

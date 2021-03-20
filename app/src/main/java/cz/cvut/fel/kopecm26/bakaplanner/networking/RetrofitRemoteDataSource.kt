@@ -31,8 +31,8 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         api.postFirebaseToken(token)
     }) { true }
 
-    override suspend fun getShifts(from: ZonedDateTime, to: ZonedDateTime) =
-        safeApiCall({ api.getShifts(from.toString(), to.toString()) }, { it?.shifts })
+    override suspend fun getShifts() =
+        safeApiCall({ api.getShifts() }, { it?.shifts })
 
     override suspend fun getShiftsBefore(to: ZonedDateTime) =
         safeApiCall({ api.getShiftsBefore(to.toString()) }) { it?.shifts }
@@ -105,6 +105,7 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             )
         }) { it?.times }
 
+    // TODO possibly move CreateShiftTemplateRequest creation to repo...
     override suspend fun createShiftTemplates(
         periodId: Int,
         startTime: String,

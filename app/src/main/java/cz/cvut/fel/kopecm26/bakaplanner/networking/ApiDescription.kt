@@ -43,12 +43,6 @@ interface ApiDescription {
     suspend fun getShifts(): Response<ShiftResponse>
 
     @GET("/shifts")
-    suspend fun getShifts(
-        @Query("start_date") startDate: String,
-        @Query("end_date") endDate: String
-    ): Response<ShiftResponse>
-
-    @GET("/shifts")
     suspend fun getShiftsBefore(@Query("end_date") endDate: String): Response<ShiftResponse>
 
     @GET("/templates")

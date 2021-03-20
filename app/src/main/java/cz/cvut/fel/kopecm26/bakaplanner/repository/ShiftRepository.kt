@@ -7,7 +7,6 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.weeksAfter
 import java.time.ZonedDateTime
 
 class ShiftRepository(private val service: RemoteDataSource, private val shiftDao: ShiftDao) {
@@ -20,38 +19,30 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun deleteAll() = shiftDao.deleteAll()
 
-    suspend fun refreshAllShifts(
-        from: ZonedDateTime = ZonedDateTime.now(),
-        to: ZonedDateTime = ZonedDateTime.now().weeksAfter(2)
-    ): ResponseModel<List<Shift>> = service.getShifts(from, to).run {
+    suspend fun refreshAllShifts(): ResponseModel<List<Shift>> = service.getShifts().run {
         if (this is ResponseModel.SUCCESS) {
-            data?.let { shiftDao.insert(it) }
-            ResponseModel.SUCCESS(shiftDao.getUpcoming(from.toString()))
+            data?.let { shiftDao.deleteAllAndReplace(it) }
+            ResponseModel.SUCCESS(shiftDao.getUpcoming())
         } else this
     }
 
-    suspend fun refreshShiftsBefore(to: ZonedDateTime = ZonedDateTime.now()) =
-        service.getShiftsBefore(to).apply {
+    suspend fun refreshShiftsBefore(to: ZonedDateTime = ZonedDateTime.now()): ResponseModel<List<Shift>> {
+        service.getShifts().apply {
             if (this is ResponseModel.SUCCESS) {
                 data?.let { shiftDao.insert(it) }
             }
         }
-
-    suspend fun getCachedShifts(from: ZonedDateTime, to: ZonedDateTime) =
-        if (shiftDao.inTimePeriod(from.toString(), to.toString()).isNullOrEmpty()) {
-            refreshAllShifts(from, to)
-        } else {
-            ResponseModel.SUCCESS(shiftDao.inTimePeriod(from.toString(), to.toString()))
-        }
+        return ResponseModel.SUCCESS(shiftDao.getBefore(to.toString()))
+    }
 
     suspend fun getShiftsBefore(to: ZonedDateTime): ResponseModel<List<Shift>> =
         if (shiftDao.getBefore(to.toString()).isNullOrEmpty()) {
-            service.getShiftsBefore(to)
+            refreshAllShifts()
         } else {
             ResponseModel.SUCCESS(shiftDao.getBefore(to.toString()))
         }
 
-    suspend fun getCachedShifts() = if (shiftDao.getAll().isNullOrEmpty()) {
+    suspend fun getAllShifts() = if (shiftDao.getAll().isNullOrEmpty()) {
         refreshAllShifts()
     } else {
         ResponseModel.SUCCESS(shiftDao.getAll())

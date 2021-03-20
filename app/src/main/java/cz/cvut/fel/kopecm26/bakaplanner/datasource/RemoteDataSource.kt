@@ -23,7 +23,7 @@ interface RemoteDataSource {
 
     suspend fun postFirebaseToken(token: String): ResponseModel<Boolean>
 
-    suspend fun getShifts(from: ZonedDateTime, to: ZonedDateTime): ResponseModel<List<Shift>>
+    suspend fun getShifts(): ResponseModel<List<Shift>>
 
     suspend fun getShiftsBefore(to: ZonedDateTime): ResponseModel<List<Shift>>
 

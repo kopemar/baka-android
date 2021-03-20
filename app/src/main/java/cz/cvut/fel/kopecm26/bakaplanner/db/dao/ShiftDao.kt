@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -36,4 +37,10 @@ interface ShiftDao : BaseDao<Shift> {
 
     @Query("DELETE FROM Shift WHERE id=:id")
     suspend fun deleteById(id: Int)
+
+    @Transaction
+    suspend fun deleteAllAndReplace(entities: Collection<Shift>) {
+        deleteAll()
+        insert(entities)
+    }
 }
