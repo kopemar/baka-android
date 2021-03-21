@@ -17,6 +17,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeShiftsResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SpecializationsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitScheduleResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import retrofit2.Response
@@ -84,11 +85,17 @@ interface ApiDescription {
     @GET("/organization/{id}/employees")
     suspend fun getOrganizationEmployees(@Path("id") periodId: Int): Response<EmployeeListResponse>
 
+    @GET("/specializations")
+    suspend fun getOrganizationSpecializations(): Response<SpecializationsResponse>
+
     @GET("/employees/{id}")
     suspend fun getEmployeeById(@Path("id") periodId: Int): Response<EmployeeListResponse>
 
     @GET("/employees/{id}/shifts")
-    suspend fun getEmployeeShifts(@Path("id") employeeId: Int, @Query("upcoming") upcoming: Boolean = true): Response<EmployeeShiftsResponse>
+    suspend fun getEmployeeShifts(
+        @Path("id") employeeId: Int,
+        @Query("upcoming") upcoming: Boolean = true
+    ): Response<EmployeeShiftsResponse>
 
     /* Period planning */
 

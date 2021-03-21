@@ -12,6 +12,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import java.time.ZonedDateTime
 
@@ -48,6 +49,7 @@ interface RemoteDataSource {
     suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<Employee>>
 
     suspend fun getOrganizationEmployees(id: Int): ResponseModel<List<Employee>>
+    suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>>
 
     suspend fun getEmployeeShifts(id: Int): ResponseModel<List<Shift>>
 

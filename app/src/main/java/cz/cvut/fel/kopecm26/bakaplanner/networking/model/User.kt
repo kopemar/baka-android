@@ -19,6 +19,7 @@ data class User(
     val organization_id: Int,
 ) {
     val fullName = "$last_name, $first_name"
+    val organizationFirstLetter = "${organization_name[0]}"
 }
 
 @JsonClass(generateAdapter = true)

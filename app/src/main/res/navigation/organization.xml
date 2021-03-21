@@ -13,6 +13,9 @@
         <action
             android:id="@+id/navigate_to_employees"
             app:destination="@id/organization_employees_fragment" />
+        <action
+            android:id="@+id/navigate_to_specializations"
+            app:destination="@id/organization_specializations_fragment" />
     </fragment>
 
     <fragment
@@ -36,5 +39,9 @@
             app:nullable="false" />
 
     </fragment>
+    <fragment
+        android:id="@+id/organization_specializations_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization.OrganizationSpecializationsFragment"
+        android:label="OrganizationSpecializationsFragment" />
 
 </navigation>

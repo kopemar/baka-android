@@ -13,5 +13,9 @@ class OrganizationFragment :
         binding.btnAllEmployees.setOnClickListener {
             findNavController().navigate(OrganizationFragmentDirections.navigateToEmployees())
         }
+
+        binding.specializations.root.setOnClickListener {
+            findNavController().navigate(OrganizationFragmentDirections.navigateToSpecializations())
+        }
     }
 }

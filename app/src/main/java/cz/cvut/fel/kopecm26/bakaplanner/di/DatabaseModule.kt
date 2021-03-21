@@ -3,6 +3,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.di
 import android.content.Context
 import cz.cvut.fel.kopecm26.bakaplanner.db.PlannerDatabase
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ContractRepository
+import cz.cvut.fel.kopecm26.bakaplanner.repository.OrganizationRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.PlanningRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ScheduleRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
@@ -28,4 +29,5 @@ val repositoryModule = module {
     single { ShiftRepository(get(), get()) }
     single { ContractRepository(get(), get()) }
     single { PlanningRepository(get()) }
+    single { OrganizationRepository(get()) }
 }
