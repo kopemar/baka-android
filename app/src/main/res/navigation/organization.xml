@@ -16,6 +16,9 @@
         <action
             android:id="@+id/navigate_to_specializations"
             app:destination="@id/organization_specializations_fragment" />
+        <action
+            android:id="@+id/action_organization_fragment_to_organization_employees_fragment"
+            app:destination="@id/organization_employees_fragment" />
     </fragment>
 
     <fragment
@@ -42,6 +45,15 @@
     <fragment
         android:id="@+id/organization_specializations_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization.OrganizationSpecializationsFragment"
-        android:label="OrganizationSpecializationsFragment" />
+        android:label="OrganizationSpecializationsFragment" >
+        <action
+            android:id="@+id/navigate_to_select_employees"
+            app:destination="@id/select_employees_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/select_employees_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees.SelectEmployeesFragment"
+        android:label="SelectEmployeesFragment" />
 
 </navigation>

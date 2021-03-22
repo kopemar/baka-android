@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="employee"
+            type="cz.cvut.fel.kopecm26.bakaplanner.util.Selection&lt;cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_2_ripple">
+
+        <TextView
+            android:id="@+id/first_letters"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@{employee.selected ? @color/color_primary : @color/gray_blue}"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@{employee.item.fullName}"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:backgroundTint="@color/colorPrimary"
+            tools:ignore="SpUsage"
+            tools:text="JD" />
+
+        <TextView
+            android:id="@+id/text_view"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@{employee.item.fullName}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/first_letters"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Johnny Dope" />
+
+        <ImageView
+            android:id="@+id/iv_check"
+            visible="@{employee.selected}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_mdi_check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

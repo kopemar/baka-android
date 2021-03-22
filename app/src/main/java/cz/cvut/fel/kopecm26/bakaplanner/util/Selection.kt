@@ -17,7 +17,10 @@ class SelectionList<W : Selection<*>> : ArrayList<W>() {
     fun getAllSelected() = filter { it.selected }
     fun getAllUnselected() = filter { !it.selected }
 
+    fun getAllSelectedCount() = filter { it.selected }.size
+
     fun isAnyNotSelected(): Boolean = find { !it.selected } != null
+    fun isAnySelected(): Boolean = find { !it.selected } == null
 
     fun select(item: W, onSelect: ((index: Int) -> Unit)? = null) {
         find { it == item }?.selected = true
@@ -27,6 +30,10 @@ class SelectionList<W : Selection<*>> : ArrayList<W>() {
     fun unselect(item: W, onSelect: ((index: Int) -> Unit)? = null) {
         find { it == item }?.selected = false
         onSelect?.invoke(indexOfFirst { it == item })
+    }
+
+    fun unselectAll() {
+        getAllSelected().forEach(::unselect)
     }
 }
 

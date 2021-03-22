@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,11 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
     protected open val toolbar: Toolbar? = null
     protected open var navigateUp: Boolean = false
 
+    @DrawableRes
+    protected open val navigateUpRes = R.drawable.ic_mdi_back
+    protected open val onNavigateUp: () -> Unit = { findNavController().navigateUp() }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,19 +52,23 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
     private fun initToolbar() {
         toolbar?.run {
             if (navigateUp) {
-                setNavigationIcon(R.drawable.ic_mdi_back)
+                setNavigationIcon(navigateUpRes)
                 setNavigationOnClickListener {
-                    findNavController().navigateUp()
+                    onNavigateUp.invoke()
                 }
             }
         }
     }
 
-    inline fun <reified T : AppCompatActivity> startActivityForResult(requestCode: Int) = Intent(requireContext(), T::class.java).apply {
-        startActivityForResult(this, requestCode)
-    }
+    inline fun <reified T : AppCompatActivity> startActivityForResult(requestCode: Int) =
+        Intent(requireContext(), T::class.java).apply {
+            startActivityForResult(this, requestCode)
+        }
 
-    inline fun <reified T : AppCompatActivity> startActivityForResult(requestCode: Int, extras: Bundle.() -> Bundle) = Intent(requireContext(), T::class.java).apply {
+    inline fun <reified T : AppCompatActivity> startActivityForResult(
+        requestCode: Int,
+        extras: Bundle.() -> Bundle
+    ) = Intent(requireContext(), T::class.java).apply {
         this.putExtras(extras.invoke(Bundle()))
         startActivityForResult(this, requestCode)
     }
@@ -92,7 +102,19 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
         .setMessage(message)
         .apply {
             title?.let(::setTitle)
-            positive?.let { this.setPositiveButton(getString(it)) { dialog, _ -> onPositive?.invoke(dialog) } }
-            negative?.let { this.setNegativeButton(getString(it)) { dialog, _ -> onNegative?.invoke(dialog) } }
+            positive?.let {
+                this.setPositiveButton(getString(it)) { dialog, _ ->
+                    onPositive?.invoke(
+                        dialog
+                    )
+                }
+            }
+            negative?.let {
+                this.setNegativeButton(getString(it)) { dialog, _ ->
+                    onNegative?.invoke(
+                        dialog
+                    )
+                }
+            }
         }.show()
 }

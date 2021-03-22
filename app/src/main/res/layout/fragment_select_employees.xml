@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SelectEmployeesViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/select_toolbar"
+            layout="@layout/toolbar_single"
+            app:layout_constraintTop_toTopOf="parent"
+            app:color="@{vm.selectedCount > 0 ? @color/colorPrimary : @color/bg_surface}"
+            app:title="@{@string/planning}" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_selections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </LinearLayout>
+</layout>

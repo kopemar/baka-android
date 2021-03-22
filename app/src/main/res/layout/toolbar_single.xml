@@ -27,7 +27,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@{color == null ? @color/bg_surface : ContextCompat.getColor(context, color)}"
+            android:background="@{color == null ? @color/bg_surface : color}"
             android:paddingEnd="8dp"
             app:elevation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
