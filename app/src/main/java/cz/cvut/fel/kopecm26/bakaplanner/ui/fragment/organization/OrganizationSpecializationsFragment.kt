@@ -1,5 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -42,7 +44,19 @@ class OrganizationSpecializationsFragment :
         viewModel.specializations.observe(viewLifecycleOwner, observer)
 
         binding.fab.setOnClickListener {
-            startActivityForResult<AddSpecializationActivity>(0)
+            startActivityForResult<AddSpecializationActivity>(ADD_SPECIALIZATION_RC)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == ADD_SPECIALIZATION_RC && resultCode == Activity.RESULT_OK) {
+            viewModel.fetchOrganizationSpecializations()
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    companion object {
+        private const val ADD_SPECIALIZATION_RC = 1118
     }
 }
