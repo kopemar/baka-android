@@ -62,11 +62,6 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
 
     private var menu: Menu? = null
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
-    }
-
     override fun initUi() {
         periodDaysViewModel.setPeriod(period)
         setMenuVisibility()

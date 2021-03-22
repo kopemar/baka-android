@@ -6,6 +6,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationSpecializationsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListSpecializationBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AddSpecializationActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.OrganizationSpecializationsViewModel
@@ -39,5 +40,9 @@ class OrganizationSpecializationsFragment :
 
     override fun initUi() {
         viewModel.specializations.observe(viewLifecycleOwner, observer)
+
+        binding.fab.setOnClickListener {
+            startActivityForResult<AddSpecializationActivity>(0)
+        }
     }
 }

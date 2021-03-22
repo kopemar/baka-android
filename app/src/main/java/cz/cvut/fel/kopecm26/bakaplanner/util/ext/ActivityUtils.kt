@@ -3,6 +3,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.util.ext
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 /**
@@ -14,6 +15,10 @@ inline fun <reified A : Activity> Context.startActivity() =
 fun Activity.hideKeyboard() =
     (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
         .hideSoftInputFromWindow(window.decorView.windowToken, 0)
+
+fun Activity.showKeyboard(view: View) =
+    (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+        .showSoftInput(view, InputMethodManager.SHOW_FORCED)
 
 fun Activity.finishWithResult(result: Int) {
     setResult(result)

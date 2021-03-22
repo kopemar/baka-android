@@ -139,4 +139,8 @@
     <string name="do_schedule">Schedule</string>
     <string name="show_profile">Show profile</string>
     <string name="specializations">Specializations</string>
+    <string name="add_specialization">Add new specialization</string>
+    <string name="_name">Name</string>
+    <string name="eg_cleaning">E.g. Cleaning</string>
+    <string name="specialization_description"><![CDATA[This action will create a new specialization for your  organization.  Employees can be assigned later.<br/><br/>Scheduling will be done with respect to employees\' specializations (provided that any shifts are labelled with this specialization).]]> </string>
 </resources>

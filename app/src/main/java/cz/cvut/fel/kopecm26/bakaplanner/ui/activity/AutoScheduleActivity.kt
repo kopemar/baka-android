@@ -28,7 +28,7 @@ class AutoScheduleActivity : ViewModelActivity<AutoScheduleViewModel, ActivityAu
                 if (it) binding.ivIcon.playAnimation()
                 else binding.ivIcon.setMinAndMaxFrame(0, 60)
             }
-            viewModel.scheduleState.collect { onScheduleState(it) }
+            viewModel.scheduleState.collect(::onScheduleState)
         }
     }
 

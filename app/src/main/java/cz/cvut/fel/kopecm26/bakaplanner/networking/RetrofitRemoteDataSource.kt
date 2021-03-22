@@ -12,6 +12,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
@@ -81,6 +82,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         safeApiCall({
             api.getOrganizationSpecializations()
         }) { it?.data }
+
+    override suspend fun createSpecialization(data: CreateSpecializationRequest): ResponseModel<Boolean> =
+        safeApiCall({
+            api.createSpecialization(data)
+        }) { true }
 
     override suspend fun getEmployeeShifts(id: Int): ResponseModel<List<Shift>> =
         safeApiCall({

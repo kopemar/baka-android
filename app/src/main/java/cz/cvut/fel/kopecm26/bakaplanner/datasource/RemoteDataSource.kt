@@ -14,6 +14,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
 import java.time.ZonedDateTime
 
 interface RemoteDataSource {
@@ -22,6 +23,7 @@ interface RemoteDataSource {
 
     suspend fun signOut(): ResponseModel<SignOutModel>
 
+    // TODO better model for returning
     suspend fun postFirebaseToken(token: String): ResponseModel<Boolean>
 
     suspend fun getShifts(): ResponseModel<List<Shift>>
@@ -49,7 +51,11 @@ interface RemoteDataSource {
     suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<Employee>>
 
     suspend fun getOrganizationEmployees(id: Int): ResponseModel<List<Employee>>
+
     suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>>
+
+    // TODO better model for returning
+    suspend fun createSpecialization(data: CreateSpecializationRequest): ResponseModel<Boolean>
 
     suspend fun getEmployeeShifts(id: Int): ResponseModel<List<Shift>>
 
@@ -75,6 +81,7 @@ interface RemoteDataSource {
         workingDays: List<Int>
     ): ResponseModel<List<ShiftTemplate>>
 
+    // TODO better model for returning
     suspend fun callAutoScheduler(
         periodId: Int
     ): ResponseModel<Boolean>

@@ -74,6 +74,7 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="16dp"
                 app:fabSize="normal"
+                app:borderWidth="0dp"
                 android:src="@drawable/ic_mdi_plus" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
