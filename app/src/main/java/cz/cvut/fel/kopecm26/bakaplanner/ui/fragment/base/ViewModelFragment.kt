@@ -15,6 +15,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getHour
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getMinute
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isCzech
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.time.LocalTime
 import kotlin.reflect.KClass
 
@@ -23,6 +25,9 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
     protected open val viewModelOwner: ViewModelStoreOwner? = null
 
     open val viewModel by lazy { clazz.let { ViewModelProvider(viewModelOwner ?: this).get(it.java) } }
+
+    // TODO refactor code
+    val sharedViewModel: SharedViewModel by sharedViewModel()
 
     protected open fun errorObserver() = Observer<Int?> {
         it?.let {

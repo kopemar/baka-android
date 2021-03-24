@@ -16,7 +16,7 @@ class AddSpecializationViewModel : BaseViewModel() {
 
     private fun launchSubmit(value: String) {
         working.work {
-            if (value.isNotEmpty()) organizationRepository.createSpecialization(value).parseResponse(_success)
+            if (value.isNotEmpty()) specializationRepository.createSpecialization(value).parseResponse(_success)
         }
     }
 }

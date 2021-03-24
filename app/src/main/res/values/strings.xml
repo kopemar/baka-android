@@ -143,4 +143,7 @@
     <string name="_name">Name</string>
     <string name="eg_cleaning">E.g. Cleaning</string>
     <string name="specialization_description"><![CDATA[This action will create a new specialization for your  organization.  Employees can be assigned later.<br/><br/>Scheduling will be done with respect to employees\' specializations (provided that any shifts are labelled with this specialization).]]> </string>
+    <string name="no_specializations_in_your_organization">No specializations in your organization</string>
+    <string name="no_employees">No employees</string>
+    <string name="add_employees">Add Employees</string>
 </resources>

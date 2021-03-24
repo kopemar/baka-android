@@ -11,8 +11,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.util.networking.safeApiCall
@@ -77,6 +79,23 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         safeApiCall({
             api.getOrganizationEmployees(id)
         }) { it?.employees }
+
+    override suspend fun getSpecializationEmployees(id: Int): ResponseModel<List<Employee>> =
+        safeApiCall({
+            api.getSpecializationEmployees(id)
+        }) { it?.employees }
+
+    override suspend fun getSpecializationEmployeesPossibilities(id: Int): ResponseModel<List<EmployeePresenter>> =
+        safeApiCall({
+            api.getSpecializationEmployeesPossibilities(id)
+        }) { it?.data }
+
+    override suspend fun putSpecializationEmployees(
+        periodId: Int,
+        request: UpdateSpecializationsRequest
+    ): ResponseModel<Boolean> = safeApiCall({
+        api.putSpecializationEmployees(periodId, request)
+    }) { true }
 
     override suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>> =
         safeApiCall({

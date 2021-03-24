@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationSpecializationsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListSpecializationBinding
@@ -33,7 +34,7 @@ class OrganizationSpecializationsFragment :
                 { specialization, binding, _ ->
                     (binding as ListSpecializationBinding).specialization = specialization
                 },
-                null,
+                { specialization, _ -> findNavController().navigate(OrganizationSpecializationsFragmentDirections.navigateToSpecializationDetail(specialization)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

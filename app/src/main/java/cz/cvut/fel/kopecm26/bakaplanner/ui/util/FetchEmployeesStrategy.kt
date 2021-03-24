@@ -1,8 +1,12 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.util
 
-sealed class FetchEmployeesStrategy {
+import java.io.Serializable
+
+sealed class FetchEmployeesStrategy : Serializable {
 
     object General : FetchEmployeesStrategy()
+
+    class Specialization(val id: Int) : FetchEmployeesStrategy()
 
 }
 

@@ -12,6 +12,8 @@
         <variable
             name="USER"
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens" />
     </data>
 
     <LinearLayout
@@ -51,7 +53,8 @@
 
                     <include
                         android:id="@+id/empty_history"
-                        layout="@layout/empty_history"
+                        layout="@layout/empty_resource"
+                        app:resource="@{EmptyScreens.NO_SPECIALIZATIONS}"
                         visible="@{vm.specializations.empty &amp;&amp; vm.noNetworkConnection != true}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/t_toolbar" />

@@ -4,15 +4,16 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat.getColor
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentSelectEmployeesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListEmployeeSelectableBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
-import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchEmployeesStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.elevationOnScroll
+import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.util.Selection
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SelectEmployeesViewModel
 
@@ -34,8 +35,10 @@ class SelectEmployeesFragment :
         }
     }
 
+    private val args by navArgs<SelectEmployeesFragmentArgs>()
+
     private val employeeAdapter by lazy {
-        BaseListAdapter<Selection<Employee>>(
+        BaseListAdapter<Selection<EmployeePresenter>>(
             { layoutInflater, viewGroup, attachToRoot ->
                 ListEmployeeSelectableBinding.inflate(
                     layoutInflater,
@@ -56,20 +59,30 @@ class SelectEmployeesFragment :
         }
     }
 
+    private val successObserver by lazy {
+        Observer<Boolean> {
+            if (it) {
+                sharedViewModel.assignSuccess.value = Consumable(true)
+                findNavController().navigateUp()
+            }
+        }
+    }
+
     override fun initUi() {
-        Logger.d("initUi")
+        viewModel.fetchEmployees(args.type)
         binding.selectToolbar.appBarLayout.elevationOnScroll(binding.rvSelections)
 
+        viewModel.success.observe(this, successObserver)
+
         viewModel.employeeSelection.observe(this) {
+            Logger.d("Got employee selection")
             binding.rvSelections.adapter = employeeAdapter.apply {
                 viewModel.employeeSelection.value?.let(::setItems)
             }
         }
 
-        viewModel.fetchEmployees(FetchEmployeesStrategy.General)
-
         viewModel.selectedCount.observe(viewLifecycleOwner, countObserver)
-        
+
         setupMenu()
     }
 
@@ -79,9 +92,7 @@ class SelectEmployeesFragment :
 
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.menu_check) {
-//                startActivityForResult<AutoScheduleActivity>(PeriodFragment.AUTO_SCHEDULE_RC) {
-//                    this.apply { putSerializable(AutoScheduleActivity.SCHEDULING_PERIOD, viewModel.period.value) }
-//                }
+                viewModel.submit(args.type)
             }
             true
         }
@@ -98,12 +109,12 @@ class SelectEmployeesFragment :
         setupSelected()
     }
 
-    private fun selectEmployee(day: Selection<Employee>) {
+    private fun selectEmployee(employee: Selection<EmployeePresenter>) {
         with(viewModel.employeeSelection.value) {
-            if (day.selected) {
-                this?.unselect(day) { binding.rvSelections.adapter?.notifyItemChanged(it) }
+            if (employee.selected) {
+                this?.unselect(employee) { binding.rvSelections.adapter?.notifyItemChanged(it) }
             } else {
-                this?.select(day) { binding.rvSelections.adapter?.notifyItemChanged(it) }
+                this?.select(employee) { binding.rvSelections.adapter?.notifyItemChanged(it) }
             }
             viewModel.countSelected()
         }

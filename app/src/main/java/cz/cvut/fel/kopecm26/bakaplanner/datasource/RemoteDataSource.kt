@@ -14,7 +14,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
 import java.time.ZonedDateTime
 
 interface RemoteDataSource {
@@ -51,6 +53,13 @@ interface RemoteDataSource {
     suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<Employee>>
 
     suspend fun getOrganizationEmployees(id: Int): ResponseModel<List<Employee>>
+
+    suspend fun getSpecializationEmployees(id: Int): ResponseModel<List<Employee>>
+
+    suspend fun getSpecializationEmployeesPossibilities(id: Int): ResponseModel<List<EmployeePresenter>>
+
+    // TODO better model for returning
+    suspend fun putSpecializationEmployees(periodId: Int, request: UpdateSpecializationsRequest): ResponseModel<Boolean>
 
     suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>>
 

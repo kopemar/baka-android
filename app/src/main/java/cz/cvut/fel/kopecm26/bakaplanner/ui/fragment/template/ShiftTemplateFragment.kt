@@ -25,7 +25,7 @@ class ShiftTemplateFragment :
     private val args by navArgs<ShiftTemplateFragmentArgs>()
 
     private val employeesFragment by lazy {
-        ShiftEmployeesFragment().apply {
+        ShiftEmployeesFragment(ShiftTemplateViewModel::class).apply {
             itemLongPressListener = {
                 findNavController().navigate(ShiftTemplateFragmentDirections.showEmployeeBottomSheet(it))
             }

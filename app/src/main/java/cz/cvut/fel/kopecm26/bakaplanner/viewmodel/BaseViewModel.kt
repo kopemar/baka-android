@@ -10,10 +10,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NoInternetError
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.NoServerConnectionError
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ContractRepository
-import cz.cvut.fel.kopecm26.bakaplanner.repository.OrganizationRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.PlanningRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ScheduleRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.ShiftRepository
+import cz.cvut.fel.kopecm26.bakaplanner.repository.SpecializationRepository
 import cz.cvut.fel.kopecm26.bakaplanner.repository.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -30,7 +30,7 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val planningRepository by inject(PlanningRepository::class.java)
 
-    protected val organizationRepository by inject(OrganizationRepository::class.java)
+    protected val specializationRepository by inject(SpecializationRepository::class.java)
 
     protected val _errorMessage = MutableLiveData<Int?>()
     val errorMessage: LiveData<Int?> = _errorMessage

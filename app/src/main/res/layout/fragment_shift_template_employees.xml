@@ -7,21 +7,48 @@
 
         <variable
             name="vm"
-            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftTemplateViewModel" />
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeListViewModel" />
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens"/>
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        isRefreshing="@{vm.working}"
-        onRefresh="@{() -> vm.fetchEmployees()}"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/no_connection"
+            layout="@layout/no_connection"
+            visible="@{vm.noNetworkConnection == true &amp;&amp; vm.employees == null}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/empty_history"
+            layout="@layout/empty_resource"
+            app:resource="@{EmptyScreens.NO_EMPLOYEES}"
+            visible="@{vm.employees.empty &amp;&amp; vm.noNetworkConnection != true}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            isRefreshing="@{vm.working}"
+            onRefresh="@{() -> vm.fetchEmployees()}"
+            android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_employees"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_employee" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,4 +8,6 @@ class SharedViewModel : BaseViewModel() {
     val signUpSuccess = MutableLiveData<Consumable<Boolean>>()
 
     val removeSuccess = MutableLiveData<Consumable<Boolean>>()
+
+    val assignSuccess = MutableLiveData<Consumable<Boolean>>()
 }

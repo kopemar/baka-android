@@ -6,7 +6,7 @@
 
         <variable
             name="employee"
-            type="cz.cvut.fel.kopecm26.bakaplanner.util.Selection&lt;cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee>" />
+            type="cz.cvut.fel.kopecm26.bakaplanner.util.Selection&lt;cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

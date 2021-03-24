@@ -8,14 +8,18 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListEmployeeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
-import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftTemplateViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeListViewModel
+import kotlin.reflect.KClass
 
-class ShiftEmployeesFragment :
-    ViewModelFragment<ShiftTemplateViewModel, FragmentShiftTemplateEmployeesBinding>(
-        R.layout.fragment_shift_template_employees,
-        ShiftTemplateViewModel::class
-    ) {
-    override val viewModelOwner: ViewModelStoreOwner? get() = activity
+class ShiftEmployeesFragment<VM : EmployeeListViewModel>(
+    clazz: KClass<VM>,
+    private val viewModelStoreOwner: ViewModelStoreOwner? = null
+) : ViewModelFragment<VM, FragmentShiftTemplateEmployeesBinding>(
+    R.layout.fragment_shift_template_employees,
+    clazz
+) {
+
+    override val viewModelOwner: ViewModelStoreOwner? get() = viewModelStoreOwner ?: activity
 
     var itemLongPressListener: ((employee: Employee) -> Unit)? = null
 
@@ -42,6 +46,8 @@ class ShiftEmployeesFragment :
     }
 
     override fun initUi() {
+        viewModel.fetchEmployees()
+
         viewModel.employees.observe(viewLifecycleOwner, observer)
     }
 }

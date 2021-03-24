@@ -32,7 +32,6 @@
     </fragment>
 
     <fragment
-
         android:id="@+id/employee_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees.EmployeeFragment"
         android:label="EmployeeFragment">
@@ -45,15 +44,34 @@
     <fragment
         android:id="@+id/organization_specializations_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization.OrganizationSpecializationsFragment"
-        android:label="OrganizationSpecializationsFragment" >
+        android:label="OrganizationSpecializationsFragment">
         <action
-            android:id="@+id/navigate_to_select_employees"
-            app:destination="@id/select_employees_fragment" />
+            android:id="@+id/navigate_to_specialization_detail"
+            app:destination="@id/specializationFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/select_employees_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees.SelectEmployeesFragment"
-        android:label="SelectEmployeesFragment" />
+        android:label="SelectEmployeesFragment">
+        <argument
+            android:name="type"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchEmployeesStrategy" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/specializationFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization.SpecializationFragment"
+        android:label="SpecializationFragment">
+        <action
+            android:id="@+id/navigate_to_select_employees"
+            app:destination="@id/select_employees_fragment" />
+
+        <argument
+            android:name="specialization"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization"
+            app:nullable="false" />
+    </fragment>
 
 </navigation>
