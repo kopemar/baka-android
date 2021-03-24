@@ -3,7 +3,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchEmployeesStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.util.Selection
@@ -11,12 +10,10 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.SelectionList
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
 
 class SelectEmployeesViewModel : BaseViewModel() {
-    private val employees = MutableLiveData<List<Employee>>()
     private val _presenters = MutableLiveData<List<EmployeePresenter>>()
 
     private val _employeeSelection =
         MediatorLiveData<SelectionList<Selection<EmployeePresenter>>>().apply {
-            addSource(employees) { mapEmployees(it) }
             addSource(_presenters) { mapEmployeePresenters(it) }
         }
     val employeeSelection: LiveData<SelectionList<Selection<EmployeePresenter>>> =
@@ -44,24 +41,6 @@ class SelectEmployeesViewModel : BaseViewModel() {
         }
     }
 
-    private fun mapEmployees(
-        employees: List<Employee>
-    ) {
-        val selections = SelectionList<Selection<EmployeePresenter>>()
-        employees.forEach {
-            selections.add(
-                Selection(
-                    EmployeePresenter(
-                        it.id,
-                        it.first_name,
-                        it.last_name
-                    )
-                )
-            )
-        }
-        _employeeSelection.value = selections
-    }
-
     private fun mapEmployeePresenters(
         employees: List<EmployeePresenter>
     ) {
@@ -77,9 +56,11 @@ class SelectEmployeesViewModel : BaseViewModel() {
                     .parseResponse(_presenters)
             }
             else -> {
-                userRepository.getCurrentUser()?.organization_id?.let {
-                    userRepository.getOrganizationEmployees(it)
-                        .parseResponse(employees)
+                userRepository.getCurrentUser()?.organization_id?.let { id ->
+                    userRepository.getOrganizationEmployees(id).parseResponse { response ->
+                        _presenters.value =
+                            response?.map { EmployeePresenter(it.id, it.first_name, it.last_name) }
+                    }
                 }
             }
         }
@@ -89,7 +70,8 @@ class SelectEmployeesViewModel : BaseViewModel() {
         val selected = _employeeSelection.value?.getAllSelected()?.map { it.item.id } ?: listOf()
         when (strategy) {
             is FetchEmployeesStrategy.Specialization -> {
-                specializationRepository.putSpecializationEmployees(strategy.id, selected).parseResponse(_success)
+                specializationRepository.putSpecializationEmployees(strategy.id, selected)
+                    .parseResponse(_success)
             }
             else -> {
                 // TODO

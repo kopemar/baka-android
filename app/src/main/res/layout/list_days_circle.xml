@@ -11,11 +11,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="2dp"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/circle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginVertical="4dp"
+        android:background="@drawable/rect_round"
         android:backgroundTint="@{day.selected ? @color/color_primary : @color/gray_blue}"
         app:viewEnabled="@{day.item.checked}">
 

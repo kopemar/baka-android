@@ -5,6 +5,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDaysResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ScheduleResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
@@ -27,6 +28,9 @@ interface ShiftsApiModule {
 
     @GET("/templates")
     suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String): Response<ShiftTemplatesResponse>
+
+    @POST("/templates/{id}/specialized")
+    suspend fun postShiftTemplateSpecialization(@Path("id") templateId: Int, @Query("specialization_id") specializationId: Int): Response<ShiftTemplate>
 
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>

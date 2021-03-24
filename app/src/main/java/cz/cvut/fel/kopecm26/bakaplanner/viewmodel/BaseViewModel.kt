@@ -58,13 +58,16 @@ abstract class BaseViewModel : ViewModel() {
         this._errorMessage.value = error.messageRes
     }
 
-    protected fun <T> ResponseModel<T>.parseResponse(liveData: MutableLiveData<T>) {
-        if (this is ResponseModel.SUCCESS) liveData.value = data
+    protected fun <T> ResponseModel<T>.parseResponse(onSuccess: (T?) -> Unit) {
+        if (this is ResponseModel.SUCCESS) onSuccess.invoke(this.data)
         else if (this is ResponseModel.ERROR) errorType?.let(::parseError)
     }
 
+    protected fun <T> ResponseModel<T>.parseResponse(liveData: MutableLiveData<T>) {
+        parseResponse { liveData.value = it }
+    }
+
     protected fun <T> ResponseModel<T>.parseResponse(flow: MutableStateFlow<ResponseModel<T>?>) {
-        flow.value = this
-        if (this is ResponseModel.ERROR) errorType?.let(::parseError)
+        parseResponse { flow.value = this }
     }
 }
