@@ -3,8 +3,10 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityWeekBinding
@@ -52,13 +54,15 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
         Observer<Boolean> {
             if (it && viewModel.step.value == PlanWeekWizard.ADJUST_SHIFTS) {
                 findNavController(binding.navHostFragment.id).navigate(
-                    AdjustShiftsFragmentDirections.navigateToPlanWeek()
+                    AdjustShiftsFragmentDirections.navigateToPlanWeekFinished()
                 )
             }
         }
     }
 
-    private val period get() = intent?.extras?.getSerializable(SCHEDULING_PERIOD) as? SchedulingPeriod
+    private val period by lazy { intent?.extras?.getSerializable(SCHEDULING_PERIOD) as? SchedulingPeriod }
+
+    private val mode by lazy { intent?.extras?.getInt(MODE) }
 
     private var menu: Menu? = null
 
@@ -68,6 +72,14 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
 
         planDaysViewModel.shiftTimeCalculations.observe(this, shiftCalcObserver)
         viewModel.finished.observe(this, finishObserver)
+
+        if (mode == MODE_UPDATE_DEMAND) {
+            binding.currentStepText.isVisible = false
+            viewModel.forceFinish()
+
+            val navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
+            navHostFragment.navController.navigate(R.id.planDemandFragment)
+        }
 
         toolbar.setTitle(R.string.plan_week)
 
@@ -168,6 +180,8 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
     }
 
     companion object {
+        const val MODE = "MODE"
+        const val MODE_UPDATE_DEMAND = 4242
         const val SCHEDULING_PERIOD = "SCHEDULING_PERIOD"
     }
 }

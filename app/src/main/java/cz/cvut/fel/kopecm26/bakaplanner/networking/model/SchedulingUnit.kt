@@ -21,6 +21,8 @@ data class SchedulingUnit(
     enum class UnitState(@DrawableRes val iconRes: Int) {
         DONE(R.drawable.ic_night_icon)
     }
+
+    fun toPeriodDay() = PeriodDay(date = start_time.formatDate(DateTimeFormats.YMD_DASH), id = id)
 }
 
 @JsonClass(generateAdapter = true)

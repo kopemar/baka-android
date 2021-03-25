@@ -11,22 +11,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginVertical="4dp"
+        android:layout_width="76dp"
+        android:layout_height="96dp"
+        android:layout_margin="4dp"
         android:background="@drawable/rect_round"
-        android:backgroundTint="@{day.selected ? @color/color_primary : @color/gray_blue}"
+        android:backgroundTint="@{day.selected ? @color/color_primary : @color/bg_surface}"
+        android:elevation="6dp"
         app:viewEnabled="@{day.item.checked}">
 
         <TextView
+            android:id="@+id/day_of_month"
+            style="@style/Text.Largest.Strong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{day.item.dayOfWeek.substring(0, 1)}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="@{day.item.dayOfMonth.toString()}"
+            android:textColor="@{day.selected ? @color/white : @color/text}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="M" />
+            tools:text="12" />
+
+        <TextView
+            style="@style/Text.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{day.item.dayOfWeek.substring(0, 3)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/day_of_month"
+            tools:text="Mon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -107,6 +107,18 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="Text.Larger.Strong">
+        <item name="android:fontFamily">@font/magra_bold</item>
+    </style>
+
+    <style name="Text.Largest.Strong">
+        <item name="android:fontFamily">@font/magra_bold</item>
+    </style>
+
+    <style name="Text.Largest">
+        <item name="android:textSize">32sp</item>
+    </style>
+
     <style name="Text.Light">
         <item name="android:textColor">@color/text_light</item>
     </style>

@@ -25,16 +25,16 @@
 
         <ImageView
             android:id="@+id/iv_shift_state_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:src="@{template.shiftTime.shiftIcon}"
-            android:background="@drawable/circle"
-            android:padding="8dp"
-            android:backgroundTint="@{context.getColor(template.priorityValue.color)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/circle"
+            android:padding="8dp"
+            android:backgroundTint="@{context.getColor(template.priorityValue.color)}"
             tools:src="@drawable/ic_weather_sunset_up" />
 
 
@@ -45,10 +45,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{USER.manager ? @string/time_from_to(template.startTimeHours, template.endTimeHours) : template.dateF}"
+            android:text="@{template.specialization == null ? @string/general : template.specialization}"
             app:layout_constraintStart_toEndOf="@id/iv_shift_state_icon"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Mon, November 9, 2020" />
+            tools:text="General" />
 
         <TextView
             android:id="@+id/tv_time"
@@ -58,26 +58,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="12dp"
-            android:text="@{@string/time_from_to(template.startTimeHours, template.endTimeHours)}"
+            android:text="@{template.priorityValue.titleRes}"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_date_headline"
             app:layout_constraintTop_toBottomOf="@id/tv_date_headline"
-            tools:text="9:00 AM - 5:30 PM" />
-
-        <TextView
-            style="@style/Text.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{template.shifts_count.toString()}"
-            app:drawableStartCompat="@drawable/ic_employee_count"
-            app:drawableTint="@color/text"
-            android:layout_marginStart="112dp"
-            android:drawablePadding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_date_headline"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="16" />
+            tools:text="Low" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

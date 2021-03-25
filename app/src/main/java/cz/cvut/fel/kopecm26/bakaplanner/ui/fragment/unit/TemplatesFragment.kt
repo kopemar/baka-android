@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPlanDayBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
@@ -29,7 +28,6 @@ class TemplatesFragment : ViewModelFragment<TemplatesViewModel, FragmentPlanDayB
 
     private val observer by lazy {
         Observer<List<ShiftTemplate>> {
-            binding.rvTemplates.layoutManager = LinearLayoutManager(binding.root.context)
             binding.rvTemplates.adapter = BaseListAdapter<ShiftTemplate>(
                 { layoutInflater, viewGroup, attachToRoot ->
                     ListTemplatesBinding.inflate(

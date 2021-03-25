@@ -11,4 +11,5 @@
     <color name="gray_blue">#465161</color>
     <color name="bg_surface_ripple">@color/bg_surface_2</color>
     <color name="bg_surface_3">#33000000</color>
+    <color name="white_or_dark_gray">#292323</color>
 </resources>

@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 
+import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -16,7 +17,8 @@ data class ShiftTemplate(
     val break_minutes: Int,
     val priority: Int,
     val duration: Float?,
-    val shifts_count: Int? = null
+    val shifts_count: Int? = null,
+    val specialization: String? = null,
 ) : Serializable {
     val startTimeHours get() = start_time.formatTime(DateTimeFormats.HOURS_MINUTES)
     val endTimeHours get() = end_time.formatTime(DateTimeFormats.HOURS_MINUTES)
@@ -36,12 +38,12 @@ data class ShiftTemplatesResponse(
     val templates: List<ShiftTemplate>
 )
 
-enum class Priority(@StringRes val titleRes: Int, val integerValue: Int) {
-    HIGHEST(R.string.highest, 5),
-    HIGH(R.string.high, 4),
-    MEDIUM(R.string.medium, 3),
-    LOW(R.string.low, 2),
-    LOWEST(R.string.lowest, 1);
+enum class Priority(@StringRes val titleRes: Int, val integerValue: Int, @ColorRes val color: Int) {
+    HIGHEST(R.string.highest, 5, R.color.red),
+    HIGH(R.string.high, 4, R.color.orange_10000),
+    MEDIUM(R.string.medium, 3, R.color.green_poison),
+    LOW(R.string.low, 2, R.color.greeno),
+    LOWEST(R.string.lowest, 1, R.color.light_blue);
 
     companion object {
         fun getPriorityByValue(value: Int) = values().find { it.integerValue == value }

@@ -97,6 +97,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         api.putSpecializationEmployees(periodId, request)
     }) { true }
 
+    override suspend fun updateDemand(templateId: Int, priority: Int): ResponseModel<Boolean> =
+        safeApiCall({
+            api.updateDemand(templateId, priority)
+        }) { true }
+
     override suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>> =
         safeApiCall({
             api.getOrganizationSpecializations()

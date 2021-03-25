@@ -62,6 +62,8 @@ enum class DateTimeFormats(val english: String, val czech: String = english) {
     @Suppress("Unused")
     SHORT_DAY("E "),
     DAY_MONTH_DAY("EE, MMMM d", "EE d. MMMM"),
+    DAY_OF_MONTH("d"),
+    YMD_DASH("YYYY-MM-dd"),
     DAY_MONTH_DAY_YEAR("EE, MMMM d, YYYY", "EE d. MMMM YYYY"),
     FULL_MONTH_DAY("MMMM d", "d. MMMM"),
     FULL_MONTH_DAY_SHORT("MMM d", "d. MMM"),

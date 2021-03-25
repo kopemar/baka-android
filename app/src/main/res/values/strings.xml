@@ -146,4 +146,5 @@
     <string name="no_specializations_in_your_organization">No specializations in your organization</string>
     <string name="no_employees">No employees</string>
     <string name="add_employees">Add Employees</string>
+    <string name="general">General</string>
 </resources>

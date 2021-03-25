@@ -76,4 +76,8 @@ class PlanWeekWizardViewModel : BaseViewModel() {
             response.errorType?.let(::parseError)
         }
     }
+
+    fun forceFinish() {
+        _finished.value = true
+    }
 }

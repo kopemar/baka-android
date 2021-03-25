@@ -12,6 +12,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.unit.TemplateFormFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.TemplateFormViewModel
 
+@Deprecated("Will not exist anymore")
 class AddShiftTemplateActivity :
     ViewModelActivity<TemplateFormViewModel, ActivityTemplateBinding>(R.layout.activity_template, TemplateFormViewModel::class) {
 

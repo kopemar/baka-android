@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week
 
+import androidx.navigation.fragment.findNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentWeekFinishedBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.BindingFragment
@@ -11,6 +12,10 @@ class PlanWeekFinishedFragment :
     override fun initUi() {
         binding.btnFinish.setOnClickListener {
             activity?.finishWithOkResult()
+        }
+
+        binding.btnPlanShifts.setOnClickListener {
+            findNavController().navigate(PlanWeekFinishedFragmentDirections.navigateToPlanDemand())
         }
     }
 }

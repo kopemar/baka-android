@@ -52,7 +52,9 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
 
         binding.emptyWeekMessage.btnPlanShift.setOnClickListener {
             startActivityForResult<PlanWeekActivity>(PLAN_PERIOD_RC) {
-                this.apply { putSerializable(PlanWeekActivity.SCHEDULING_PERIOD, viewModel.period.value) }
+                this.apply {
+                    putSerializable(PlanWeekActivity.SCHEDULING_PERIOD, viewModel.period.value)
+                }
             }
         }
     }
@@ -71,6 +73,13 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
             if (it.itemId == R.id.action_auto) {
                 startActivityForResult<AutoScheduleActivity>(AUTO_SCHEDULE_RC) {
                     this.apply { putSerializable(AutoScheduleActivity.SCHEDULING_PERIOD, viewModel.period.value) }
+                }
+            } else if (it.itemId == R.id.action_edit) {
+                startActivityForResult<PlanWeekActivity>(PLAN_PERIOD_RC) {
+                    this.apply {
+                        putInt(PlanWeekActivity.MODE, PlanWeekActivity.MODE_UPDATE_DEMAND)
+                        putSerializable(PlanWeekActivity.SCHEDULING_PERIOD, viewModel.period.value)
+                    }
                 }
             }
             true

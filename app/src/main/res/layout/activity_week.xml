@@ -8,7 +8,7 @@
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanWeekWizardViewModel" />
 
-        <import type="cz.cvut.fel.kopecm26.bakaplanner.R" />
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -23,6 +23,7 @@
             app:title="@{@string/plan_week}" />
 
         <TextView
+            android:id="@+id/current_step_text"
             fromHtml="@{vm.finished ? @string/finished : @string/step_of_wizard(vm.step.index, vm.stepsCount, context.getString(vm.step.stepName))}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
             android:layout_marginBottom="16dp" />
 
         <View
+            visible="@{currentStepText.getVisibility() == View.VISIBLE}"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray_blue" />

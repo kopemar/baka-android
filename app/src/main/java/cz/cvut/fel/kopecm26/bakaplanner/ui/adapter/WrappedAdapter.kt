@@ -53,7 +53,7 @@ class WrappedAdapter<S, T, B>(
         if (viewType == VIEW_TYPE_HEADER && inflateHeader != null) {
             HeaderViewHolder(inflateHeader.invoke(LayoutInflater.from(parent.context), parent, false))
         } else {
-            super.onCreateViewHolder(parent, viewType)
+            WrappedViewHolder(inflate.invoke(LayoutInflater.from(parent.context), parent, false))
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -72,6 +72,16 @@ class WrappedAdapter<S, T, B>(
                 (holder as BaseListAdapter<*>.ItemViewHolder).binding,
                 position
             )
+        }
+    }
+
+    open inner class WrappedViewHolder(binding: ViewDataBinding) : BaseListAdapter<T>.ItemViewHolder(binding) {
+        init {
+            binding.root.setOnLongClickListener {
+                onLongPress?.invoke(getItem(bindingAdapterPosition - (inflateHeader?.let { 1 } ?: 0)), binding)
+                onLongPress != null
+            }
+            binding.root.setOnClickListener { onClick?.invoke(getItem(bindingAdapterPosition - (inflateHeader?.let { 1 } ?: 0)), binding) }
         }
     }
 

@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 open class BaseListAdapter<T>(
-    private val inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding,
+    protected val inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding,
     protected val bind: (item: T, binding: ViewDataBinding, index: Int) -> Unit,
-    private val onClick: ((item: T, binding: ViewDataBinding) -> Unit)? = null,
+    protected val onClick: ((item: T, binding: ViewDataBinding) -> Unit)? = null,
     compareItems: (old: T, new: T) -> Boolean,
     compareContents: (old: T, new: T) -> Boolean,
-    private val onLongPress: ((item: T, binding: ViewDataBinding) -> Unit)? = null
+    protected val onLongPress: ((item: T, binding: ViewDataBinding) -> Unit)? = null
 ) : ListAdapter<T, RecyclerView.ViewHolder>(DiffCallback(compareItems, compareContents)) {
     var items = emptyList<T>()
 

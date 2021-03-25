@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization
 
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat.getFont
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -39,6 +40,8 @@ class SpecializationFragment: ViewModelFragment<SpecializationViewModel, Fragmen
     }
 
     override fun initUi() {
+        binding.toolbarLayout.setCollapsedTitleTypeface(getFont(requireContext(), R.font.magra))
+
         viewModel.setSpecializationValue(args.specialization)
 
         sharedViewModel.assignSuccess.observe(viewLifecycleOwner, assignObserver)

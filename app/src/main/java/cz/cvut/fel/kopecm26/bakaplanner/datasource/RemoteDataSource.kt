@@ -61,6 +61,8 @@ interface RemoteDataSource {
     // TODO better model for returning
     suspend fun putSpecializationEmployees(periodId: Int, request: UpdateSpecializationsRequest): ResponseModel<Boolean>
 
+    suspend fun updateDemand(templateId: Int, priority: Int) : ResponseModel<Boolean>
+
     suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>>
 
     // TODO better model for returning

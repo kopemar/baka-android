@@ -45,12 +45,35 @@
         android:label="AdjustShiftsFragment"
         tools:layout="@layout/fragment_adjust_shifts">
         <action
-            android:id="@+id/navigate_to_plan_week"
+            android:id="@+id/navigate_to_plan_week_finished"
             app:destination="@id/plan_week_finished_fragment" />
     </fragment>
     <fragment
         android:id="@+id/plan_week_finished_fragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanWeekFinishedFragment"
         android:label="PlanWeekFinishedFragment"
-        tools:layout="@layout/fragment_week_finished" />
+        tools:layout="@layout/fragment_week_finished">
+        <action
+            android:id="@+id/navigate_to_plan_demand"
+            app:destination="@id/planDemandFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planDemandFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDemandFragment"
+        android:label="PlanDemandFragment"
+        tools:layout="@layout/fragment_plan_demand">
+        <action
+            android:id="@+id/show_demand_dialog"
+            app:destination="@id/demandDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/demandDialogFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.DemandDialogFragment"
+        android:label="DemandDialogFragment">
+        <argument
+            android:name="template"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate"
+            app:nullable="false" />
+    </dialog>
+
 </navigation>
