@@ -45,19 +45,5 @@
             app:layout_constraintStart_toEndOf="@id/iv_header"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_chevron"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginEnd="16dp"
-            android:rotation="@{expanded ? 180F : 0F}"
-            android:src="@drawable/ic_chevron_down"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/gray_blue"
-            tools:src="@drawable/ic_chevron_down" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

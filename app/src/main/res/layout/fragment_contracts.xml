@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/contracts_toolbar"
             layout="@layout/toolbar_single"
             app:title="@{@string/contracts}" />
 

@@ -9,8 +9,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentContractsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.HeaderExpandableBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListContractBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
-import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.ExpandableHeaderAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.Headers
+import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.WrappedAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ContractsViewModel
 
@@ -20,12 +20,12 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
 ) {
 
     override val toolbar: Toolbar
-        get() = binding.toolbar.toolbar
+        get() = binding.contractsToolbar.toolbar
 
     override var navigateUp = true
 
     private val contractsAdapter
-        get() = ExpandableHeaderAdapter<Headers, Contract>(
+        get() = WrappedAdapter<Headers, Contract, Nothing>(
             { layoutInflater, viewGroup, attachToRoot ->
                 HeaderExpandableBinding.inflate(
                     layoutInflater,
@@ -74,8 +74,5 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
 
     override fun initUi() {
         viewModel.contracts.observe(this, observer)
-
-        binding.toolbar.toolbar.run {
-        }
     }
 }
