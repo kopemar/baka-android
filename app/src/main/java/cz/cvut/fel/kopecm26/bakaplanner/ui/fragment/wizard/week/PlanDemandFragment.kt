@@ -86,7 +86,12 @@ class PlanDemandFragment : ViewModelFragment<PlanDemandViewModel, FragmentPlanDe
                         Logger.d(template)
                     },
                     { old, new -> old.id == new.id },
-                    { old, new -> old == new }
+                    { old, new -> old == new },
+                    onHeaderClick = {
+                        it.value.firstOrNull { value -> value.specialization.isNullOrEmpty() }?.let { template ->
+                            findNavController().navigate(PlanDemandFragmentDirections.showSpecializations(template))
+                        }
+                    }
                 ).apply {
                     header = it.key
                     setItems(it.value)

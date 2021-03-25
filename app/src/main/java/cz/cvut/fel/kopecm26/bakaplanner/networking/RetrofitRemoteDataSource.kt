@@ -102,10 +102,22 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.updateDemand(templateId, priority)
         }) { true }
 
+    override suspend fun getPossibleTemplateSpecializations(templateId: Int): ResponseModel<List<Specialization>> =
+        safeApiCall({
+            api.getPossibleTemplateSpecializations(templateId)
+        }) { it?.data }
+
     override suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>> =
         safeApiCall({
             api.getOrganizationSpecializations()
         }) { it?.data }
+
+    override suspend fun createSpecializedShift(
+        templateId: Int,
+        specializationId: Int
+    ): ResponseModel<ShiftTemplate> = safeApiCall({
+        api.createSpecializedShift(templateId, specializationId)
+    }) { it }
 
     override suspend fun createSpecialization(data: CreateSpecializationRequest): ResponseModel<Boolean> =
         safeApiCall({

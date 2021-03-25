@@ -9,6 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SpecializationsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitScheduleResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import retrofit2.Response
@@ -79,4 +80,10 @@ interface ShiftsApiModule {
 
     @PUT("templates/{id}")
     suspend fun updateDemand(@Path("id") templateId: Int, @Query("priority") priority: Int): Response<Void>
+
+    @GET("templates/{id}/calculations/specializations")
+    suspend fun getPossibleTemplateSpecializations(@Path("id") templateId: Int): Response<SpecializationsResponse>
+
+    @POST("/templates/{id}/specialized")
+    suspend fun createSpecializedShift(@Path("id") templateId: Int, @Query("specialization_id") specializationId: Int): Response<ShiftTemplate>
 }
