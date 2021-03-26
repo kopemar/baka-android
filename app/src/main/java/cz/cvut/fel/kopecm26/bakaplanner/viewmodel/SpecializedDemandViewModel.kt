@@ -29,8 +29,8 @@ class SpecializedDemandViewModel : BaseViewModel() {
 
     private fun fetchSpecializations() {
         working.work {
-            _template.value?.id?.let {
-                specializationRepository.getPossibleSpecializations(it)
+            _template.value?.let {
+                specializationRepository.getSpecializations(it)
                     .parseResponse(_specializations)
             }
         }

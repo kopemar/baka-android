@@ -22,11 +22,12 @@ interface OrganizationApiModule {
     suspend fun getOrganizationEmployees(@Path("id") periodId: Int): Response<EmployeeListResponse>
 
     @GET("/specializations")
-    suspend fun getOrganizationSpecializations(): Response<SpecializationsResponse>
+    suspend fun getSpecializations(@Query("for_template") templateId: Int? = null): Response<SpecializationsResponse>
 
     @GET("/specializations/{id}/employees")
     suspend fun getSpecializationEmployees(@Path("id") periodId: Int): Response<EmployeeListResponse>
 
+    // TODO TODO will change API endpoint
     @GET("/specializations/{id}/calculations/contracts")
     suspend fun getSpecializationEmployeesPossibilities(@Path("id") periodId: Int): Response<AddSpecializationResponse>
 

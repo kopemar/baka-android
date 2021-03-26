@@ -14,7 +14,7 @@ class OrganizationSpecializationsViewModel : BaseViewModel() {
 
     fun fetchOrganizationSpecializations() {
         working.work {
-            specializationRepository.fetchSpecializations().parseResponse(_specializations)
+            specializationRepository.getSpecializations().parseResponse(_specializations)
         }
     }
 }

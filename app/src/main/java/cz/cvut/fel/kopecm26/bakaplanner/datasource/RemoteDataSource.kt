@@ -63,9 +63,7 @@ interface RemoteDataSource {
 
     suspend fun updateDemand(templateId: Int, priority: Int) : ResponseModel<Boolean>
 
-    suspend fun getPossibleTemplateSpecializations(templateId: Int): ResponseModel<List<Specialization>>
-
-    suspend fun getOrganizationSpecializations(): ResponseModel<List<Specialization>>
+    suspend fun getSpecializations(forTemplateId: Int? = null): ResponseModel<List<Specialization>>
 
     suspend fun createSpecializedShift(templateId: Int, specializationId: Int): ResponseModel<ShiftTemplate>
 
