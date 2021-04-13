@@ -3,6 +3,8 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking.modules
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateOrganizationResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -18,4 +20,7 @@ interface AuthApiModule {
 
     @POST("/users/fcm-token")
     suspend fun postFirebaseToken(@Query("fcm_token") fcmToken: String): Response<Void>
+
+    @POST("/organization")
+    suspend fun postOrganization(@Body request: CreateOrganizationRequest): Response<CreateOrganizationResponse>
 }
