@@ -42,7 +42,7 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         safeApiCall({ api.getShiftsBefore(to.toString()) }) { it?.shifts }
 
     override suspend fun getUnassignedShifts(from: ZonedDateTime) =
-        safeApiCall({ api.getUnassignedShiftsFrom(from.toString()) }) { it?.templates }
+        safeApiCall({ api.getUnassignedShiftsFrom(from.toString()) }) { it?.data }
 
     override suspend fun getContracts() =
         safeApiCall({ api.getContracts() }) { it?.contracts }
@@ -68,7 +68,7 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun getShiftTemplates(unitId: Int): ResponseModel<List<ShiftTemplate>> =
         safeApiCall({
             api.getShiftTemplates(unitId)
-        }) { it?.templates }
+        }) { it?.data }
 
     override suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<Employee>> =
         safeApiCall({
@@ -151,27 +151,13 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     // TODO possibly move CreateShiftTemplateRequest creation to repo...
     override suspend fun createShiftTemplates(
         periodId: Int,
-        startTime: String,
-        endTime: String,
-        shiftHours: Int,
-        breakMinutes: Int,
-        perDay: Int,
-        excluded: Map<Int, ArrayList<Int>>,
-        workingDays: List<Int>
+        request: CreateShiftTemplatesRequest
     ): ResponseModel<List<ShiftTemplate>> = safeApiCall({
         api.createShiftTemplates(
             periodId,
-            CreateShiftTemplatesRequest(
-                startTime,
-                endTime,
-                shiftHours,
-                breakMinutes,
-                perDay,
-                excluded,
-                workingDays
-            )
+            request
         )
-    }) { it?.templates }
+    }) { it?.data}
 
     // TODO better response model
     override suspend fun callAutoScheduler(periodId: Int): ResponseModel<Boolean> = safeApiCall(

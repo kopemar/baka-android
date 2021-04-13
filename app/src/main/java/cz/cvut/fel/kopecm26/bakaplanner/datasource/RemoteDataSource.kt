@@ -15,6 +15,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
 import java.time.ZonedDateTime
@@ -59,13 +60,19 @@ interface RemoteDataSource {
     suspend fun getSpecializationEmployeesPossibilities(id: Int): ResponseModel<List<EmployeePresenter>>
 
     // TODO better model for returning
-    suspend fun putSpecializationEmployees(periodId: Int, request: UpdateSpecializationsRequest): ResponseModel<Boolean>
+    suspend fun putSpecializationEmployees(
+        periodId: Int,
+        request: UpdateSpecializationsRequest
+    ): ResponseModel<Boolean>
 
-    suspend fun updateDemand(templateId: Int, priority: Int) : ResponseModel<Boolean>
+    suspend fun updateDemand(templateId: Int, priority: Int): ResponseModel<Boolean>
 
     suspend fun getSpecializations(forTemplateId: Int? = null): ResponseModel<List<Specialization>>
 
-    suspend fun createSpecializedShift(templateId: Int, specializationId: Int): ResponseModel<ShiftTemplate>
+    suspend fun createSpecializedShift(
+        templateId: Int,
+        specializationId: Int
+    ): ResponseModel<ShiftTemplate>
 
     // TODO better model for returning
     suspend fun createSpecialization(data: CreateSpecializationRequest): ResponseModel<Boolean>
@@ -85,13 +92,7 @@ interface RemoteDataSource {
 
     suspend fun createShiftTemplates(
         periodId: Int,
-        startTime: String,
-        endTime: String,
-        shiftHours: Int,
-        breakMinutes: Int,
-        perDay: Int,
-        excluded: Map<Int, ArrayList<Int>>,
-        workingDays: List<Int>
+        request: CreateShiftTemplatesRequest
     ): ResponseModel<List<ShiftTemplate>>
 
     // TODO better model for returning
@@ -99,7 +100,5 @@ interface RemoteDataSource {
         periodId: Int
     ): ResponseModel<Boolean>
 
-    suspend fun submitSchedule(
-        periodId: Int
-    ): ResponseModel<SchedulingPeriod>
+    suspend fun submitSchedule(periodId: Int): ResponseModel<SchedulingPeriod>
 }

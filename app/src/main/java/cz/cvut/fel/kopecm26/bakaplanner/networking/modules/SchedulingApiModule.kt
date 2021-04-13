@@ -26,5 +26,5 @@ interface SchedulingApiModule {
     suspend fun createTemplate(@Body template: ShiftTemplate): Response<ShiftTemplateResponse>
 
     @GET("/templates")
-    suspend fun getShiftTemplates(@Query("unit_id") unitId: Int): Response<ShiftTemplatesResponse>
+    suspend fun getShiftTemplates(@Query("unit") unitId: Int? = null): Response<ShiftTemplatesResponse>
 }

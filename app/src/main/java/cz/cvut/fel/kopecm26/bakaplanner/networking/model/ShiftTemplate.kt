@@ -35,7 +35,7 @@ data class ShiftTemplateResponse(
 
 @JsonClass(generateAdapter = true)
 data class ShiftTemplatesResponse(
-    val templates: List<ShiftTemplate>
+    val data: List<ShiftTemplate>
 )
 
 enum class Priority(@StringRes val titleRes: Int, val integerValue: Int, @ColorRes val color: Int) {

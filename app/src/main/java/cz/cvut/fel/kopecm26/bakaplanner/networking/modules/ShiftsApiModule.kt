@@ -11,6 +11,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationRes
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitScheduleResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.SubmitScheduleRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -30,9 +31,6 @@ interface ShiftsApiModule {
     @GET("/templates")
     suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String): Response<ShiftTemplatesResponse>
 
-    @POST("/templates/{id}/specialized")
-    suspend fun postShiftTemplateSpecialization(@Path("id") templateId: Int, @Query("specialization_id") specializationId: Int): Response<ShiftTemplate>
-
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>
 
@@ -48,6 +46,7 @@ interface ShiftsApiModule {
     @DELETE("/shift/{id}/schedule")
     suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<Shift>
 
+    // TODO not optimal use of REST API
     @GET("/periods/{id}/calculations/period-days")
     suspend fun getPeriodDays(@Path("id") periodId: Int): Response<PeriodDaysResponse>
 
@@ -61,20 +60,22 @@ interface ShiftsApiModule {
         @Query("per_day") perDay: Int,
     ): Response<ShiftTimeCalculationResponse>
 
-    @POST("/periods/{id}/shift-templates")
+    @POST("/periods/{id}/templates")
     suspend fun createShiftTemplates(
         @Path("id") periodId: Int,
         @Body body: CreateShiftTemplatesRequest,
     ): Response<ShiftTemplatesResponse>
 
+    // TODO not optimal use of REST API
     @POST("/periods/{id}/calculations/generate-schedule")
     suspend fun callAutoSchedule(
         @Path("id") periodId: Int
     ): Response<AutoSchedulerResponse>
 
-    @POST("/periods/{id}/submit")
+    @POST("/periods/{id}")
     suspend fun submitSchedule(
-        @Path("id") periodId: Int
+        @Path("id") periodId: Int,
+        @Body request: SubmitScheduleRequest = SubmitScheduleRequest(true)
     ): Response<SubmitScheduleResponse>
 
     @PUT("templates/{id}")

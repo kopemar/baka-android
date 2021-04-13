@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.repository
 
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 
 class PlanningRepository(private val service: RemoteDataSource) {
     suspend fun getSchedulingPeriods() = service.getSchedulingPeriods()
@@ -12,7 +13,8 @@ class PlanningRepository(private val service: RemoteDataSource) {
 
     suspend fun getShiftTemplates(unitId: Int) = service.getShiftTemplates(unitId)
 
-    suspend fun getShiftTemplateEmployees(templateId: Int) = service.getTemplateEmployees(templateId)
+    suspend fun getShiftTemplateEmployees(templateId: Int) =
+        service.getTemplateEmployees(templateId)
 
     suspend fun getShiftTimeCalculations(
         periodId: Int,
@@ -39,7 +41,18 @@ class PlanningRepository(private val service: RemoteDataSource) {
         perDay: Int,
         excluded: Map<Int, ArrayList<Int>>,
         workingDays: List<Int>
-    ) = service.createShiftTemplates(periodId, startTime, endTime, shiftHours, breakMinutes, perDay, excluded, workingDays)
+    ) = service.createShiftTemplates(
+        periodId,
+        CreateShiftTemplatesRequest(
+            startTime,
+            endTime,
+            shiftHours,
+            breakMinutes,
+            perDay,
+            excluded,
+            workingDays
+        )
+    )
 
     suspend fun getPeriodDays(periodId: Int) = service.getPeriodDays(periodId)
 
