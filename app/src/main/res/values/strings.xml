@@ -149,4 +149,8 @@
     <string name="general">General</string>
     <string name="add_specific_demand">Add Specific Demand</string>
     <string name="organization_name">Organization name</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="e_mail">Email</string>
+    <string name="password_repeat">Repeat password</string>
 </resources>
