@@ -11,7 +11,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateOrganizationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
@@ -30,6 +32,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     }
 
     override suspend fun signOut() = safeApiCall({ api.signOut() }, { it })
+
+    override suspend fun signUp(request: CreateOrganizationRequest): ResponseModel<CreateOrganizationResponse> =
+        safeApiCall({
+            api.postOrganization(request)
+        }) { it }
 
     override suspend fun postFirebaseToken(token: String): ResponseModel<Boolean> = safeApiCall({
         api.postFirebaseToken(token)

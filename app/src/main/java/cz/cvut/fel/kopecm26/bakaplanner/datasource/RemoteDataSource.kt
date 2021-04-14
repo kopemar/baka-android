@@ -14,7 +14,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateOrganizationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
@@ -25,6 +27,8 @@ interface RemoteDataSource {
     suspend fun signIn(auth: Auth): ResponseModel<User>
 
     suspend fun signOut(): ResponseModel<SignOutModel>
+
+    suspend fun signUp(request: CreateOrganizationRequest): ResponseModel<CreateOrganizationResponse>
 
     // TODO better model for returning
     suspend fun postFirebaseToken(token: String): ResponseModel<Boolean>
