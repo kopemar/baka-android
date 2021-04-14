@@ -25,6 +25,10 @@ class LoginFragment : ViewModelFragment<LoginViewModel, FragmentLoginBinding>(
     override fun initUi() {
         viewModel.signedIn.observe(this, signedInObserver)
 
+        binding.btnSignUp.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.navigateToNewOrganization())
+        }
+
         form {
             input(binding.etUsername.id) {
                 assert(getString(R.string.username_must_be_filled)) {

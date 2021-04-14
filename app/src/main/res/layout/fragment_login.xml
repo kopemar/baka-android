@@ -58,6 +58,13 @@
             android:layout_width="match_parent"
             android:text="@string/log_in" />
 
+        <Button
+            style="@style/Button.Primary"
+            android:id="@+id/btn_sign_up"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:text="@string/sign_up" />
+
     </LinearLayout>
 
 </layout>
