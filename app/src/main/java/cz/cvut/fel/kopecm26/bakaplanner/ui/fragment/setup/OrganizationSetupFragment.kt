@@ -31,6 +31,10 @@ class OrganizationSetupFragment :
     }
 
     override fun initUi() {
+        viewModel.working.observe(viewLifecycleOwner) {
+            if (it) requireActivity().hideKeyboard()
+        }
+
         viewModel.response.observe(viewLifecycleOwner, observer)
 
         binding.clRoot.setOnFocusChangeListener { _, hasFocus ->
