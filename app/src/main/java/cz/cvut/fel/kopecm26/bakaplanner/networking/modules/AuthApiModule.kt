@@ -3,7 +3,9 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking.modules
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.UserResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateEmployeeResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateOrganizationResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateEmployeeRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -23,4 +25,7 @@ interface AuthApiModule {
 
     @POST("/organization")
     suspend fun postOrganization(@Body request: CreateOrganizationRequest): Response<CreateOrganizationResponse>
+
+    @POST("/employee")
+    suspend fun postEmployee(@Body request: CreateEmployeeRequest): Response<CreateEmployeeResponse>
 }

@@ -7,6 +7,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationEmployeesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListEmployeeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AddEmployeeActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.elevationOnScroll
@@ -43,8 +44,13 @@ class OrganizationEmployeesFragment :
     }
 
     override fun initUi() {
+        // todo better way :P
         PrefsUtils.getUser()?.organization_id?.let {
             viewModel.fetchOrganizationEmployees(it)
+        }
+
+        binding.fab.setOnClickListener {
+            startActivityForResult<AddEmployeeActivity>(1111)
         }
 
         binding.mainToolbar.appBarLayout.elevationOnScroll(binding.rvEmployees)

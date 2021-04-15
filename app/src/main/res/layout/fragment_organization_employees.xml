@@ -14,51 +14,69 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_single"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/employees}" />
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
-            isRefreshing="@{vm.working}"
-            onRefresh="@{() -> vm.fetchOrganizationEmployees(USER.organization_id)}"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <include
+                android:id="@+id/main_toolbar"
+                layout="@layout/toolbar_single"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@{@string/employees}" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                isRefreshing="@{vm.working}"
+                onRefresh="@{() -> vm.fetchOrganizationEmployees(USER.organization_id)}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-                <include
-                    android:id="@+id/no_connection"
-                    layout="@layout/no_connection"
-                    visible="@{vm.noNetworkConnection == true &amp;&amp; vm.employees == null}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/t_toolbar"
-                    tools:visibility="gone" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <include
-                    android:id="@+id/empty_history"
-                    layout="@layout/empty_history"
-                    visible="@{vm.employees.empty &amp;&amp; vm.noNetworkConnection != true}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
+                    <include
+                        android:id="@+id/no_connection"
+                        layout="@layout/no_connection"
+                        visible="@{vm.noNetworkConnection == true &amp;&amp; vm.employees == null}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/t_toolbar"
+                        tools:visibility="gone" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_employees"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-            </LinearLayout>
+                    <include
+                        android:id="@+id/empty_history"
+                        layout="@layout/empty_history"
+                        visible="@{vm.employees.empty &amp;&amp; vm.noNetworkConnection != true}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_employees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:backgroundTint="@color/colorPrimary"
+            app:tint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:fabSize="normal"
+            app:borderWidth="0dp"
+            android:src="@drawable/ic_mdi_plus" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
