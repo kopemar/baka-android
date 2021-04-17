@@ -55,12 +55,12 @@ class AddEmployeeFormFragment: ViewModelFragment<AddEmployeeViewModel, FragmentA
             isNotEmpty().description(R.string.username_has_to_be_filled)
             matches("[A-z0-9]+([A-z0-9.]+)+([^.])").description(R.string.username_cannot_end_with_dot)
             matches("[A-z0-9]+([A-z0-9.]).([A-z0-9]+)+").description(R.string.username_can_contain)
-            matches("[a-z0-9]+([a-z0-9.]+)+([a-z0-9]+)+").description(R.string.username_must_be_lowercase)
+            matches("[a-z0-9]+([a-z0-9.]).([a-z0-9]+)+").description(R.string.username_must_be_lowercase)
         }
 
         inputLayout(binding.inputPassword) {
             assert(getString(R.string.must_be_at_least_6)) {
-                it.editText?.text.toString().length > 6
+                it.editText?.text.toString().length >= 6
             }
             matches("[A-z0-9]+").description(R.string.password_can_contain_letters_and_digits)
         }
