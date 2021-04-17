@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees
 
+import android.annotation.SuppressLint
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat.getColor
 import androidx.lifecycle.Observer
@@ -25,6 +26,7 @@ class SelectEmployeesFragment :
     override val toolbar: Toolbar get() = binding.selectToolbar.toolbar
     override var navigateUp: Boolean = true
 
+    @SuppressLint("NotifyDataSetChanged")
     override val onNavigateUp: () -> Unit = {
         if ((viewModel.selectedCount.value ?: 0) > 0) {
             viewModel.employeeSelection.value?.unselectAll()

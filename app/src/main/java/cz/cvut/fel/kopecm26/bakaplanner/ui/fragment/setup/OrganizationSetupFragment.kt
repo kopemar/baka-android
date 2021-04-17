@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.setup
 
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -16,6 +17,9 @@ class OrganizationSetupFragment :
         R.layout.fragment_organization_setup, NewOrganizationViewModel::class
     ) {
     override val viewModel: NewOrganizationViewModel by navGraphViewModels(R.id.new_organization)
+
+    override val toolbar: Toolbar get() = binding.setupToolbar.toolbar
+    override var navigateUp = true
 
     override val onNavigateUp = {
         if (viewModel.working.value != true) {
@@ -37,6 +41,9 @@ class OrganizationSetupFragment :
         }
 
         viewModel.response.observe(viewLifecycleOwner, observer)
+        toolbar.inflateMenu(R.menu.check)
+
+        setupForm()
 
         binding.clRoot.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -77,6 +84,10 @@ class OrganizationSetupFragment :
                 assert(getString(R.string.passwords_must_match)) {
                     it.editText?.text.toString() == binding.inputPassword.editText?.text.toString()
                 }
+            }
+
+            submitWith(toolbar.menu, R.id.menu_check) {
+                viewModel.submit()
             }
         }
     }

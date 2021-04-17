@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.setup
 
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.afollestad.vvalidator.form
@@ -12,6 +13,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.NewOrganizationViewModel
 class OrganizationNameFragment: ViewModelFragment<NewOrganizationViewModel, FragmentOrganizationNameBinding>(
     R.layout.fragment_organization_name, NewOrganizationViewModel::class
 ) {
+    override val toolbar: Toolbar get() = binding.setupToolbar
+    override var navigateUp = true
+
     override val viewModel: NewOrganizationViewModel by navGraphViewModels(R.id.new_organization)
 
     override fun initUi() {
