@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateEmployeeResponse
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatter
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
 import java.time.LocalDate
 
@@ -14,6 +16,19 @@ class AddEmployeeViewModel : BaseViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val passwordRepeat = MutableLiveData("")
+    private val _date = MutableLiveData<LocalDate>()
+    private val _dateFormatted = MediatorLiveData<String>().apply {
+        addSource(_date) {
+            value = it.format(formatter(DateTimeFormats.MONTH_DAY_YEAR))
+        }
+    }
+
+    val dateFormatted: LiveData<String> = _dateFormatted
+
+    fun setDate(date: LocalDate) {
+        _date.value = date
+    }
+
     // TODO
     val dateOfBirth = MutableLiveData<LocalDate>(LocalDate.of(2000, 1, 1))
 
@@ -38,6 +53,9 @@ class AddEmployeeViewModel : BaseViewModel() {
         }
         addSource(passwordRepeat) {
             value = notEmpty() && password.value == passwordRepeat.value
+        }
+        addSource(dateOfBirth) {
+            value = notEmpty()
         }
     }
 
@@ -67,6 +85,6 @@ class AddEmployeeViewModel : BaseViewModel() {
 
     // TODO email validation
     private fun notEmpty() =
-        !firstName.value.isNullOrBlank() && !lastName.value.isNullOrBlank() && !username.value.isNullOrBlank() && !email.value.isNullOrBlank() && !password.value.isNullOrBlank()
+        !firstName.value.isNullOrBlank() && !lastName.value.isNullOrBlank() && !username.value.isNullOrBlank() && !email.value.isNullOrBlank() && !password.value.isNullOrBlank() && dateOfBirth.value != null
 
 }

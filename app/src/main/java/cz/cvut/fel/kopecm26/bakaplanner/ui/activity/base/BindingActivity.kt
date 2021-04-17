@@ -29,7 +29,7 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
 
     @DrawableRes
     protected open val navigateUpRes = R.drawable.ic_mdi_back
-    protected open val onNavigateUp: () -> Unit = { finish() }
+    protected open val onNavigateUp: (() -> Unit)? = null
 
     @ColorRes
     protected open val navigateUpTint = R.color.text
@@ -78,9 +78,13 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onNavigateUp.invoke()
+        onNavigateUp?.invoke()
 
         return super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        onNavigateUp?.invoke() ?: super.onBackPressed()
     }
 
     protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) =

@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.di
 
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AddEmployeeViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AdjustShiftsViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanDaysViewModel
@@ -11,6 +12,7 @@ import org.koin.dsl.module
 val sharedViewModelModule = module {
     viewModel { SharedViewModel() }
     viewModel { TemplateFormViewModel() }
+    viewModel { AddEmployeeViewModel() }
 
     viewModel { PeriodDaysViewModel() }
     viewModel { PlanDaysViewModel() }

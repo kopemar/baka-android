@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base
 
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.widget.EditText
 import androidx.databinding.ViewDataBinding
@@ -17,6 +18,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.util.ext.isCzech
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.time.LocalDate
 import java.time.LocalTime
 import kotlin.reflect.KClass
 
@@ -56,6 +58,26 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
             observable.value.toString().getHour() ?: 9,
             observable.value.toString().getMinute() ?: 0,
             isCzech()
+        ).show()
+    }
+
+    protected fun setUpDatePicker(
+        year: Int? = null,
+        month: Int? = null,
+        day: Int? = null,
+        onPicked: (LocalDate) -> Unit
+    ) {
+        val defaultDate = LocalDate.now().minusYears(20)
+        DatePickerDialog(
+            requireContext(),
+            R.style.AlertDialogTheme,
+            { _, y, m, d ->
+                val dateTime = LocalDate.of(y, m, d)
+                onPicked(dateTime)
+            },
+            year ?: defaultDate.year,
+            month ?: defaultDate.monthValue,
+            day ?: defaultDate.dayOfMonth,
         ).show()
     }
 }

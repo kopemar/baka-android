@@ -79,7 +79,10 @@
     <string name="are_you_sure_you_want_to_cancel">Are you sure you want to cancel this?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+
     <string name="template_fragment_tag" translatable="false">TemplateFragment</string>
+    <string name="add_employee_tag" translatable="false">AddEmployeeFormFragment</string>
+
     <string name="time_picker" translatable="false">TimePicker</string>
     <string name="break_minutes">Break</string>
     <string name="_0" translatable="false">0</string>
@@ -154,4 +157,14 @@
     <string name="e_mail">Email</string>
     <string name="password_repeat">Repeat password</string>
     <string name="add_employee">Add employee</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="submit_valid_email">Insert valid email</string>
+    <string name="username_can_contain">Username can contain letters, digits and one dot</string>
+    <string name="please_insert_last_name">Insert last name please</string>
+    <string name="please_insert_first_name">Insert first name please</string>
+    <string name="username_must_be_lowercase">Username must be lowercase</string>
+    <string name="username_cannot_end_with_dot">Username cannot end with dot</string>
+    <string name="must_be_at_least_6">Password must be at least 6 characters long</string>
+    <string name="password_can_contain_letters_and_digits">Password can contain letters and digits</string>
+    <string name="passwords_must_match">Passwords must match</string>
 </resources>
