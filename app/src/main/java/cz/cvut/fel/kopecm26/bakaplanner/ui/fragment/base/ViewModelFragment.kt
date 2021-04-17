@@ -19,7 +19,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.BaseViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.ZoneOffset
 import kotlin.reflect.KClass
 
 abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutRes: Int, private val clazz: KClass<V>) : BindingFragment<B>(layoutRes) {
@@ -65,9 +67,11 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
         year: Int? = null,
         month: Int? = null,
         day: Int? = null,
+        showYearFirst: Boolean = true,
+        maxYearsAgo: Long = 15,
         onPicked: (LocalDate) -> Unit
     ) {
-        val defaultDate = LocalDate.now().minusYears(20)
+        val defaultDate = LocalDate.of(1990, 1, 1)
         DatePickerDialog(
             requireContext(),
             R.style.AlertDialogTheme,
@@ -78,6 +82,10 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
             year ?: defaultDate.year,
             month ?: defaultDate.monthValue,
             day ?: defaultDate.dayOfMonth,
-        ).show()
+        ).apply {
+            // This is StackOverflow workaround to display year picker first…
+            if (showYearFirst) this.datePicker.touchables.firstOrNull()?.performClick()
+            this.datePicker.maxDate = LocalDateTime.now().minusYears(maxYearsAgo).toEpochSecond(ZoneOffset.UTC) * 1000
+        }.show()
     }
 }

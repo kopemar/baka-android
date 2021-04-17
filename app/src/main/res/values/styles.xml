@@ -36,7 +36,6 @@
         <item name="android:colorControlActivated">@color/colorPrimary</item>
         <item name="android:buttonBarButtonStyle">@style/ButtonStyle</item>
         <item name="android:windowBackground">@color/bg_surface</item>
-        <item name="android:datePickerMode">spinner</item>
     </style>
 
     <style name="TitlePaneStyleCenter" >
