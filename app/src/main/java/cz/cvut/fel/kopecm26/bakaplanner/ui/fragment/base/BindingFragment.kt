@@ -86,7 +86,7 @@ abstract class BindingFragment<B : ViewDataBinding>(private val layoutRes: Int) 
     private fun initBinding(inflater: LayoutInflater, container: ViewGroup?) {
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.setVariable(BR.USER, PrefsUtils.getUser())
     }

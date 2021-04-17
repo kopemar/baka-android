@@ -44,7 +44,7 @@ class AddEmployeeFormFragment: ViewModelFragment<AddEmployeeViewModel, FragmentA
         }
 
         inputLayout(binding.inputBirthDate) {
-            isNotEmpty()
+            isNotEmpty().description(R.string.birth_date_has_to_be_filled)
         }
 
         inputLayout(binding.inputEmail) {
@@ -52,6 +52,7 @@ class AddEmployeeFormFragment: ViewModelFragment<AddEmployeeViewModel, FragmentA
         }
 
         inputLayout(binding.inputUsername) {
+            isNotEmpty().description(R.string.username_has_to_be_filled)
             matches("[A-z0-9]+([A-z0-9.]+)+([^.])").description(R.string.username_cannot_end_with_dot)
             matches("[A-z0-9]+([A-z0-9.]).([A-z0-9]+)+").description(R.string.username_can_contain)
             matches("[a-z0-9]+([a-z0-9.]+)+([a-z0-9]+)+").description(R.string.username_must_be_lowercase)

@@ -76,11 +76,11 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
             requireContext(),
             R.style.AlertDialogTheme,
             { _, y, m, d ->
-                val dateTime = LocalDate.of(y, m, d)
+                val dateTime = LocalDate.of(y, m + 1, d)
                 onPicked(dateTime)
             },
             year ?: defaultDate.year,
-            month ?: defaultDate.monthValue,
+            month ?: defaultDate.monthValue - 1,
             day ?: defaultDate.dayOfMonth,
         ).apply {
             // This is StackOverflow workaround to display year picker first…

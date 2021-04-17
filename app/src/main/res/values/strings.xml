@@ -167,4 +167,6 @@
     <string name="must_be_at_least_6">Password must be at least 6 characters long</string>
     <string name="password_can_contain_letters_and_digits">Password can contain letters and digits</string>
     <string name="passwords_must_match">Passwords must match</string>
+    <string name="username_has_to_be_filled">Username must be filled</string>
+    <string name="birth_date_has_to_be_filled">Birth date has to be filled</string>
 </resources>

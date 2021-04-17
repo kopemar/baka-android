@@ -21,6 +21,7 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
     override val onNavigateUp = { if (viewModel.working.value == false) finish() }
 
     override fun initUi() {
+        toolbar.title = getString(R.string.add_employee)
         viewModel.working.observe(this) {
             if (it) hideKeyboard()
         }
