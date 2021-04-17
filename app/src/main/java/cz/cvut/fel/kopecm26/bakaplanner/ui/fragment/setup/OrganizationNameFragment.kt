@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.setup
 
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.afollestad.vvalidator.form
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationNameBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
@@ -20,8 +21,18 @@ class OrganizationNameFragment: ViewModelFragment<NewOrganizationViewModel, Frag
             }
         }
 
-        binding.btnNext.setOnClickListener {
-            findNavController().navigate(OrganizationNameFragmentDirections.navigateToOrganizationSetup())
+        setupForm()
+    }
+
+    private fun setupForm() {
+        form {
+            inputLayout(binding.inputOrganizationName) {
+                isNotEmpty()
+            }
+            
+            submitWith(binding.btnNext) {
+                findNavController().navigate(OrganizationNameFragmentDirections.navigateToOrganizationSetup())
+            }
         }
     }
 

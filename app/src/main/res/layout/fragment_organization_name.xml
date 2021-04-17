@@ -67,7 +67,8 @@
                 style="@style/Base.Widget.AppCompat.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textNoSuggestions"
                 android:paddingHorizontal="16dp"
                 android:text="@={vm.name}" />
         </com.google.android.material.textfield.TextInputLayout>

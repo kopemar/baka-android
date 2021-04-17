@@ -9,229 +9,208 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.NewOrganizationViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_root"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_root"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusableInTouchMode="true">
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintBottom_toBottomOf="@id/input_first_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_first_name"
+                app:tint="@color/text_light" />
 
-                <ImageView
-                    android:id="@+id/baka_planner_icon"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="96dp"
-                    android:src="@drawable/ic_logo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/text" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_first_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/first_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_profile"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tv_login"
-                    style="@style/Text.Medium"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_first_name"
+                    style="@style/Base.Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginBottom="8dp"
-                    app:fromHtml="@{@string/login_with_credentials}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/baka_planner_icon" />
+                    android:layout_height="56dp"
+                    android:autofillHints="name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords|textNoSuggestions"
+                    android:nextFocusDown="@id/input_last_name"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.firstName}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_last_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/last_name"
+                app:layout_constraintEnd_toEndOf="@id/input_first_name"
+                app:layout_constraintStart_toStartOf="@id/input_first_name"
+                app:layout_constraintTop_toBottomOf="@id/input_first_name">
 
-                <ImageView
-                    android:id="@+id/iv_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_profile"
-                    app:layout_constraintBottom_toBottomOf="@id/input_first_name"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/input_first_name"
-                    app:tint="@color/text" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_first_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/first_name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_profile"
-                    app:layout_constraintTop_toBottomOf="@id/tv_login">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/actv_first_name"
-                        style="@style/Base.Widget.AppCompat.EditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:inputType="text"
-                        android:paddingHorizontal="16dp"
-                        android:text="@={vm.firstName}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_last_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/last_name"
-                    app:layout_constraintEnd_toEndOf="@id/input_first_name"
-                    app:layout_constraintStart_toStartOf="@id/input_first_name"
-                    app:layout_constraintTop_toBottomOf="@id/input_first_name">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/actv_last_name"
-                        style="@style/Base.Widget.AppCompat.EditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:inputType="text"
-                        android:paddingHorizontal="16dp"
-                        android:text="@={vm.lastName}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_username"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/username"
-                    app:layout_constraintEnd_toEndOf="@id/input_first_name"
-                    app:layout_constraintStart_toStartOf="@id/input_first_name"
-                    app:layout_constraintTop_toBottomOf="@id/input_last_name">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/actv_username"
-                        style="@style/Base.Widget.AppCompat.EditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:inputType="text"
-                        android:paddingHorizontal="16dp"
-                        android:text="@={vm.username}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:id="@+id/iv_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_mdi_email_outline"
-                    app:layout_constraintBottom_toBottomOf="@id/input_email"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/input_email"
-                    app:tint="@color/text" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_email"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/e_mail"
-                    app:layout_constraintEnd_toEndOf="@id/input_first_name"
-                    app:layout_constraintStart_toStartOf="@id/input_first_name"
-                    app:layout_constraintTop_toBottomOf="@id/input_username">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/actv_email"
-                        style="@style/Base.Widget.AppCompat.EditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:inputType="textEmailAddress"
-                        android:paddingHorizontal="16dp"
-                        android:text="@={vm.email}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:id="@+id/iv_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_lock"
-                    app:layout_constraintBottom_toBottomOf="@id/input_password"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/input_password"
-                    app:tint="@color/text" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_password"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/password"
-                    app:layout_constraintEnd_toEndOf="@id/input_first_name"
-                    app:layout_constraintStart_toStartOf="@id/input_first_name"
-                    app:layout_constraintTop_toBottomOf="@id/input_email">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/actv_password"
-                        style="@style/Base.Widget.AppCompat.EditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:inputType="textPassword"
-                        android:paddingHorizontal="16dp"
-                        android:text="@={vm.password}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_password_repeat"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/password_repeat"
-                    app:layout_constraintEnd_toEndOf="@id/input_first_name"
-                    app:layout_constraintStart_toStartOf="@id/input_first_name"
-                    app:layout_constraintTop_toBottomOf="@id/input_password">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/actv_password_repeat"
-                        style="@style/Base.Widget.AppCompat.EditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:inputType="textPassword"
-                        android:paddingHorizontal="16dp"
-                        android:text="@={vm.passwordRepeat}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <Button
-                    android:id="@+id/btn_next"
-                    style="@style/Button.Primary.Color"
-                    viewEnabled="@{vm.canSubmit == true}"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_last_name"
+                    style="@style/Base.Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
-                    android:onClick="@{() -> vm.submit()}"
-                    android:text="@string/next"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/input_password_repeat" />
+                    android:layout_height="56dp"
+                    android:autofillHints="name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    android:nextFocusDown="@id/input_username"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.lastName}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/username"
+                app:layout_constraintEnd_toEndOf="@id/input_first_name"
+                app:layout_constraintStart_toStartOf="@id/input_first_name"
+                app:layout_constraintTop_toBottomOf="@id/input_last_name">
 
-        <include
-            layout="@layout/progress_overlay"
-            android:elevation="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:visible="@{vm.working}" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_username"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions"
+                    android:nextFocusDown="@id/iv_email"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.username}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/iv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_mdi_email"
+                app:layout_constraintBottom_toBottomOf="@id/input_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_email"
+                app:tint="@color/text_light" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/e_mail"
+                app:layout_constraintEnd_toEndOf="@id/input_first_name"
+                app:layout_constraintStart_toStartOf="@id/input_first_name"
+                app:layout_constraintTop_toBottomOf="@id/input_username">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_email"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:autofillHints="emailAddress"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusDown="@id/input_password"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.email}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/iv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_lock"
+                app:layout_constraintBottom_toBottomOf="@id/input_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_password"
+                app:tint="@color/text_light" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/password"
+                app:layout_constraintEnd_toEndOf="@id/input_first_name"
+                app:layout_constraintStart_toStartOf="@id/input_first_name"
+                app:layout_constraintTop_toBottomOf="@id/input_email">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_password"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@id/input_password_repeat"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.password}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_password_repeat"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/password_repeat"
+                app:layout_constraintEnd_toEndOf="@id/input_first_name"
+                app:layout_constraintStart_toStartOf="@id/input_first_name"
+                app:layout_constraintTop_toBottomOf="@id/input_password">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_password_repeat"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.passwordRepeat}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <Button
+                            android:id="@+id/btn_next"
+                            style="@style/Button.Primary.Color"
+                            viewEnabled="@{vm.canSubmit == true}"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="16dp"
+                            android:onClick="@{() -> vm.submit()}"
+                            android:text="@string/add"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/input_password_repeat" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
