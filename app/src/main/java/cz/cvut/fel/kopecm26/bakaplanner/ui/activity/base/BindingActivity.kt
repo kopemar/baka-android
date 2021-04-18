@@ -29,7 +29,7 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
 
     @DrawableRes
     protected open val navigateUpRes = R.drawable.ic_mdi_back
-    protected open val onNavigateUp: (() -> Unit)? = null
+    protected open val onNavigateUp: ((BackNavigation) -> Unit)? = null
 
     @ColorRes
     protected open val navigateUpTint = R.color.text
@@ -78,13 +78,13 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onNavigateUp?.invoke()
+        onNavigateUp?.invoke(BackNavigation.SUPPORT)
 
         return super.onSupportNavigateUp()
     }
 
     override fun onBackPressed() {
-        onNavigateUp?.invoke() ?: super.onBackPressed()
+        onNavigateUp?.invoke(BackNavigation.BUTTON) ?: super.onBackPressed()
     }
 
     protected fun showSnackBar(text: String, length: Int = Snackbar.LENGTH_SHORT) =
@@ -121,5 +121,9 @@ abstract class BindingActivity<B : ViewDataBinding>(@LayoutRes private val layou
                 }
             }
             .show()
+    }
+
+    enum class BackNavigation {
+        SUPPORT, BUTTON
     }
 }

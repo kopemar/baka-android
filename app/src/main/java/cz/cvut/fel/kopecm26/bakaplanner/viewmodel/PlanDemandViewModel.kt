@@ -27,8 +27,8 @@ class PlanDemandViewModel : BaseViewModel() {
             planningRepository.getSchedulingUnits(periodId).parseResponse { response ->
                 _daySelection.value = SingleSelectionList<Selection<PeriodDay>>().apply {
                     response?.map { Selection(it.toPeriodDay()) }?.let { addAll(it) }
-                    this[0].selected = true
-                    fetchShiftsInUnit(this[0].item.id)
+                    this.firstOrNull()?.selected = true
+                    this.firstOrNull()?.item?.id?.let { fetchShiftsInUnit(it) }
                 }
             }
         }

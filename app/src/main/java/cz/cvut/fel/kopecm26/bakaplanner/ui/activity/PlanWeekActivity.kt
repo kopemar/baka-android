@@ -18,7 +18,6 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.PlanWeekWizard
-import cz.cvut.fel.kopecm26.bakaplanner.util.ext.finishWithOkResult
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AdjustShiftsViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
@@ -34,6 +33,26 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
     override val toolbar: Toolbar get() = binding.toolbar.toolbar
     override val navigateUp = true
     override val navigateUpRes: Int get() = R.drawable.ic_mdi_close
+    override val onNavigateUp: ((BackNavigation) -> Unit) get() = {
+        if (it == BackNavigation.SUPPORT || viewModel.firstStep.value == true) {
+            if (viewModel.working.value == false) {
+                showMaterialDialog(
+                    R.string.are_you_sure_you_want_to_cancel,
+                    positive = R.string.yes,
+                    onPositive = {
+                        finish()
+                    },
+                    negative = R.string.no,
+                    onNegative = { dialog ->
+                        dialog.dismiss()
+                    }
+                )
+            }
+        } else {
+            findNavController(binding.navHostFragment.id).popBackStack()
+            prevStep()
+        }
+    }
 
     private val periodDaysViewModel: PeriodDaysViewModel by viewModel()
     private val planDaysViewModel: PlanDaysViewModel by viewModel()
@@ -144,15 +163,6 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
         this.menu = menu
         menuInflater.inflate(R.menu.check_time, menu)
         return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onBackPressed() {
-        if (viewModel.finished.value != true) {
-            prevStep()
-            super.onBackPressed()
-        } else {
-            finishWithOkResult()
-        }
     }
 
     private fun setMenuVisibility() {

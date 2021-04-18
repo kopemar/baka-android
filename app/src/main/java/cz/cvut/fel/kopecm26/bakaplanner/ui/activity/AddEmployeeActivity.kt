@@ -18,7 +18,9 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
     override val toolbar: Toolbar get() = binding.mainToolbar.toolbar
     override val navigateUp = true
 
-    override val onNavigateUp = { if (viewModel.working.value == false) finish() }
+    override val onNavigateUp: (BackNavigation) -> Unit = {
+        if (viewModel.working.value == false) finish()
+    }
 
     override fun initUi() {
         toolbar.title = getString(R.string.add_employee)
