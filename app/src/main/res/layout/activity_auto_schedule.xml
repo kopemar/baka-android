@@ -2,6 +2,7 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AutoScheduleViewModel" />
@@ -61,25 +62,38 @@
         <Button
             android:id="@+id/btn_schedule"
             style="@style/Button.Primary"
+            viewEnabled="@{!vm.working}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@string/do_schedule"
-            app:icon="@drawable/ic_mdi_plus"
-            app:iconGravity="textStart"
-            app:iconPadding="4dp"
-            viewEnabled="@{!vm.working}"
             android:onClick="@{() -> vm.callAutoSchedule()}"
+            android:text="@string/do_schedule"
+            app:icon="@drawable/ic_robot"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <ProgressBar
+            visible="@{vm.working}"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:indeterminateTint="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@id/btn_schedule"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            visible="@{vm.working}"
-            android:indeterminateTint="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/empty_text" />
+
+        <ImageView
+            android:id="@+id/id_success"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_scheduling_done"
+            android:visibility="gone"
+            visible="@{!vm.working}"
+            app:layout_constraintBottom_toTopOf="@id/btn_schedule"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
