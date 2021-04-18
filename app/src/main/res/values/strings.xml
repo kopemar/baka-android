@@ -124,7 +124,7 @@
     <string name="_24_hours">24 hours</string>
     <string name="check_time">Check time</string>
     <string name="shift_times">Shift times</string>
-    <string name="from_to__">%s – %s</string>
+    <string name="from_to__" translatable="false">%s – %s</string>
     <string name="week">Week</string>
     <string name="working_days">Working days</string>
     <string name="shift_length">Shift length</string>
@@ -169,4 +169,7 @@
     <string name="passwords_must_match">Passwords must match</string>
     <string name="username_has_to_be_filled">Username must be filled</string>
     <string name="birth_date_has_to_be_filled">Birth date has to be filled</string>
+    <string name="type">Type</string>
+    <string name="add_contract">Add contract</string>
+    <string name="work_load">Workload</string>
 </resources>
