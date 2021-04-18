@@ -3,6 +3,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.setup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.afollestad.vvalidator.form
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentLoginBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
@@ -24,6 +25,13 @@ class LoginFragment : ViewModelFragment<LoginViewModel, FragmentLoginBinding>(
 
     override fun initUi() {
         viewModel.signedIn.observe(this, signedInObserver)
+
+        binding.form.setOnFocusChangeListener { _, hasFocus ->
+            Logger.d("cl root click")
+            if (hasFocus) {
+                requireActivity().hideKeyboard()
+            }
+        }
 
         binding.btnSignUp.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.navigateToNewOrganization())
