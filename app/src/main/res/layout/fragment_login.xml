@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.LoginViewModel" />
@@ -10,9 +11,9 @@
 
     <LinearLayout
         android:id="@+id/form"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_width="match_parent"
         android:orientation="vertical"
         android:paddingTop="16dp">
 
@@ -35,51 +36,107 @@
 
         <TextView
             style="@style/Text.Medium"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
             app:fromHtml="@{@string/login_with_credentials}" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/FormTextField"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/ic_user"
-            android:hint="@string/username"
-            android:id="@+id/et_username"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:paddingHorizontal="6dp"
-            android:text="@={vm.username}"
-            android:textColor="@color/text" />
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-        <EditText
-            style="@style/FormTextField"
-            android:drawableStart="@drawable/ic_lock"
-            android:hint="@string/password"
-            android:id="@+id/et_password"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            <ImageView
+                android:id="@+id/iv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_user"
+                android:layout_marginStart="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/input_username"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_username"
+                app:tint="@color/text_light" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:hint="@string/username">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_username"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:autofillHints="username"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:nextFocusDown="@id/input_password"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.username}" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:text="@={vm.password}" />
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_lock"
+                android:layout_marginStart="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/input_username"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/input_username"
+                app:tint="@color/text_light" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:hint="@string/password">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_password"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:autofillHints="password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="@={vm.password}" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <Button
-            style="@style/Button.Primary"
             android:id="@+id/btn_log_in"
-            android:layout_margin="8dp"
+            style="@style/Button.Primary"
             android:layout_width="match_parent"
+            android:layout_margin="8dp"
             android:text="@string/log_in" />
 
         <Button
-            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:id="@+id/btn_sign_up"
-            android:layout_marginHorizontal="8dp"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"
-            android:text="@string/sign_up" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/sign_up"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 

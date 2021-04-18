@@ -30,16 +30,12 @@ class LoginFragment : ViewModelFragment<LoginViewModel, FragmentLoginBinding>(
         }
 
         form {
-            input(binding.etUsername.id) {
-                assert(getString(R.string.username_must_be_filled)) {
-                    it.text.isNotBlank()
-                }
+            inputLayout(binding.inputUsername.id) {
+                this.isNotEmpty().description(R.string.field_must_be_filled)
             }
 
-            input(binding.etPassword.id) {
-                assert(getString(R.string.password_must_be_filled)) {
-                    it.text.isNotBlank()
-                }
+            inputLayout(binding.inputPassword.id) {
+                this.isNotEmpty().description(R.string.field_must_be_filled)
             }
 
             submitWith(binding.btnLogIn.id) {
