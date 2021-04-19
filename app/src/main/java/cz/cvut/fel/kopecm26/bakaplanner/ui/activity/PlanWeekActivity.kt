@@ -19,6 +19,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.PlanWeekWizard
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.finishWithOkResult
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AdjustShiftsViewModel
@@ -36,7 +37,10 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
     override val navigateUp = true
     override val navigateUpRes: Int get() = R.drawable.ic_mdi_close
     override val onNavigateUp: ((BackNavigation) -> Unit) get() = {
-        if (it == BackNavigation.SUPPORT || viewModel.firstStep.value == true) {
+        Logger.d("Go back ${viewModel.firstStep.value}")
+        if (mode == MODE_UPDATE_DEMAND) {
+            finishWithOkResult()
+        } else if (it == BackNavigation.SUPPORT || viewModel.step.value == PlanWeekWizard.SELECT_DAYS) {
             if (viewModel.working.value == false) {
                 showMaterialDialog(
                     R.string.are_you_sure_you_want_to_cancel,
