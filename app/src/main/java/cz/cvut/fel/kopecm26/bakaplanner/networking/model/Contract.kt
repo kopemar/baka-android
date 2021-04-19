@@ -30,5 +30,5 @@ fun Int.mapToContractType() = ContractTypes.values().firstOrNull { it.id == this
 
 @JsonClass(generateAdapter = true)
 data class ContractResponse(
-    val contracts: List<Contract>
+    val data: List<Contract>
 )

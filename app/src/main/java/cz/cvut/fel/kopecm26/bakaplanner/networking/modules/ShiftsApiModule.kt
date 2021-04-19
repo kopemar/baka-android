@@ -35,6 +35,9 @@ interface ShiftsApiModule {
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>
 
+    @GET("/employees/{id}/contracts")
+    suspend fun getEmployeeContracts(@Path("id") employeeId: Int): Response<ContractResponse>
+
     @GET("/shift/{id}/schedules")
     suspend fun getSchedulesForShift(@Path("id") shiftId: Int): Response<ScheduleResponse>
 

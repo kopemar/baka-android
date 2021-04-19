@@ -42,6 +42,9 @@
         <action
             android:id="@+id/navigate_to_specializations"
             app:destination="@id/organization_specializations_fragment" />
+        <action
+            android:id="@+id/navigate_to_contracts"
+            app:destination="@id/contracts_fragment" />
 
     </fragment>
     <fragment
@@ -80,6 +83,17 @@
             android:name="specialization"
             app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization"
             app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contracts_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.ContractsFragment"
+        android:label="ContractsFragment"
+        app:popUpTo="@id/profile"
+        tools:layout="@layout/fragment_contracts">
+        <argument
+            android:name="type"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchContractsStrategy" />
     </fragment>
 
 </navigation>

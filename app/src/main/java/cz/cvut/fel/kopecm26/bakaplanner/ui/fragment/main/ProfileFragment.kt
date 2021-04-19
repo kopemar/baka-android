@@ -6,6 +6,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentProfileBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.DispatchActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchContractsStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.startActivity
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ProfileViewModel
 
@@ -31,7 +32,7 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
         }
 
         binding.btnContracts.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections.navigateToContracts())
+            findNavController().navigate(ProfileFragmentDirections.navigateToContracts(FetchContractsStrategy.General))
         }
 
         binding.btnSettings.setOnClickListener {

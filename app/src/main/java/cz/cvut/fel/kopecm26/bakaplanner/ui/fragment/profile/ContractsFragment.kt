@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -72,7 +73,10 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
         }
     }
 
+    private val args by navArgs<ContractsFragmentArgs>()
+
     override fun initUi() {
+        viewModel.setStrategy(args.type)
         viewModel.contracts.observe(this, observer)
     }
 }

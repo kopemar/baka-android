@@ -11,6 +11,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentEmployeeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseViewPagerAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchContractsStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchSpecializationStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeViewModel
 
@@ -24,15 +25,27 @@ class EmployeeFragment : ViewModelFragment<EmployeeViewModel, FragmentEmployeeBi
     override var navigateUp: Boolean = true
 
     private val employeeInfoFragment by lazy {
-        EmployeeInformationFragment(onSpecializations)
+        EmployeeInformationFragment(onSpecializations, onContracts)
     }
 
-    private val onSpecializations = {
-        findNavController().navigate(
-            EmployeeFragmentDirections.navigateToSpecializations(
-                FetchSpecializationStrategy.Employee(args.employee.id)
+    private val onSpecializations by lazy {
+        {
+            findNavController().navigate(
+                EmployeeFragmentDirections.navigateToSpecializations(
+                    FetchSpecializationStrategy.Employee(args.employee.id)
+                )
             )
-        )
+        }
+    }
+
+    private val onContracts by lazy {
+        {
+            findNavController().navigate(
+                EmployeeFragmentDirections.navigateToContracts(
+                    FetchContractsStrategy.Employee(args.employee.id)
+                )
+            )
+        }
     }
 
     private val employeeShiftsFragment by lazy { EmployeeShiftsFragment() }

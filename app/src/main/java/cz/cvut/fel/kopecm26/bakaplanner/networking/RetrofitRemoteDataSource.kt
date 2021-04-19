@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking
 
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
@@ -59,7 +60,10 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         safeApiCall({ api.getUnassignedShiftsFrom(from.toString()) }) { it?.data }
 
     override suspend fun getContracts() =
-        safeApiCall({ api.getContracts() }) { it?.contracts }
+        safeApiCall({ api.getContracts() }) { it?.data }
+
+    override suspend fun getEmployeeContracts(employeeId: Int): ResponseModel<List<Contract>> =
+        safeApiCall({ api.getEmployeeContracts(employeeId) }) { it?.data }
 
     override suspend fun getSchedulesForShift(shiftId: Int) =
         safeApiCall({ api.getSchedulesForShift(shiftId) }) { it?.schedules }

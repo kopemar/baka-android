@@ -7,7 +7,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeViewModel
 
 class EmployeeInformationFragment(
-    val onSpecialization: () -> Unit
+    val onSpecialization: () -> Unit,
+    val onContracts: () -> Unit,
 ) :
     ViewModelFragment<EmployeeViewModel, FragmentEmployeeInformationBinding>(
         R.layout.fragment_employee_information,
@@ -18,6 +19,10 @@ class EmployeeInformationFragment(
     override fun initUi() {
         binding.specializations.root.setOnClickListener {
             onSpecialization()
+        }
+
+        binding.contracts.root.setOnClickListener {
+            onContracts()
         }
     }
 }
