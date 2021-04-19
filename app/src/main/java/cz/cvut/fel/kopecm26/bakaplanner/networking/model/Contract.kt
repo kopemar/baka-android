@@ -20,10 +20,10 @@ data class Contract(
     val type: ContractTypes? get() = type_id.mapToContractType()
 }
 
-enum class ContractTypes(val id: Int, @StringRes val nameRes: Int) {
-    EMPLOYMENT_CONTRACT(1, R.string.employment_contract),
-    AGREEMENT_COMPLETE(2, R.string.agreement_complete),
-    AGREEMENT_PERFORM(3, R.string.agreement_perform),
+enum class ContractTypes(val id: Int, @StringRes val nameRes: Int, val type: String) {
+    EMPLOYMENT_CONTRACT(1, R.string.employment_contract, "EmploymentContract"),
+    AGREEMENT_COMPLETE(2, R.string.agreement_complete, "AgreementToCompleteAJob"),
+    AGREEMENT_PERFORM(3, R.string.agreement_perform, "AgreementToPerformAJob"),
 }
 
 fun Int.mapToContractType() = ContractTypes.values().firstOrNull { it.id == this }
