@@ -16,6 +16,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -72,13 +73,13 @@ interface ShiftsApiModule {
         @Path("id") periodId: Int
     ): Response<AutoSchedulerResponse>
 
-    @POST("/periods/{id}")
+    @PUT("/periods/{id}")
     suspend fun submitSchedule(
         @Path("id") periodId: Int,
         @Body request: SubmitScheduleRequest = SubmitScheduleRequest(true)
     ): Response<SubmitScheduleResponse>
 
-    @PUT("templates/{id}")
+    @PATCH("templates/{id}")
     suspend fun updateDemand(@Path("id") templateId: Int, @Query("priority") priority: Int): Response<Void>
 
     @POST("/templates/{id}/specialized")
