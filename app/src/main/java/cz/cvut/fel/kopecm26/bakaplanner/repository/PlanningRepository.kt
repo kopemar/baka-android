@@ -23,24 +23,33 @@ class PlanningRepository(private val service: RemoteDataSource) {
         shiftHours: Int,
         breakMinutes: Int,
         perDay: Int,
+        nightShift: Boolean,
+        is24Hours: Boolean,
+        shiftStart: String?
     ) = service.getShiftTimeCalculations(
         periodId,
         startTime,
         endTime,
         shiftHours,
         breakMinutes,
-        perDay
+        perDay,
+        nightShift,
+        is24Hours,
+        shiftStart
     )
 
     suspend fun createShiftTemplates(
         periodId: Int,
-        startTime: String,
-        endTime: String,
+        startTime: String?,
+        endTime: String?,
         shiftHours: Int,
         breakMinutes: Int,
         perDay: Int,
         excluded: Map<Int, ArrayList<Int>>,
-        workingDays: List<Int>
+        workingDays: List<Int>,
+        nightShift: Boolean,
+        is24Hours: Boolean,
+        shiftStart: String?
     ) = service.createShiftTemplates(
         periodId,
         CreateShiftTemplatesRequest(
@@ -50,7 +59,10 @@ class PlanningRepository(private val service: RemoteDataSource) {
             breakMinutes,
             perDay,
             excluded,
-            workingDays
+            workingDays,
+            nightShift,
+            is24Hours,
+            shiftStart
         )
     )
 

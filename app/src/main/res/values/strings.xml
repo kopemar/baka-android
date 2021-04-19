@@ -172,4 +172,5 @@
     <string name="type">Type</string>
     <string name="add_contract">Add contract</string>
     <string name="work_load">Workload</string>
+    <string name="first_shift">First shift</string>
 </resources>

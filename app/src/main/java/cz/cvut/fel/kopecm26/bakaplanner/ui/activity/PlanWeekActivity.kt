@@ -127,27 +127,30 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
             PlanWeekWizard.ADJUST_SHIFTS -> {
                 ifNotNull(
                     periodDaysViewModel.period.value,
-                    planDaysViewModel.startTime.value,
-                    planDaysViewModel.endTime.value,
+                    planDaysViewModel.startTime.value ?: planDaysViewModel.shiftStartTime.value,
+                    planDaysViewModel.endTime.value ?: planDaysViewModel.shiftStartTime.value,
                     planDaysViewModel.breakMinutes.value,
                     planDaysViewModel.shiftHours.value,
-                    planDaysViewModel.shiftsPerDay.value
+                    planDaysViewModel.shiftsPerDay.value,
+                    planDaysViewModel.nightShift.value,
                 ) {
                     Logger.d(adjustViewModel.mapExcludedToMap())
                     viewModel.submitShiftTemplates(
                         periodDaysViewModel.period.value!!.id,
-                        planDaysViewModel.startTime.value!!,
-                        planDaysViewModel.endTime.value!!,
+                        planDaysViewModel.startTime.value.toString(),
+                        planDaysViewModel.endTime.value.toString(),
                         planDaysViewModel.shiftHours.value!!,
                         planDaysViewModel.breakMinutes.value!!,
                         planDaysViewModel.shiftsPerDay.value!!,
                         adjustViewModel.mapExcludedToMap(),
-                        periodDaysViewModel.mapWorkingDayIdsToList()
+                        periodDaysViewModel.mapWorkingDayIdsToList(),
+                        planDaysViewModel.nightShift.value == true,
+                        planDaysViewModel.is24Hours.value == true,
+                        planDaysViewModel.shiftStartTime.value?.toString()
                     )
                 }
             }
         }
-        // Form is validated in PlanWeekWizard.PLAN_DAYS, can go to next otherwise
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

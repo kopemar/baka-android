@@ -96,6 +96,9 @@ interface RemoteDataSource {
         shiftHours: Int,
         breakMinutes: Int,
         perDay: Int,
+        nightShift: Boolean = false,
+        is24Hours: Boolean = false,
+        shiftStart: String? = null
     ): ResponseModel<List<ShiftTimeCalculation>>
 
     suspend fun createShiftTemplates(

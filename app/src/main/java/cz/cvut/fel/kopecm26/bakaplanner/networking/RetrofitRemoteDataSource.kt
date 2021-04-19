@@ -149,7 +149,10 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         endTime: String,
         shiftHours: Int,
         breakMinutes: Int,
-        perDay: Int
+        perDay: Int,
+        nightShift: Boolean,
+        is24Hours: Boolean,
+        shiftStart: String?
     ): ResponseModel<List<ShiftTimeCalculation>> =
         safeApiCall({
             api.getShiftTimeCalculations(
@@ -158,11 +161,13 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
                 endTime,
                 shiftHours,
                 breakMinutes,
-                perDay
+                perDay,
+                nightShift,
+                is24Hours,
+                shiftStart
             )
         }) { it?.times }
 
-    // TODO possibly move CreateShiftTemplateRequest creation to repo...
     override suspend fun createShiftTemplates(
         periodId: Int,
         request: CreateShiftTemplatesRequest

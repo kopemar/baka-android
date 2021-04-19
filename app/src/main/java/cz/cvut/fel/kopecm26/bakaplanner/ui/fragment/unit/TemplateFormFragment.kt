@@ -19,6 +19,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.setupAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.TemplateFormViewModel
 
+@Deprecated("Will be removed in final version")
 class TemplateFormFragment : ViewModelFragment<TemplateFormViewModel, FragmentTemplateFormBinding>(
     R.layout.fragment_template_form,
     TemplateFormViewModel::class

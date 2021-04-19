@@ -53,7 +53,10 @@ class PlanWeekWizardViewModel : BaseViewModel() {
         breakMinutes: Int,
         perDay: Int,
         excluded: Map<Int, ArrayList<Int>>,
-        workingDays: List<Int>
+        workingDays: List<Int>,
+        nightShift: Boolean,
+        is24Hours: Boolean,
+        shiftStart: String?
     ) {
         working.work {
             planningRepository.createShiftTemplates(
@@ -64,7 +67,10 @@ class PlanWeekWizardViewModel : BaseViewModel() {
                 breakMinutes,
                 perDay,
                 excluded,
-                workingDays
+                workingDays,
+                nightShift,
+                is24Hours,
+                shiftStart
             ).let(::handlePlanningResult)
         }
     }

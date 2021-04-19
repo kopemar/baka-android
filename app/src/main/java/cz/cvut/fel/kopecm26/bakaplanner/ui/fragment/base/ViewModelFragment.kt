@@ -46,6 +46,7 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
         viewModel.errorMessage.observe(this, errorObserver())
     }
 
+    @Deprecated("Will be removed in release")
     protected fun EditText.setUpTimePicker(
         observable: MutableLiveData<String>
     ) {
@@ -59,6 +60,23 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
             },
             observable.value.toString().getHour() ?: 9,
             observable.value.toString().getMinute() ?: 0,
+            isCzech()
+        ).show()
+    }
+
+    protected fun setUpTimePicker(
+        hour: Int? = null,
+        minute: Int? = null,
+        onPicked: (LocalTime) -> Unit
+    ) {
+        TimePickerDialog(
+            requireContext(),
+            R.style.AlertDialogTheme,
+            { _, hourOfDay, min ->
+                onPicked.invoke(LocalTime.of(hourOfDay, min))
+            },
+            hour ?: 9,
+            minute ?: 0,
             isCzech()
         ).show()
     }

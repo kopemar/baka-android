@@ -66,11 +66,15 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
         }
 
         inputLayout(binding.inputStartTime) {
-            isNotEmpty()
+            if (viewModel.is24Hours.value != true) isNotEmpty()
         }
 
         inputLayout(binding.inputEndTime) {
-            isNotEmpty()
+            if (viewModel.is24Hours.value != true) isNotEmpty()
+        }
+
+        inputLayout(binding.inputShiftStart) {
+            if (viewModel.is24Hours.value == true) isNotEmpty()
         }
 
         inputLayout(binding.inputShiftHours) {
@@ -79,12 +83,31 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
     }
 
     private fun setupTimePickers() {
+        binding.actvShiftStart.onClickOrFocus {
+            setUpTimePicker(
+                viewModel.shiftStartTime.value?.hour,
+                viewModel.shiftStartTime.value?.minute
+            ) {
+                viewModel.setShiftStartTime(it)
+            }
+        }
+
         binding.actvStartTime.onClickOrFocus {
-            setUpTimePicker(viewModel.startTime)
+            setUpTimePicker(
+                viewModel.startTime.value?.hour,
+                viewModel.startTime.value?.minute
+            ) {
+                viewModel.setStartTime(it)
+            }
         }
 
         binding.actvEndTime.onClickOrFocus {
-            setUpTimePicker(viewModel.endTime)
+            setUpTimePicker(
+                viewModel.endTime.value?.hour,
+                viewModel.endTime.value?.minute
+            ) {
+                viewModel.setEndTime(it)
+            }
         }
     }
 

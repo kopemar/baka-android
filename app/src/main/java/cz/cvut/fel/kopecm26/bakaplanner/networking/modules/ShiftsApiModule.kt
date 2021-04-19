@@ -59,6 +59,9 @@ interface ShiftsApiModule {
         @Query("shift_hours") shiftHours: Int,
         @Query("break_minutes") breakMinutes: Int,
         @Query("per_day") perDay: Int,
+        @Query("night_shift") nightShift: Boolean,
+        @Query("is_24_hours") is24Hours: Boolean,
+        @Query("shift_start") shiftStart: String?
     ): Response<ShiftTimeCalculationResponse>
 
     @POST("/periods/{id}/templates")
