@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 
 /**
  * Utils function to simplify creation of new Activities...
@@ -28,3 +31,7 @@ fun Activity.finishWithResult(result: Int) {
 fun Activity.finishWithOkResult() {
     finishWithResult(Activity.RESULT_OK)
 }
+
+inline fun <reified T : Fragment> FragmentActivity.getFragment(@IdRes holderId: Int) =
+    supportFragmentManager.findFragmentById(holderId)?.childFragmentManager
+        ?.fragments?.firstOrNull { it is T } as? T

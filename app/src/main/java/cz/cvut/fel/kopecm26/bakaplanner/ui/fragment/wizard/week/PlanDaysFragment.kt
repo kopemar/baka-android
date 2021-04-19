@@ -1,6 +1,9 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week
 
 import android.widget.AdapterView
+import com.afollestad.vvalidator.form
+import com.afollestad.vvalidator.form.Form
+import com.afollestad.vvalidator.form.FormResult
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPlanDaysBinding
@@ -42,11 +45,37 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
         setupForm()
     }
 
+    fun validateForm(onSubmit: (FormResult) -> Unit) {
+        val result = form {
+            setUpFormFields()
+//            submitWith(menu, menuItem, onSubmit)
+        }.validate(false)
+        onSubmit(result)
+    }
+
     private fun setupForm() {
         setupTimePickers()
         setupBreakAdapter()
         setupShiftHoursAdapter()
         setupShiftPerDayAdapter()
+    }
+
+    private fun Form.setUpFormFields() {
+        inputLayout(binding.inputBreak) {
+            isNotEmpty()
+        }
+
+        inputLayout(binding.inputStartTime) {
+            isNotEmpty()
+        }
+
+        inputLayout(binding.inputEndTime) {
+            isNotEmpty()
+        }
+
+        inputLayout(binding.inputShiftHours) {
+            isNotEmpty()
+        }
     }
 
     private fun setupTimePickers() {

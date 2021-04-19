@@ -8,6 +8,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityAddEmployeeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees.AddEmployeeFormFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AddEmployeeViewModel
 
@@ -46,9 +47,8 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
 
     private fun setupMenu(menu: Menu?) {
         menu?.let { m ->
-            val templates =
-                supportFragmentManager.findFragmentById(R.id.fragment)?.childFragmentManager
-                    ?.fragments?.firstOrNull { it is AddEmployeeFormFragment } as? AddEmployeeFormFragment
+            val templates = getFragment<AddEmployeeFormFragment>(R.id.fragment)
+
             templates?.setupFormValidation(m, R.id.menu_check) {
                 viewModel.submit()
             }

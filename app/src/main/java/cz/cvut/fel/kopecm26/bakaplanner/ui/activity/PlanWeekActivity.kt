@@ -14,10 +14,12 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.AdjustShiftsFragmentDirections
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.PlanDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SelectWorkingDaysFragmentDirections
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.PlanWeekWizard
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AdjustShiftsViewModel
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodDaysViewModel
@@ -49,7 +51,8 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
                 )
             }
         } else {
-            findNavController(binding.navHostFragment.id).popBackStack()
+            val nav = findNavController(binding.navHostFragment.id)
+            nav.navigateUp()
             prevStep()
         }
     }
@@ -87,7 +90,6 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
 
     override fun initUi() {
         periodDaysViewModel.setPeriod(period)
-        setMenuVisibility()
 
         planDaysViewModel.shiftTimeCalculations.observe(this, shiftCalcObserver)
         viewModel.finished.observe(this, finishObserver)
@@ -101,73 +103,53 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
         }
 
         toolbar.setTitle(R.string.plan_week)
-
-        setupBackButton()
-        setupNextButton()
     }
 
-    private fun setupBackButton() {
-        binding.btnBack.setOnClickListener {
-            val nav = findNavController(R.id.nav_host_fragment)
-            if (viewModel.step.value != PlanWeekWizard.SELECT_DAYS) {
-                prevStep()
-                nav.navigateUp()
-            }
-        }
-    }
+    private fun setupMenu() {
+        val nav = findNavController(R.id.nav_host_fragment)
 
-    // TODO simplify this
-    private fun setupNextButton() {
-        binding.btnNext.setOnClickListener {
-            val nav = findNavController(R.id.nav_host_fragment)
-            when (viewModel.step.value) {
-                PlanWeekWizard.SELECT_DAYS -> {
-                    nav.navigate(SelectWorkingDaysFragmentDirections.navigateToPlanDays())
-                }
-                PlanWeekWizard.PLAN_DAYS -> {
-                    fetchCalculations()
-                    nav.navigate(PlanDaysFragmentDirections.navigateToReview())
-                }
-                PlanWeekWizard.REVIEW -> {
-                    nav.navigate(ReviewFragmentDirections.navigateToAdjustShifts())
-                }
-                PlanWeekWizard.ADJUST_SHIFTS -> {
-                    ifNotNull(
-                        periodDaysViewModel.period.value,
-                        planDaysViewModel.startTime.value,
-                        planDaysViewModel.endTime.value,
-                        planDaysViewModel.breakMinutes.value,
-                        planDaysViewModel.shiftHours.value,
-                        planDaysViewModel.shiftsPerDay.value
-                    ) {
-                        Logger.d(adjustViewModel.mapExcludedToMap())
-                        viewModel.submitShiftTemplates(
-                            periodDaysViewModel.period.value!!.id,
-                            planDaysViewModel.startTime.value!!,
-                            planDaysViewModel.endTime.value!!,
-                            planDaysViewModel.shiftHours.value!!,
-                            planDaysViewModel.breakMinutes.value!!,
-                            planDaysViewModel.shiftsPerDay.value!!,
-                            adjustViewModel.mapExcludedToMap(),
-                            periodDaysViewModel.mapWorkingDayIdsToList()
-                        )
-                    }
+        when (viewModel.step.value) {
+            PlanWeekWizard.SELECT_DAYS -> {
+                nav.navigate(SelectWorkingDaysFragmentDirections.navigateToPlanDays())
+                viewModel.nextStep()
+            }
+            PlanWeekWizard.PLAN_DAYS -> {
+                validateForm()
+            }
+            PlanWeekWizard.REVIEW -> {
+                nav.navigate(ReviewFragmentDirections.navigateToAdjustShifts())
+                viewModel.nextStep()
+            }
+            PlanWeekWizard.ADJUST_SHIFTS -> {
+                ifNotNull(
+                    periodDaysViewModel.period.value,
+                    planDaysViewModel.startTime.value,
+                    planDaysViewModel.endTime.value,
+                    planDaysViewModel.breakMinutes.value,
+                    planDaysViewModel.shiftHours.value,
+                    planDaysViewModel.shiftsPerDay.value
+                ) {
+                    Logger.d(adjustViewModel.mapExcludedToMap())
+                    viewModel.submitShiftTemplates(
+                        periodDaysViewModel.period.value!!.id,
+                        planDaysViewModel.startTime.value!!,
+                        planDaysViewModel.endTime.value!!,
+                        planDaysViewModel.shiftHours.value!!,
+                        planDaysViewModel.breakMinutes.value!!,
+                        planDaysViewModel.shiftsPerDay.value!!,
+                        adjustViewModel.mapExcludedToMap(),
+                        periodDaysViewModel.mapWorkingDayIdsToList()
+                    )
                 }
             }
-            viewModel.nextStep()
-            setMenuVisibility()
         }
+        // Form is validated in PlanWeekWizard.PLAN_DAYS, can go to next otherwise
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         this.menu = menu
         menuInflater.inflate(R.menu.check_time, menu)
         return super.onCreateOptionsMenu(menu)
-    }
-
-    private fun setMenuVisibility() {
-        menu?.findItem(R.id.action_check_time)?.isVisible =
-            viewModel.step.value == PlanWeekWizard.PLAN_DAYS
     }
 
     private fun fetchCalculations() {
@@ -178,13 +160,24 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
 
     private fun prevStep() {
         viewModel.prevStep()
-        setMenuVisibility()
+    }
+
+    private fun validateForm() {
+        val fragment = getFragment<PlanDaysFragment>(R.id.nav_host_fragment)
+        Logger.d("fragment: ${supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments} / $fragment")
+        fragment?.validateForm {
+            fetchCalculations()
+            if (it.success()) {
+                val nav = findNavController(binding.navHostFragment.id)
+                nav.navigate(PlanDaysFragmentDirections.navigateToReview())
+                viewModel.nextStep()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_check_time) {
-            fetchCalculations()
-            findNavController(R.id.nav_host_fragment).navigate(PlanDaysFragmentDirections.showShiftTimesDialog())
+        if (item.itemId == R.id.action_next) {
+            setupMenu()
         }
         return super.onOptionsItemSelected(item)
     }
