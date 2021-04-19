@@ -121,6 +121,11 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.getSpecializations(forTemplateId)
         }) { it?.data }
 
+    override suspend fun getEmployeeSpecializations(employeeId: Int): ResponseModel<List<Specialization>> =
+        safeApiCall({
+            api.getEmployeeSpecializations(employeeId)
+        }) { it?.data }
+
     override suspend fun createSpecializedShift(
         templateId: Int,
         specializationId: Int

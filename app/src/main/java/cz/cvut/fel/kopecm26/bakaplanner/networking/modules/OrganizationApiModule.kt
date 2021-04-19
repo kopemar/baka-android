@@ -24,6 +24,9 @@ interface OrganizationApiModule {
     @GET("/specializations")
     suspend fun getSpecializations(@Query("for_template") templateId: Int? = null): Response<SpecializationsResponse>
 
+    @GET("/employees/{id}/specializations")
+    suspend fun getEmployeeSpecializations(@Path("id") employeeId: Int): Response<SpecializationsResponse>
+
     @GET("/specializations/{id}/employees")
     suspend fun getSpecializationEmployees(@Path("id") periodId: Int): Response<EmployeeListResponse>
 

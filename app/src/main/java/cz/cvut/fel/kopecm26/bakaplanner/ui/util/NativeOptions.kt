@@ -8,5 +8,6 @@ enum class NativeOptions(@StringRes val nameRes: Int, @DrawableRes val iconRes: 
     HISTORY(R.string.history, R.drawable.ic_history),
     EMPLOYEES(R.string.employees, R.drawable.ic_employee_count),
     SPECIALIZATIONS(R.string.specializations, R.drawable.ic_user_cog),
-    SHOW_PROFILE(R.string.show_profile, R.drawable.ic_profile)
+    SHOW_PROFILE(R.string.show_profile, R.drawable.ic_profile),
+    SHOW_CONTRACTS(R.string.contracts, R.drawable.ic_contracts),
 }

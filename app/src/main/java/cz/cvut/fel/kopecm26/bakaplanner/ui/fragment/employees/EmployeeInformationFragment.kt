@@ -6,12 +6,18 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentEmployeeInformationB
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeViewModel
 
-class EmployeeInformationFragment :
+class EmployeeInformationFragment(
+    val onSpecialization: () -> Unit
+) :
     ViewModelFragment<EmployeeViewModel, FragmentEmployeeInformationBinding>(
         R.layout.fragment_employee_information,
         EmployeeViewModel::class
     ) {
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
-
+    override fun initUi() {
+        binding.specializations.root.setOnClickListener {
+            onSpecialization()
+        }
+    }
 }

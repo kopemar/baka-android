@@ -173,4 +173,5 @@
     <string name="add_contract">Add contract</string>
     <string name="work_load">Workload</string>
     <string name="first_shift">First shift</string>
+    <string name="user_id">User ID</string>
 </resources>

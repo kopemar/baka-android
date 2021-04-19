@@ -4,6 +4,7 @@ import androidx.navigation.fragment.findNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchSpecializationStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.OrganizationEmployeesViewModel
 
 class OrganizationFragment :
@@ -15,7 +16,7 @@ class OrganizationFragment :
         }
 
         binding.specializations.root.setOnClickListener {
-            findNavController().navigate(OrganizationFragmentDirections.navigateToSpecializations())
+            findNavController().navigate(OrganizationFragmentDirections.navigateToSpecializations(FetchSpecializationStrategy.General))
         }
     }
 }

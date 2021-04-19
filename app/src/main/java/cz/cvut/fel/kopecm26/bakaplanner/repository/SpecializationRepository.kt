@@ -11,6 +11,9 @@ class SpecializationRepository(private val service: RemoteDataSource) {
     suspend fun getSpecializations(template: ShiftTemplate? = null) =
         service.getSpecializations(template?.id)
 
+    suspend fun getEmployeeSpecializations(employeeId: Int) =
+        service.getEmployeeSpecializations(employeeId)
+
     suspend fun createSpecialization(name: String) =
         service.createSpecialization(CreateSpecializationRequest(name))
 

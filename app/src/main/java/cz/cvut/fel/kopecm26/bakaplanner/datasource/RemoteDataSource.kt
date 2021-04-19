@@ -77,6 +77,8 @@ interface RemoteDataSource {
 
     suspend fun getSpecializations(forTemplateId: Int? = null): ResponseModel<List<Specialization>>
 
+    suspend fun getEmployeeSpecializations(employeeId: Int): ResponseModel<List<Specialization>>
+
     suspend fun createSpecializedShift(
         templateId: Int,
         specializationId: Int

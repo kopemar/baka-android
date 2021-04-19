@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationSpecializationsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListSpecializationBinding
@@ -20,6 +21,8 @@ class OrganizationSpecializationsFragment :
     ) {
     override val toolbar: Toolbar get() = binding.mainToolbar.toolbar
     override var navigateUp = true
+
+    private val args by navArgs<OrganizationSpecializationsFragmentArgs>()
 
     private val observer by lazy {
         Observer<List<Specialization>> {
@@ -42,6 +45,7 @@ class OrganizationSpecializationsFragment :
     }
 
     override fun initUi() {
+        viewModel.setStrategy(args.type)
         viewModel.specializations.observe(viewLifecycleOwner, observer)
 
         binding.fab.setOnClickListener {
@@ -51,7 +55,7 @@ class OrganizationSpecializationsFragment :
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ADD_SPECIALIZATION_RC && resultCode == Activity.RESULT_OK) {
-            viewModel.fetchOrganizationSpecializations()
+            viewModel.refreshSpecializations()
         }
 
         super.onActivityResult(requestCode, resultCode, data)
