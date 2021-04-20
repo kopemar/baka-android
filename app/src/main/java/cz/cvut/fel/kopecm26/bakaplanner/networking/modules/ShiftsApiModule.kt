@@ -9,7 +9,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateContractResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitScheduleResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateContractRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.SubmitScheduleRequest
 import retrofit2.Response
@@ -34,6 +36,9 @@ interface ShiftsApiModule {
 
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>
+
+    @POST("/contracts")
+    suspend fun createContract(@Body request: CreateContractRequest): Response<CreateContractResponse>
 
     @GET("/employees/{id}/contracts")
     suspend fun getEmployeeContracts(@Path("id") employeeId: Int): Response<ContractResponse>

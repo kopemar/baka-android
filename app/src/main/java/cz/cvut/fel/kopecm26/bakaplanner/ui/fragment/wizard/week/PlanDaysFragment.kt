@@ -48,7 +48,6 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
     fun validateForm(onSubmit: (FormResult) -> Unit) {
         val result = form {
             setUpFormFields()
-//            submitWith(menu, menuItem, onSubmit)
         }.validate(false)
         onSubmit(result)
     }

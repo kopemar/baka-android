@@ -30,7 +30,7 @@ class AddEmployeeViewModel : BaseViewModel() {
     }
 
     // TODO
-    val dateOfBirth = MutableLiveData<LocalDate>(LocalDate.of(2000, 1, 1))
+    val dateOfBirth = MutableLiveData(LocalDate.of(2000, 1, 1))
 
     private val _response = MutableLiveData<CreateEmployeeResponse>()
     val response: LiveData<CreateEmployeeResponse> = _response

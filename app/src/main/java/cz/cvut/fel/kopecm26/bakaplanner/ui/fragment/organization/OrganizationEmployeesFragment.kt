@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationEmployeesBinding
@@ -22,7 +23,7 @@ class OrganizationEmployeesFragment :
 
     override val toolbar: Toolbar get() = binding.mainToolbar.toolbar
     override var navigateUp = true
-
+    override val viewModelOwner: ViewModelStoreOwner? get() = activity
     private val observer by lazy {
         Observer<List<Employee>> {
             binding.rvEmployees.adapter = BaseListAdapter<Employee>(

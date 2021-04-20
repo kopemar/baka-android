@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="vm"
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AddContractViewModel" />
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.ContractTypes" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bg_surface">
 
         <include
             android:id="@+id/add_contract_toolbar"
@@ -41,13 +52,14 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/type"
                 android:inputType="none"
-                android:text="@{null}" />
+                android:text="@{vm.contractType.nameRes}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/spinner_work_load"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            visible="@{vm.contractType == ContractTypes.EMPLOYMENT_CONTRACT}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -56,7 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_contract"
             app:layout_constraintTop_toBottomOf="@id/spinner_contract_type"
-            app:placeholderText="@string/type">
+            app:placeholderText="@string/work_load">
 
             <AutoCompleteTextView
                 android:id="@+id/actv_work_load"
@@ -64,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/work_load"
                 android:inputType="none"
-                android:text="@{null}" />
+                android:text="@{vm.workLoadF}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,9 +86,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="@string/organization_name"
-            app:layout_constraintEnd_toEndOf="@id/spinner_work_load"
-            app:layout_constraintStart_toStartOf="@id/spinner_work_load"
+            android:hint="@string/start_date"
+            app:layout_constraintEnd_toEndOf="@id/spinner_contract_type"
+            app:layout_constraintStart_toStartOf="@id/spinner_contract_type"
             app:layout_constraintTop_toBottomOf="@id/spinner_work_load">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -86,7 +98,8 @@
                 android:layout_height="56dp"
                 android:imeOptions="actionNext"
                 android:inputType="none"
-                android:paddingHorizontal="16dp" />
+                android:paddingHorizontal="16dp"
+                android:text="@{vm.startDateFormatted}" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -94,20 +107,22 @@
             android:id="@+id/switch_indefinite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="16dp"
             android:layout_marginTop="8dp"
+            android:onCheckedChanged="@{(v, checked) -> vm.setIndefinite(checked)}"
             android:paddingStart="48dp"
-            app:layout_constraintTop_toBottomOf="@id/input_start_date"
-            android:text="@string/_24_hours" />
+            android:paddingEnd="16dp"
+            android:text="@string/indefinite_contract"
+            app:layout_constraintTop_toBottomOf="@id/input_start_date" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_end_date"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            visible="@{!switchIndefinite.checked}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/organization_name"
-            app:layout_constraintEnd_toEndOf="@id/spinner_work_load"
-            app:layout_constraintStart_toStartOf="@id/spinner_work_load"
+            android:hint="@string/end_date"
+            app:layout_constraintEnd_toEndOf="@id/spinner_contract_type"
+            app:layout_constraintStart_toStartOf="@id/spinner_contract_type"
             app:layout_constraintTop_toBottomOf="@id/switch_indefinite">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -117,8 +132,13 @@
                 android:layout_height="56dp"
                 android:imeOptions="actionNext"
                 android:inputType="none"
-                android:paddingHorizontal="16dp" />
+                android:paddingHorizontal="16dp"
+                android:text="@{vm.endDateFormatted}" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <include
+            layout="@layout/progress_overlay"
+            visible="@{vm.working}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

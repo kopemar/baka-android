@@ -1,5 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -10,9 +12,11 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentContractsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.HeaderExpandableBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListContractBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract
+import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AddContractActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.Headers
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.WrappedAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchContractsStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ContractsViewModel
 
 class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContractsBinding>(
@@ -78,5 +82,25 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
     override fun initUi() {
         viewModel.setStrategy(args.type)
         viewModel.contracts.observe(this, observer)
+        val type = args.type
+        if (type is FetchContractsStrategy.Employee) {
+            binding.fab.setOnClickListener {
+                startActivityForResult<AddContractActivity>(ADD_CONTRACT_REQUEST) {
+                    apply { putInt(AddContractActivity.EMPLOYEE_EXTRA_KEY, type.id) }
+                }
+            }
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == ADD_CONTRACT_REQUEST && resultCode == Activity.RESULT_OK) {
+            viewModel.refreshContracts()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    companion object {
+        private const val ADD_CONTRACT_REQUEST = 4904
     }
 }

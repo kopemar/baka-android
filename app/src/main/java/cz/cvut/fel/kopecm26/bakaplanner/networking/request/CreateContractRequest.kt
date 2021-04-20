@@ -1,8 +1,10 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking.request
 
 import androidx.annotation.FloatRange
+import com.squareup.moshi.JsonClass
 
-data class AddContractRequest(
+@JsonClass(generateAdapter = true)
+data class CreateContractRequest(
     val employee_id: Int,
     val start_date: String,
     val end_date: String?,

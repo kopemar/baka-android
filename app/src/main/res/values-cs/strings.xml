@@ -7,7 +7,7 @@
     <string name="inactive_contracts">Neaktuální smlouvy</string>
     <string name="active_contracts">Aktuální smlouvy</string>
     <string name="valid_until">Platná do %s</string>
-    <string name="employment_contract">Pracovní smlouva č. %d</string>
+    <string name="employment_contract_">Pracovní smlouva č. %d</string>
     <string name="shift">Směna</string>
     <string name="contracts">Smlouvy</string>
     <string name="not_found">Nenalezeno</string>
@@ -45,8 +45,8 @@
     <string name="sign_up">Zapsat se</string>
     <string name="history">Historie</string>
     <string name="settings">Nastavení</string>
-    <string name="agreement_complete">"Dohoda o provedení práce #%d "</string>
-    <string name="agreement_perform">"Dohoda o pracovní činnosti #%d "</string>
+    <string name="agreement_complete_">"Dohoda o provedení práce #%d "</string>
+    <string name="agreement_perform_">"Dohoda o pracovní činnosti #%d "</string>
     <string name="shifts">Volné směny</string>
     <string name="no_history_for_you">Historie směn je prázdná</string>
     <string name="pick_schedule">Vyberte rozvrh</string>

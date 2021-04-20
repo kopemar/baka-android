@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginTop="12dp"
-            android:text="@{String.format(context.getString(contract.type.nameRes), contract.id)}"
+            android:text="@{String.format(context.getString(contract.type.nameResTemplate), contract.id)}"
             app:layout_constraintStart_toEndOf="@id/iv_contract_icon"
             app:layout_constraintTop_toTopOf="parent" />
 

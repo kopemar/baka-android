@@ -14,9 +14,11 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SignOutModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateContractResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateEmployeeResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateOrganizationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateContractRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateEmployeeRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
@@ -46,6 +48,8 @@ interface RemoteDataSource {
     suspend fun getContracts(): ResponseModel<List<Contract>>
 
     suspend fun getEmployeeContracts(employeeId: Int): ResponseModel<List<Contract>>
+
+    suspend fun createContract(employeeId: Int, request: CreateContractRequest): ResponseModel<CreateContractResponse>
 
     suspend fun getSchedulesForShift(shiftId: Int): ResponseModel<List<Schedule>>
 

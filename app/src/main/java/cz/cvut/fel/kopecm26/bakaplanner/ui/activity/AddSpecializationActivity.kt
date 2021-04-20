@@ -62,7 +62,7 @@ class AddSpecializationActivity :
             }
 
             menu?.let {
-                submitWith(it, R.id.menu_check) { viewModel.submit() }
+                submitWith(it, R.id.action_check) { viewModel.submit() }
             }
         }
     }

@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="16dp"
-            android:text="@{String.format(context.getString(schedule.type.nameRes), schedule.id)}"
+            android:text="@{String.format(context.getString(schedule.type.nameResTemplate), schedule.id)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_schedule_id"
             app:layout_constraintTop_toBottomOf="@id/tv_schedule_id"

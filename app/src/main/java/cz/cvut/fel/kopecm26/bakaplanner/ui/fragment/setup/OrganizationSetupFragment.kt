@@ -86,7 +86,7 @@ class OrganizationSetupFragment :
                 }
             }
 
-            submitWith(toolbar.menu, R.id.menu_check) {
+            submitWith(toolbar.menu, R.id.action_check) {
                 viewModel.submit()
             }
         }

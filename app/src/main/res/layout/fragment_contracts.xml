@@ -1,34 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <variable
+            name="USER"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
+
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ContractsViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent">
 
-        <include
-            android:id="@+id/contracts_toolbar"
-            layout="@layout/toolbar_single"
-            app:title="@{@string/contracts}" />
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            onRefresh="@{() -> vm.refreshContracts()}"
-            app:isRefreshing="@{vm.working}">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_contracts"
+            <include
+                android:id="@+id/contracts_toolbar"
+                layout="@layout/toolbar_single"
+                app:title="@{@string/contracts}" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                onRefresh="@{() -> vm.refreshContracts()}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                android:layout_height="wrap_content"
+                app:isRefreshing="@{vm.working}">
 
-    </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_contracts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:backgroundTint="@color/colorPrimary"
+            app:tint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            visible="@{USER.manager}"
+            app:fabSize="normal"
+            app:borderWidth="0dp"
+            android:src="@drawable/ic_mdi_plus" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

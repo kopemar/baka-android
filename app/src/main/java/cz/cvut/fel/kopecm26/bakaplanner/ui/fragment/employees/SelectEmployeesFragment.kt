@@ -93,7 +93,7 @@ class SelectEmployeesFragment :
         toolbar.inflateMenu(R.menu.check)
 
         toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.menu_check) {
+            if (it.itemId == R.id.action_check) {
                 viewModel.submit(args.type)
             }
             true

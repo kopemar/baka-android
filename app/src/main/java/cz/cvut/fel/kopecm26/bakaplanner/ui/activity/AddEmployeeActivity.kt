@@ -41,7 +41,7 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_check) viewModel.submit()
+        if (item.itemId == R.id.action_check) viewModel.submit()
         return super.onOptionsItemSelected(item)
     }
 
@@ -49,7 +49,7 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
         menu?.let { m ->
             val templates = getFragment<AddEmployeeFormFragment>(R.id.fragment)
 
-            templates?.setupFormValidation(m, R.id.menu_check) {
+            templates?.setupFormValidation(m, R.id.action_check) {
                 viewModel.submit()
             }
         }
