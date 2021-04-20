@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_edit"
         android:icon="@drawable/ic_mdi_pencil"
-        android:title="@string/auto_schedule"
+        android:title="@string/edit_demand"
         app:showAsAction="ifRoom" />
 
     <item

@@ -2,7 +2,9 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.planning
 
 import android.app.Activity
 import android.content.Intent
+import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.forEach
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
@@ -13,6 +15,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPeriodBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListDaysCircleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodState
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AutoScheduleActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
@@ -98,7 +101,15 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
     }
 
     private fun setupMenu() {
-        toolbar.inflateMenu(R.menu.period_schedule)
+        if (viewModel.period.value?.submitted != true && !viewModel.units.value.isNullOrEmpty()) {
+            toolbar.inflateMenu(R.menu.period_schedule)
+        }
+
+        if (viewModel.period.value?.state == PeriodState.TO_BE_SUBMITTED) {
+            toolbar.menu.forEach {
+                it.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
+            }
+        }
 
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.action_auto) {

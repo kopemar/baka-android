@@ -179,4 +179,5 @@
     <string name="to_be_submitted">To be submitted</string>
     <string name="submitted">Submitted</string>
     <string name="to_be_planned">To be planned</string>
+    <string name="edit_demand">Edit shift demand</string>
 </resources>
