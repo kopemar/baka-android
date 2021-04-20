@@ -62,16 +62,6 @@ class PlanDemandFragment : ViewModelFragment<PlanDemandViewModel, FragmentPlanDe
             it.forEach {
                 concatAdapter.addAdapter(WrappedAdapter<String, ShiftTemplate, Nothing> (
                     { layoutInflater, viewGroup, attachToRoot ->
-                        HeaderTimeBinding.inflate(
-                            layoutInflater,
-                            viewGroup,
-                            attachToRoot
-                        )
-                    },
-                    { text, binding, _ ->
-                        (binding as HeaderTimeBinding).text = text
-                    },
-                    { layoutInflater, viewGroup, attachToRoot ->
                         ListTemplateDemandBinding.inflate(
                             layoutInflater,
                             viewGroup,
@@ -87,6 +77,16 @@ class PlanDemandFragment : ViewModelFragment<PlanDemandViewModel, FragmentPlanDe
                     },
                     { old, new -> old.id == new.id },
                     { old, new -> old == new },
+                    { layoutInflater, viewGroup, attachToRoot ->
+                        HeaderTimeBinding.inflate(
+                            layoutInflater,
+                            viewGroup,
+                            attachToRoot
+                        )
+                    },
+                    { text, binding, _ ->
+                        (binding as HeaderTimeBinding).text = text
+                    },
                     onHeaderClick = {
                         it.value.firstOrNull { value -> value.specialization.isNullOrEmpty() }?.let { template ->
                             findNavController().navigate(PlanDemandFragmentDirections.showSpecializations(template))

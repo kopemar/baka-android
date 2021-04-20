@@ -3,9 +3,10 @@ package cz.cvut.fel.kopecm26.bakaplanner.repository
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
+import java.time.ZonedDateTime
 
 class PlanningRepository(private val service: RemoteDataSource) {
-    suspend fun getSchedulingPeriods() = service.getSchedulingPeriods()
+    suspend fun getSchedulingPeriods(from: ZonedDateTime? = null) = service.getSchedulingPeriods(from)
 
     suspend fun getSchedulingUnits(periodId: Int) = service.getSchedulingUnits(periodId)
 

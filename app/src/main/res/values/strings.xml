@@ -174,4 +174,9 @@
     <string name="work_load">Workload</string>
     <string name="first_shift">First shift</string>
     <string name="user_id">User ID</string>
+    <string name="past">Past</string>
+    <string name="current">Current</string>
+    <string name="to_be_submitted">To be submitted</string>
+    <string name="submitted">Submitted</string>
+    <string name="to_be_planned">To be planned</string>
 </resources>

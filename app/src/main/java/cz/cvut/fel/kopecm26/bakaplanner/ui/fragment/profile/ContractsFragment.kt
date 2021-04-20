@@ -28,14 +28,6 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
     private val contractsAdapter
         get() = WrappedAdapter<Headers, Contract, Nothing>(
             { layoutInflater, viewGroup, attachToRoot ->
-                HeaderExpandableBinding.inflate(
-                    layoutInflater,
-                    viewGroup,
-                    attachToRoot
-                )
-            },
-            { header, binding, _ -> (binding as HeaderExpandableBinding).header = header },
-            { layoutInflater, viewGroup, attachToRoot ->
                 ListContractBinding.inflate(
                     layoutInflater,
                     viewGroup,
@@ -45,7 +37,15 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
             { contract, binding, _ -> (binding as ListContractBinding).contract = contract },
             null,
             { old, new -> old.id == new.id },
-            { old, new -> old == new }
+            { old, new -> old == new },
+            { layoutInflater, viewGroup, attachToRoot ->
+                HeaderExpandableBinding.inflate(
+                    layoutInflater,
+                    viewGroup,
+                    attachToRoot
+                )
+            },
+            { header, binding, _ -> (binding as HeaderExpandableBinding).header = header },
         )
 
     private val observer by lazy {

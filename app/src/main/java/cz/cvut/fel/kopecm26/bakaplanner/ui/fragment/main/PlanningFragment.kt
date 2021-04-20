@@ -3,38 +3,67 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ConcatAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPlanningBinding
+import cz.cvut.fel.kopecm26.bakaplanner.databinding.HeaderPeriodsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListPeriodBinding
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodState
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
-import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
+import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.WrappedAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanningViewModel
 
-class PlanningFragment : ViewModelFragment<PlanningViewModel, FragmentPlanningBinding>(R.layout.fragment_planning, PlanningViewModel::class) {
+class PlanningFragment : ViewModelFragment<PlanningViewModel, FragmentPlanningBinding>(
+    R.layout.fragment_planning,
+    PlanningViewModel::class
+) {
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
     private val observer by lazy {
-        Observer<List<SchedulingPeriod>> {
-            binding.rvPeriods.layoutManager = LinearLayoutManager(binding.root.context)
-            binding.rvPeriods.adapter = BaseListAdapter<SchedulingPeriod>(
-                { layoutInflater, viewGroup, attachToRoot ->
-                    ListPeriodBinding.inflate(
-                        layoutInflater,
-                        viewGroup,
-                        attachToRoot
-                    )
-                },
-                { period, binding, _ -> (binding as ListPeriodBinding).period = period },
-                { period, _ -> findNavController().navigate(PlanningFragmentDirections.navigateToPeriodFragment(period)) },
-                { old, new -> old.id == new.id },
-                { old, new -> old == new }
-            ).apply { setItems(it) }
+        Observer<Map<PeriodState, List<SchedulingPeriod>>> {
+            val adapter = ConcatAdapter()
+            it.forEach { (key, u) ->
+                val wrapped = WrappedAdapter<PeriodState, SchedulingPeriod, Nothing>(
+                    { layoutInflater, viewGroup, attachToRoot ->
+                        ListPeriodBinding.inflate(
+                            layoutInflater,
+                            viewGroup,
+                            attachToRoot
+                        )
+                    },
+                    { period, binding, _ -> (binding as ListPeriodBinding).period = period },
+                    { period, _ ->
+                        findNavController().navigate(
+                            PlanningFragmentDirections.navigateToPeriodFragment(
+                                period
+                            )
+                        )
+                    },
+                    { old, new -> old.id == new.id },
+                    { old, new -> old == new },
+                    inflateHeader = { layoutInflater, viewGroup, attachToRoot ->
+                        HeaderPeriodsBinding.inflate(
+                            layoutInflater,
+                            viewGroup,
+                            attachToRoot
+                        )
+                    },
+                    bindHeader = { state, binding, _ ->
+                        (binding as HeaderPeriodsBinding).state = state
+                    }
+                ).apply {
+                    header = key
+                    setItems(u)
+                }
+
+                adapter.addAdapter(wrapped)
+            }
+            binding.rvPeriods.adapter = adapter
         }
     }
 
     override fun initUi() {
-        viewModel.periods.observe(viewLifecycleOwner, observer)
+        viewModel.periodsMap.observe(viewLifecycleOwner, observer)
     }
 }

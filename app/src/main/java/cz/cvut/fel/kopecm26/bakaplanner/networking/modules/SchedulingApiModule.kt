@@ -17,7 +17,7 @@ interface SchedulingApiModule {
      * Scheduling periods, usually weeks
      */
     @GET("/periods")
-    suspend fun getSchedulingPeriods(): Response<SchedulingPeriodsResponse>
+    suspend fun getSchedulingPeriods(@Query("from") from: String? = null): Response<SchedulingPeriodsResponse>
 
     @GET("periods/{id}/units")
     suspend fun getSchedulingUnits(@Path("id") periodId: Int): Response<SchedulingUnitsResponse>

@@ -10,13 +10,13 @@ import androidx.viewbinding.ViewBinding
 // https://medium.com/swlh/expandable-list-in-android-with-mergeadapter-3a7f0cb56166
 // https://medium.com/codeshake/create-an-expandable-recyclerview-with-the-mergeadapter-254fd671fa5b
 class WrappedAdapter<S, T, B>(
-    private val inflateHeader: ((layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding)? = null,
-    private val bindHeader: ((item: S, binding: ViewDataBinding, index: Int) -> Unit)? = null,
     inflate: (layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding,
     bind: (item: T, binding: ViewBinding, index: Int) -> Unit,
     onClick: ((item: T, binding: ViewBinding) -> Unit)? = null,
     compareItems: (old: T, new: T) -> Boolean,
     compareContents: (old: T, new: T) -> Boolean,
+    private val inflateHeader: ((layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding)? = null,
+    private val bindHeader: ((item: S, binding: ViewDataBinding, index: Int) -> Unit)? = null,
     private val onHeaderClick: (() -> Unit)? = null,
     private val onFooterClick: (() -> Unit)? = null,
     private val inflateBottom: ((layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> ViewDataBinding)? = null,

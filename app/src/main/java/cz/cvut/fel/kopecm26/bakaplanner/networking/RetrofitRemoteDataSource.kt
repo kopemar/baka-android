@@ -74,8 +74,8 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun removeShiftFromSchedule(shiftId: Int) =
         safeApiCall({ api.removeShiftFromSchedule(shiftId) }) { it }
 
-    override suspend fun getSchedulingPeriods() =
-        safeApiCall({ api.getSchedulingPeriods() }) { it?.periods }
+    override suspend fun getSchedulingPeriods(from: ZonedDateTime?) =
+        safeApiCall({ api.getSchedulingPeriods(from?.toString()) }) { it?.periods }
 
     override suspend fun getSchedulingUnits(periodId: Int) =
         safeApiCall({ api.getSchedulingUnits(periodId) }) { it?.data }
