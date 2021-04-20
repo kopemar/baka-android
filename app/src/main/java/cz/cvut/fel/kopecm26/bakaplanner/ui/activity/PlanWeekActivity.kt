@@ -38,7 +38,7 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
     override val navigateUpRes: Int get() = R.drawable.ic_mdi_close
     override val onNavigateUp: ((BackNavigation) -> Unit) get() = {
         Logger.d("Go back ${viewModel.firstStep.value}")
-        if (mode == MODE_UPDATE_DEMAND) {
+        if (mode == MODE_UPDATE_DEMAND || viewModel.finished.value == true) {
             finishWithOkResult()
         } else if (it == BackNavigation.SUPPORT || viewModel.step.value == PlanWeekWizard.SELECT_DAYS) {
             if (viewModel.working.value == false) {
@@ -78,6 +78,7 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
 
     private val finishObserver by lazy {
         Observer<Boolean> {
+            menu?.findItem(R.id.action_next)?.isVisible = false
             if (it && viewModel.step.value == PlanWeekWizard.ADJUST_SHIFTS) {
                 findNavController(binding.navHostFragment.id).navigate(
                     AdjustShiftsFragmentDirections.navigateToPlanWeekFinished()
@@ -155,7 +156,7 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         this.menu = menu
-        menuInflater.inflate(R.menu.check_time, menu)
+        if (mode != MODE_UPDATE_DEMAND) menuInflater.inflate(R.menu.check_time, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

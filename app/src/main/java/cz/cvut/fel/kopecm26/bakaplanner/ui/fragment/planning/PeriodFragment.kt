@@ -7,18 +7,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentPeriodBinding
-import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListSchedulingUnitBinding
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
+import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListDaysCircleBinding
+import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AutoScheduleActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.Selection
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
 
-class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(R.layout.fragment_period, PeriodViewModel::class) {
+class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
+    R.layout.fragment_period,
+    PeriodViewModel::class
+) {
     override val toolbar: Toolbar get() = binding.planningToolbar.toolbar
     override var navigateUp = true
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
@@ -26,26 +32,51 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
     private val args by navArgs<PeriodFragmentArgs>()
 
     private val observer by lazy {
-        Observer<List<SchedulingUnit>> {
-            binding.rvUnits.layoutManager = LinearLayoutManager(binding.root.context)
-            binding.rvUnits.adapter = BaseListAdapter<SchedulingUnit>(
+        Observer<List<Selection<PeriodDay>>> {
+            binding.rvUnits.adapter = BaseListAdapter<Selection<PeriodDay>>(
                 { layoutInflater, viewGroup, attachToRoot ->
-                    ListSchedulingUnitBinding.inflate(
+                    ListDaysCircleBinding.inflate(
                         layoutInflater,
                         viewGroup,
                         attachToRoot
                     )
                 },
-                { unit, binding, _ -> (binding as ListSchedulingUnitBinding).unit = unit },
-                { unit, _ -> findNavController().navigate(PeriodFragmentDirections.navigateToTemplatesFragment(unit)) },
-                { old, new -> old.id == new.id },
+                { unit, binding, _ -> (binding as ListDaysCircleBinding).day = unit },
+                { selection, _ -> selectUnit(selection) },
+                { old, new -> old.item.id == new.item.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
         }
     }
 
+    private val shiftsObserver by lazy {
+        Observer<List<ShiftTemplate>> {
+            binding.rvShifts.adapter = BaseListAdapter<ShiftTemplate>(
+                { layoutInflater, viewGroup, attachToRoot ->
+                    ListTemplatesBinding.inflate(
+                        layoutInflater,
+                        viewGroup,
+                        attachToRoot
+                    )
+                },
+                { template, binding, _ ->
+                    (binding as ListTemplatesBinding).template = template
+                },
+                { template, _ ->
+                    findNavController().navigate(PeriodFragmentDirections.navigateToTemplateFragment(template))
+                    Logger.d(template)
+                },
+                { old, new -> old.id == new.id },
+                { old, new -> old == new },
+            ).apply {
+                setItems(it)
+            }
+        }
+    }
+
     override fun initUi() {
-        viewModel.units.observe(viewLifecycleOwner, observer)
+        viewModel.daySelection.observe(viewLifecycleOwner, observer)
+        viewModel.templates.observe(viewLifecycleOwner, shiftsObserver)
         viewModel.setPeriod(args.period)
 
         setupMenu()
@@ -72,7 +103,12 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.action_auto) {
                 startActivityForResult<AutoScheduleActivity>(AUTO_SCHEDULE_RC) {
-                    this.apply { putSerializable(AutoScheduleActivity.SCHEDULING_PERIOD, viewModel.period.value) }
+                    this.apply {
+                        putSerializable(
+                            AutoScheduleActivity.SCHEDULING_PERIOD,
+                            viewModel.period.value
+                        )
+                    }
                 }
             } else if (it.itemId == R.id.action_edit) {
                 startActivityForResult<PlanWeekActivity>(PLAN_PERIOD_RC) {
@@ -83,6 +119,16 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                 }
             }
             true
+        }
+    }
+
+    private fun selectUnit(day: Selection<PeriodDay>) {
+        viewModel.daySelection.value?.select(day) { newIndex, originalIndex ->
+            binding.rvUnits.adapter?.apply {
+                notifyItemChanged(newIndex)
+                notifyItemChanged(originalIndex)
+            }
+            viewModel.fetchShiftsInUnit(day.item.id)
         }
     }
 
