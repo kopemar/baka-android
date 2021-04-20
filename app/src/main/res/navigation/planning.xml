@@ -26,6 +26,9 @@
         <action
             android:id="@+id/navigate_to_templates_fragment"
             app:destination="@id/templates_fragment" />
+        <action
+            android:id="@+id/navigate_to_template_fragment"
+            app:destination="@id/shift_template_fragment" />
     </fragment>
 
     <fragment
@@ -37,9 +40,9 @@
             android:name="unit"
             app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit"
             app:nullable="false" />
-        <action
-            android:id="@+id/navigate_to_template_fragment"
-            app:destination="@id/shift_template_fragment" />
+<!--        <action-->
+<!--            android:id="@+id/navigate_to_template_fragment"-->
+<!--            app:destination="@id/shift_template_fragment" />-->
     </fragment>
 
     <fragment
