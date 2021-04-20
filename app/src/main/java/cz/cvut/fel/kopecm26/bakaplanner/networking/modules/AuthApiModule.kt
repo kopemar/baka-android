@@ -26,6 +26,6 @@ interface AuthApiModule {
     @POST("/organization")
     suspend fun postOrganization(@Body request: CreateOrganizationRequest): Response<CreateOrganizationResponse>
 
-    @POST("/employee")
+    @POST("/employees")
     suspend fun postEmployee(@Body request: CreateEmployeeRequest): Response<CreateEmployeeResponse>
 }

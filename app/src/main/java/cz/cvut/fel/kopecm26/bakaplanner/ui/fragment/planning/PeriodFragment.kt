@@ -96,6 +96,7 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == PLAN_PERIOD_RC && resultCode == Activity.RESULT_OK) {
             viewModel.fetchSchedulingUnits()
+            setupMenu()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
