@@ -6,4 +6,3 @@ import com.squareup.moshi.JsonClass
 data class AddSpecializationResponse(
     val data: List<EmployeePresenter>
 )
-

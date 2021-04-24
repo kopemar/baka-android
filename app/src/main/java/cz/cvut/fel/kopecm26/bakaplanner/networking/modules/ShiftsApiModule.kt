@@ -32,7 +32,7 @@ interface ShiftsApiModule {
     suspend fun getShiftsBefore(@Query("end_date") endDate: String): Response<ShiftResponse>
 
     @GET("/templates")
-    suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String): Response<ShiftTemplatesResponse>
+    suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String, @Query("unassigned") unassigned: Boolean = true): Response<ShiftTemplatesResponse>
 
     @GET("/contracts")
     suspend fun getContracts(): Response<ContractResponse>
