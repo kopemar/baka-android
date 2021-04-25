@@ -16,15 +16,15 @@ interface SchedulingApiModule {
     /**
      * Scheduling periods, usually weeks
      */
-    @GET("/periods")
+    @GET("/api/v1/periods")
     suspend fun getSchedulingPeriods(@Query("from") from: String? = null): Response<SchedulingPeriodsResponse>
 
-    @GET("periods/{id}/units")
+    @GET("/api/v1/periods/{id}/units")
     suspend fun getSchedulingUnits(@Path("id") periodId: Int): Response<SchedulingUnitsResponse>
 
-    @POST("/templates")
+    @POST("/api/v1/templates")
     suspend fun createTemplate(@Body template: ShiftTemplate): Response<ShiftTemplateResponse>
 
-    @GET("/templates")
+    @GET("/api/v1/templates")
     suspend fun getShiftTemplates(@Query("unit") unitId: Int? = null): Response<ShiftTemplatesResponse>
 }

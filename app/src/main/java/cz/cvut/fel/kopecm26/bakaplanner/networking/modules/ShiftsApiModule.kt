@@ -25,41 +25,41 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ShiftsApiModule {
-    @GET("/shifts")
+    @GET("/api/v1/shifts")
     suspend fun getShifts(): Response<ShiftResponse>
 
-    @GET("/shifts")
+    @GET("/api/v1/shifts")
     suspend fun getShiftsBefore(@Query("end_date") endDate: String): Response<ShiftResponse>
 
-    @GET("/templates")
+    @GET("/api/v1/templates")
     suspend fun getUnassignedShiftsFrom(@Query("start_date") startDate: String, @Query("unassigned") unassigned: Boolean = true): Response<ShiftTemplatesResponse>
 
-    @GET("/contracts")
+    @GET("/api/v1/contracts")
     suspend fun getContracts(): Response<ContractResponse>
 
-    @POST("/contracts")
+    @POST("/api/v1/contracts")
     suspend fun createContract(@Body request: CreateContractRequest): Response<CreateContractResponse>
 
-    @GET("/employees/{id}/contracts")
+    @GET("/api/v1/employees/{id}/contracts")
     suspend fun getEmployeeContracts(@Path("id") employeeId: Int): Response<ContractResponse>
 
-    @GET("/shift/{id}/schedules")
+    @GET("/api/v1/shift/{id}/schedules")
     suspend fun getSchedulesForShift(@Path("id") shiftId: Int): Response<ScheduleResponse>
 
-    @POST("/shifts")
+    @POST("/api/v1/shifts")
     suspend fun addShiftToSchedule(
         @Query("template_id") shiftId: Int,
         @Query("schedule_id") scheduleId: Int
     ): Response<Shift>
 
-    @DELETE("/shift/{id}/schedule")
+    @DELETE("/api/v1/shift/{id}/schedule")
     suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<Shift>
 
     // TODO not optimal use of REST API
-    @GET("/periods/{id}/calculations/period-days")
+    @GET("/api/v1/periods/{id}/calculations/period-days")
     suspend fun getPeriodDays(@Path("id") periodId: Int): Response<PeriodDaysResponse>
 
-    @GET("/periods/{id}/calculations/shift-times")
+    @GET("/api/v1/periods/{id}/calculations/shift-times")
     suspend fun getShiftTimeCalculations(
         @Path("id") periodId: Int,
         @Query("start_time") startTime: String,
@@ -72,27 +72,27 @@ interface ShiftsApiModule {
         @Query("shift_start") shiftStart: String?
     ): Response<ShiftTimeCalculationResponse>
 
-    @POST("/periods/{id}/templates")
+    @POST("/api/v1/periods/{id}/templates")
     suspend fun createShiftTemplates(
         @Path("id") periodId: Int,
         @Body body: CreateShiftTemplatesRequest,
     ): Response<ShiftTemplatesResponse>
 
     // TODO not optimal use of REST API
-    @POST("/periods/{id}/calculations/generate-schedule")
+    @POST("/api/v1/periods/{id}/calculations/generate-schedule")
     suspend fun callAutoSchedule(
         @Path("id") periodId: Int
     ): Response<AutoSchedulerResponse>
 
-    @PUT("/periods/{id}")
+    @PUT("/api/v1/periods/{id}")
     suspend fun submitSchedule(
         @Path("id") periodId: Int,
         @Body request: SubmitScheduleRequest = SubmitScheduleRequest(true)
     ): Response<SubmitScheduleResponse>
 
-    @PATCH("templates/{id}")
+    @PATCH("/api/v1/templates/{id}")
     suspend fun updateDemand(@Path("id") templateId: Int, @Query("priority") priority: Int): Response<Void>
 
-    @POST("/templates/{id}/specialized")
+    @POST("/api/v1/templates/{id}/specialized")
     suspend fun createSpecializedShift(@Path("id") templateId: Int, @Query("specialization_id") specializationId: Int): Response<ShiftTemplate>
 }
