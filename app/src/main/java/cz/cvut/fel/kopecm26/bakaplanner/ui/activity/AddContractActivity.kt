@@ -59,9 +59,20 @@ class AddContractActivity : ViewModelActivity<AddContractViewModel, ActivityAddC
         }
     }
 
+    private val errorObserver by lazy {
+        Observer<Int?> {
+            it?.let {
+                showSnackBar(it)
+                viewModel.removeError()
+            }
+        }
+    }
+
     override fun initUi() {
         employeeId?.let { viewModel.setEmployee(it) }
         viewModel.response.observe(this, responseObserver)
+
+        viewModel.errorMessage.observe(this, errorObserver)
 
         setupTypeAdapter()
         setupWorkloadAdapter()

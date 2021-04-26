@@ -1,5 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
@@ -44,18 +46,31 @@ class OrganizationEmployeesFragment :
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == ADD_EMPLOYEE_REQUEST && resultCode == Activity.RESULT_OK) {
+            fetchEmployees()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun initUi() {
         // todo better way :P
-        PrefsUtils.getUser()?.organization_id?.let {
-            viewModel.fetchOrganizationEmployees(it)
-        }
+        fetchEmployees()
 
         binding.fab.setOnClickListener {
-            startActivityForResult<AddEmployeeActivity>(1111)
+            startActivityForResult<AddEmployeeActivity>(ADD_EMPLOYEE_REQUEST)
         }
 
         binding.mainToolbar.appBarLayout.elevationOnScroll(binding.rvEmployees)
 
         viewModel.employees.observe(viewLifecycleOwner, observer)
+    }
+
+    fun fetchEmployees() = PrefsUtils.getUser()?.organization_id?.let {
+        viewModel.fetchOrganizationEmployees(it)
+    }
+
+    companion object {
+        const val ADD_EMPLOYEE_REQUEST = 1111
     }
 }

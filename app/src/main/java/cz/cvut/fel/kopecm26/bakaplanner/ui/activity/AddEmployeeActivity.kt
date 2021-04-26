@@ -3,11 +3,13 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityAddEmployeeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.base.ViewModelActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees.AddEmployeeFormFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.finishWithOkResult
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.getFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.hideKeyboard
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AddEmployeeViewModel
@@ -23,6 +25,15 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
         if (viewModel.working.value == false) finish()
     }
 
+    private val errorObserver by lazy {
+        Observer<Int?> {
+            it?.let {
+                showSnackBar(it)
+                viewModel.removeError()
+            }
+        }
+    }
+
     override fun initUi() {
         toolbar.title = getString(R.string.add_employee)
         viewModel.working.observe(this) {
@@ -30,8 +41,10 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
         }
 
         viewModel.response.observe(this) {
-            if (it.success) finish()
+            if (it.success) finishWithOkResult()
         }
+
+        viewModel.errorMessage.observe(this, errorObserver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -55,5 +68,4 @@ class AddEmployeeActivity : ViewModelActivity<AddEmployeeViewModel, ActivityAddE
         }
         Logger.d("setupMenu")
     }
-
 }

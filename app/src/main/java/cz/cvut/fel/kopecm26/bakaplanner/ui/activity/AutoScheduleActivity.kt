@@ -2,6 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityAutoScheduleBinding
@@ -22,11 +23,22 @@ class AutoScheduleActivity : ViewModelActivity<AutoScheduleViewModel, ActivityAu
         if (viewModel.working.value == false) finish()
     }
 
+    private val errorObserver by lazy {
+        Observer<Int?> {
+            it?.let {
+                showSnackBar(it)
+                viewModel.removeError()
+            }
+        }
+    }
+
     override fun initUi() {
         val period = intent?.getSerializableExtra(SCHEDULING_PERIOD) as? SchedulingPeriod
         period?.let { viewModel.setPeriod(it) }
 
         toolbar.title = getString(R.string.auto_schedule)
+
+        viewModel.errorMessage.observe(this, errorObserver)
 
         lifecycleScope.launchWhenStarted {
             viewModel.working.observe(this@AutoScheduleActivity) {

@@ -37,7 +37,6 @@ class PlanWeekActivity : ViewModelActivity<PlanWeekWizardViewModel, ActivityWeek
     override val navigateUp = true
     override val navigateUpRes: Int get() = R.drawable.ic_mdi_close
     override val onNavigateUp: ((BackNavigation) -> Unit) get() = {
-        Logger.d("Go back ${viewModel.firstStep.value}")
         if (mode == MODE_UPDATE_DEMAND || viewModel.finished.value == true) {
             finishWithOkResult()
         } else if (it == BackNavigation.SUPPORT || viewModel.step.value == PlanWeekWizard.SELECT_DAYS) {

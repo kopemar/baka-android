@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.forEach
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.orhanobut.logger.Logger
@@ -16,6 +15,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListDaysCircleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodState
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AutoScheduleActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
@@ -30,9 +30,14 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
 ) {
     override val toolbar: Toolbar get() = binding.planningToolbar.toolbar
     override var navigateUp = true
-    override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
     private val args by navArgs<PeriodFragmentArgs>()
+
+    private val periodObserver by lazy {
+        Observer<SchedulingPeriod> {
+            setupMenu()
+        }
+    }
 
     private val observer by lazy {
         Observer<List<Selection<PeriodDay>>> {
@@ -82,7 +87,7 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         viewModel.templates.observe(viewLifecycleOwner, shiftsObserver)
         viewModel.setPeriod(args.period)
 
-        setupMenu()
+        viewModel.period.observe(viewLifecycleOwner, periodObserver)
 
         binding.emptyWeekMessage.btnPlanShift.setOnClickListener {
             startActivityForResult<PlanWeekActivity>(PLAN_PERIOD_RC) {
