@@ -10,10 +10,6 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftTemplateViewModel" />
 
         <variable
-            name="infoExpanded"
-            type="Boolean" />
-
-        <variable
             name="USER"
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
 
