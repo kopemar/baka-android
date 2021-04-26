@@ -103,6 +103,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="Text.Large.Strong">
+        <item name="android:fontFamily">@font/magra_bold</item>
+    </style>
+
     <style name="Text.Larger">
         <item name="android:textSize">24sp</item>
     </style>

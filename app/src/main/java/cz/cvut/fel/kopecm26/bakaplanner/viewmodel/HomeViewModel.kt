@@ -16,6 +16,12 @@ class HomeViewModel : BaseViewModel() {
     private val _nextWeekDays = MutableLiveData<List<Shift>>()
     val nextWeekDays: LiveData<List<Shift>> = _nextWeekDays
 
+    private val _daysVisible = MutableLiveData(false)
+    val daysVisible: LiveData<Boolean> = _daysVisible
+    fun invertDaysVisible() {
+        _daysVisible.value = _daysVisible.value?.not()
+    }
+
     init {
         getAll()
     }

@@ -11,21 +11,33 @@
         <variable
             name="last"
             type="Boolean" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:visibility="@{last ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/iv_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mdi_check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             style="@style/Text.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginVertical="4dp"
+            android:layout_marginStart="8dp"
             android:text="@{shift.dayOfWeek}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_check"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Friday" />
 
@@ -40,13 +52,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="1:00 PM - 9:30 PM" />
-
-        <View
-            visible="@{!last}"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_blue"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -27,10 +27,10 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
                         attachToRoot
                     )
                 },
-                { shift, binding, index ->
+                { shift, binding, _ ->
                     run {
                         (binding as ListDayTimeBinding).shift = shift
-                        binding.last = index == it.size - 1
+                        binding.last = shift.ended
                     }
                 },
                 null,

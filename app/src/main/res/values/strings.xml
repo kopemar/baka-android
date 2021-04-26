@@ -186,4 +186,5 @@
     <string name="employment_contract">Employment contract</string>
     <string name="agreement_complete">Agreement to complete a job</string>
     <string name="agreement_perform">Agreement to perform a job</string>
+    <string name="coming_up_this_week">Coming up this week</string>
 </resources>

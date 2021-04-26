@@ -5,6 +5,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.temporal.TemporalAdjusters
 
@@ -24,7 +25,7 @@ interface ShiftDao : BaseDao<Shift> {
     suspend fun getUpcoming(time: String = LocalDateTime.now().toString()): List<Shift>
 
     @Query("SELECT * FROM Shift WHERE start_time > :start AND start_time < :end ORDER BY start_time")
-    suspend fun inTimePeriod(start: String = LocalDateTime.now().toString(), end: String = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SUNDAY)).toString()): List<Shift>
+    suspend fun inTimePeriod(start: String = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toString(), end: String = LocalDateTime.now().with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY)).toString()): List<Shift>
 
     @Query("SELECT * FROM Shift WHERE start_time < :time AND end_time > :time LIMIT 1")
     suspend fun getHappeningAt(time: String = LocalDateTime.now().toString()): Shift?
