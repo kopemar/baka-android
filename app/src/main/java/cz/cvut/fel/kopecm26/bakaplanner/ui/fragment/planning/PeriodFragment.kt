@@ -2,9 +2,11 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.planning
 
 import android.app.Activity
 import android.content.Intent
+import android.text.Html
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.forEach
+import androidx.core.view.isEmpty
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,6 +25,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.util.Selection
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
+import okhttp3.internal.toHexString
 
 class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
     R.layout.fragment_period,
@@ -71,7 +74,11 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                     (binding as ListTemplatesBinding).template = template
                 },
                 { template, _ ->
-                    findNavController().navigate(PeriodFragmentDirections.navigateToTemplateFragment(template))
+                    findNavController().navigate(
+                        PeriodFragmentDirections.navigateToTemplateFragment(
+                            template
+                        )
+                    )
                     Logger.d(template)
                 },
                 { old, new -> old.id == new.id },
@@ -86,6 +93,7 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         viewModel.daySelection.observe(viewLifecycleOwner, observer)
         viewModel.templates.observe(viewLifecycleOwner, shiftsObserver)
         viewModel.setPeriod(args.period)
+        setupMenu()
 
         viewModel.period.observe(viewLifecycleOwner, periodObserver)
 
@@ -107,11 +115,26 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
     }
 
     private fun setupMenu() {
-        if (viewModel.period.value?.submitted != true && !viewModel.units.value.isNullOrEmpty()) {
-            toolbar.inflateMenu(R.menu.period_schedule)
+        Logger.d("Setup menu")
+        if (toolbar.menu.isEmpty()) toolbar.inflateMenu(R.menu.period_schedule)
+
+        toolbar.menu.forEach {
+            val color = resources.getColor(R.color.text, null).toHexString()
+            Logger.d(color)
+            it.title = Html.fromHtml("<font color='#${color.substring(2, color.length)}'>${it.title}</font>", 0)
         }
 
-        if (viewModel.period.value?.state == PeriodState.TO_BE_SUBMITTED) {
+        if (
+            args.period.state == PeriodState.SUBMITTED ||
+            args.period.state == PeriodState.CURRENT ||
+            (args.period.state == PeriodState.TO_BE_PLANNED && viewModel.units.value.isNullOrEmpty())
+        ) {
+            toolbar.menu.forEach {
+                it.isVisible = false
+            }
+        }
+
+        if (args.period.state == PeriodState.TO_BE_SUBMITTED) {
             toolbar.menu.forEach {
                 it.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
             }

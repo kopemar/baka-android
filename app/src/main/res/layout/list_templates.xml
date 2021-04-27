@@ -70,12 +70,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{template.shifts_count.toString()}"
-            app:drawableStartCompat="@drawable/ic_employee_count"
+            app:drawableEndCompat="@drawable/ic_employee_count"
             app:drawableTint="@color/text"
-            android:layout_marginStart="112dp"
+            android:layout_marginEnd="32dp"
             android:drawablePadding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_date_headline"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="16" />
 

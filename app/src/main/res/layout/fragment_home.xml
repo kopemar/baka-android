@@ -8,6 +8,7 @@
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HomeViewModel" />
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens"/>
     </data>
 
     <LinearLayout
@@ -188,7 +189,8 @@
 
                 <include
                     android:id="@+id/empty_message"
-                    layout="@layout/empty_plans"
+                    layout="@layout/empty_resource"
+                    app:resource="@{EmptyScreens.NOTHING}"
                     app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null}" />
 
 

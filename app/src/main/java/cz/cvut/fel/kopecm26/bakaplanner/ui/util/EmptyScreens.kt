@@ -12,9 +12,17 @@ enum class EmptyScreens(
     @DrawableRes val bottomButtonIcon: Int? = null,
     @DrawableRes val topButtonIcon: Int? = null,
 ) {
+    NO_PERIOD_UNITS(
+        R.drawable.ic_calendar,
+        R.string.no_specializations_in_your_organization
+    ),
     NO_SPECIALIZATIONS(
         R.drawable.ic_history_empty,
         R.string.no_specializations_in_your_organization
+    ),
+    NOTHING(
+        R.drawable.ic_mdi_home,
+        R.string.no_more_plans_for_you
     ),
     NO_EMPLOYEES(
         R.drawable.ic_history_empty,

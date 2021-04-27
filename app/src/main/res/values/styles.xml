@@ -13,6 +13,7 @@
         <item name="android:textColor">@color/text</item>
         <item name="android:fontFamily">@font/magra</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:actionMenuTextColor">@color/text</item>
     </style>
 
     <style name="AppTheme.Launcher" parent="Theme.MaterialComponents.DayNight.NoActionBar">

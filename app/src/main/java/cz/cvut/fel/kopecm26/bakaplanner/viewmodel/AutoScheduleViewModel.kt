@@ -2,10 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class AutoScheduleViewModel: BaseViewModel() {
 
@@ -16,8 +13,8 @@ class AutoScheduleViewModel: BaseViewModel() {
         _period.value = schedulingPeriod
     }
 
-    private val _scheduleState = MutableStateFlow<ResponseModel<Boolean>?>(null)
-    val scheduleState: StateFlow<ResponseModel<Boolean>?> = _scheduleState
+    private val _scheduleState = MutableLiveData<Boolean>(false)
+    val success: LiveData<Boolean> = _scheduleState
 
     fun callAutoSchedule() {
         _period.value?.id?.let(::callAutoScheduleWithId)
