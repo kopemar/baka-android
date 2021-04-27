@@ -51,6 +51,8 @@ class AddSpecializationActivity :
             hideKeyboard()
         }
 
+        toolbar.title = getString(R.string.add_specialization)
+
         viewModel.working.observe(this, workingObserver)
         viewModel.success.observe(this, successObserver)
     }
