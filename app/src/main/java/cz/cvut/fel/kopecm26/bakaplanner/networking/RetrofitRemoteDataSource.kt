@@ -89,17 +89,17 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     override suspend fun getTemplateEmployees(templateId: Int) =
         safeApiCall({
             api.getTemplateEmployees(templateId)
-        }) { it?.employees }
+        }) { it?.data }
 
     override suspend fun getOrganizationEmployees(id: Int) =
         safeApiCall({
-            api.getOrganizationEmployees(id)
-        }) { it?.employees }
+            api.getOrganizationEmployees()
+        }) { it?.data }
 
     override suspend fun getSpecializationEmployees(id: Int) =
         safeApiCall({
             api.getSpecializationEmployees(id)
-        }) { it?.employees }
+        }) { it?.data }
 
     override suspend fun getSpecializationEmployeesPossibilities(id: Int) =
         safeApiCall({

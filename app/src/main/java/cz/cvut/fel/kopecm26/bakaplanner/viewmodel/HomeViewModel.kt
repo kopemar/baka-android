@@ -3,10 +3,15 @@ package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 
 class HomeViewModel : BaseViewModel() {
+    private val _currentEmployees = MutableLiveData<List<Employee>>()
+    val currentEmployees: LiveData<List<Employee>> = _currentEmployees
+
     private val _currentShift = MutableLiveData<Shift>()
     val currentShift: LiveData<Shift> = _currentShift
 
@@ -35,10 +40,14 @@ class HomeViewModel : BaseViewModel() {
 
     private fun getAll() {
         working.work {
-            getShifts()
-            getCurrentShift()
-            getNextShift()
-            getNextWeekShifts()
+            if (PrefsUtils.getUser()?.manager != true) {
+                getShifts()
+                getCurrentShift()
+                getNextShift()
+                getNextWeekShifts()
+            } else {
+                getCurrentEmployees()
+            }
         }
     }
 
@@ -48,6 +57,10 @@ class HomeViewModel : BaseViewModel() {
         } else {
             getAll()
         }
+    }
+
+    private suspend fun getCurrentEmployees() {
+
     }
 
     private suspend fun getNextWeekShifts() {

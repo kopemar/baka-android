@@ -18,8 +18,8 @@ interface OrganizationApiModule {
     @GET("/api/v1/templates/{id}/employees")
     suspend fun getTemplateEmployees(@Path("id") id: Int): Response<EmployeeListResponse>
 
-    @GET("/api/v1/organization/{id}/employees")
-    suspend fun getOrganizationEmployees(@Path("id") periodId: Int): Response<EmployeeListResponse>
+    @GET("/api/v1/employees")
+    suspend fun getOrganizationEmployees(): Response<EmployeeListResponse>
 
     @GET("/api/v1/specializations")
     suspend fun getSpecializations(@Query("for_template") templateId: Int? = null): Response<SpecializationsResponse>
