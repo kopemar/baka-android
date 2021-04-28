@@ -5,6 +5,8 @@
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AutoScheduleViewModel" />
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.R"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -89,9 +91,9 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:padding="3dp"
-            android:src="@drawable/ic_scheduling_done"
+            android:src="@{vm.working ? @drawable/ic_mdi_check : @drawable/ic_scheduling_done}"
             android:visibility="gone"
-            visible="@{!vm.working}"
+            visible="@{!vm.working &amp;&amp; vm.success}"
             app:tint="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@id/btn_schedule"
             app:layout_constraintEnd_toEndOf="parent"

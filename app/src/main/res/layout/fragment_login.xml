@@ -158,8 +158,8 @@
             </LinearLayout>
         </ScrollView>
 
-        <!--        <include-->
-        <!--            layout="@layout/progress_overlay"-->
-        <!--            app:visible="@{vm.working}" />-->
+        <include
+            layout="@layout/progress_overlay"
+            app:visible="@{vm.working}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
