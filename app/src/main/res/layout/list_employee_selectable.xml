@@ -24,7 +24,7 @@
             android:backgroundTint="@{employee.selected ? @color/color_primary : @color/gray_blue}"
             android:gravity="center"
             android:padding="8dp"
-            android:text="@{employee.item.fullName}"
+            android:text="@{employee.item.firstLetters}"
             android:textSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
