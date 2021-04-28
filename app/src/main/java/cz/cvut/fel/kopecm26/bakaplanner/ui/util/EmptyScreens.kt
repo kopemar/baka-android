@@ -25,7 +25,11 @@ enum class EmptyScreens(
         R.string.no_more_plans_for_you
     ),
     NO_EMPLOYEES(
-        R.drawable.ic_history_empty,
+        R.drawable.ic_employee_count,
         R.string.no_employees
+    ),
+    NO_EMPLOYEES_ORGANIZATION(
+        R.drawable.ic_employee_count,
+        R.string.no_employees_organization
     );
 }

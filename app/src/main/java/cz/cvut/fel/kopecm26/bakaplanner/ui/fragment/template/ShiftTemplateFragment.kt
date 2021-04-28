@@ -58,7 +58,7 @@ class ShiftTemplateFragment :
 
     private fun setupViewPager() {
 
-        val fragments = listOf(shiftInfoFragment, employeesFragment)
+        val fragments = if (PrefsUtils.getUser()?.manager == true) listOf(shiftInfoFragment, employeesFragment) else listOf(shiftInfoFragment)
         val titles = listOf(R.string.information, R.string.employees)
 
         binding.viewPager.adapter = BaseViewPagerAdapter(childFragmentManager, lifecycle, fragments)

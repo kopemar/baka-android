@@ -104,6 +104,16 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                 }
             }
         }
+
+        binding.btnSubmit.setOnClickListener {
+            if (viewModel.period.value?.state == PeriodState.CURRENT ||
+                viewModel.period.value?.state == PeriodState.TO_BE_SUBMITTED
+            ) {
+                viewModel.submit()
+            } else if (viewModel.period.value?.state == PeriodState.TO_BE_PLANNED) {
+                startAutoSchedule()
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -121,7 +131,14 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         toolbar.menu.forEach {
             val color = resources.getColor(R.color.text, null).toHexString()
             Logger.d(color)
-            it.title = Html.fromHtml("<font color='#${color.substring(2, color.length)}'>${it.title}</font>", 0)
+            it.title = Html.fromHtml(
+                "<font color='#${
+                    color.substring(
+                        2,
+                        color.length
+                    )
+                }'>${it.title}</font>", 0
+            )
         }
 
         if (
@@ -142,14 +159,7 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
 
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.action_auto) {
-                startActivityForResult<AutoScheduleActivity>(AUTO_SCHEDULE_RC) {
-                    this.apply {
-                        putSerializable(
-                            AutoScheduleActivity.SCHEDULING_PERIOD,
-                            viewModel.period.value
-                        )
-                    }
-                }
+                startAutoSchedule()
             } else if (it.itemId == R.id.action_edit) {
                 startActivityForResult<PlanWeekActivity>(PLAN_PERIOD_RC) {
                     this.apply {
@@ -169,6 +179,17 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                 notifyItemChanged(originalIndex)
             }
             viewModel.fetchShiftsInUnit(day.item.id)
+        }
+    }
+
+    private fun startAutoSchedule() {
+        startActivityForResult<AutoScheduleActivity>(AUTO_SCHEDULE_RC) {
+            this.apply {
+                putSerializable(
+                    AutoScheduleActivity.SCHEDULING_PERIOD,
+                    viewModel.period.value
+                )
+            }
         }
     }
 

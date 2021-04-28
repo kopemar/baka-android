@@ -72,16 +72,27 @@
                 android:text="@={vm.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            style="@style/Text.Light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="36dp"
+            app:layout_constraintTop_toBottomOf="@id/input_organization_name"
+            android:justificationMode="inter_word"
+            android:text="@string/after_sign_up_features" />
+
         <Button
             android:id="@+id/btn_next"
             style="@style/Button.Primary.Color"
             viewEnabled="@{!vm.name.empty}"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/next"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_organization_name" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

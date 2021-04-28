@@ -9,36 +9,41 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.UnassignedViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/unassigned_toolbar"
-            layout="@layout/toolbar_single_main"
-            app:title="@{@string/shifts}" />
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
-            isRefreshing="@{vm.working}"
-            onRefresh="@{() -> vm.fetchShifts()}"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/unassigned_toolbar">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_shifts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
             <include
-                android:id="@+id/empty_message"
-                layout="@layout/empty_shifts"
+                android:id="@+id/unassigned_toolbar"
+                layout="@layout/toolbar_single_main"
+                app:title="@{@string/shifts}" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                isRefreshing="@{vm.working}"
+                onRefresh="@{() -> vm.fetchShifts()}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:visible="@{vm.shifts.empty}" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/unassigned_toolbar">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_shifts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/empty_message"
+                    layout="@layout/empty_shifts"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:visible="@{vm.shifts.empty}" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

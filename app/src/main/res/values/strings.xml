@@ -187,4 +187,7 @@
     <string name="agreement_complete">Agreement to complete a job</string>
     <string name="agreement_perform">Agreement to perform a job</string>
     <string name="coming_up_this_week">Coming up this week</string>
+    <string name="after_sign_up_features">New features such as automatic scheduling will be enabled once you sign up.</string>
+    <string name="log_in_to_bakaplanner">Log in to bakaplanner</string>
+    <string name="no_employees_organization">No employeees in your organization</string>
 </resources>

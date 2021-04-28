@@ -9,16 +9,18 @@
         <import type="android.R"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="BottomNavigationBehavior"
         android:background="@color/bg_surface"
         tools:context=".ui.activity.MainActivity">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@id/bnv_main"
+            android:layout_marginBottom="57dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.fragment.app.FragmentContainerView
@@ -40,7 +42,8 @@
             android:elevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:menu="@menu/main_employee"
+            android:layout_gravity="bottom"
             tools:layout_editor_absoluteX="0dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
