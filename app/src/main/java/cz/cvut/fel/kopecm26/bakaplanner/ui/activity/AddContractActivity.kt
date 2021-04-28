@@ -70,6 +70,8 @@ class AddContractActivity : ViewModelActivity<AddContractViewModel, ActivityAddC
 
     override fun initUi() {
         employeeId?.let { viewModel.setEmployee(it) }
+
+        toolbar.title = getString(R.string.add_contract)
         viewModel.response.observe(this, responseObserver)
 
         viewModel.errorMessage.observe(this, errorObserver)

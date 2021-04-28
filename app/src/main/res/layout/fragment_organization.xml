@@ -42,39 +42,14 @@
             tools:text="Qu, Inc."
             />
 
-        <TextView
-            style="@style/Text.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/employees" />
-
-        <TextView
-            android:background="@drawable/color_2_ripple"
-            android:id="@+id/btn_all_employees"
-            style="@style/Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:drawablePadding="12dp"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="@string/employees"
-            app:drawableStartCompat="@drawable/ic_employee_count" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_blue"
-            android:layout_marginStart="52dp"
-            android:layout_marginEnd="16dp"/>
+            android:background="@color/gray_blue" />
 
-        <TextView
-            style="@style/Text.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/specializations" />
+
+        <include android:id="@+id/btn_all_employees" layout="@layout/list_native_options" app:option="@{NativeOptions.EMPLOYEES}"  />
 
         <include android:id="@+id/specializations" layout="@layout/list_native_options" app:option="@{NativeOptions.SPECIALIZATIONS}"  />
 

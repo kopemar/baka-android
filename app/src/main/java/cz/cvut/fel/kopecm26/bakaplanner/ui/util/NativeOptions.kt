@@ -10,4 +10,5 @@ enum class NativeOptions(@StringRes val nameRes: Int, @DrawableRes val iconRes: 
     SPECIALIZATIONS(R.string.specializations, R.drawable.ic_user_cog),
     SHOW_PROFILE(R.string.show_profile, R.drawable.ic_profile),
     SHOW_CONTRACTS(R.string.contracts, R.drawable.ic_contracts),
+    SETTINGS(R.string.settings, R.drawable.ic_settings)
 }

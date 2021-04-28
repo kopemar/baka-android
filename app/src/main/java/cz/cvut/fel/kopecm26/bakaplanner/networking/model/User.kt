@@ -18,6 +18,7 @@ data class User(
     val organization_name: String,
     val organization_id: Int,
 ) {
+    val firstLetters = "${first_name?.get(0)}${last_name?.get(0)}"
     val fullName = "$last_name, $first_name"
     val organizationFirstLetter = "${organization_name[0]}"
 }

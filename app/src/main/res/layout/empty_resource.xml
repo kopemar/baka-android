@@ -24,9 +24,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:background="@drawable/circle"
-            android:padding="24dp"
+            android:padding="28dp"
             android:alpha="0.64"
-            tools:src="@drawable/ic_calendar"
+            tools:src="@drawable/ic_briefcase"
             app:tint="@color/bg_surface" />
 
         <TextView

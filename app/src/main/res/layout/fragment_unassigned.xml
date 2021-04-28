@@ -7,6 +7,8 @@
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.UnassignedViewModel" />
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -31,17 +33,24 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/unassigned_toolbar">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_shifts"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <include
-                    android:id="@+id/empty_message"
-                    layout="@layout/empty_shifts"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:visible="@{vm.shifts.empty}" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_shifts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/empty_message"
+                        layout="@layout/empty_resource"
+                        visible="@{vm.shifts.empty}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:resource="@{EmptyScreens.NO_SHIFTS_TO_ASSIGN}" />
+                </LinearLayout>
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

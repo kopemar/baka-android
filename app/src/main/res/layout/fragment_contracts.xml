@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,13 +11,15 @@
         <variable
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ContractsViewModel" />
+
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -34,26 +36,41 @@
                 android:layout_height="wrap_content"
                 app:isRefreshing="@{vm.working}">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_contracts"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_contracts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/empty_history"
+                        layout="@layout/empty_resource"
+                        app:resource="@{EmptyScreens.NO_CONTRACT}"
+                        visible="@{vm.contracts.empty &amp;&amp; vm.noNetworkConnection != true}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
+
+                </LinearLayout>
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
-            android:backgroundTint="@color/colorPrimary"
-            app:tint="@color/white"
+            visible="@{USER.manager}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            visible="@{USER.manager}"
-            app:fabSize="normal"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/ic_mdi_plus"
             app:borderWidth="0dp"
-            android:src="@drawable/ic_mdi_plus" />
+            app:fabSize="normal"
+            app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -37,6 +37,10 @@ class LoginFragment : ViewModelFragment<LoginViewModel, FragmentLoginBinding>(
             findNavController().navigate(LoginFragmentDirections.navigateToNewOrganization())
         }
 
+        binding.btnSetBackend.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.navigateToUrlFragment())
+        }
+
         form {
             inputLayout(binding.inputUsername.id) {
                 this.isNotEmpty().description(R.string.field_must_be_filled)

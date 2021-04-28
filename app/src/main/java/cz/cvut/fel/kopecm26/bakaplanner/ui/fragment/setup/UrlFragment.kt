@@ -37,7 +37,7 @@ class UrlFragment : BindingFragment<FragmentUrlBinding>(R.layout.fragment_url) {
                     activity?.finishAffinity()
                     findNavController().navigate(UrlFragmentDirections.openMainActivity())
                 } ?: run {
-                    findNavController().navigate(UrlFragmentDirections.navigateToLogin())
+                    findNavController().navigateUp()
                 }
             }
         }

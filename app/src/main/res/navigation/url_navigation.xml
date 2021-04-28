@@ -3,16 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/url_navigation"
-    app:startDestination="@id/urlFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/urlFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.setup.UrlFragment"
         android:label="UrlFragment"
         tools:layout="@layout/fragment_url">
-        <action
-            android:id="@+id/navigate_to_login"
-            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/open_main_activity"
             app:destination="@id/mainActivity"
@@ -34,6 +31,9 @@
         <action
             android:id="@+id/navigate_to_new_organization"
             app:destination="@id/new_organization" />
+        <action
+            android:id="@+id/navigate_to_url_fragment"
+            app:destination="@id/urlFragment" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"

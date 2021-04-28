@@ -17,7 +17,7 @@ enum class EmptyScreens(
         R.string.no_specializations_in_your_organization
     ),
     NO_SPECIALIZATIONS(
-        R.drawable.ic_history_empty,
+        R.drawable.ic_settings,
         R.string.no_specializations_in_your_organization
     ),
     NOTHING(
@@ -27,6 +27,22 @@ enum class EmptyScreens(
     NO_EMPLOYEES(
         R.drawable.ic_employee_count,
         R.string.no_employees
+    ),
+    NO_SHIFTS(
+        R.drawable.ic_hourglass_start,
+        R.string.no_shifts
+    ),
+    NO_SHIFTS_HISTORY(
+        R.drawable.ic_hourglass_end,
+        R.string.no_shifts
+    ),
+    NO_SHIFTS_TO_ASSIGN(
+        R.drawable.ic_briefcase,
+        R.string.no_shifts_to_assign
+    ),
+    NO_CONTRACT(
+        R.drawable.ic_contracts,
+        R.string.no_contracts
     ),
     NO_EMPLOYEES_ORGANIZATION(
         R.drawable.ic_employee_count,

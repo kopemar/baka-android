@@ -51,12 +51,11 @@
                     android:background="@drawable/circle"
                     android:backgroundTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:src="@{vm.shift.shiftTime.shiftIcon}"
                     android:textSize="36sp"
                     android:translationY="60dp"
-                    tools:src="@drawable/ic_weather_sunny"
-                    tools:text="JD" />
+                    tools:src="@drawable/ic_weather_sunny" />
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"

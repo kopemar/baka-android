@@ -11,7 +11,7 @@ class OrganizationFragment :
     ViewModelFragment<OrganizationEmployeesViewModel, FragmentOrganizationBinding>(R.layout.fragment_organization, OrganizationEmployeesViewModel::class) {
 
     override fun initUi() {
-        binding.btnAllEmployees.setOnClickListener {
+        binding.btnAllEmployees.root.setOnClickListener {
             findNavController().navigate(OrganizationFragmentDirections.navigateToEmployees())
         }
 

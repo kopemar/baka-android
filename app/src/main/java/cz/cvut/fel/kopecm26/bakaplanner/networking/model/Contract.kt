@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
 
 @Entity
 @JsonClass(generateAdapter = true)
@@ -17,6 +19,7 @@ data class Contract(
     val active: Boolean,
     @Json(name = "type") val type_id: Int
 ) {
+    val endDate get() = end_date?.formatDate(DateTimeFormats.MONTH_DAY_YEAR)
     val type: ContractTypes? get() = type_id.mapToContractType()
 }
 

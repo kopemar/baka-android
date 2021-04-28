@@ -20,6 +20,11 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>(
 
     private var currentNavController: LiveData<NavController>? = null
 
+    override val onNavigateUp: ((BackNavigation) -> Unit)
+        get() = {
+            if (currentNavController?.value?.navigateUp() != true && !supportFragmentManager.popBackStackImmediate()) finish()
+        }
+
     override fun initUi() {
         setupBottomNavigationBar()
 

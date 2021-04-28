@@ -190,4 +190,7 @@
     <string name="after_sign_up_features">New features such as automatic scheduling will be enabled once you sign up.</string>
     <string name="log_in_to_bakaplanner">Log in to bakaplanner</string>
     <string name="no_employees_organization">No employeees in your organization</string>
+    <string name="no_shifts_to_assign">No shifts to assign</string>
+    <string name="no_contracts">No contracts</string>
+    <string name="no_shifts">No shifts</string>
 </resources>

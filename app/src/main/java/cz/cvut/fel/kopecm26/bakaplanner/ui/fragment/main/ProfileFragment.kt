@@ -27,15 +27,15 @@ class ProfileFragment : ViewModelFragment<ProfileViewModel, FragmentProfileBindi
     override fun initUi() {
         viewModel.signedOut.observe(this, signedOutObserver)
 
-        binding.btnHistory.setOnClickListener {
+        binding.btnHistory.root.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.navigateToHistory())
         }
 
-        binding.btnContracts.setOnClickListener {
+        binding.btnContracts.root.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.navigateToContracts(FetchContractsStrategy.General))
         }
 
-        binding.btnSettings.setOnClickListener {
+        binding.btnSettings.root.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.navigateToSettings())
         }
     }

@@ -39,11 +39,11 @@
 
         <TextView
             android:id="@+id/tv_contract_dur"
-            style="@style/Text.Light"
+            style="@style/Text.Light.Normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="@{@string/valid_until(contract.end_date)}"
+            android:text="@{contract.endDate == null ? @string/indefinite_contract : @string/valid_until(contract.endDate)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_contract_type"
             app:layout_constraintTop_toBottomOf="@id/tv_contract_type"

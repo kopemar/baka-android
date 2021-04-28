@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="option"
             type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.NativeOptions" />
+
         <variable
             name="line"
             type="Boolean" />
@@ -19,15 +20,17 @@
         <TextView
             android:id="@+id/btn_all_employees"
             style="@style/Text"
+            drawableStart="@{option.iconRes}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/color_2_ripple"
             android:drawablePadding="12dp"
             android:gravity="center_vertical"
-            android:padding="8dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="14dp"
             android:text="@{option.nameRes}"
-            drawableStart="@{option.iconRes}" />
+            app:drawableTint="@color/text" />
 
         <View
             visible="@{line == null ? true : line}"
