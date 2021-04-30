@@ -28,7 +28,7 @@ data class SchedulingPeriod(
 // TODO icons
 enum class PeriodState(
     @StringRes val titleRes: Int,
-    @DrawableRes val iconRes: Int = R.drawable.ic_night_icon
+    @DrawableRes val iconRes: Int = R.drawable.ic_calendar
 ) {
     PAST(R.string.past),
     CURRENT(R.string.current, R.drawable.ic_calendar),

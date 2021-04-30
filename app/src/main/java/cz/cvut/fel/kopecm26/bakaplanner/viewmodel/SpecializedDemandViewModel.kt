@@ -15,14 +15,19 @@ class SpecializedDemandViewModel : BaseViewModel() {
 
     val specializations: LiveData<List<Specialization>> = _specializations
 
+    private val _success = MutableLiveData<Boolean>()
+    val success: LiveData<Boolean> = _success
+
     fun setTemplate(template: ShiftTemplate) {
         _template.value = template
     }
 
     fun createSpecializedShift(specialization: Specialization) {
         working.work {
-            _template.value?.id?.let {
-                specializationRepository.createSpecializedShift(it, specialization)
+            _template.value?.id?.let { id ->
+                specializationRepository.createSpecializedShift(id, specialization).parseResponse {
+                    _success.value = it != null
+                }
             }
         }
     }

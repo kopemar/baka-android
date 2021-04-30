@@ -151,5 +151,27 @@
             app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
             app:layout_constraintTop_toTopOf="@id/tv_priority_label"
             tools:text="2.20h" />
+
+        <TextView
+            android:id="@+id/tv_specialization_label"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/specialization"
+            app:layout_constraintStart_toStartOf="@id/tv_shift_id_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_priority_label" />
+
+        <TextView
+            android:id="@+id/tv_specialization_value"
+            style="@style/Text.Light"
+            visible="@{tvPriorityLabel.getVisibility() == View.VISIBLE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.template.specialization}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_specialization_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
+            app:layout_constraintTop_toTopOf="@id/tv_specialization_label"
+            tools:text="2.20h" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

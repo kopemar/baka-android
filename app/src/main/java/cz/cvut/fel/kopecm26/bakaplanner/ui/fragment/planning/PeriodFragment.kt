@@ -91,7 +91,8 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                 { template, _ ->
                     findNavController().navigate(
                         PeriodFragmentDirections.navigateToTemplateFragment(
-                            template
+                            template,
+                            args.period
                         )
                     )
                     Logger.d(template)

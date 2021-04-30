@@ -28,20 +28,23 @@ class ShiftTemplateFragment :
     private val employeesFragment by lazy {
         ShiftEmployeesFragment(ShiftTemplateViewModel::class).apply {
             itemLongPressListener = {
-                findNavController().navigate(ShiftTemplateFragmentDirections.showEmployeeBottomSheet(it))
+                findNavController().navigate(
+                    ShiftTemplateFragmentDirections.showEmployeeBottomSheet(
+                        it
+                    )
+                )
             }
         }
     }
 
-    private val shiftInfoFragment by lazy { ShiftInformationFragment {
-        navigateToSignUpFragment()
-    }
+    private val shiftInfoFragment by lazy {
+        ShiftInformationFragment {
+            navigateToSignUpFragment()
+        }
     }
 
     override fun initUi() {
         viewModel.template.postValue(args.template)
-
-
 
         setupMenu()
         setupViewPager()
@@ -50,7 +53,7 @@ class ShiftTemplateFragment :
     private fun setupMenu() {
         if (PrefsUtils.getUser()?.agreement == true) {
             toolbar.inflateMenu(R.menu.sign_up)
-        } else if (PrefsUtils.getUser()?.manager == true) {
+        } else if (PrefsUtils.getUser()?.manager == true && !args.period.submitted) {
             toolbar.inflateMenu(R.menu.add_employees)
         }
 
@@ -60,7 +63,9 @@ class ShiftTemplateFragment :
             } else if (it.itemId == R.id.add_employee) {
                 findNavController().navigate(
                     ShiftTemplateFragmentDirections.navigateToSelectEmployees(
-                        FetchEmployeesStrategy.Template(args.template.id ?: 0)))
+                        FetchEmployeesStrategy.Template(args.template.id ?: 0)
+                    )
+                )
             }
             true
         }
@@ -68,7 +73,10 @@ class ShiftTemplateFragment :
 
     private fun setupViewPager() {
 
-        val fragments = if (PrefsUtils.getUser()?.manager == true) listOf(shiftInfoFragment, employeesFragment) else listOf(shiftInfoFragment)
+        val fragments = if (PrefsUtils.getUser()?.manager == true) listOf(
+            shiftInfoFragment,
+            employeesFragment
+        ) else listOf(shiftInfoFragment)
         val titles = listOf(R.string.information, R.string.employees)
 
         binding.viewPager.adapter = BaseViewPagerAdapter(childFragmentManager, lifecycle, fragments)

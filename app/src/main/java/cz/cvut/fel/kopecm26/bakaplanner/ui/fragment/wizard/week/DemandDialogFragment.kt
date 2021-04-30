@@ -46,14 +46,14 @@ class DemandDialogFragment : ViewModelBottomSheetFragment<DemandDialogViewModel,
                 (binding as ListDemandItemBinding).item = item
             },
             { priority, _ ->
-                args.template?.id?.let { id ->
+                args.template.id?.let { id ->
                     viewModel.updateDemand(id, priority.item)
                 }
             },
             { old, new -> old.item.integerValue == new.item.integerValue },
             { old, new -> old == new }
         ).apply {
-            val items = Priority.values().map { Selection(it,  args.template?.priority == it.integerValue) }
+            val items = Priority.values().map { Selection(it,  args.template.priority == it.integerValue) }
             setItems(items)
         }
     }

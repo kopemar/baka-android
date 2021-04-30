@@ -198,4 +198,6 @@
     <string name="n_employees">%d employees</string>
     <string name="are_working_now">Are working now</string>
     <string name="working_now">Working now</string>
+    <string name="specialization">Specialization</string>
+    <string name="pick_demand">Pick demand</string>
 </resources>
