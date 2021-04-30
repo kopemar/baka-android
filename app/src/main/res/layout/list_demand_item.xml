@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,8 +9,7 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.util.Selection&lt;cz.cvut.fel.kopecm26.bakaplanner.networking.model.Priority>" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:alpha="@{item.selected ? 1F : 0.4F}"
         android:layout_width="wrap_content"
         android:layout_height="82dp"
