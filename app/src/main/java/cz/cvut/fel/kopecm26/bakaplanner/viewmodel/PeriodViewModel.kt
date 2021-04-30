@@ -24,6 +24,9 @@ class PeriodViewModel : BaseViewModel() {
         if (_period.value != period) _period.value = period
     }
 
+    private val _success = MutableLiveData<Boolean>()
+    val success: LiveData<Boolean> = _success
+
     private val _units = MediatorLiveData<List<SchedulingUnit>>().apply {
         addSource(_period) { fetchSchedulingUnits() }
     }
@@ -52,8 +55,11 @@ class PeriodViewModel : BaseViewModel() {
 
     fun submit() {
         working.work {
-            _period.value?.id?.let {
-                planningRepository.submitSchedule(it).parseResponse(_period)
+            _period.value?.id?.let { id ->
+                planningRepository.submitSchedule(id).parseResponse {
+                    _period.value = it
+                    _success.value = true
+                }
             }
         }
     }

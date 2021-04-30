@@ -27,7 +27,7 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
     private val removeObserver by lazy {
         Observer<Consumable<Boolean>> {
             it.addConsumer(CONSUMER_TAG)
-            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
+            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG) == true) {
                 viewModel.refreshShifts()
 
                 showSnackBar(R.string.successfully_removed).apply {
@@ -40,7 +40,7 @@ class ScheduleFragment : ViewModelFragment<ScheduleViewModel, FragmentScheduleBi
     private val signUpObserver by lazy {
         Observer<Consumable<Boolean>> {
             it.addConsumer(CONSUMER_TAG)
-            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
+            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG) == true) {
                 viewModel.refreshShifts()
             }
         }

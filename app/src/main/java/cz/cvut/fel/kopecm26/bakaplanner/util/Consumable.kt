@@ -35,7 +35,6 @@ class Consumable<T>(private val value: T) {
      */
     fun consume(key: String): T {
         _consumers[key] = true
-        // todo can be consumed only once
         return value
     }
 

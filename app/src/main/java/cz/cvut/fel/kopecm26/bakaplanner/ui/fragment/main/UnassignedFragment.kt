@@ -29,7 +29,7 @@ class UnassignedFragment : ViewModelFragment<UnassignedViewModel, FragmentUnassi
     private val successObserver by lazy {
         Observer<Consumable<Boolean>> {
             it.addConsumer(CONSUMER_TAG)
-            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
+            if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG) ) {
                 viewModel.fetchShifts()
                 showSnackBar(R.string.successfully_signed_up).apply {
                     this.setAction(R.string.ok) { snack -> snack.hide() }

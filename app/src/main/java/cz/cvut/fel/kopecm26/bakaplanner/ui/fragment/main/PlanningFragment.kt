@@ -12,13 +12,18 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodState
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.WrappedAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PlanningViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PlanningFragment : ViewModelFragment<PlanningViewModel, FragmentPlanningBinding>(
     R.layout.fragment_planning,
     PlanningViewModel::class
 ) {
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
+
+    private val sharedVM: SharedViewModel by sharedViewModel()
 
     private val observer by lazy {
         Observer<Map<PeriodState, List<SchedulingPeriod>>> {
@@ -63,7 +68,21 @@ class PlanningFragment : ViewModelFragment<PlanningViewModel, FragmentPlanningBi
         }
     }
 
+    private val submitConsumer by lazy {
+        Observer<Consumable<Boolean>> {
+            it.addConsumer(SUBMIT_CONSUMER)
+            if (it.canBeConsumed(SUBMIT_CONSUMER) && it.consume(SUBMIT_CONSUMER)) {
+                viewModel.fetchSchedulingPeriods()
+            }
+        }
+    }
+
     override fun initUi() {
+        sharedVM.periodChanged.observe(viewLifecycleOwner, submitConsumer)
         viewModel.periodsMap.observe(viewLifecycleOwner, observer)
+    }
+
+    companion object {
+        private const val SUBMIT_CONSUMER = "SUBMIT_CONSUMER"
     }
 }

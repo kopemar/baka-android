@@ -23,9 +23,12 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AutoScheduleActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.util.Selection
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.PeriodViewModel
+import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.shared.SharedViewModel
 import okhttp3.internal.toHexString
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>(
     R.layout.fragment_period,
@@ -34,11 +37,23 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
     override val toolbar: Toolbar get() = binding.planningToolbar.toolbar
     override var navigateUp = true
 
+    private val sharedVM: SharedViewModel by sharedViewModel()
+
     private val args by navArgs<PeriodFragmentArgs>()
 
     private val periodObserver by lazy {
         Observer<SchedulingPeriod> {
             setupMenu()
+            sharedVM.periodChanged.value = Consumable(true)
+        }
+    }
+
+    private val successObserver by lazy {
+        Observer<Boolean> {
+            if (it) {
+                sharedVM.periodChanged.value = Consumable(true)
+                setupMenu()
+            }
         }
     }
 
@@ -92,6 +107,9 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
     override fun initUi() {
         viewModel.daySelection.observe(viewLifecycleOwner, observer)
         viewModel.templates.observe(viewLifecycleOwner, shiftsObserver)
+
+        viewModel.success.observe(viewLifecycleOwner, successObserver)
+
         viewModel.setPeriod(args.period)
         setupMenu()
 
@@ -117,8 +135,9 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == PLAN_PERIOD_RC && resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             viewModel.fetchSchedulingUnits()
+            sharedVM.periodChanged.value = Consumable(true)
             setupMenu()
         }
         super.onActivityResult(requestCode, resultCode, data)

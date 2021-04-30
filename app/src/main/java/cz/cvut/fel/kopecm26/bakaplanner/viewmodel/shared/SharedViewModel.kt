@@ -12,4 +12,6 @@ class SharedViewModel : BaseViewModel() {
     val assignSuccess = MutableLiveData<Consumable<Boolean>>()
 
     val setDemandSuccess = MutableLiveData<Consumable<Boolean>>()
+
+    val periodChanged = MutableLiveData<Consumable<Boolean>>()
 }
