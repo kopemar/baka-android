@@ -63,7 +63,7 @@ class SpecializationFragment: ViewModelFragment<SpecializationViewModel, Fragmen
     }
 
     private fun setupMenu() {
-        toolbar.inflateMenu(R.menu.specializations)
+        toolbar.inflateMenu(R.menu.add_employees)
 
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.add_employee) {

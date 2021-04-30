@@ -8,5 +8,7 @@ sealed class FetchEmployeesStrategy : Serializable {
 
     class Specialization(val id: Int) : FetchEmployeesStrategy()
 
+    class Template(val id: Int) : FetchEmployeesStrategy()
+
 }
 

@@ -2,7 +2,7 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking.modules
 
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AddSpecializationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeShiftsResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.ShiftsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SpecializationsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
@@ -19,7 +19,7 @@ interface OrganizationApiModule {
     suspend fun getTemplateEmployees(@Path("id") id: Int): Response<EmployeeListResponse>
 
     @GET("/api/v1/employees")
-    suspend fun getOrganizationEmployees(): Response<EmployeeListResponse>
+    suspend fun getOrganizationEmployees(@Query("working_now") workingNow: Boolean = false): Response<EmployeeListResponse>
 
     @GET("/api/v1/specializations")
     suspend fun getSpecializations(@Query("for_template") templateId: Int? = null): Response<SpecializationsResponse>
@@ -47,5 +47,5 @@ interface OrganizationApiModule {
     suspend fun getEmployeeShifts(
         @Path("id") employeeId: Int,
         @Query("upcoming") upcoming: Boolean = true
-    ): Response<EmployeeShiftsResponse>
+    ): Response<ShiftsResponse>
 }

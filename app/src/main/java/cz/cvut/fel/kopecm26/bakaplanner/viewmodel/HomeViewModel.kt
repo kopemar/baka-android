@@ -60,7 +60,7 @@ class HomeViewModel : BaseViewModel() {
     }
 
     private suspend fun getCurrentEmployees() {
-
+        userRepository.getOrganizationEmployees(true).parseResponse(_currentEmployees)
     }
 
     private suspend fun getNextWeekShifts() {

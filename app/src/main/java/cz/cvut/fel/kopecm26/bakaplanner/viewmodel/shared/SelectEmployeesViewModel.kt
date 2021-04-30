@@ -55,12 +55,16 @@ class SelectEmployeesViewModel : BaseViewModel() {
                 specializationRepository.getSpecializationEmployeesPossibilities(strategy.id)
                     .parseResponse(_presenters)
             }
+            is FetchEmployeesStrategy.Template -> {
+                scheduleRepository.getSchedulesForShift(strategy.id).parseResponse { response ->
+                    _presenters.value =
+                        response?.map { EmployeePresenter(it.id, it.first_name ?: "", it.last_name ?: "") }
+                }
+            }
             else -> {
-                userRepository.getCurrentUser()?.organization_id?.let { id ->
-                    userRepository.getOrganizationEmployees(id).parseResponse { response ->
-                        _presenters.value =
-                            response?.map { EmployeePresenter(it.id, it.first_name, it.last_name) }
-                    }
+                userRepository.getOrganizationEmployees().parseResponse { response ->
+                    _presenters.value =
+                        response?.map { EmployeePresenter(it.id, it.first_name, it.last_name) }
                 }
             }
         }
@@ -72,6 +76,11 @@ class SelectEmployeesViewModel : BaseViewModel() {
             is FetchEmployeesStrategy.Specialization -> {
                 specializationRepository.putSpecializationEmployees(strategy.id, selected)
                     .parseResponse(_success)
+            }
+            is FetchEmployeesStrategy.Template -> {
+                scheduleRepository.addShiftToSchedules(strategy.id, selected).parseResponse {
+                    _success.value = it != null
+                }
             }
             else -> {
                 // TODO

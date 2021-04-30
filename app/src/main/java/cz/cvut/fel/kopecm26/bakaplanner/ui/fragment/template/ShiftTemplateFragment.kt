@@ -9,6 +9,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentShiftTemplateBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseViewPagerAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchEmployeesStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftTemplateViewModel
 
@@ -17,7 +18,7 @@ class ShiftTemplateFragment :
         R.layout.fragment_shift_template,
         ShiftTemplateViewModel::class
     ) {
-    override val toolbar: Toolbar get() = binding.sToolbar.toolbar
+    override val toolbar: Toolbar get() = binding.toolbar
     override var navigateUp = true
 
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
@@ -32,12 +33,15 @@ class ShiftTemplateFragment :
         }
     }
 
-    private val shiftInfoFragment by lazy { ShiftInformationFragment() }
+    private val shiftInfoFragment by lazy { ShiftInformationFragment {
+        navigateToSignUpFragment()
+    }
+    }
 
     override fun initUi() {
         viewModel.template.postValue(args.template)
 
-        binding.btnAdd.setOnClickListener { navigateToSignUpFragment() }
+
 
         setupMenu()
         setupViewPager()
@@ -46,11 +50,17 @@ class ShiftTemplateFragment :
     private fun setupMenu() {
         if (PrefsUtils.getUser()?.agreement == true) {
             toolbar.inflateMenu(R.menu.sign_up)
+        } else if (PrefsUtils.getUser()?.manager == true) {
+            toolbar.inflateMenu(R.menu.add_employees)
         }
 
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.menu_sign_up) {
                 navigateToSignUpFragment()
+            } else if (it.itemId == R.id.add_employee) {
+                findNavController().navigate(
+                    ShiftTemplateFragmentDirections.navigateToSelectEmployees(
+                        FetchEmployeesStrategy.Template(args.template.id ?: 0)))
             }
             true
         }

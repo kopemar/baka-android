@@ -10,7 +10,9 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateContractResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.ShiftsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitScheduleResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.AddShiftToSchedules
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateContractRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.SubmitScheduleRequest
@@ -52,7 +54,13 @@ interface ShiftsApiModule {
         @Query("schedule_id") scheduleId: Int
     ): Response<Shift>
 
-    @DELETE("/api/v1/shift/{id}/schedule")
+    @POST("/api/v1/shifts")
+    suspend fun addShiftToSchedules(
+        @Query("template_id") shiftId: Int,
+        @Body schedule: AddShiftToSchedules
+    ): Response<ShiftsResponse>
+
+    @DELETE("/api/v1/shift/{id}")
     suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<Shift>
 
     // TODO not optimal use of REST API

@@ -5,6 +5,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Auth
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.AddShiftToSchedules
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateContractRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateEmployeeRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
@@ -64,10 +65,13 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
     }) { it }
 
     override suspend fun getSchedulesForShift(shiftId: Int) =
-        safeApiCall({ api.getSchedulesForShift(shiftId) }) { it?.schedules }
+        safeApiCall({ api.getSchedulesForShift(shiftId) }) { it?.data }
 
     override suspend fun addShiftToSchedule(shiftId: Int, scheduleId: Int) =
         safeApiCall({ api.addShiftToSchedule(shiftId, scheduleId) }) { it }
+
+    override suspend fun addShiftToSchedules(shiftId: Int, request: AddShiftToSchedules) =
+        safeApiCall({ api.addShiftToSchedules(shiftId, request) }) { it?.data }
 
     override suspend fun removeShiftFromSchedule(shiftId: Int) =
         safeApiCall({ api.removeShiftFromSchedule(shiftId) }) { it }
@@ -91,9 +95,9 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.getTemplateEmployees(templateId)
         }) { it?.data }
 
-    override suspend fun getOrganizationEmployees(id: Int) =
+    override suspend fun getOrganizationEmployees(workingNow: Boolean) =
         safeApiCall({
-            api.getOrganizationEmployees()
+            api.getOrganizationEmployees(workingNow)
         }) { it?.data }
 
     override suspend fun getSpecializationEmployees(id: Int) =

@@ -6,10 +6,16 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentShiftTemplateInforma
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.ShiftTemplateViewModel
 
-class ShiftInformationFragment :
+class ShiftInformationFragment(
+    val onSignUp: () -> Unit
+) :
     ViewModelFragment<ShiftTemplateViewModel, FragmentShiftTemplateInformationBinding>(
         R.layout.fragment_shift_template_information,
         ShiftTemplateViewModel::class
     ) {
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
+
+    override fun initUi() {
+        binding.btnAdd.setOnClickListener { onSignUp() }
+    }
 }

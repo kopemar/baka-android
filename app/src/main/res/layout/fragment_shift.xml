@@ -66,7 +66,7 @@
                     app:elevation="6dp"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:subtitle="@{vm.shift.endTimeHours}"
+                    app:subtitle="@{@string/time_from_to(vm.shift.startTimeHours, vm.shift.endTimeHours)}"
                     app:subtitleTextColor="@color/text_light"
                     app:title="@{vm.shift.dateF}"
                     app:titleTextAppearance="@style/TitleStyle.Large"

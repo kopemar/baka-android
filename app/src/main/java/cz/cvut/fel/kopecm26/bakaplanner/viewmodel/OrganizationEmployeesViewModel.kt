@@ -11,7 +11,7 @@ class OrganizationEmployeesViewModel : BaseViewModel() {
 
     fun fetchOrganizationEmployees(organizationId: Int) {
         working.work {
-            userRepository.getOrganizationEmployees(organizationId).parseResponse(_employees)
+            userRepository.getOrganizationEmployees().parseResponse(_employees)
         }
     }
 }
