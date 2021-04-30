@@ -194,4 +194,8 @@
     <string name="no_contracts">No contracts</string>
     <string name="no_shifts">No shifts</string>
     <string name="hello">Hello, %s</string>
+
+    <string name="n_employees">%d employees</string>
+    <string name="are_working_now">Are working now</string>
+    <string name="working_now">Working now</string>
 </resources>

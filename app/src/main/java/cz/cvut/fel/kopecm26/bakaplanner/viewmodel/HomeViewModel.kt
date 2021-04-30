@@ -27,6 +27,12 @@ class HomeViewModel : BaseViewModel() {
         _daysVisible.value = _daysVisible.value?.not()
     }
 
+    private val _employeesVisible = MutableLiveData(false)
+    val employeesVisible: LiveData<Boolean> = _employeesVisible
+    fun invertEmployeesVisible() {
+        _employeesVisible.value = _employeesVisible.value?.not()
+    }
+
     init {
         getAll()
     }

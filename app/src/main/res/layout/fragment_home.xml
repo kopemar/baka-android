@@ -13,7 +13,7 @@
             name="USER"
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
 
-        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens"/>
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens" />
     </data>
 
     <LinearLayout
@@ -29,12 +29,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            style="@style/Text.Larger"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Text.Larger"
-            tools:text="Hello, Martina"
             android:layout_marginHorizontal="16dp"
-            android:text="@{@string/hello(USER.first_name)}" />
+            android:text="@{@string/hello(USER.first_name)}"
+            tools:text="Hello, Martina" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
@@ -93,7 +93,7 @@
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_chevron_right"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -148,10 +148,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{() -> vm.invertDaysVisible()}"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_rectangle_round"
                     android:elevation="@dimen/card_elevation"
+                    android:onClick="@{() -> vm.invertDaysVisible()}"
                     android:paddingBottom="16dp">
 
                     <ImageView
@@ -159,10 +159,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:src="@drawable/ic_chevron_down"
                         android:rotation="@{vm.daysVisible ? 180 : 0}"
+                        android:src="@drawable/ic_chevron_down"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_later_this_week"
@@ -187,17 +187,77 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_later_this_week" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        visible="@{vm.daysVisible}"
-                        tools:visibility="gone"
                         android:id="@+id/rv_date_time"
+                        visible="@{vm.daysVisible}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="12dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        tools:listitem="@layout/list_day_time"
                         app:layout_constraintStart_toStartOf="@id/tv_later_this_week"
-                        app:layout_constraintTop_toBottomOf="@id/tv_coming_up_this_week" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_coming_up_this_week"
+                        tools:listitem="@layout/list_day_time"
+                        tools:visibility="gone" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    visible="@{USER.manager &amp;&amp; !vm.currentEmployees.empty}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_rectangle_round"
+                    android:elevation="@dimen/card_elevation"
+                    android:onClick="@{() -> vm.invertEmployeesVisible()}"
+                    android:paddingBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:rotation="@{vm.employeesVisible ? 180 : 0}"
+                        android:src="@drawable/ic_chevron_down"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_n_employees"
+                        style="@style/Text.Large"
+                        android:layout_width="124dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@{@string/n_employees(vm.currentEmployees.size)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_working_now"
+                        style="@style/Text.Light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/are_working_now"
+                        app:layout_constraintStart_toStartOf="@id/tv_n_employees"
+                        app:layout_constraintTop_toBottomOf="@id/tv_n_employees" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_employees"
+                        visible="@{vm.employeesVisible}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="12dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_working_now"
+                        app:layout_constraintTop_toBottomOf="@id/tv_working_now"
+                        tools:listitem="@layout/list_day_time"
+                        tools:visibility="gone" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <include
