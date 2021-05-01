@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="contract"
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract" />
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_round_top"
         android:orientation="vertical"
-        android:paddingTop="8dp">
+        android:paddingVertical="8dp">
 
         <TextView
             style="@style/Text.Large"
@@ -31,6 +32,26 @@
             android:background="@color/gray_blue"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+        <TextView
+            style="@style/Text.Medium"
+            fromHtml="@{@string/start_date_(contract.startDate)}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp" />
 
+        <TextView
+            style="@style/Text.Medium"
+            fromHtml="@{contract.endDate == null ? @string/indefinite_contract : @string/end_date_(contract.endDate)}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_dates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

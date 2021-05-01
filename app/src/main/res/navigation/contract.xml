@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/contracts_fragment"
+    android:id="@+id/contract">
+
+    <fragment
+        android:id="@+id/contracts_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.ContractsFragment"
+        android:label="ContractsFragment"
+        app:popUpTo="@id/profile"
+        tools:layout="@layout/fragment_contracts">
+        <argument
+            android:name="type"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchContractsStrategy" />
+        <action
+            android:id="@+id/show_contract_dialog"
+            app:destination="@id/contract_dialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/contract_dialog"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.ContractDialogFragment"
+        android:label="ContractDialogFragment">
+        <argument
+            android:name="contract"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract" />
+
+    </dialog>
+
+</navigation>

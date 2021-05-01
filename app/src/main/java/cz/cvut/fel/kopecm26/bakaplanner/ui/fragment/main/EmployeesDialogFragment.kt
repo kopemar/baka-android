@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.main
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.DialogEmployeesBinding
@@ -32,7 +33,7 @@ class EmployeesDialogFragment: ViewModelBottomSheetFragment<HomeViewModel, Dialo
                         (binding as ListEmployeeBinding).employee = employee
                     }
                 },
-                { item, _ -> EmployeesDialogFragmentDirections.navigateToEmployeeDetail(item) },
+                { item, _ -> findNavController().navigate(EmployeesDialogFragmentDirections.navigateToEmployeeDetail(item)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }

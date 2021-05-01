@@ -201,4 +201,7 @@
     <string name="specialization">Specialization</string>
     <string name="pick_demand">Pick demand</string>
     <string name="remove_from_shift">Remove from shift</string>
+    <string name="start_date_"><![CDATA[<b>Start date</b>: %s]]></string>
+    <string name="end_date_"><![CDATA[<b>End date</b>: %s]]></string>
+    <string name="worked_in_"><![CDATA[Worked <b>%d</b> hours in <b>%d</b>]]></string>
 </resources>

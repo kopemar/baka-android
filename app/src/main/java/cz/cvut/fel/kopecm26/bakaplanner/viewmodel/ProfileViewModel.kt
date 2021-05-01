@@ -29,7 +29,6 @@ class ProfileViewModel : BaseViewModel() {
     private suspend fun removeSession() {
         PrefsUtils.remove(Constants.Prefs.USER)
         shiftRepository.deleteAll()
-        contractRepository.deleteAll()
         _signedOut.value = true
     }
 }

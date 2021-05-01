@@ -16,18 +16,16 @@ val databaseModule: Module = module {
     fun buildDatabase(context: Context): PlannerDatabase = PlannerDatabase.buildDatabase(context)
 
     fun getShiftDao(database: PlannerDatabase) = database.getShiftDao()
-    fun getContractDao(database: PlannerDatabase) = database.getContractDao()
 
     single { buildDatabase(androidApplication()) }
     single { getShiftDao(get()) }
-    single { getContractDao(get()) }
 }
 
 val repositoryModule = module {
     single { UserRepository(get()) }
     single { ScheduleRepository(get(), get()) }
     single { ShiftRepository(get(), get()) }
-    single { ContractRepository(get(), get()) }
+    single { ContractRepository(get()) }
     single { PlanningRepository(get()) }
     single { SpecializationRepository(get()) }
 }
