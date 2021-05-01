@@ -72,6 +72,6 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun removeShiftFromSchedule(shiftId: Int) =
         service.removeShiftFromSchedule(shiftId).apply {
-            if (this is ResponseModel.SUCCESS) data?.id?.let { shiftDao.deleteById(it) }
+            if (this is ResponseModel.SUCCESS) { shiftDao.deleteById(shiftId) }
         }
 }

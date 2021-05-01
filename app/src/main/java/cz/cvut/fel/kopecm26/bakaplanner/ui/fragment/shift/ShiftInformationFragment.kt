@@ -9,11 +9,16 @@ import kotlin.reflect.KClass
 
 class ShiftInformationFragment(
     clazz: KClass<ShiftViewModel>,
-    private val viewModelStoreOwner: ViewModelStoreOwner? = null
+    private val viewModelStoreOwner: ViewModelStoreOwner? = null,
+    private val onRemoveShift: () -> Unit,
 ) :
     ViewModelFragment<ShiftViewModel, FragmentShiftInformationBinding>(
         R.layout.fragment_shift_information,
         clazz
     ) {
     override val viewModelOwner: ViewModelStoreOwner? get() = viewModelStoreOwner ?: activity
+
+    override fun initUi() {
+        binding.btnRemove.setOnClickListener { onRemoveShift() }
+    }
 }

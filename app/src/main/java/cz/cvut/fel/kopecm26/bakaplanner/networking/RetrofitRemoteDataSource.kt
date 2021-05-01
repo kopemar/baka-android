@@ -74,7 +74,7 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         safeApiCall({ api.addShiftToSchedules(shiftId, request) }) { it?.data }
 
     override suspend fun removeShiftFromSchedule(shiftId: Int) =
-        safeApiCall({ api.removeShiftFromSchedule(shiftId) }) { it }
+        safeApiCall({ api.removeShiftFromSchedule(shiftId) }) { it?.success }
 
     override suspend fun getSchedulingPeriods(from: ZonedDateTime?) =
         safeApiCall({ api.getSchedulingPeriods(from?.toString()) }) { it?.periods }
@@ -189,7 +189,6 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         )
     }) { it?.data}
 
-    // TODO better response model
     override suspend fun callAutoScheduler(periodId: Int) = safeApiCall(
         { api.callAutoSchedule(periodId) }
     ) { it?.success }

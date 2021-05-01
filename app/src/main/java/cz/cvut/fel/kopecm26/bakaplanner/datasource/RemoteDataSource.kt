@@ -58,7 +58,7 @@ interface RemoteDataSource {
 
     suspend fun addShiftToSchedules(shiftId: Int, request: AddShiftToSchedules): ResponseModel<List<Shift>>
 
-    suspend fun removeShiftFromSchedule(shiftId: Int): ResponseModel<Shift>
+    suspend fun removeShiftFromSchedule(shiftId: Int): ResponseModel<Boolean>
 
     suspend fun getSchedulingPeriods(from: ZonedDateTime? = null): ResponseModel<List<SchedulingPeriod>>
 

@@ -28,7 +28,9 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
     private val sharedVM: SharedViewModel by sharedViewModel()
 
     private val informationFragment by lazy {
-        ShiftInformationFragment(ShiftViewModel::class, this)
+        ShiftInformationFragment(ShiftViewModel::class, this) {
+            runRemoval()
+        }
     }
 
     private val removedObserver by lazy {
@@ -49,7 +51,6 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
 
         setupMenu()
         setupViewPager()
-//        binding.btnRemove.setOnClickListener { runRemoval() }
     }
 
     private fun setupViewPager() {

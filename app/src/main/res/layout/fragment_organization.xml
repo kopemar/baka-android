@@ -4,54 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="USER"
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
 
-        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.NativeOptions"/>
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.NativeOptions" />
     </data>
-    <LinearLayout
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_single_main"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/organization}" />
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/circle"
-            android:backgroundTint="@color/colorPrimary"
-            android:gravity="center"
-            android:text="@{USER.organizationFirstLetter}"
-            android:textSize="36sp"
-            tools:text="Q" />
-
-        <TextView
-            style="@style/Text.Larger"
-            android:layout_margin="16dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@{USER.organization_name}"
-            tools:text="Qu, Inc."
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/main_toolbar"
+                layout="@layout/toolbar_single_main"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@{@string/organization}" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@{USER.organizationFirstLetter}"
+                android:textSize="36sp"
+                tools:text="Q" />
+
+            <TextView
+                style="@style/Text.Larger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="@{USER.organization_name}"
+                tools:text="Qu, Inc." />
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_blue" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_blue" />
 
 
-        <include android:id="@+id/btn_all_employees" layout="@layout/list_native_options" app:option="@{NativeOptions.EMPLOYEES}"  />
+            <include
+                android:id="@+id/btn_all_employees"
+                layout="@layout/list_native_options"
+                app:option="@{NativeOptions.EMPLOYEES}" />
 
-        <include android:id="@+id/specializations" layout="@layout/list_native_options" app:option="@{NativeOptions.SPECIALIZATIONS}"  />
+            <include
+                android:id="@+id/specializations"
+                layout="@layout/list_native_options"
+                app:option="@{NativeOptions.SPECIALIZATIONS}" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

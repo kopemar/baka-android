@@ -10,6 +10,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplatesResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculationResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.AutoSchedulerResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateContractResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.DeleteShiftResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.ShiftsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitScheduleResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.AddShiftToSchedules
@@ -60,8 +61,8 @@ interface ShiftsApiModule {
         @Body schedule: AddShiftToSchedules
     ): Response<ShiftsResponse>
 
-    @DELETE("/api/v1/shift/{id}")
-    suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<Shift>
+    @DELETE("/api/v1/shifts/{id}")
+    suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<DeleteShiftResponse>
 
     // TODO not optimal use of REST API
     @GET("/api/v1/periods/{id}/calculations/period-days")

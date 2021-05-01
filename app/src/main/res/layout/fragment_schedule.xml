@@ -11,48 +11,53 @@
         <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_single_main"
-            app:title="@{@string/schedule}" />
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
-            isRefreshing="@{vm.working}"
-            onRefresh="@{() -> vm.fetchShiftsRemote()}"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_shifts"
+            <include
+                android:id="@+id/main_toolbar"
+                layout="@layout/toolbar_single_main"
+                app:title="@{@string/schedule}" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                isRefreshing="@{vm.working}"
+                onRefresh="@{() -> vm.fetchShiftsRemote()}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_toolbar">
 
-        <include
-            android:id="@+id/empty_list"
-            layout="@layout/empty_resource"
-            app:resource="@{EmptyScreens.NO_SHIFTS}"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-            app:visible="@{vm.shifts.empty &amp;&amp; vm.noNetworkConnection != true}" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_shifts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <include
-            android:id="@+id/no_connection"
-            layout="@layout/no_connection"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-            app:visible="@{vm.noNetworkConnection == true &amp;&amp; vm.shifts == null}" />
+            <include
+                android:id="@+id/empty_list"
+                layout="@layout/empty_resource"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+                app:resource="@{EmptyScreens.NO_SHIFTS}"
+                app:visible="@{vm.shifts.empty &amp;&amp; vm.noNetworkConnection != true}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/no_connection"
+                layout="@layout/no_connection"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+                app:visible="@{vm.noNetworkConnection == true &amp;&amp; vm.shifts == null}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
