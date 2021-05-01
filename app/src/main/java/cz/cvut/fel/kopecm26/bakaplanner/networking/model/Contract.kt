@@ -8,6 +8,7 @@ import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatDate
+import java.io.Serializable
 
 @Entity
 @JsonClass(generateAdapter = true)
@@ -18,7 +19,7 @@ data class Contract(
     val work_load: Double?,
     val active: Boolean,
     @Json(name = "type") val type_id: Int
-) {
+) : Serializable {
     val endDate get() = end_date?.formatDate(DateTimeFormats.MONTH_DAY_YEAR)
     val type: ContractTypes? get() = type_id.mapToContractType()
 }

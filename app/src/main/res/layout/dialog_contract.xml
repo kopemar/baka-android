@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
-            name="vm"
-            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.EmployeeDialogViewModel" />
-
-
-        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.NativeOptions" />
+            name="contract"
+            type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Contract" />
     </data>
 
     <LinearLayout
@@ -21,12 +17,12 @@
 
         <TextView
             style="@style/Text.Large"
-            fromHtml="@{@string/name(vm.employee.fullName, vm.employee.username)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:text="@{String.format(context.getString(contract.type.nameResTemplate), contract.id)}" />
 
         <View
             android:layout_width="match_parent"
@@ -35,21 +31,6 @@
             android:background="@color/gray_blue"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <include
-            android:id="@+id/show_profile"
-            layout="@layout/list_native_options"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:line="@{false}"
-            app:option="@{NativeOptions.SHOW_PROFILE}" />
 
-        <include
-            android:id="@+id/remove_from_shift"
-            layout="@layout/list_native_options"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:line="@{false}"
-            app:option="@{NativeOptions.REMOVE_FROM_SHIFT}" />
     </LinearLayout>
 </layout>

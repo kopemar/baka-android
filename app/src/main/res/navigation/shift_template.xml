@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/shift_template_fragment"
+    android:id="@+id/shift_template">
+
+    <fragment
+        android:id="@+id/shift_template_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template.ShiftTemplateFragment"
+        android:label="ShiftTemplateFragment"
+        tools:layout="@layout/fragment_shift_template">
+
+        <argument
+            android:name="template"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate"
+            app:nullable="false" />
+
+        <argument
+            android:name="period"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/navigate_to_select_employees"
+            app:destination="@id/select_employees_fragment" />
+
+        <action
+            android:id="@+id/show_dialog"
+            app:destination="@id/pick_schedule_fragment" />
+        <action
+            android:id="@+id/show_employee_bottom_sheet"
+            app:destination="@id/employeeBottomSheetFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/pick_schedule_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.shift.PickScheduleFragment"
+        android:label="PickScheduleFragment"
+        tools:layout="@layout/dialog_pick_schedule">
+        <argument
+            android:name="template"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate"
+            app:nullable="false" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/employeeBottomSheetFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template.EmployeeBottomSheetFragment"
+        android:label="EmployeeBottomSheetFragment"
+        tools:layout="@layout/dialog_employee_detail">
+        <argument
+            android:name="employee"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/navigate_to_employee_detail"
+            app:destination="@id/employee_fragment" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/employee_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees.EmployeeFragment"
+        android:label="EmployeeFragment">
+        <argument
+            android:name="employee"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/navigate_to_specializations"
+            app:destination="@id/organization_specializations_fragment" />
+
+        <action
+            android:id="@+id/navigate_to_contracts"
+            app:destination="@id/contracts_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contracts_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.profile.ContractsFragment"
+        android:label="ContractsFragment"
+        app:popUpTo="@id/profile"
+        tools:layout="@layout/fragment_contracts">
+        <argument
+            android:name="type"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchContractsStrategy" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/organization_specializations_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization.OrganizationSpecializationsFragment"
+        android:label="OrganizationSpecializationsFragment">
+
+        <argument
+            android:name="type"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchSpecializationStrategy" />
+
+        <action
+            android:id="@+id/navigate_to_specialization_detail"
+            app:destination="@id/specializationFragment">
+            <argument
+                android:name="specialization"
+                app:argType="cz.cvut.fel.kopecm26.bakaplanner.networking.model.Specialization"
+                app:nullable="false" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/specializationFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.organization.SpecializationFragment"
+        android:label="SpecializationFragment" />
+
+    <fragment
+        android:id="@+id/select_employees_fragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.employees.SelectEmployeesFragment"
+        android:label="SelectEmployeesFragment">
+        <argument
+            android:name="type"
+            app:argType="cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchEmployeesStrategy" />
+
+    </fragment>
+
+</navigation>

@@ -69,7 +69,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:onClick="@{() -> vm.success == true ? null : vm.callAutoSchedule()}"
             android:text="@{vm.success ? @string/finish : @string/do_schedule}"
             app:icon="@drawable/ic_robot"
             app:iconGravity="textStart"

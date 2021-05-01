@@ -8,9 +8,19 @@ import java.time.format.DateTimeParseException
 import java.time.temporal.ChronoUnit
 
 fun String.isBefore(date: ZonedDateTime = ZonedDateTime.now()): Boolean =
-    ZonedDateTime.parse(this).isBefore(date)
+    try {
+        ZonedDateTime.parse(this)
+    } catch (e: DateTimeParseException) {
+        LocalDate.parse(this).atStartOfDay(ZoneId.systemDefault())
+    }.isBefore(date)
 
-fun String.isBefore(date: String) = isBefore(ZonedDateTime.parse(date))
+fun String.isBefore(date: String) = isBefore(
+    try {
+        ZonedDateTime.parse(date)
+    } catch (e: DateTimeParseException) {
+        LocalDate.parse(date).atStartOfDay(ZoneId.systemDefault())
+    }
+)
 
 fun String.daysUntilNow() = ZonedDateTime.now().until(ZonedDateTime.parse(this), ChronoUnit.DAYS)
 fun String.hoursUntilNow() = ZonedDateTime.now().until(ZonedDateTime.parse(this), ChronoUnit.HOURS)

@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentContractsBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.HeaderExpandableBinding
@@ -39,7 +40,9 @@ class ContractsFragment : ViewModelFragment<ContractsViewModel, FragmentContract
                 )
             },
             { contract, binding, _ -> (binding as ListContractBinding).contract = contract },
-            null,
+            { item, _ ->
+                Logger.d("${item}")
+                ContractsFragmentDirections.showContractDialog(item) },
             { old, new -> old.id == new.id },
             { old, new -> old == new },
             { layoutInflater, viewGroup, attachToRoot ->
