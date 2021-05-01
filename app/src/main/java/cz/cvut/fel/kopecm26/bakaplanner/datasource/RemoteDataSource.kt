@@ -17,6 +17,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.User
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateContractResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateEmployeeResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.CreateOrganizationResponse
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeePresenter
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.AddShiftToSchedules
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateContractRequest
@@ -72,7 +73,7 @@ interface RemoteDataSource {
 
     suspend fun getTemplateEmployees(templateId: Int): ResponseModel<List<Employee>>
 
-    suspend fun getOrganizationEmployees(workingNow: Boolean = false): ResponseModel<List<Employee>>
+    suspend fun getOrganizationEmployees(workingNow: Boolean = false, page: Int = 1): ResponseModel<EmployeeListResponse>
 
     suspend fun getSpecializationEmployees(id: Int): ResponseModel<List<Employee>>
 

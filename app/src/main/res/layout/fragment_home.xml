@@ -205,7 +205,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        visible="@{USER.manager &amp;&amp; !vm.currentEmployees.empty}"
+                        visible="@{USER.manager &amp;&amp; !vm.currentEmployees.data.empty}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -233,7 +233,7 @@
                             android:layout_height="30dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
-                            android:text="@{@string/n_employees(vm.currentEmployees.size)}"
+                            android:text="@{@string/n_employees(vm.currentEmployees.data.size)}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

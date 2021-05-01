@@ -36,7 +36,7 @@ class UserRepository(private val service: RemoteDataSource) {
 
     fun getCurrentUser() = PrefsUtils.getUser()
 
-    suspend fun getOrganizationEmployees(workingNow: Boolean = false) = service.getOrganizationEmployees(workingNow)
+    suspend fun getOrganizationEmployees(workingNow: Boolean = false, page: Int = 1) = service.getOrganizationEmployees(workingNow, page)
 
     suspend fun getEmployeeShifts(id: Int) = service.getEmployeeShifts(id)
 

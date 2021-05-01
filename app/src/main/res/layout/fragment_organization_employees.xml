@@ -34,7 +34,7 @@
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh"
                 isRefreshing="@{vm.working}"
-                onRefresh="@{() -> vm.fetchOrganizationEmployees(USER.organization_id)}"
+                onRefresh="@{() -> vm.fetchOrganizationEmployees()}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
@@ -55,7 +55,7 @@
                         android:id="@+id/empty_history"
                         layout="@layout/empty_resource"
                         app:resource="@{EmptyScreens.NO_EMPLOYEES_ORGANIZATION}"
-                        app:visible="@{vm.employees.empty &amp;&amp; vm.noNetworkConnection != true}"
+                        app:visible="@{vm.employees == null &amp;&amp; vm.noNetworkConnection != true}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
 

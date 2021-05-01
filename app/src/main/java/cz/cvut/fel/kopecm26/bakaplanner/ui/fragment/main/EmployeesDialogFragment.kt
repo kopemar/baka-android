@@ -7,6 +7,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.DialogEmployeesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListEmployeeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelBottomSheetFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.HorizontalSpaceItemDecoration
@@ -19,7 +20,7 @@ class EmployeesDialogFragment: ViewModelBottomSheetFragment<HomeViewModel, Dialo
     override val viewModel: HomeViewModel by navGraphViewModels(R.id.home)
 
     private val employeeObserver by lazy {
-        Observer<List<Employee>> {
+        Observer<EmployeeListResponse> {
             binding.rvEmployees.adapter = BaseListAdapter<Employee>(
                 { layoutInflater, viewGroup, attachToRoot ->
                     ListEmployeeBinding.inflate(
@@ -36,7 +37,7 @@ class EmployeesDialogFragment: ViewModelBottomSheetFragment<HomeViewModel, Dialo
                 { item, _ -> findNavController().navigate(EmployeesDialogFragmentDirections.navigateToEmployeeDetail(item)) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
-            ).apply { setItems(it) }
+            ).apply { setItems(it.data) }
             binding.rvEmployees.addItemDecoration(HorizontalSpaceItemDecoration(16))
         }
     }

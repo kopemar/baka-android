@@ -10,6 +10,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListDayTimeBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListEmployeeCircleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseListAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.HorizontalSpaceItemDecoration
@@ -47,7 +48,7 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
     }
 
     private val employeeObserver by lazy {
-        Observer<List<Employee>> {
+        Observer<EmployeeListResponse> {
             binding.rvEmployees.adapter = BaseListAdapter<Employee>(
                 { layoutInflater, viewGroup, attachToRoot ->
                     ListEmployeeCircleBinding.inflate(
@@ -64,7 +65,7 @@ class HomeFragment : ViewModelFragment<HomeViewModel, FragmentHomeBinding>(
                 { _, _ -> findNavController().navigate(HomeFragmentDirections.showEmployeeDialog()) },
                 { old, new -> old.id == new.id },
                 { old, new -> old == new }
-            ).apply { setItems(it) }
+            ).apply { setItems(it.data) }
             binding.rvEmployees.addItemDecoration(HorizontalSpaceItemDecoration(16))
         }
     }

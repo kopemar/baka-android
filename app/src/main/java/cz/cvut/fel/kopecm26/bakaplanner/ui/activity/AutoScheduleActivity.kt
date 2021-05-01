@@ -2,7 +2,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.activity
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ActivityAutoScheduleBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
@@ -38,7 +37,6 @@ class AutoScheduleActivity : ViewModelActivity<AutoScheduleViewModel, ActivityAu
 
         binding.btnSchedule.setOnClickListener {
             if (viewModel.success.value == true) {
-                Logger.d("Test")
                 finishWithOkResult()
             } else {
                 viewModel.callAutoSchedule()

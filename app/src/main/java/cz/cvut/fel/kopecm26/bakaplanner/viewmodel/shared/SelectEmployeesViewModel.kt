@@ -64,7 +64,7 @@ class SelectEmployeesViewModel : BaseViewModel() {
             else -> {
                 userRepository.getOrganizationEmployees().parseResponse { response ->
                     _presenters.value =
-                        response?.map { EmployeePresenter(it.id, it.first_name, it.last_name) }
+                        response?.data?.map { EmployeePresenter(it.id, it.first_name, it.last_name) }
                 }
             }
         }

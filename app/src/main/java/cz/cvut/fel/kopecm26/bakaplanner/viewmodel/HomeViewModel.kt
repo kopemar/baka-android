@@ -3,15 +3,15 @@ package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
-import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.EmployeeListResponse
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 
 class HomeViewModel : BaseViewModel() {
-    private val _currentEmployees = MutableLiveData<List<Employee>>()
-    val currentEmployees: LiveData<List<Employee>> = _currentEmployees
+    private val _currentEmployees = MutableLiveData<EmployeeListResponse>()
+    val currentEmployees: LiveData<EmployeeListResponse> = _currentEmployees
 
     private val _currentShift = MutableLiveData<Shift>()
     val currentShift: LiveData<Shift> = _currentShift
