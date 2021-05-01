@@ -8,52 +8,57 @@
             name="vm"
             type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.HistoryViewModel" />
 
-        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens"/>
+        <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/t_toolbar"
-            layout="@layout/toolbar_single"
-            app:title="@{@string/history}" />
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
-            isRefreshing="@{vm.working}"
-            onRefresh="@{() -> vm.refreshShifts()}"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/t_toolbar">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_shifts"
+            <include
+                android:id="@+id/t_toolbar"
+                layout="@layout/toolbar_single"
+                app:title="@{@string/history}" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                isRefreshing="@{vm.working}"
+                onRefresh="@{() -> vm.refreshShifts()}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t_toolbar">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_shifts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-        <include
-            android:id="@+id/no_connection"
-            layout="@layout/no_connection"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/t_toolbar"
-            visible="@{vm.noNetworkConnection == true &amp;&amp; vm.shifts == null}" />
+            <include
+                android:id="@+id/no_connection"
+                layout="@layout/no_connection"
+                visible="@{vm.noNetworkConnection == true &amp;&amp; vm.shifts == null}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
 
-        <include
-            android:id="@+id/empty_history"
-            layout="@layout/empty_resource"
-            app:resource="@{EmptyScreens.NO_SHIFTS_HISTORY}"
-            visible="@{vm.shifts.empty &amp;&amp; vm.noNetworkConnection != true}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/t_toolbar" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/empty_history"
+                layout="@layout/empty_resource"
+                visible="@{vm.shifts.empty &amp;&amp; vm.noNetworkConnection != true}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t_toolbar"
+                app:resource="@{EmptyScreens.NO_SHIFTS_HISTORY}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 </layout>

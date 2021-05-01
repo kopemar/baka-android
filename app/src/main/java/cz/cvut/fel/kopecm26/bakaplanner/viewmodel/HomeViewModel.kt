@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 
@@ -33,6 +34,9 @@ class HomeViewModel : BaseViewModel() {
         _employeesVisible.value = _employeesVisible.value?.not()
     }
 
+    private val _upcomingPeriod = MutableLiveData<SchedulingPeriod>()
+    val upcomingPeriod: LiveData<SchedulingPeriod> = _upcomingPeriod
+
     init {
         getAll()
     }
@@ -53,6 +57,7 @@ class HomeViewModel : BaseViewModel() {
                 getNextWeekShifts()
             } else {
                 getCurrentEmployees()
+                getUpcomingPeriod()
             }
         }
     }
@@ -67,6 +72,10 @@ class HomeViewModel : BaseViewModel() {
 
     private suspend fun getCurrentEmployees() {
         userRepository.getOrganizationEmployees(true).parseResponse(_currentEmployees)
+    }
+
+    private suspend fun getUpcomingPeriod() {
+        planningRepository.getUpcomingPeriod().parseResponse(_upcomingPeriod)
     }
 
     private suspend fun getNextWeekShifts() {

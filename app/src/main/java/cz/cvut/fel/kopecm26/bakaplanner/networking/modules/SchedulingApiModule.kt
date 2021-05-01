@@ -1,5 +1,6 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking.modules
 
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriodsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnitsResponse
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
@@ -18,6 +19,9 @@ interface SchedulingApiModule {
      */
     @GET("/api/v1/periods")
     suspend fun getSchedulingPeriods(@Query("from") from: String? = null): Response<SchedulingPeriodsResponse>
+
+    @GET("/api/v1/periods/upcoming")
+    suspend fun getUpcomingPeriod(): Response<SchedulingPeriod>
 
     @GET("/api/v1/periods/{id}/units")
     suspend fun getSchedulingUnits(@Path("id") periodId: Int): Response<SchedulingUnitsResponse>

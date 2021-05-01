@@ -62,6 +62,8 @@ interface RemoteDataSource {
 
     suspend fun getSchedulingPeriods(from: ZonedDateTime? = null): ResponseModel<List<SchedulingPeriod>>
 
+    suspend fun getUpcomingPeriod(): ResponseModel<SchedulingPeriod>
+
     suspend fun getSchedulingUnits(periodId: Int): ResponseModel<List<SchedulingUnit>>
 
     suspend fun addShiftTemplate(template: ShiftTemplate): ResponseModel<ShiftTemplate>

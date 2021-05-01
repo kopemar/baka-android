@@ -8,6 +8,8 @@ import java.time.ZonedDateTime
 class PlanningRepository(private val service: RemoteDataSource) {
     suspend fun getSchedulingPeriods(from: ZonedDateTime? = null) = service.getSchedulingPeriods(from)
 
+    suspend fun getUpcomingPeriod() = service.getUpcomingPeriod()
+
     suspend fun getSchedulingUnits(periodId: Int) = service.getSchedulingUnits(periodId)
 
     suspend fun addShiftTemplate(template: ShiftTemplate) = service.addShiftTemplate(template)
