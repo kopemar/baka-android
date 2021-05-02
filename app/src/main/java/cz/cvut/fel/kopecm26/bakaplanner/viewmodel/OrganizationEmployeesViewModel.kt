@@ -22,7 +22,6 @@ class OrganizationEmployeesViewModel : BaseViewModel() {
     ).flow.cachedIn(viewModelScope)
 
     private val _employeesState = MutableLiveData<EmployeeListResponse>()
-//    val employees: Flow<PagingData<Employee>> = _employees
 
     private val _employees = MutableSharedFlow<PagingData<Employee>>()
     val employees: Flow<PagingData<Employee>> = _employees
