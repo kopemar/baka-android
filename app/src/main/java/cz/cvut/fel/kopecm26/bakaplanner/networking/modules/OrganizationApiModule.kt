@@ -16,10 +16,10 @@ import retrofit2.http.Query
 
 interface OrganizationApiModule {
     @GET("/api/v1/templates/{id}/employees")
-    suspend fun getTemplateEmployees(@Path("id") id: Int): Response<EmployeeListResponse>
+    suspend fun getTemplateEmployees(@Path("id") id: Int, @Query("page") page: Int = 1): Response<EmployeeListResponse>
 
     @GET("/api/v1/employees")
-    suspend fun getOrganizationEmployees(@Query("working_now") workingNow: Boolean = false, @Query("page") page: Int = 1): Response<EmployeeListResponse>
+    suspend fun getOrganizationEmployees(@Query("working_now") workingNow: Boolean = false, @Query("page") page: Int = 1, @Query("per_page") perPage: Int = 25): Response<EmployeeListResponse>
 
     @GET("/api/v1/specializations")
     suspend fun getSpecializations(@Query("for_template") templateId: Int? = null): Response<SpecializationsResponse>
@@ -28,7 +28,7 @@ interface OrganizationApiModule {
     suspend fun getEmployeeSpecializations(@Path("id") employeeId: Int): Response<SpecializationsResponse>
 
     @GET("/api/v1/specializations/{id}/employees")
-    suspend fun getSpecializationEmployees(@Path("id") periodId: Int): Response<EmployeeListResponse>
+    suspend fun getSpecializationEmployees(@Path("id") periodId: Int, @Query("page") page: Int = 1): Response<EmployeeListResponse>
 
     // TODO TODO will change API endpoint
     @GET("/api/v1/specializations/{id}/calculations/contracts")

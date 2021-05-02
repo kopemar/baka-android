@@ -38,6 +38,14 @@ abstract class BaseViewModel : ViewModel() {
     val noNetworkConnection = MutableLiveData(false)
     val working = MutableLiveData(false)
 
+
+    private val _showEmptyResource = MutableLiveData(false)
+    val showEmptyResource: LiveData<Boolean> = _showEmptyResource
+
+    fun setShowEmptyResource(value: Boolean) {
+        _showEmptyResource.value = value
+    }
+
     fun MutableLiveData<Boolean>.work(work: suspend () -> Unit) {
         viewModelScope.launch {
             this@work.value = true

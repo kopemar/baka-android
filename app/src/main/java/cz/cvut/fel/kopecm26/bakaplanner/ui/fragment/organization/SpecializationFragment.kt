@@ -34,7 +34,7 @@ class SpecializationFragment: ViewModelFragment<SpecializationViewModel, Fragmen
         Observer<Consumable<Boolean>> {
             it.addConsumer(CONSUMER_TAG)
             if (it.canBeConsumed(CONSUMER_TAG) && it.consume(CONSUMER_TAG)) {
-                viewModel.fetchEmployees()
+                employeeListFragment.refresh()
             }
         }
     }

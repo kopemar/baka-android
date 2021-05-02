@@ -17,7 +17,7 @@ class SpecializationRepository(private val service: RemoteDataSource) {
     suspend fun createSpecialization(name: String) =
         service.createSpecialization(CreateSpecializationRequest(name))
 
-    suspend fun getSpecializationEmployees(id: Int) = service.getSpecializationEmployees(id)
+    suspend fun getSpecializationEmployees(id: Int, page: Int = 1) = service.getSpecializationEmployees(id, page)
 
     suspend fun getSpecializationEmployeesPossibilities(id: Int) = service.getSpecializationEmployeesPossibilities(id)
 

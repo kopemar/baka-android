@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template
 
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -44,6 +45,9 @@ class ShiftTemplateFragment :
     }
 
     override fun initUi() {
+        binding.toolbarLayout.setCollapsedTitleTypeface(ResourcesCompat.getFont(requireContext(), R.font.magra))
+        binding.toolbarLayout.setCollapsedSubtitleTypeface(ResourcesCompat.getFont(requireContext(), R.font.magra))
+
         viewModel.template.postValue(args.template)
 
         setupMenu()

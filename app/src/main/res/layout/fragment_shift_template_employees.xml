@@ -19,34 +19,40 @@
         <include
             android:id="@+id/no_connection"
             layout="@layout/no_connection"
-            visible="@{vm.noNetworkConnection == true &amp;&amp; vm.employees == null}"
+            visible="@{vm.noNetworkConnection == true }"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
 
-        <include
-            android:id="@+id/empty_history"
-            layout="@layout/empty_resource"
-            app:resource="@{EmptyScreens.NO_EMPLOYEES}"
-            visible="@{vm.employees.empty &amp;&amp; vm.noNetworkConnection != true}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             isRefreshing="@{vm.working}"
-            onRefresh="@{() -> vm.fetchEmployees()}"
             android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_employees"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/list_employee" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/empty_history"
+                    layout="@layout/empty_resource"
+                    app:resource="@{EmptyScreens.NO_EMPLOYEES}"
+                    visible="@{vm.noNetworkConnection != true &amp;&amp; vm.showEmptyResource}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_employees"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_employee" />
+            </LinearLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

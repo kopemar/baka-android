@@ -1,14 +1,11 @@
 package cz.cvut.fel.kopecm26.bakaplanner.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.paging.PagingData
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
+import kotlinx.coroutines.flow.Flow
 
 abstract class EmployeeListViewModel: BaseViewModel() {
 
-    protected val _employees = MediatorLiveData<List<Employee>>()
+    abstract val flow: Flow<PagingData<Employee>>
 
-    val employees: LiveData<List<Employee>> = _employees
-
-    abstract fun fetchEmployees()
 }

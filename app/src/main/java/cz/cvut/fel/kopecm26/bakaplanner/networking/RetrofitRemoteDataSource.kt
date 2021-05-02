@@ -93,20 +93,20 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
             api.getShiftTemplates(unitId)
         }) { it?.data }
 
-    override suspend fun getTemplateEmployees(templateId: Int) =
+    override suspend fun getTemplateEmployees(templateId: Int, page: Int) =
         safeApiCall({
-            api.getTemplateEmployees(templateId)
-        }) { it?.data }
+            api.getTemplateEmployees(templateId, page)
+        }) { it }
 
     override suspend fun getOrganizationEmployees(workingNow: Boolean, page: Int) =
         safeApiCall({
             api.getOrganizationEmployees(workingNow, page)
         }) { it }
 
-    override suspend fun getSpecializationEmployees(id: Int) =
+    override suspend fun getSpecializationEmployees(id: Int, page: Int) =
         safeApiCall({
-            api.getSpecializationEmployees(id)
-        }) { it?.data }
+            api.getSpecializationEmployees(id, page)
+        }) { it }
 
     override suspend fun getSpecializationEmployeesPossibilities(id: Int) =
         safeApiCall({

@@ -6,8 +6,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.PaginatedListResponse
 
 class BasePagingSource<T: Any, P: PaginatedListResponse<T>>(
+    private val refreshKey: Int = 1,
     private val loadResource: suspend (params: LoadParams<Int>) -> ResponseModel<P>,
-    private val refreshKey: Int = 1
 ): PagingSource<Int, T>() {
 
     override fun getRefreshKey(state: PagingState<Int, T>) = refreshKey

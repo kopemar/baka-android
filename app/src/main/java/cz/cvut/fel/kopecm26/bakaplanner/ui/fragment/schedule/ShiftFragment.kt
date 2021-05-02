@@ -46,6 +46,8 @@ class ShiftFragment : ViewModelFragment<ShiftViewModel, FragmentShiftBinding>(
 
     override fun initUi() {
         binding.toolbarLayout.setCollapsedTitleTypeface(ResourcesCompat.getFont(requireContext(), R.font.magra))
+        binding.toolbarLayout.setCollapsedSubtitleTypeface(ResourcesCompat.getFont(requireContext(), R.font.magra))
+
         viewModel.shift.value = args.shift
         viewModel.removed.observe(this, removedObserver)
 
