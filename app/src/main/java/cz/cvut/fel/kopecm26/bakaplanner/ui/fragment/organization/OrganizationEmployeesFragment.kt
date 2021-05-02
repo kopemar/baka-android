@@ -14,6 +14,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AddEmployeeActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.PagingAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.elevationOnScroll
+import cz.cvut.fel.kopecm26.bakaplanner.util.binding.onRefresh
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.OrganizationEmployeesViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -57,7 +58,7 @@ class OrganizationEmployeesFragment :
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ADD_EMPLOYEE_REQUEST && resultCode == Activity.RESULT_OK) {
-            viewModel.fetchOrganizationEmployees()
+            employeesAdapter.refresh()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -74,6 +75,10 @@ class OrganizationEmployeesFragment :
 
         binding.rvEmployees.apply {
             adapter = employeesAdapter
+        }
+
+        binding.swipeRefresh.onRefresh {
+            employeesAdapter.refresh()
         }
 
         collectLatest()
