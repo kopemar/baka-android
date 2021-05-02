@@ -53,7 +53,7 @@ class OrganizationEmployeesViewModel : BaseViewModel() {
                 LoadResult.Page(
                     data = response.data?.data ?: listOf(),
                     prevKey = null,
-                    nextKey = if (response.data?.has_next == true) _employeesState.value?.current_page?.plus(1) ?: 1 else null,
+                    nextKey = if (response.data?.hasNext == true) _employeesState.value?.currentPage?.plus(1) ?: 1 else null,
                 )
             } else {
                 LoadResult.Error(
