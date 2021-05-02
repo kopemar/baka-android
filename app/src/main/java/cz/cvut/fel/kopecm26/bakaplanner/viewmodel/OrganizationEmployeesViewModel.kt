@@ -17,12 +17,9 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 class OrganizationEmployeesViewModel : BaseViewModel() {
 
     val flow = Pager(
-        // Configure how data is loaded by passing additional properties to
-        // PagingConfig, such as prefetchDistance.
-        PagingConfig(pageSize = 10)
-    ) {
-        EmployeePagingSource()
-    }.flow.cachedIn(viewModelScope)
+        PagingConfig(pageSize = 15, prefetchDistance = 1),
+        pagingSourceFactory = { EmployeePagingSource() }
+    ).flow.cachedIn(viewModelScope)
 
     private val _employeesState = MutableLiveData<EmployeeListResponse>()
 //    val employees: Flow<PagingData<Employee>> = _employees
@@ -36,7 +33,7 @@ class OrganizationEmployeesViewModel : BaseViewModel() {
         }
     }
 
-    suspend fun getNextPage(page: Int) = fetchAndEmit(page) as? ResponseModel.SUCCESS
+    suspend fun getNextPage(page: Int) = fetchAndEmit(page)
 
     private suspend fun fetchAndEmit(page: Int) =
         userRepository.getOrganizationEmployees(page = page).apply {
@@ -46,20 +43,23 @@ class OrganizationEmployeesViewModel : BaseViewModel() {
 
     inner class EmployeePagingSource : PagingSource<Int, Employee>() {
 
-        override fun getRefreshKey(state: PagingState<Int, Employee>): Int? {
-            return state.anchorPosition?.let { anchorPosition ->
-                val anchorPage = state.closestPageToPosition(anchorPosition)
-                anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-            }
-        }
+        override fun getRefreshKey(state: PagingState<Int, Employee>): Int? = state.anchorPosition
 
         override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Employee> {
+            working.value = true
             val response = getNextPage(params.key ?: 1)
-            return LoadResult.Page(
-                data = response?.data?.data ?: listOf(),
-                prevKey = null,
-                nextKey = if (response?.data?.has_next == true) params.key?.plus(1) else null,
-            )
+            working.value = false
+            return if (response is ResponseModel.SUCCESS) {
+                LoadResult.Page(
+                    data = response.data?.data ?: listOf(),
+                    prevKey = null,
+                    nextKey = if (response.data?.has_next == true) _employeesState.value?.current_page?.plus(1) ?: 1 else null,
+                )
+            } else {
+                LoadResult.Error(
+                    RuntimeException()
+                )
+            }
         }
     }
 }

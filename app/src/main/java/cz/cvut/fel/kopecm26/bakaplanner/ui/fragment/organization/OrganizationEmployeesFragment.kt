@@ -6,8 +6,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.map
-import com.orhanobut.logger.Logger
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentOrganizationEmployeesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListEmployeeBinding
@@ -17,6 +15,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.PagingAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.elevationOnScroll
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.OrganizationEmployeesViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -29,8 +28,11 @@ class OrganizationEmployeesFragment :
     override val toolbar: Toolbar get() = binding.mainToolbar.toolbar
     override var navigateUp = true
     override val viewModelOwner: ViewModelStoreOwner? get() = activity
+
+    private var job: Job? = null
+
     private val employeesAdapter by lazy {
-        PagingAdapter<Employee> (
+        PagingAdapter<Employee>(
             { layoutInflater, viewGroup, attachToRoot ->
                 ListEmployeeBinding.inflate(
                     layoutInflater,
@@ -70,15 +72,19 @@ class OrganizationEmployeesFragment :
         binding.mainToolbar.appBarLayout.elevationOnScroll(binding.rvEmployees)
 
 
-        binding.rvEmployees.adapter = employeesAdapter
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.flow.collectLatest { pagingData ->
-                Logger.d("paging data: ${pagingData.map { it }}")
-                employeesAdapter.submitData(pagingData)
-            }
+        binding.rvEmployees.apply {
+            adapter = employeesAdapter
         }
 
+        collectLatest()
+    }
+
+    private fun collectLatest() {
+        job?.cancel()
+
+        job = viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.flow.collectLatest { employeesAdapter.submitData(it) }
+        }
     }
 
     companion object {

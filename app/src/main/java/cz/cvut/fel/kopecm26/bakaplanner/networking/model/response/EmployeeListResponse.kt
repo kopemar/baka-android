@@ -9,5 +9,6 @@ data class EmployeeListResponse(
     val data: List<Employee>,
     val has_next: Boolean,
     val total_pages: Int,
-    val current_page: Int
+    val current_page: Int,
+    val records: Int = data.size
 )
