@@ -196,6 +196,7 @@
     <string name="hello">Hello, %s</string>
 
     <string name="n_employees">%d employees</string>
+    <string name="n_days_left">%d days left</string>
     <string name="are_working_now">Are working now</string>
     <string name="working_now">Working now</string>
     <string name="specialization">Specialization</string>
@@ -204,4 +205,12 @@
     <string name="start_date_"><![CDATA[<b>Start date</b>: %s]]></string>
     <string name="end_date_"><![CDATA[<b>End date</b>: %s]]></string>
     <string name="worked_in_"><![CDATA[Worked <b>%d</b> hours in <b>%d</b>]]></string>
+    <string name="plan_shift_times">Planned shift times</string>
+    <string name="assigned_employees">Assigned employees</string>
+    <string name="submitted_schedule">Submitted schedule</string>
+    <string name="start_is_before_end">End is not before start</string>
+    <string name="use_24_h_mode_instead">Use 24-h mode instead</string>
+    <string name="shift_too_long">Shift is too long</string>
+    <string name="working_hours_too_long">Working hours are too long</string>
+    <string name="cannot_cover_whole_day">Cannot cover whole day</string>
 </resources>

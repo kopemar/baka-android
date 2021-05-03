@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ShiftDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 
-@Database(entities = [Shift::class], version = 10, exportSchema = false)
+@Database(entities = [Shift::class], version = 11, exportSchema = false)
 abstract class PlannerDatabase : RoomDatabase() {
     abstract fun getShiftDao(): ShiftDao
 

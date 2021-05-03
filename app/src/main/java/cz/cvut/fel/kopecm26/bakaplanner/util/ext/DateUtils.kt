@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.util.ext
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -90,6 +91,20 @@ fun ZonedDateTime.mergeWithHours(time: String, nextDay: Boolean = false): String
         ZoneId.systemDefault()
     ).run { if (nextDay) this.plusDays(1) else this }.toString()
 }
+
+fun LocalDate.mergeWithHours(time: LocalTime, nextDay: Boolean = false): LocalDateTime? {
+    val mergedDate = this
+    return LocalDateTime.of(
+        mergedDate.year,
+        mergedDate.monthValue,
+        mergedDate.dayOfMonth,
+        time.hour,
+        time.minute,
+        0,
+        0
+    ).run { if (nextDay) this.plusDays(1) else this }
+}
+
 
 fun LocalDate.weeksAfter(count: Long = 1) = plus(count, ChronoUnit.WEEKS)
 

@@ -7,6 +7,8 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTimeCalculation
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.DateTimeFormats
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.formatter
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.ifNotNull
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.mergeWithHours
+import java.time.LocalDate
 import java.time.LocalTime
 
 class PlanDaysViewModel : BaseViewModel() {
@@ -41,7 +43,9 @@ class PlanDaysViewModel : BaseViewModel() {
     private val _shiftStartTime = MutableLiveData<LocalTime>()
     val shiftStartTime: LiveData<LocalTime> = _shiftStartTime
     private val _shiftStartTimeF = MediatorLiveData<String>().apply {
-        addSource(_shiftStartTime) { this.value = it.format(formatter(DateTimeFormats.HOURS_MINUTES)) }
+        addSource(_shiftStartTime) {
+            this.value = it.format(formatter(DateTimeFormats.HOURS_MINUTES))
+        }
     }
     val shiftStartTimeF: LiveData<String?> = _shiftStartTimeF
 
@@ -93,5 +97,118 @@ class PlanDaysViewModel : BaseViewModel() {
                 ).parseResponse(_shiftTimeCalculations)
             }
         }
+    }
+
+    fun validateStartBeforeEnd(): Boolean {
+        val today = LocalDate.now()
+        val nightShift = nightShift.value ?: false
+        val start = startTime.value
+        val count = shiftsPerDay.value ?: 1
+        val end = endTime.value
+        val hours = shiftHours.value?.toLong()
+        val minutes = breakMinutes.value?.toLong()
+        var value = false
+        ifNotNull(
+            nightShift,
+            start,
+            end,
+            count,
+            hours,
+            minutes
+        ) {
+            value = today.mergeWithHours(start!!)
+                ?.isBefore(today.mergeWithHours(end!!, nightShift)) == true
+        } ?: run {
+            // Do not display errors if hours not filled...
+            value = hours == null
+        }
+        return value
+    }
+
+    fun validateMax24Hours(): Boolean {
+        val today = LocalDate.now()
+        val nightShift = nightShift.value ?: false
+        val is24Hours = is24Hours.value ?: false
+        val start = startTime.value
+        val count = shiftsPerDay.value ?: 1
+        val end = endTime.value
+        val hours = shiftHours.value?.toLong()
+        val minutes = breakMinutes.value?.toLong()
+        var value = false
+        ifNotNull(
+            nightShift,
+            start,
+            end,
+            count,
+            hours,
+            minutes
+        ) {
+            value = !nightShift || is24Hours || today.mergeWithHours(start!!)?.plusDays(1)
+                ?.isAfter(today.mergeWithHours(end!!, nightShift)) == true
+        } ?: run {
+            // Do not display errors if hours not filled...
+            value = is24Hours || hours == null
+        }
+        return value
+    }
+
+    fun validateNotTooLong(fromFirstStartField: Boolean): Boolean {
+        val today = LocalDate.now()
+        val nightShift = nightShift.value ?: false
+        val is24Hours = is24Hours.value ?: false
+        val shiftStartTime = shiftStartTime.value
+        val start = startTime.value ?: shiftStartTime
+        val count = shiftsPerDay.value ?: 1
+        val end = endTime.value
+        val hours = shiftHours.value?.toLong()
+        val minutes = breakMinutes.value?.toLong()
+        var value = false
+        ifNotNull(
+            nightShift,
+            start,
+            end,
+            count,
+            hours,
+            minutes
+        ) {
+            val startPlusAllShifts = today.mergeWithHours(start!!)?.plusHours(hours!! * count)
+                ?.plusMinutes(minutes!! * count)
+            value = (is24Hours &&
+                    startPlusAllShifts?.isBefore(today.mergeWithHours(start, true)) != true) ||
+                    startPlusAllShifts?.isEqual(today.mergeWithHours(end!!, nightShift)) == true ||
+                    startPlusAllShifts?.isBefore(today.mergeWithHours(end!!, nightShift)) != true
+        } ?: run {
+            // Do not display errors if hours not filled...
+            value = fromFirstStartField && !is24Hours || hours == null
+        }
+        return value
+    }
+
+    fun validateNotTooShort(): Boolean {
+        val today = LocalDate.now()
+        val nightShift = nightShift.value ?: false
+        val is24Hours = is24Hours.value ?: false
+        val start = startTime.value
+        val count = shiftsPerDay.value ?: 1
+        val end = endTime.value
+        val hours = shiftHours.value?.toLong()
+        val minutes = breakMinutes.value?.toLong()
+        var value = false
+        ifNotNull(
+            nightShift,
+            start,
+            end,
+            count,
+            hours,
+            minutes
+        ) {
+            val startPlusOneShift =
+                today.mergeWithHours(start!!)?.plusHours(hours!!)?.plusMinutes(minutes!!)
+            value = startPlusOneShift?.isAfter(today.mergeWithHours(end!!, nightShift)) != true
+        } ?: run {
+            // Do not display errors if hours not filled...
+            value = hours == null
+        }
+        return value
     }
 }

@@ -16,6 +16,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.response.SubmitSchedule
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.AddShiftToSchedules
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateContractRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.SchedulingParams
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.SubmitScheduleRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -90,7 +91,8 @@ interface ShiftsApiModule {
     // TODO not optimal use of REST API
     @POST("/api/v1/periods/{id}/calculations/generate-schedule")
     suspend fun callAutoSchedule(
-        @Path("id") periodId: Int
+        @Path("id") periodId: Int,
+        @Body params: SchedulingParams
     ): Response<AutoSchedulerResponse>
 
     @PUT("/api/v1/periods/{id}")

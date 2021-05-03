@@ -41,7 +41,7 @@ class HomeViewModel : BaseViewModel() {
         getAll()
     }
 
-    fun refreshShifts() {
+    fun refresh() {
         working.work {
             shiftRepository.refreshAllShifts().let(::handleRefreshResponse)
             getAll()

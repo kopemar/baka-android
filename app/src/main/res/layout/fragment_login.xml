@@ -79,7 +79,7 @@
                             android:layout_height="56dp"
                             android:autofillHints="username"
                             android:imeOptions="actionNext"
-                            android:inputType="text"
+                            android:inputType="textNoSuggestions"
                             android:lines="1"
                             android:nextFocusDown="@id/input_password"
                             android:paddingHorizontal="16dp"

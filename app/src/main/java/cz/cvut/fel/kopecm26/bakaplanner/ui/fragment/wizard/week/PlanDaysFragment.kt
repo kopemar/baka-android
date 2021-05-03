@@ -65,11 +65,31 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
         }
 
         inputLayout(binding.inputStartTime) {
-            if (viewModel.is24Hours.value != true) isNotEmpty()
+            if (viewModel.is24Hours.value != true) {
+                isNotEmpty()
+            }
+            this.assert(getString(R.string.start_is_before_end)) {
+                viewModel.is24Hours.value == true || viewModel.validateStartBeforeEnd()
+            }
+
+            this.assert(getString(R.string.use_24_h_mode_instead)) {
+                viewModel.validateMax24Hours()
+            }
+
+            this.assert(getString(R.string.shift_too_long)) {
+                viewModel.is24Hours.value == true || viewModel.validateNotTooLong(false)
+            }
+
+            this.assert(getString(R.string.cannot_cover_whole_day)) {
+                viewModel.is24Hours.value == true || viewModel.validateNotTooShort()
+            }
         }
 
         inputLayout(binding.inputEndTime) {
             if (viewModel.is24Hours.value != true) isNotEmpty()
+            this.assert(binding.inputStartTime.error.toString()) {
+                binding.inputStartTime.error != ""
+            }
         }
 
         inputLayout(binding.inputShiftStart) {
@@ -78,6 +98,9 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
 
         inputLayout(binding.inputShiftHours) {
             isNotEmpty()
+            this.assert(getString(R.string.cannot_cover_whole_day)) {
+                viewModel.is24Hours.value != true || viewModel.validateNotTooLong(true)
+            }
         }
     }
 

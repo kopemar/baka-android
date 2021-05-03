@@ -9,7 +9,8 @@ data class Employee(
     val first_name: String,
     val last_name: String,
     val username: String,
-    val uid: String
+    val uid: String,
+    val shift_id: Int? = null
 ) : Serializable {
     val idString = id.toString()
     val fullName: String get() = "$last_name, $first_name"

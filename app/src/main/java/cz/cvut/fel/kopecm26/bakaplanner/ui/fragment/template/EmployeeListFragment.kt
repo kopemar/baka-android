@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
-class ShiftEmployeesFragment<VM : EmployeeListViewModel>(
+class EmployeeListFragment<VM : EmployeeListViewModel>(
     clazz: KClass<VM>,
     private val viewModelStoreOwner: ViewModelStoreOwner? = null
 ) : ViewModelFragment<VM, FragmentShiftTemplateEmployeesBinding>(

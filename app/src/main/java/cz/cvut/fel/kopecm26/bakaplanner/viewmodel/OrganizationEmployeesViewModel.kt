@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Employee
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.util.BasePagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,8 +18,9 @@ class OrganizationEmployeesViewModel : BaseViewModel() {
         pagingSourceFactory = {
             BasePagingSource {
                 working.value = true
-                getNextPage(it.key ?: 1).also {
+                getNextPage(it.key ?: 1).also { response ->
                     working.value = false
+                    setShowEmptyResource(response is ResponseModel.SUCCESS && response.data?.data.isNullOrEmpty())
                 }
             }
         }

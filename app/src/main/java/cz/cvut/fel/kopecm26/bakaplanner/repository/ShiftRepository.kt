@@ -7,6 +7,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
+import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import java.time.ZonedDateTime
 
 class ShiftRepository(private val service: RemoteDataSource, private val shiftDao: ShiftDao) {
@@ -28,19 +29,23 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
 
     suspend fun refreshShiftsBefore(to: ZonedDateTime = ZonedDateTime.now()): ResponseModel<List<Shift>> {
         service.getShifts().apply {
+            if (PrefsUtils.getUser()?.manager == true) return this
             if (this is ResponseModel.SUCCESS) {
-                data?.let { shiftDao.insert(it) }
+                data?.let { shiftDao.deleteAllAndReplace(it) }
             }
         }
         return ResponseModel.SUCCESS(shiftDao.getBefore(to.toString()))
     }
 
-    suspend fun getShiftsBefore(to: ZonedDateTime): ResponseModel<List<Shift>> =
-        if (shiftDao.getBefore(to.toString()).isNullOrEmpty()) {
-            refreshAllShifts()
-        } else {
+    suspend fun getShiftsBefore(to: ZonedDateTime): ResponseModel<List<Shift>> {
+        val response = refreshShiftsBefore(to)
+        return if (response is ResponseModel.ERROR) {
             ResponseModel.SUCCESS(shiftDao.getBefore(to.toString()))
+        } else {
+            response
         }
+    }
+
 
     suspend fun getAllShifts() = if (shiftDao.getAll().isNullOrEmpty()) {
         refreshAllShifts()

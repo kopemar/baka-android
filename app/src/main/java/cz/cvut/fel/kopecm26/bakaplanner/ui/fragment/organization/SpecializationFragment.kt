@@ -11,7 +11,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.databinding.FragmentSpecializationBinding
 import cz.cvut.fel.kopecm26.bakaplanner.ui.adapter.BaseViewPagerAdapter
 import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.base.ViewModelFragment
-import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template.ShiftEmployeesFragment
+import cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template.EmployeeListFragment
 import cz.cvut.fel.kopecm26.bakaplanner.ui.util.FetchEmployeesStrategy
 import cz.cvut.fel.kopecm26.bakaplanner.util.Consumable
 import cz.cvut.fel.kopecm26.bakaplanner.viewmodel.SpecializationViewModel
@@ -27,7 +27,7 @@ class SpecializationFragment: ViewModelFragment<SpecializationViewModel, Fragmen
     private val args by navArgs<SpecializationFragmentArgs>()
 
     private val employeeListFragment by lazy {
-        ShiftEmployeesFragment(SpecializationViewModel::class, this)
+        EmployeeListFragment(SpecializationViewModel::class, this)
     }
 
     private val assignObserver by lazy {

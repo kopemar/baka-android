@@ -17,7 +17,9 @@ data class SchedulingPeriod(
     val start_date: String,
     val end_date: String,
     val submitted: Boolean,
-    val planned: Boolean
+    val planned: Boolean,
+    val days_left: Int? = null,
+    val units_exist: Boolean? = null
 ) : Serializable {
     val state: PeriodState get() = getState()
 
@@ -39,7 +41,7 @@ enum class PeriodState(
     companion object {
         fun SchedulingPeriod.getState(): PeriodState = when {
             start_date.getLocalDate().isBefore(LocalDate.now()) && end_date.getLocalDate().isBefore(LocalDate.now()) -> PAST
-            start_date.getLocalDate().isBefore(LocalDate.now()) -> CURRENT
+            start_date.getLocalDate().isBefore(LocalDate.now()) || start_date.getLocalDate().isEqual(LocalDate.now()) -> CURRENT
             submitted -> SUBMITTED
             planned -> TO_BE_SUBMITTED
             else -> TO_BE_PLANNED

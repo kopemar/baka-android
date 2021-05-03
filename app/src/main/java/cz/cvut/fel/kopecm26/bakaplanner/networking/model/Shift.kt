@@ -30,6 +30,7 @@ data class Shift(
     val schedule_id: String?,
     val duration: Float,
     val user_scheduled: Boolean,
+    val specialization: String? = null
 ) : Serializable {
     val idString get() = id.toString()
     val dateF get() = start_time.formatDate(DateTimeFormats.getFullDateFormat(start_time))

@@ -2,7 +2,6 @@ package cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.template
 
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
@@ -22,16 +21,17 @@ class ShiftTemplateFragment :
     override val toolbar: Toolbar get() = binding.toolbar
     override var navigateUp = true
 
-    override val viewModelOwner: ViewModelStoreOwner? get() = activity
+//    override val viewModelOwner: ViewModelStoreOwner? get() = activity
 
     private val args by navArgs<ShiftTemplateFragmentArgs>()
 
     private val employeesFragment by lazy {
-        ShiftEmployeesFragment(ShiftTemplateViewModel::class).apply {
+        EmployeeListFragment(ShiftTemplateViewModel::class, this).apply {
             itemLongPressListener = {
                 findNavController().navigate(
                     ShiftTemplateFragmentDirections.showEmployeeBottomSheet(
-                        it
+                        it,
+                        args.period
                     )
                 )
             }
@@ -39,7 +39,7 @@ class ShiftTemplateFragment :
     }
 
     private val shiftInfoFragment by lazy {
-        ShiftInformationFragment {
+        ShiftInformationFragment(this) {
             navigateToSignUpFragment()
         }
     }

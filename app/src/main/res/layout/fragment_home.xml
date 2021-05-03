@@ -14,6 +14,7 @@
             type="cz.cvut.fel.kopecm26.bakaplanner.networking.model.User" />
 
         <import type="cz.cvut.fel.kopecm26.bakaplanner.ui.util.EmptyScreens" />
+        <import type="android.view.View" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -42,7 +43,7 @@
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh"
-                onRefresh="@{() -> vm.refreshShifts()}"
+                onRefresh="@{() -> vm.refresh()}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -205,7 +206,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        visible="@{USER.manager &amp;&amp; !vm.currentEmployees.data.empty}"
+                        visible="@{USER.manager &amp;&amp; vm.currentEmployees != null &amp;&amp; vm.currentEmployees.records != 0}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -233,7 +234,7 @@
                             android:layout_height="30dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
-                            android:text="@{@string/n_employees(vm.currentEmployees.data.size)}"
+                            android:text="@{@string/n_employees(vm.currentEmployees.records)}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -264,11 +265,132 @@
                             tools:visibility="gone" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        visible="@{USER.manager &amp;&amp; vm.upcomingPeriod.days_left != null}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/bg_rectangle_round"
+                        android:elevation="@dimen/card_elevation"
+                        android:onClick="@{() -> vm.invertEmployeesVisible()}"
+                        android:paddingBottom="16dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:rotation="@{vm.employeesVisible ? 180 : 0}"
+                            android:src="@drawable/ic_chevron_down"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_n_days_left"
+                            style="@style/Text.Large"
+                            android:layout_width="124dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@{@string/n_days_left(vm.upcomingPeriod.days_left)}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_days_left"
+                            style="@style/Text.Light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:text="@string/are_working_now"
+                            app:layout_constraintStart_toStartOf="@id/tv_n_days_left"
+                            app:layout_constraintTop_toBottomOf="@id/tv_n_days_left" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_days_left">
+
+                            <ImageView
+                                android:id="@+id/iv_check_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_mdi_check"
+                                android:visibility="@{vm.upcomingPeriod.units_exist ? View.VISIBLE : View.INVISIBLE}"
+                                app:layout_constraintBottom_toTopOf="@id/iv_check_2"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="4dp"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/plan_shift_times"
+                                app:layout_constraintBottom_toBottomOf="@id/iv_check_1"
+                                app:layout_constraintStart_toEndOf="@id/iv_check_1"
+                                app:layout_constraintTop_toTopOf="@id/iv_check_1" />
+
+
+                            <ImageView
+                                android:id="@+id/iv_check_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_mdi_check"
+                                android:visibility="@{vm.upcomingPeriod.planned ? View.VISIBLE : View.INVISIBLE}"
+                                app:layout_constraintBottom_toTopOf="@id/iv_check_3"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/iv_check_1" />
+
+                            <TextView
+                                style="@style/Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="4dp"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/assigned_employees"
+                                app:layout_constraintBottom_toBottomOf="@id/iv_check_2"
+                                app:layout_constraintStart_toEndOf="@id/iv_check_2"
+                                app:layout_constraintTop_toTopOf="@id/iv_check_2" />
+
+                            <ImageView
+                                android:id="@+id/iv_check_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_mdi_check"
+                                android:visibility="@{vm.upcomingPeriod.submitted ? View.VISIBLE : View.INVISIBLE}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/iv_check_2" />
+
+                            <TextView
+                                style="@style/Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="4dp"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/submitted_schedule"
+                                app:layout_constraintBottom_toBottomOf="@id/iv_check_3"
+                                app:layout_constraintStart_toEndOf="@id/iv_check_3"
+                                app:layout_constraintTop_toTopOf="@id/iv_check_3" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <include
                         android:id="@+id/empty_message"
                         layout="@layout/empty_resource"
                         app:resource="@{EmptyScreens.NOTHING}"
-                        app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null}" />
+                        app:visible="@{vm.nextShift == null &amp;&amp; vm.nextWeekDays.empty &amp;&amp; vm.currentShift == null || (USER.manager &amp;&amp; vm.currentEmployees.records == 0 &amp;&amp; vm.upcomingPeriod == null)}" />
 
 
                 </LinearLayout>
