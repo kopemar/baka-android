@@ -2,15 +2,21 @@ package cz.cvut.fel.kopecm26.bakaplanner.repository
 
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.datasource.RemoteDataSource
+import cz.cvut.fel.kopecm26.bakaplanner.db.dao.PeriodDao
 import cz.cvut.fel.kopecm26.bakaplanner.db.dao.ShiftDao
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ErrorType
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ResponseModel
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.Shift
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
 import java.time.ZonedDateTime
 
-class ShiftRepository(private val service: RemoteDataSource, private val shiftDao: ShiftDao) {
+class ShiftRepository(
+    private val service: RemoteDataSource,
+    private val shiftDao: ShiftDao,
+    private val periodDao: PeriodDao,
+) {
 
     suspend fun getNextWeekShifts(): List<Shift> = shiftDao.inTimePeriod()
 
@@ -46,11 +52,30 @@ class ShiftRepository(private val service: RemoteDataSource, private val shiftDa
         }
     }
 
+    suspend fun getAllPeriods(from: ZonedDateTime = ZonedDateTime.now()): ResponseModel<List<SchedulingPeriod>> {
+        val response = service.getSchedulingPeriods(from)
+        return if (response is ResponseModel.ERROR) {
+            ResponseModel.SUCCESS(periodDao.getAll())
+        } else {
+            response.also {
+                if (it is ResponseModel.SUCCESS) it.data?.let { periods ->
+                    periodDao.deleteAllAndReplace(periods)
+                }
+            }
+        }
+    }
 
-    suspend fun getAllShifts() = if (shiftDao.getAll().isNullOrEmpty()) {
-        refreshAllShifts()
-    } else {
-        ResponseModel.SUCCESS(shiftDao.getAll())
+    suspend fun getAllShifts(): ResponseModel<List<Shift>> {
+        refreshAllShifts().let {
+            return if (it is ResponseModel.SUCCESS) {
+                it.also {
+                    it.data?.let { shifts -> shiftDao.deleteAllAndReplace(shifts) }
+                }
+            } else {
+                val cached = shiftDao.getAll()
+                if (cached.isNullOrEmpty()) it else ResponseModel.SUCCESS(cached)
+            }
+        }
     }
 
     suspend fun getUpcomingShifts(): ResponseModel<List<Shift>> {

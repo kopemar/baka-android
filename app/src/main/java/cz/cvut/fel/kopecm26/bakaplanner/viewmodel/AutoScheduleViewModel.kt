@@ -13,7 +13,7 @@ class AutoScheduleViewModel: BaseViewModel() {
         _period.value = schedulingPeriod
     }
 
-    private val _scheduleState = MutableLiveData<Boolean>(false)
+    private val _scheduleState = MutableLiveData(false)
     val success: LiveData<Boolean> = _scheduleState
 
     fun callAutoSchedule() {

@@ -26,6 +26,9 @@ interface SchedulingApiModule {
     @GET("/api/v1/periods/{id}/units")
     suspend fun getSchedulingUnits(@Path("id") periodId: Int): Response<SchedulingUnitsResponse>
 
+    @GET("/api/v1/periods/{id}")
+    suspend fun getSchedulingPeriod(@Path("id") periodId: Int): Response<SchedulingPeriod>
+
     @POST("/api/v1/templates")
     suspend fun createTemplate(@Body template: ShiftTemplate): Response<ShiftTemplateResponse>
 

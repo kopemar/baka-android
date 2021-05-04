@@ -34,6 +34,12 @@ class HomeViewModel : BaseViewModel() {
         _employeesVisible.value = _employeesVisible.value?.not()
     }
 
+    private val _periodDetailVisible = MutableLiveData(false)
+    val periodDetailVisible: LiveData<Boolean> = _periodDetailVisible
+    fun invertPeriodDetailVisible() {
+        _periodDetailVisible.value = _periodDetailVisible.value?.not()
+    }
+
     private val _upcomingPeriod = MutableLiveData<SchedulingPeriod>()
     val upcomingPeriod: LiveData<SchedulingPeriod> = _upcomingPeriod
 

@@ -14,4 +14,10 @@
         android:title="@string/auto_schedule"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_submit"
+        android:icon="@drawable/ic_fa_solid_calendar_check"
+        android:title="@string/submit"
+        app:showAsAction="never" />
+
 </menu>

@@ -18,6 +18,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.databinding.ListTemplatesBinding
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodDay
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodState
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingPeriod
+import cz.cvut.fel.kopecm26.bakaplanner.networking.model.SchedulingUnit
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.ShiftTemplate
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.AutoScheduleActivity
 import cz.cvut.fel.kopecm26.bakaplanner.ui.activity.PlanWeekActivity
@@ -52,8 +53,14 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         Observer<Boolean> {
             if (it) {
                 sharedVM.periodChanged.value = Consumable(true)
-                setupMenu()
+                viewModel.fetchPeriod()
             }
+        }
+    }
+
+    private val unitsObserver by lazy {
+        Observer<List<SchedulingUnit>> {
+            if (it != null) setupMenu()
         }
     }
 
@@ -72,6 +79,7 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                 { old, new -> old.item.id == new.item.id },
                 { old, new -> old == new }
             ).apply { setItems(it) }
+            setupMenu()
         }
     }
 
@@ -110,6 +118,7 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         viewModel.templates.observe(viewLifecycleOwner, shiftsObserver)
 
         viewModel.success.observe(viewLifecycleOwner, successObserver)
+        viewModel.units.observe(viewLifecycleOwner, unitsObserver)
 
         viewModel.setPeriod(args.period)
         setupMenu()
@@ -128,7 +137,7 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
             if (viewModel.period.value?.state == PeriodState.CURRENT ||
                 viewModel.period.value?.state == PeriodState.TO_BE_SUBMITTED
             ) {
-                viewModel.submit()
+                showSubmitDialog()
             } else if (viewModel.period.value?.state == PeriodState.TO_BE_PLANNED) {
                 startAutoSchedule()
             }
@@ -139,13 +148,13 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         if (resultCode == Activity.RESULT_OK) {
             viewModel.fetchSchedulingUnits()
             sharedVM.periodChanged.value = Consumable(true)
-            setupMenu()
+            viewModel.fetchPeriod()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun setupMenu() {
-        Logger.d("Setup menu")
+        Logger.d("Setup menu ${viewModel.units.value} / ${viewModel.period.value?.state}")
         if (toolbar.menu.isEmpty()) toolbar.inflateMenu(R.menu.period_schedule)
 
         toolbar.menu.forEach {
@@ -162,17 +171,22 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
         }
 
         if (
-            args.period.state == PeriodState.SUBMITTED ||
-            args.period.state == PeriodState.CURRENT ||
-            (args.period.state == PeriodState.TO_BE_PLANNED && viewModel.units.value.isNullOrEmpty())
+            viewModel.period.value?.state == PeriodState.SUBMITTED ||
+            viewModel.period.value?.state == PeriodState.CURRENT ||
+            (viewModel.period.value?.state == PeriodState.TO_BE_PLANNED && viewModel.units.value.isNullOrEmpty())
         ) {
             toolbar.menu.forEach {
                 it.isVisible = false
             }
+        } else if (viewModel.period.value?.state == PeriodState.TO_BE_PLANNED) {
+            toolbar.menu.forEach {
+                it.isVisible = true
+            }
         }
 
-        if (args.period.state == PeriodState.TO_BE_SUBMITTED) {
+        if (viewModel.period.value?.state == PeriodState.TO_BE_SUBMITTED) {
             toolbar.menu.forEach {
+                it.isVisible = true
                 it.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
             }
         }
@@ -187,6 +201,8 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                         putSerializable(PlanWeekActivity.SCHEDULING_PERIOD, viewModel.period.value)
                     }
                 }
+            } else if (it.itemId == R.id.action_submit) {
+                showSubmitDialog()
             }
             true
         }
@@ -211,6 +227,16 @@ class PeriodFragment : ViewModelFragment<PeriodViewModel, FragmentPeriodBinding>
                 )
             }
         }
+    }
+
+    private fun showSubmitDialog() {
+        showMaterialDialog(
+            R.string.are_you_sure_you_want_to_submit,
+            positive = R.string.yes,
+            negative = R.string.no,
+            onPositive = { viewModel.submit() },
+            onNegative = { it.dismiss() }
+        )
     }
 
     companion object {

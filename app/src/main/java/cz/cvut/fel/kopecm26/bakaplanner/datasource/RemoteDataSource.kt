@@ -24,6 +24,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateEmployeeRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.SchedulingParams
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
 import java.time.ZonedDateTime
 
@@ -61,6 +62,8 @@ interface RemoteDataSource {
     suspend fun removeShiftFromSchedule(shiftId: Int): ResponseModel<Boolean>
 
     suspend fun getSchedulingPeriods(from: ZonedDateTime? = null): ResponseModel<List<SchedulingPeriod>>
+
+    suspend fun getSchedulingPeriod(id: Int): ResponseModel<SchedulingPeriod>
 
     suspend fun getUpcomingPeriod(): ResponseModel<SchedulingPeriod>
 
@@ -119,9 +122,9 @@ interface RemoteDataSource {
         request: CreateShiftTemplatesRequest
     ): ResponseModel<List<ShiftTemplate>>
 
-    // TODO better model for returning
     suspend fun callAutoScheduler(
-        periodId: Int
+        periodId: Int,
+        schedulingParams: SchedulingParams
     ): ResponseModel<Boolean>
 
     suspend fun submitSchedule(periodId: Int): ResponseModel<SchedulingPeriod>

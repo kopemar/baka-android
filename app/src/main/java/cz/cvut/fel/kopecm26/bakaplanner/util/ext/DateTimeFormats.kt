@@ -44,15 +44,15 @@ fun LocalTime.formatTime(format: DateTimeFormats): String =
     format(formatWithZone(format))
 
 private fun formatWithZone(format: DateTimeFormats): DateTimeFormatter =
-    formatWithZone(if (isCzech()) format.czech else format.english)
+    formatWithZone(format.english)
 
 private fun formatWithZone(pattern: String): DateTimeFormatter =
     formatter(pattern).withZone(ZoneId.systemDefault())
 
 fun formatter(format: DateTimeFormats): DateTimeFormatter =
-    formatter(if (isCzech()) format.czech else format.english)
+    formatter(format.english)
 
-fun formatter(pattern: String): DateTimeFormatter = DateTimeFormatter.ofPattern(pattern)
+fun formatter(pattern: String): DateTimeFormatter = DateTimeFormatter.ofPattern(pattern, Locale.US)
 
 fun isCzech() = Locale.getDefault().country == "CZ"
 

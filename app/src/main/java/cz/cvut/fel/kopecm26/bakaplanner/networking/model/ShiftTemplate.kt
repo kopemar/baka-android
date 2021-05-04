@@ -1,6 +1,7 @@
 package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
@@ -38,12 +39,13 @@ data class ShiftTemplatesResponse(
     val data: List<ShiftTemplate>
 )
 
-enum class Priority(@StringRes val titleRes: Int, val integerValue: Int, @ColorRes val color: Int) {
-    HIGHEST(R.string.highest, 5, R.color.red),
-    HIGH(R.string.high, 4, R.color.orange_10000),
-    MEDIUM(R.string.medium, 3, R.color.green_poison),
-    LOW(R.string.low, 2, R.color.greeno),
-    LOWEST(R.string.lowest, 1, R.color.light_blue);
+enum class Priority(@StringRes val titleRes: Int, val integerValue: Int, @ColorRes val color: Int, @DrawableRes val iconRes: Int) {
+    HIGHEST(R.string.highest, 5, R.color.red, R.drawable.ic_mdi_chevron_triple_up),
+    HIGH(R.string.high, 4, R.color.orange_10000, R.drawable.ic_mdi_chevron_up),
+    MEDIUM(R.string.medium, 3, R.color.yellow, R.drawable.ic_mdi_tilde),
+    LOW(R.string.low, 2, R.color.greeno, R.drawable.ic_mdi_chevron_down),
+    LOWEST(R.string.lowest, 1, R.color.light_blue, R.drawable.ic_mdi_chevron_triple_down),
+    NONE(R.string.remove, 0, R.color.gray_blue, R.drawable.ic_fa_solid_trash);
 
     companion object {
         fun getPriorityByValue(value: Int) = values().find { it.integerValue == value }

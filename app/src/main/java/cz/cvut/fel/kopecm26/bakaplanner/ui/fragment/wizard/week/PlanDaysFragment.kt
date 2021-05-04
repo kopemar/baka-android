@@ -76,13 +76,11 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
                 viewModel.validateMax24Hours()
             }
 
-            this.assert(getString(R.string.shift_too_long)) {
+            this.assert(getString(R.string.working_day_too_short)) {
                 viewModel.is24Hours.value == true || viewModel.validateNotTooLong(false)
             }
 
-            this.assert(getString(R.string.cannot_cover_whole_day)) {
-                viewModel.is24Hours.value == true || viewModel.validateNotTooShort()
-            }
+
         }
 
         inputLayout(binding.inputEndTime) {
@@ -98,6 +96,11 @@ class PlanDaysFragment : ViewModelFragment<PlanDaysViewModel, FragmentPlanDaysBi
 
         inputLayout(binding.inputShiftHours) {
             isNotEmpty()
+
+            this.assert(getString(R.string.cannot_cover_whole_day)) {
+                viewModel.is24Hours.value == true || viewModel.validateNotTooShort()
+            }
+
             this.assert(getString(R.string.cannot_cover_whole_day)) {
                 viewModel.is24Hours.value != true || viewModel.validateNotTooLong(true)
             }

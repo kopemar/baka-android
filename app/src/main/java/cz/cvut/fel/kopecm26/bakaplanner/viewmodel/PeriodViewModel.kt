@@ -47,6 +47,18 @@ class PeriodViewModel : BaseViewModel() {
         }
     }
 
+    fun fetchPeriod() {
+        _period.value?.id?.let {
+            working.work {
+               planningRepository.getSchedulingPeriod(it).parseResponse { period ->
+                   if (period != null) {
+                       setPeriod(period)
+                   }
+               }
+            }
+        }
+    }
+
     fun fetchShiftsInUnit(id: Int) {
         working.work {
             planningRepository.getShiftTemplates(id).parseResponse(_templates)

@@ -2,6 +2,8 @@ package cz.cvut.fel.kopecm26.bakaplanner.networking.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import cz.cvut.fel.kopecm26.bakaplanner.R
 import cz.cvut.fel.kopecm26.bakaplanner.networking.model.PeriodState.Companion.getState
@@ -12,8 +14,9 @@ import java.io.Serializable
 import java.time.LocalDate
 
 @JsonClass(generateAdapter = true)
+@Entity
 data class SchedulingPeriod(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val start_date: String,
     val end_date: String,
     val submitted: Boolean,
@@ -27,7 +30,6 @@ data class SchedulingPeriod(
     val dateEndShort get() = end_date.formatDate(DateTimeFormats.FULL_MONTH_DAY_SHORT)
 }
 
-// TODO icons
 enum class PeriodState(
     @StringRes val titleRes: Int,
     @DrawableRes val iconRes: Int = R.drawable.ic_calendar

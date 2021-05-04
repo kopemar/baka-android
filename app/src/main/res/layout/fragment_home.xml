@@ -230,7 +230,7 @@
                         <TextView
                             android:id="@+id/tv_n_employees"
                             style="@style/Text.Large"
-                            android:layout_width="124dp"
+                            android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
@@ -274,7 +274,7 @@
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/bg_rectangle_round"
                         android:elevation="@dimen/card_elevation"
-                        android:onClick="@{() -> vm.invertEmployeesVisible()}"
+                        android:onClick="@{() -> vm.invertPeriodDetailVisible()}"
                         android:paddingBottom="16dp">
 
                         <ImageView
@@ -282,7 +282,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
-                            android:rotation="@{vm.employeesVisible ? 180 : 0}"
+                            android:rotation="@{vm.periodDetailVisible ? 180 : 0}"
                             android:src="@drawable/ic_chevron_down"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -290,11 +290,11 @@
                         <TextView
                             android:id="@+id/tv_n_days_left"
                             style="@style/Text.Large"
-                            android:layout_width="124dp"
+                            android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginHorizontal="16dp"
                             android:layout_marginTop="16dp"
-                            android:text="@{@string/n_days_left(vm.upcomingPeriod.days_left)}"
+                            android:text="@{@string/plan_from_to(vm.upcomingPeriod.dateStartShort, vm.upcomingPeriod.dateEndShort)}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -305,7 +305,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
-                            android:text="@string/are_working_now"
+                            android:text="@{@string/n_days_left(vm.upcomingPeriod.days_left)}"
                             app:layout_constraintStart_toStartOf="@id/tv_n_days_left"
                             app:layout_constraintTop_toBottomOf="@id/tv_n_days_left" />
 
@@ -314,6 +314,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="16dp"
                             android:layout_marginTop="8dp"
+                            visible="@{vm.periodDetailVisible}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_days_left">
 

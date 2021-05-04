@@ -196,6 +196,7 @@
     <string name="hello">Hello, %s</string>
 
     <string name="n_employees">%d employees</string>
+    <string name="plan_from_to">Plan %s - %s</string>
     <string name="n_days_left">%d days left</string>
     <string name="are_working_now">Are working now</string>
     <string name="working_now">Working now</string>
@@ -213,4 +214,7 @@
     <string name="shift_too_long">Shift is too long</string>
     <string name="working_hours_too_long">Working hours are too long</string>
     <string name="cannot_cover_whole_day">Cannot cover whole day</string>
+    <string name="remove">Remove</string>
+    <string name="working_day_too_short">"Working day is too short "</string>
+    <string name="are_you_sure_you_want_to_submit">Are you sure you want to submit this scheduling period?</string>
 </resources>

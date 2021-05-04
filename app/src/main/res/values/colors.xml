@@ -25,4 +25,5 @@
     <color name="bg_surface_ripple">#E1DBDB</color>
     <color name="bg_surface_3">#33C6D0E0</color>
     <color name="white_or_dark_gray">#FFFFFF</color>
+    <color name="yellow">#FFC400</color>
 </resources>

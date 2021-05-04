@@ -78,8 +78,14 @@ class PlanningFragment : ViewModelFragment<PlanningViewModel, FragmentPlanningBi
     }
 
     override fun initUi() {
-        sharedVM.periodChanged.observe(viewLifecycleOwner, submitConsumer)
         viewModel.periodsMap.observe(viewLifecycleOwner, observer)
+
+        sharedVM.periodChanged.observe(viewLifecycleOwner) {
+            it.addConsumer(SUBMIT_CONSUMER)
+            if (it.canBeConsumed(SUBMIT_CONSUMER) && it.consume(SUBMIT_CONSUMER)) {
+                viewModel.fetchSchedulingPeriods()
+            }
+        }
     }
 
     companion object {

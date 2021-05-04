@@ -23,7 +23,7 @@
             android:background="@drawable/circle"
             android:backgroundTint="@{context.getColor(item.item.color)}"
             android:padding="8dp"
-            android:src="@drawable/ic_weather_sunny"
+            android:src="@{item.item.iconRes}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

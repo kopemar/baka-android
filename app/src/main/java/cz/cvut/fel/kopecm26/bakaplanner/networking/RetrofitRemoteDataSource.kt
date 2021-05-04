@@ -11,6 +11,7 @@ import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateEmployeeRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateOrganizationRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateShiftTemplatesRequest
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.CreateSpecializationRequest
+import cz.cvut.fel.kopecm26.bakaplanner.networking.request.SchedulingParams
 import cz.cvut.fel.kopecm26.bakaplanner.networking.request.UpdateSpecializationsRequest
 import cz.cvut.fel.kopecm26.bakaplanner.util.Constants
 import cz.cvut.fel.kopecm26.bakaplanner.util.ext.PrefsUtils
@@ -78,6 +79,9 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
 
     override suspend fun getSchedulingPeriods(from: ZonedDateTime?) =
         safeApiCall({ api.getSchedulingPeriods(from?.toString()) }) { it?.periods }
+
+    override suspend fun getSchedulingPeriod(id: Int) =
+        safeApiCall({ api.getSchedulingPeriod(id) }) { it }
 
     override suspend fun getUpcomingPeriod() =
         safeApiCall({ api.getUpcomingPeriod() }) { it }
@@ -192,8 +196,8 @@ class RetrofitRemoteDataSource(private val api: ApiDescription) : RemoteDataSour
         )
     }) { it?.data}
 
-    override suspend fun callAutoScheduler(periodId: Int) = safeApiCall(
-        { api.callAutoSchedule(periodId) }
+    override suspend fun callAutoScheduler(periodId: Int, schedulingParams: SchedulingParams) = safeApiCall(
+        { api.callAutoSchedule(periodId, schedulingParams) }
     ) { it?.success }
 
     override suspend fun submitSchedule(periodId: Int) =
