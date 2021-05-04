@@ -217,4 +217,9 @@
     <string name="remove">Remove</string>
     <string name="working_day_too_short">"Working day is too short "</string>
     <string name="are_you_sure_you_want_to_submit">Are you sure you want to submit this scheduling period?</string>
+    <string name="iterations">Iterations</string>
+    <string name="no_empty_shifts">No empty shifts</string>
+    <string name="demand_fulfill">Demand Fulfill</string>
+    <string name="free_days">Free Days</string>
+    <string name="specialized">Specialized Preferred</string>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/auto_schedule"
+    app:startDestination="@id/autoSchedulingFragment">
+
+    <fragment
+        android:id="@+id/autoSchedulingFragment"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.scheduling.AutoSchedulingFragment"
+        android:label="AutoSchedulingFragment" >
+        <action
+            android:id="@+id/show_schedule_dialog"
+            app:destination="@id/autoScheduleDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/autoScheduleDialog"
+        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.scheduling.AutoScheduleDialog"
+        android:label="AutoScheduleDialog" />
+</navigation>

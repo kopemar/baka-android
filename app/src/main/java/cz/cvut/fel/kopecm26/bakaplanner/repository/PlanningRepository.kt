@@ -75,9 +75,21 @@ class PlanningRepository(private val service: RemoteDataSource) {
 
     suspend fun getPeriodDays(periodId: Int) = service.getPeriodDays(periodId)
 
-    suspend fun callAutoScheduler(periodId: Int, iterations: Int = 2) = service.callAutoScheduler(periodId, SchedulingParams(
+    suspend fun callAutoScheduler(
+        periodId: Int,
+        iterations: Int = 2,
+        noEmpty: Int = 80,
+        demandFulfill: Int = 100,
+        specializedPreferred: Int = 60,
+        freeDays: Int = 30
+    ) = service.callAutoScheduler(periodId, SchedulingParams(
         iterations = iterations,
-        priorities = SchedulingPriorities()
+        priorities = SchedulingPriorities(
+            no_empty_shifts = noEmpty,
+            free_days = freeDays,
+            demand_fulfill = demandFulfill,
+            specialized_preferred = specializedPreferred,
+        )
     ))
 
 

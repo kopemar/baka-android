@@ -1,103 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="vm"
-            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AutoScheduleViewModel" />
-
-        <import type="cz.cvut.fel.kopecm26.bakaplanner.R"/>
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_surface">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar_single"
-            app:title="@{@string/auto_schedule}" />
-
-        <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:src="@drawable/ic_robot"
-            app:layout_constraintBottom_toTopOf="@id/empty_text"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:background="@drawable/circle"
-            android:padding="32dp"
-            android:alpha="0.64"
-            app:tint="@color/bg_surface" />
+            app:navGraph="@navigation/auto_schedule" />
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/empty_text"
-            style="@style/Text.Large.Light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:maxWidth="300dp"
-            android:text="@string/automatic_scheduling_assigns_shifts_to_employees"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@id/btn_adjust"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_icon" />
-
-        <Button
-            visible="@{!vm.working &amp;&amp; vm.success != true}"
-            android:id="@+id/btn_adjust"
-            style="@style/Button.Secondary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/params_set_up"
-            app:icon="@drawable/ic_settings"
-            app:iconGravity="textStart"
-            app:iconPadding="4dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_schedule" />
-
-        <Button
-            android:id="@+id/btn_schedule"
-            style="@style/Button.Primary"
-            viewEnabled="@{!vm.working}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@{vm.success ? @string/finish : @string/do_schedule}"
-            app:icon="@drawable/ic_robot"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <ProgressBar
-            visible="@{vm.working}"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:indeterminateTint="@color/colorPrimary"
-            app:layout_constraintBottom_toTopOf="@id/btn_schedule"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_text" />
-
-        <ImageView
-            android:id="@+id/id_success"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:padding="3dp"
-            android:src="@{vm.working ? @drawable/ic_mdi_check : @drawable/ic_scheduling_done}"
-            android:visibility="gone"
-            visible="@{!vm.working &amp;&amp; vm.success}"
-            app:tint="@color/colorPrimary"
-            app:layout_constraintBottom_toTopOf="@id/btn_schedule"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_text" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

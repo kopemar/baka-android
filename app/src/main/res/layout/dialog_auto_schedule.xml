@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="cz.cvut.fel.kopecm26.bakaplanner.viewmodel.AutoScheduleViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_top"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+
+        <TextView
+            style="@style/Text.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/working_now" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/gray_blue"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_iterations"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textColorHint="@color/text_light"
+                app:boxStrokeColor="@color/text_light"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/iterations"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_iterations"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/text"
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="16dp"
+                    android:text="@{vm.iterations.toString()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_no_empty"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textColorHint="@color/text_light"
+                app:boxStrokeColor="@color/text_light"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/no_empty_shifts"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_no_empty"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/text"
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="16dp"
+                    android:text="@{vm.noEmptyShifts.toString()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_demand"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textColorHint="@color/text_light"
+                app:boxStrokeColor="@color/text_light"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/demand_fulfill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_demand"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/text"
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="16dp"
+                    android:text="@{vm.demandFulfill.toString()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_specialized"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textColorHint="@color/text_light"
+                app:boxStrokeColor="@color/text_light"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/specialized"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_specialized"
+                    style="@style/Base.Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/text"
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="16dp"
+                    android:text="@{vm.specialized.toString()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_free_days"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:textColorHint="@color/text_light"
+            app:boxStrokeColor="@color/text_light"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/free_days"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actv_free_days"
+                style="@style/Base.Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:imeOptions="actionNext"
+                android:textColor="@color/text"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="16dp"
+                android:text="@{vm.freeDays.toString()}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+</layout>
