@@ -20,7 +20,7 @@ data class SchedulingPeriod(
     val start_date: String,
     val end_date: String,
     val submitted: Boolean,
-    val planned: Boolean,
+    val planned: Boolean = false,
     val days_left: Int? = null,
     val units_exist: Boolean? = null
 ) : Serializable {

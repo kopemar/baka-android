@@ -21,7 +21,6 @@ import org.koin.java.KoinJavaComponent.inject
 
 abstract class BaseViewModel : ViewModel() {
     protected val userRepository by inject(UserRepository::class.java)
-
     protected val shiftRepository by inject(ShiftRepository::class.java)
 
     protected val contractRepository by inject(ContractRepository::class.java)

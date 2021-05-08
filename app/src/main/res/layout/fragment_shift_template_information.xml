@@ -168,7 +168,7 @@
             visible="@{tvPriorityLabel.getVisibility() == View.VISIBLE}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vm.template.specialization}"
+            android:text="@{vm.template.specialization == null ? @string/general : vm.template.specialization}"
             app:layout_constraintBottom_toBottomOf="@id/tv_specialization_label"
             app:layout_constraintEnd_toEndOf="@id/tv_shift_id"
             app:layout_constraintTop_toTopOf="@id/tv_specialization_label"

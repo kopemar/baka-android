@@ -30,8 +30,7 @@ interface OrganizationApiModule {
     @GET("/api/v1/specializations/{id}/employees")
     suspend fun getSpecializationEmployees(@Path("id") periodId: Int, @Query("page") page: Int = 1): Response<EmployeeListResponse>
 
-    // TODO TODO will change API endpoint
-    @GET("/api/v1/specializations/{id}/calculations/contracts")
+    @GET("/api/v1/specializations/{id}/calculate-contracts")
     suspend fun getSpecializationEmployeesPossibilities(@Path("id") periodId: Int): Response<AddSpecializationResponse>
 
     @PUT("/api/v1/specializations/{id}")

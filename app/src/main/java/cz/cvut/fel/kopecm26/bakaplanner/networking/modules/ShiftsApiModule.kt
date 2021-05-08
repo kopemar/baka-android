@@ -65,11 +65,10 @@ interface ShiftsApiModule {
     @DELETE("/api/v1/shifts/{id}")
     suspend fun removeShiftFromSchedule(@Path("id") shiftId: Int): Response<DeleteShiftResponse>
 
-    // TODO not optimal use of REST API
-    @GET("/api/v1/periods/{id}/calculations/period-days")
+    @GET("/api/v1/periods/{id}/calculate-period-days")
     suspend fun getPeriodDays(@Path("id") periodId: Int): Response<PeriodDaysResponse>
 
-    @GET("/api/v1/periods/{id}/calculations/shift-times")
+    @GET("/api/v1/periods/{id}/calculate-shift-times")
     suspend fun getShiftTimeCalculations(
         @Path("id") periodId: Int,
         @Query("start_time") startTime: String,
@@ -89,7 +88,7 @@ interface ShiftsApiModule {
     ): Response<ShiftTemplatesResponse>
 
     // TODO not optimal use of REST API
-    @POST("/api/v1/periods/{id}/calculations/generate-schedule")
+    @POST("/api/v1/periods/{id}/generate-schedule")
     suspend fun callAutoSchedule(
         @Path("id") periodId: Int,
         @Body params: SchedulingParams

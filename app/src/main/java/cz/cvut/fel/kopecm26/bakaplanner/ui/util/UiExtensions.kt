@@ -68,3 +68,23 @@ fun Context.showDatePicker(
         }
     }.show()
 }
+
+
+fun Context.showDatePicker(
+    year: Int? = null,
+    month: Int? = null,
+    day: Int? = null,
+    onPicked: (LocalDate) -> Unit
+) {
+    val defaultDate = LocalDate.of(1990, 1, 1)
+    DatePickerDialog(
+        this,
+        { _, y, m, d ->
+            val dateTime = LocalDate.of(y, m + 1, d)
+            onPicked(dateTime)
+        },
+        year ?: defaultDate.year,
+        month ?: defaultDate.monthValue - 1,
+        day ?: defaultDate.dayOfMonth,
+    ).show()
+}

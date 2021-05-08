@@ -7,6 +7,10 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
+    lintOptions {
+        abortOnError false
+    }
+
     signingConfigs {
         release {
             def properties = new Properties()
