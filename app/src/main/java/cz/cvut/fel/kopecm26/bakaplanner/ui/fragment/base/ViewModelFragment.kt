@@ -22,7 +22,6 @@ abstract class ViewModelFragment<V : BaseViewModel, B : ViewDataBinding>(layoutR
 
     open val viewModel by lazy { clazz.let { ViewModelProvider(viewModelOwner ?: this).get(it.java) } }
 
-    // TODO refactor code
     val sharedViewModel: SharedViewModel by sharedViewModel()
 
     protected open fun errorObserver() = Observer<Int?> {

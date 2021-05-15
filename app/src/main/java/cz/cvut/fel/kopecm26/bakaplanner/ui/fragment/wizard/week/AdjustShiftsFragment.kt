@@ -82,7 +82,6 @@ class AdjustShiftsFragment : ViewModelFragment<PlanDaysViewModel, FragmentAdjust
         showShiftCalculations()
     }
 
-    // TODO animator
     private fun selectCalc(day: Selection<ShiftTimeCalculation>) {
         adjustViewModel.daysMap.value?.get(adjustViewModel.selectedDay?.item)?.apply {
             if (day.selected) unselect(day) {

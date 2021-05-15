@@ -82,9 +82,7 @@ class SelectEmployeesViewModel : BaseViewModel() {
                     _success.value = it != null
                 }
             }
-            else -> {
-                // TODO
-            }
+            else -> { }
         }
     }
 }

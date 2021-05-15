@@ -20,16 +20,9 @@
         android:label="PlanDaysFragment"
         tools:layout="@layout/fragment_plan_days">
         <action
-            android:id="@+id/show_shift_times_dialog"
-            app:destination="@id/shiftTimesDialogFragment" />
-        <action
             android:id="@+id/navigate_to_review"
             app:destination="@id/reviewFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/shiftTimesDialogFragment"
-        android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ShiftTimesDialogFragment"
-        android:label="ShiftTimesDialogFragment" />
     <fragment
         android:id="@+id/reviewFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.ReviewFragment"
@@ -70,6 +63,7 @@
             app:destination="@id/specializedDemandDialog" />
     </fragment>
     <dialog
+        tools:layout="@layout/dialog_demand"
         android:id="@+id/demandDialogFragment"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.DemandDialogFragment"
         android:label="DemandDialogFragment">
@@ -79,6 +73,7 @@
             app:nullable="false" />
     </dialog>
     <dialog
+        tools:layout="@layout/dialog_specializated_demand"
         android:id="@+id/specializedDemandDialog"
         android:name="cz.cvut.fel.kopecm26.bakaplanner.ui.fragment.wizard.week.SpecializedDemandDialog"
         android:label="SpecializedDemandDialog">

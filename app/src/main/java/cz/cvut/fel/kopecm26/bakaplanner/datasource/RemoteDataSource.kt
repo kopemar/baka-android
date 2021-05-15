@@ -38,7 +38,6 @@ interface RemoteDataSource {
 
     suspend fun createEmployee(request: CreateEmployeeRequest): ResponseModel<CreateEmployeeResponse>
 
-    // TODO better model for returning
     suspend fun postFirebaseToken(token: String): ResponseModel<Boolean>
 
     suspend fun getShifts(): ResponseModel<List<Shift>>
@@ -81,7 +80,6 @@ interface RemoteDataSource {
 
     suspend fun getSpecializationEmployeesPossibilities(id: Int): ResponseModel<List<EmployeePresenter>>
 
-    // TODO better model for returning
     suspend fun putSpecializationEmployees(
         periodId: Int,
         request: UpdateSpecializationsRequest
@@ -98,7 +96,6 @@ interface RemoteDataSource {
         specializationId: Int
     ): ResponseModel<ShiftTemplate>
 
-    // TODO better model for returning
     suspend fun createSpecialization(data: CreateSpecializationRequest): ResponseModel<Boolean>
 
     suspend fun getEmployeeShifts(id: Int): ResponseModel<List<Shift>>

@@ -29,7 +29,6 @@ class AddEmployeeViewModel : BaseViewModel() {
         _date.value = date
     }
 
-    // TODO
     val dateOfBirth = MutableLiveData(LocalDate.of(2000, 1, 1))
 
     private val _response = MutableLiveData<CreateEmployeeResponse>()
@@ -83,7 +82,6 @@ class AddEmployeeViewModel : BaseViewModel() {
         }
     }
 
-    // TODO email validation
     private fun notEmpty() =
         !firstName.value.isNullOrBlank() && !lastName.value.isNullOrBlank() && !username.value.isNullOrBlank() && !email.value.isNullOrBlank() && !password.value.isNullOrBlank() && dateOfBirth.value != null
 

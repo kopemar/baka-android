@@ -87,7 +87,7 @@ interface ShiftsApiModule {
         @Body body: CreateShiftTemplatesRequest,
     ): Response<ShiftTemplatesResponse>
 
-    // TODO not optimal use of REST API
+
     @POST("/api/v1/periods/{id}/generate-schedule")
     suspend fun callAutoSchedule(
         @Path("id") periodId: Int,

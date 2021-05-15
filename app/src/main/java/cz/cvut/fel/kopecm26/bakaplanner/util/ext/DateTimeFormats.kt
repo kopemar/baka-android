@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.util.*
 
-// todo
+
 fun String.formatDate(format: DateTimeFormats): String =
     try {
         getLocalDate().format(formatWithZone(format))
